@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="xca75.sfu.ca.greenfood">
+    package="com.example.hca127.greenfood">
 
     <application
         android:allowBackup="true"
@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".weekly_calc"
+            android:label="@string/title_activity_weekly_calc"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".about_page"
+            android:label="@string/title_activity_about_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".meal_calc"
+            android:label="@string/title_activity_meal_calc"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

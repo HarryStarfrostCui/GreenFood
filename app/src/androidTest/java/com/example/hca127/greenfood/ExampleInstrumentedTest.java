@@ -1,4 +1,4 @@
-package xca75.sfu.ca.greenfood;
+package com.example.hca127.greenfood;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("xca75.sfu.ca.greenfood", appContext.getPackageName());
+        assertEquals("com.example.hca127.greenfood", appContext.getPackageName());
     }
 }

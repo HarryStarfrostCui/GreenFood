@@ -1,4 +1,4 @@
-package xca75.sfu.ca.greenfood;
+package com.example.hca127.greenfood;
 
 import org.junit.Test;
 
