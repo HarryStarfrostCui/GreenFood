@@ -28,6 +28,11 @@
             android:name=".meal_calc"
             android:label="@string/title_activity_meal_calc"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".AddingFoodPage"
+            android:label="add food">
+        </activity>
     </application>
 
 </manifest>
