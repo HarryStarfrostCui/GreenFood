@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private Button weekly, meal, about;
 
     @Override
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         weekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), weekly_calc.class);
+                Intent intent = new Intent(MainActivity.this, AddingFoodPage.class);
+
                 //intent.putExtra(x,y);
                 startActivity(intent);
             }
