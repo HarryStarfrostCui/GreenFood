@@ -66,27 +66,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp">
 
-                    <ImageButton
-                        android:id="@+id/beef"
+                    <Button
+                        android:id="@+id/beefImage"
                         android:layout_width="350dp"
-                        android:layout_height="200dp"
+                        android:layout_height="180dp"
                         android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/beef" />
-
-                    <ImageButton
-                        android:id="@+id/lamb"
+                        android:text="HELLO"
+                        android:textColor="#FFFFFF"
+                        android:textAlignment="gravity"
+                        android:background="@drawable/beef" />
+                    <Button
+                        android:id="@+id/lambImage"
                         android:layout_width="350dp"
-                        android:layout_height="200dp"
+                        android:layout_height="180dp"
                         android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/lamb" />
+                        android:background="@drawable/lamb" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp">
+
+                    <Button
+                        android:id="@+id/chickenImage"
+                        android:onClick="chickenPopUp"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/chicken" />
+
+                    <Button
+                        android:id="@+id/fishImage"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/fish" />
 
                 </LinearLayout>
 
@@ -96,46 +131,18 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/chicken"
+                    <Button
+                        android:id="@+id/vegImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/chicken" />
+                        android:background="@drawable/bok" />
 
                     <ImageButton
-                        android:id="@+id/fish"
-                        android:layout_width="350dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/fish" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/veg"
-                        android:layout_width="350dp"
-                        android:layout_height="200dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/bok" />
-
-                    <ImageButton
-                        android:id="@+id/egg"
+                        android:id="@+id/eggImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -153,7 +160,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/cheese"
+                        android:id="@+id/cheeseImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -163,7 +170,7 @@
                         android:src="@drawable/cheese" />
 
                     <ImageButton
-                        android:id="@+id/potato"
+                        android:id="@+id/potatoImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -181,7 +188,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/tofu"
+                        android:id="@+id/tofuImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -191,7 +198,7 @@
                         android:src="@drawable/tofu" />
 
                     <ImageButton
-                        android:id="@+id/yogurt"
+                        android:id="@+id/yogurtImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -209,7 +216,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/beans"
+                        android:id="@+id/beansImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
@@ -219,7 +226,7 @@
                         android:src="@drawable/beans" />
 
                     <ImageButton
-                        android:id="@+id/pork"
+                        android:id="@+id/porkImg"
                         android:layout_width="350dp"
                         android:layout_height="200dp"
                         android:layout_margin="5dp"
