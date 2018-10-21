@@ -31,7 +31,12 @@
 
         <activity
             android:name=".AddingFoodPage"
-            android:label="add food">
+            android:label="">
+        </activity>
+
+        <activity android:name=".PopUpActivity"
+            android:theme="@style/AppTheme.PopUpWindows">
+
         </activity>
     </application>
 

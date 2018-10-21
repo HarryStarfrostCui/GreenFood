@@ -29,4 +29,9 @@
         <item name="android:paddingEnd">10dp</item>
     </style>
 
+    <style name="AppTheme.PopUpWindows">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 </resources>
