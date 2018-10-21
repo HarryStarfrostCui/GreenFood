@@ -19,14 +19,14 @@ public class IngredientListTest {
     @Test
     public void getCarbon() {
         IngredientList plate = new IngredientList();
-        plate.addIng("Lamb",39.2);
+        plate.addIng("Lamb",39.2,75);
         assertEquals(39.2, plate.getCarbon(0),0.0001);
     }
 
     @Test
     public void getAmout() {
         IngredientList plate = new IngredientList();
-        plate.addIng("Lamb",39.2);
+        plate.addIng("Lamb",39.2,75);
         plate.setIngAmount(0,10);
         assertEquals(10,plate.getAmout(0));
     }
@@ -34,16 +34,16 @@ public class IngredientListTest {
     @Test
     public void getsize() {
         IngredientList plate = new IngredientList();
-        plate.addIng("Lamb",39.2);
+        plate.addIng("Lamb",39.2,75);
         assertEquals(1, plate.getsize());
-        plate.addIng("Beef",27.0);
+        plate.addIng("Beef",27.0,75);
         assertEquals(2, plate.getsize());
     }
 
     @Test
     public void addIng() {
         IngredientList plate = new IngredientList();
-        plate.addIng("Lamb",39.2);
+        plate.addIng("Lamb",39.2,75);
         assertEquals(1, plate.getsize());
         assertEquals("Lamb", plate.getName(0));
         assertEquals(39.2, plate.getCarbon(0),0.0001);
@@ -52,7 +52,7 @@ public class IngredientListTest {
     @Test
     public void setIngAmount() {
         IngredientList plate = new IngredientList();
-        plate.addIng("Lamb",39.2);
+        plate.addIng("Lamb",39.2,75);
         assertEquals(true, plate.setIngAmount(0,1));
         assertEquals(false, plate.setIngAmount(1,2));
     }
@@ -76,7 +76,7 @@ public class IngredientListTest {
         Random rand = new Random();
         int amount;
         for (int i = 0; i < food.size(); i++){
-            plate.addIng(food.get(i), carbon.get(i));
+            plate.addIng(food.get(i), carbon.get(i),1000);
             amount = rand.nextInt(10);
             plate.setIngAmount(i, amount);
             total += amount*carbon.get(i);
