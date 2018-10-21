@@ -12,7 +12,7 @@ public class IngredientListTest {
     @Test
     public void getName() {
         IngredientList plate = new IngredientList();
-        plate.addIng("Lamb",39.2);
+        plate.addIng("Lamb",39.2,75);
         assertEquals("Lamb", plate.getName(0));
     }
 
@@ -66,7 +66,7 @@ public class IngredientListTest {
                         "Tofu", "Dry Beans", "Milk(2%)", "Tomatoes", "Lentils")
         );
         ArrayList<Double> carbon = new ArrayList<>(
-                Arrays.asList(39.2, 12.0, 13.5, 12.1, 11.9,
+                Arrays.asList(39.2, 27.0, 13.5, 12.1, 11.9,
                         10.9, 6.9, 6.1, 4.8, 2.9,
                         2.7, 2.5, 2.3, 2.2, 2.0,
                         2.0, 2.0, 1.9, 1.1, 0.9)

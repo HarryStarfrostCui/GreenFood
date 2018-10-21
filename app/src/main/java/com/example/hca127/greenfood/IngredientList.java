@@ -3,83 +3,100 @@ package com.example.hca127.greenfood;
 import java.util.ArrayList;
 
 public class IngredientList {
-    private ArrayList<String> name;
-    private ArrayList<Double> carbon_coefficient;
-    private ArrayList<Integer> amount;
-    private ArrayList<Double> carbonEmit;
+    private ArrayList<Ingredient> plate;
 
     IngredientList() {
-        name = new ArrayList<String>();
-        carbon_coefficient = new ArrayList<Double>();
-        amount = new ArrayList<Integer>();
-        carbonEmit = new ArrayList<Double>();
-        /*
-        ArrayList<String> food = new ArrayList<>(
-                Arrays.asList("Lamb", "Beef", "Cheese", "Pork", "Salmon",
-                        "Turkey", "Chicken", "Tuna", "Eggs", "Potatoes",
-                        "Rice", "Peanut Butter", "Nuts", "Yogurt", "Broccoli",
-                        "Tofu", "Dry Beans", "Milk(2%)", "Tomatoes", "Lentils")
-        );
-        ArrayList<Double> carbon = new ArrayList<>(
-                Arrays.asList(39.2, 12.0, 13.5, 12.1, 11.9,
-                        10.9, 6.9, 6.1, 4.8, 2.9,
-                        2.7, 2.5, 2.3, 2.2, 2.0,
-                        2.0, 2.0, 1.9, 1.1, 0.9)
-        );
-        for (int i = 0; i < food.size(); i++){
-            addIng(food.get(i), carbon.get(i));
-        }
-        */
-
+        plate = new ArrayList<Ingredient>();
     }
 
-    String getName(int index) {
-        return name.get(index);
-    }
+    String getName(int index) {        return plate.get(index).getName();    }
 
     double getCarbon(int index) {
-        return carbon_coefficient.get(index);
+        return plate.get(index).getCarbon_coefficient();
     }
 
+    double getServing_weight(int index) {        return plate.get(index).getServing_weight();    }
+
     int getAmout(int index) {
-        return amount.get(index);
+        return plate.get(index).getAmount();
     }
 
     int getsize() {
-        return name.size();
+        return plate.size();
     }
 
-    void addIng(String food_name, double Carbon) {
-        name.add(food_name);
-        carbon_coefficient.add(Carbon);
-        amount.add(0);
-        carbonEmit.add(0.0);
+    void addIng(String food_name, double Carbon, double serve_size) {
+        Ingredient newcomer = new Ingredient(food_name, Carbon, serve_size);
+        plate.add(newcomer);
     }
 
     boolean setIngAmount(int index, int Amount) {
         if (index >= getsize()) {
             return false;
         }
-        amount.set(index, Amount);
-        carbonEmit.set(index, Amount * carbon_coefficient.get(index));
+        plate.get(index).setAmount(Amount);
         return true;
     }
 
     double getTotalEmit() {
         int i;
         double sum = 0;
-        for (i = 0; i < carbonEmit.size(); i++) {
-            sum += carbonEmit.get(i);
+        for (i = 0; i < getsize(); i++) {
+            sum += plate.get(i).getEmit();
         }
         return sum;
     }
 
+    private ArrayList<Integer> getFavList(){
+        //stage 1: 7 food the user like most
+        ArrayList<Integer> favourite = new ArrayList<>();
+        ArrayList<Integer> Index = new ArrayList<>();
+        for(int i = 0; i<favourite.size(); i++){
+            favourite.add(plate.get(i).getAmount());
+            Index.add(i);
+        }
+
+        int temp;
+        for(int i = 1; i<getsize(); i++){
+            for(int j = i-1; j>=0; j--){
+                if(favourite.get(j)<favourite.get(j+1)){
+                    temp = favourite.get(j);
+                    favourite.set(j, favourite.get(j+1));
+                    favourite.set(j+1, temp);
+                    temp = Index.get(j);
+                    Index.set(j, Index.get(j+1));
+                    Index.set(j+1,temp);
+                }else{
+                    break;
+                }
+            }
+        }
+        while((favourite.size()>6 || favourite.get(favourite.size()-1)==0) && Index.size()>0){
+            favourite.remove(favourite.size()-1);
+            Index.remove(Index.size()-1);
+        }
+        if(Index.size()==0){
+            Index.add(plate.size()-1); //empty list case handle
+        }
+        return Index;
+    }
+
     public int getSuggestionIndex() {  //later can be use for suggestion
-        int index = 0;
-        for (int i = 1; i <= carbonEmit.size(); i++) {
-            if (carbonEmit.get(index)*carbon_coefficient.get(index) > carbonEmit.get(i)*carbon_coefficient.get(i)) {
+        ArrayList<Integer> favourite = getFavList();
+        int index = favourite.get(0);
+        int initual = index;
+
+        double current, temp;
+        for(int i = 1; i<favourite.size();i++){
+            current = plate.get(index).getCarbon_coefficient() * plate.get(index).getEmit();
+            temp = plate.get(favourite.get(i)).getCarbon_coefficient() * plate.get(favourite.get(i)).getEmit();
+            if(temp < current){
                 index = i;
             }
+        }
+
+        if(index==initual){
+            return index+1;
         }
         return index;
     }
