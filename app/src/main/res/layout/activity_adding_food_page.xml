@@ -79,6 +79,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
                         android:inputType="number"
+                        android:maxLength="2"
                         android:hint="0 Servings"
                         android:gravity="bottom"
                         android:paddingBottom="3dp"

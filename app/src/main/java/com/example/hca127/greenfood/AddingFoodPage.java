@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class AddingFoodPage extends AppCompatActivity {
@@ -25,9 +26,7 @@ public class AddingFoodPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void chickenPopUp(View v) {
-        Intent intent = new Intent(AddingFoodPage.this, PopUpActivity.class);
-        startActivity(intent);
-
-    }
+    /*EditText beefEditText = (EditText)findViewById(R.id.beefAmount);
+    String beefAmt = beefEditText.getText().toString();
+    /*int beefAmount_integer = Integer.parseInt(beefAmt);*/           /*Use to retrieve the amount*/
 }
