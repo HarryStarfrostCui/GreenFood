@@ -25,9 +25,4 @@ public class AddingFoodPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void chickenPopUp(View v) {
-        Intent intent = new Intent(AddingFoodPage.this, PopUpActivity.class);
-        startActivity(intent);
-
-    }
 }

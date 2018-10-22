@@ -34,10 +34,6 @@
             android:label="">
         </activity>
 
-        <activity android:name=".PopUpActivity"
-            android:theme="@style/AppTheme.PopUpWindows">
-
-        </activity>
     </application>
 
 </manifest>
