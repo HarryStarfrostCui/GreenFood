@@ -70,26 +70,37 @@
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/beefImage"
+                    <EditText
+                        android:id="@+id/beefAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:text="HELLO"
-                        android:textColor="#FFFFFF"
-                        android:textAlignment="gravity"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/beef" />
-                    <Button
-                        android:id="@+id/lambImage"
+                    <EditText
+                        android:id="@+id/lambAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/lamb" />
 
                 </LinearLayout>
@@ -102,25 +113,37 @@
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/chickenImage"
-                        android:onClick="chickenPopUp"
+                    <EditText
+                        android:id="@+id/chickenAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/chicken" />
-
-                    <Button
-                        android:id="@+id/porkImg"
+                    <EditText
+                        android:id="@+id/porkAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/pork" />
 
                 </LinearLayout>
@@ -133,25 +156,38 @@
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/vegImg"
+                    <EditText
+                        android:id="@+id/fishAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/bok" />
-
-                    <Button
-                        android:id="@+id/fishImg"
-                        android:layout_width="350dp"
-                        android:layout_height="180dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/fish" />
+                    <EditText
+                        android:id="@+id/eggAmount"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="2dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/egg" />
 
                 </LinearLayout>
 
@@ -163,24 +199,37 @@
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/cheeseImg"
+                    <EditText
+                        android:id="@+id/vegAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/cheese" />
-
-                    <Button
-                        android:id="@+id/potatoImg"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/veg" />
+                    <EditText
+                        android:id="@+id/potatoAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/potato" />
 
                 </LinearLayout>
@@ -193,25 +242,38 @@
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/tofuImg"
+                    <EditText
+                        android:id="@+id/milkAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/tofu" />
-
-                    <Button
-                        android:id="@+id/yogurtImg"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/milk" />
+                    <EditText
+                        android:id="@+id/cheeseAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/yogurt" />
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/cheese" />
 
                 </LinearLayout>
 
@@ -223,25 +285,38 @@
                     android:paddingRight="10dp"
                     android:paddingLeft="10dp">
 
-                    <Button
-                        android:id="@+id/beansImg"
+                    <EditText
+                        android:id="@+id/riceAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/beans" />
-
-                    <Button
-                        android:id="@+id/eggImg"
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/rice" />
+                    <EditText
+                        android:id="@+id/breadAmount"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
+                        android:layout_margin="2dp"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/egg" />
+                        android:inputType="number"
+                        android:hint="0 Servings"
+                        android:gravity="bottom"
+                        android:paddingBottom="3dp"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bread" />
 
                 </LinearLayout>
 
