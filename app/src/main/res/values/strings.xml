@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Green Food Challenge</string>
+    <string name="main_activity_banner">Welcome to the Green Food\nC0<sub><small>2</small></sub>e calculator</string>
+    <string name="main_activity_calculate_button">Calculate My Diet</string>
+    <string name="main_activity_about_button">What is CO2E?</string>
+
     <string name="title_activity_weekly_calc">Weekly Diet Calculator</string>
+
     <string name="large_text">
-        cause it was way too long
+        cause it was way too long, well it is called large_text.... ... .. .
     </string>
     <string name="text_about_page">Nanana this is new text</string>
     <string name="title_activity_about_page">About CO2e and The Green food Challenge</string>
@@ -41,7 +46,5 @@
     <integer-array name="Serving_in_gram">
         <item>75</item> <item>75</item> <item>50</item> <item>75</item> <item>75</item>
         <item>75</item> <item>75</item> <item>75</item> <item>110</item> <item>113</item>
-        <item></item> <item></item> <item></item> <item></item> <item></item>
-        <item></item> <item></item> <item></item> <item></item> <item></item>
     </integer-array>
 </resources>
