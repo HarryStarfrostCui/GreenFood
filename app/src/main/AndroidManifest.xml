@@ -21,7 +21,7 @@
             android:label="@string/title_activity_weekly_calc"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".about_page"
+            android:name=".AboutActivity"
             android:label="@string/title_activity_about_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

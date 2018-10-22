@@ -28,21 +28,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        meal = findViewById(R.id.meal);
-        meal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), meal_calc.class);
-                //intent.putExtra(x,y);
-                startActivity(intent);
-            }
-        });
 
         about = findViewById(R.id.about);
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), about_page.class);
+                Intent intent = new Intent(getBaseContext(), AboutActivity.class);
                 //intent.putExtra(x,y);
                 startActivity(intent);
             }
