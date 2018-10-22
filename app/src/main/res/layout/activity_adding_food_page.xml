@@ -46,7 +46,8 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/check" />
+                android:src="@drawable/check"
+                android:onClick="check"/>
 
         </LinearLayout>
 
@@ -77,6 +78,7 @@
                         android:scaleType="fitXY"
                         android:background="@drawable/beef" />
                     <RadioGroup
+                        android:id="@+id/beefRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -119,6 +121,7 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <RadioGroup
+                        android:id = "@+id/lambRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -178,6 +181,7 @@
                         android:scaleType="fitXY"
                         android:background="@drawable/chicken" />
                     <RadioGroup
+                        android:id="@+id/chickenRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -220,6 +224,7 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <RadioGroup
+                        android:id="@+id/fishRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -279,6 +284,7 @@
                         android:scaleType="fitXY"
                         android:background="@drawable/pork" />
                     <RadioGroup
+                        android:id="@+id/porkRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -321,6 +327,7 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <RadioGroup
+                        android:id="@+id/eggRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -380,6 +387,7 @@
                         android:scaleType="fitXY"
                         android:background="@drawable/veg" />
                     <RadioGroup
+                        android:id="@+id/vegRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
@@ -422,6 +430,7 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <RadioGroup
+                        android:id="@+id/breadRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:paddingTop="10dp"
