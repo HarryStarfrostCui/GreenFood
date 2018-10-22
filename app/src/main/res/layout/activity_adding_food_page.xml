@@ -104,7 +104,6 @@
 
                     <Button
                         android:id="@+id/chickenImage"
-                        android:onClick="chickenPopUp"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_margin="5dp"
