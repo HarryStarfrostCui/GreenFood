@@ -21,18 +21,8 @@ public class MainActivity extends AppCompatActivity {
         weekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddingFoodPage.class);
+                Intent intent = new Intent(MainActivity.this, AddingFoodActivity.class);
 
-                //intent.putExtra(x,y);
-                startActivity(intent);
-            }
-        });
-
-        meal = findViewById(R.id.meal);
-        meal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), meal_calc.class);
                 //intent.putExtra(x,y);
                 startActivity(intent);
             }
@@ -42,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), about_page.class);
+                Intent intent = new Intent(getBaseContext(), AboutActivity.class);
                 //intent.putExtra(x,y);
                 startActivity(intent);
             }

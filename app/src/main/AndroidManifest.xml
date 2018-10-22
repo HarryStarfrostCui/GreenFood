@@ -17,20 +17,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".weekly_calc"
-            android:label="@string/title_activity_weekly_calc"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".about_page"
+            android:name=".AboutActivity"
             android:label="@string/title_activity_about_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".meal_calc"
-            android:label="@string/title_activity_meal_calc"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".AddingFoodPage"
+            android:name=".AddingFoodActivity"
             android:label="">
         </activity>
 
