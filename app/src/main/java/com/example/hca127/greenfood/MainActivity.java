@@ -21,13 +21,12 @@ public class MainActivity extends AppCompatActivity {
         weekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddingFoodPage.class);
+                Intent intent = new Intent(MainActivity.this, AddingFoodActivity.class);
 
                 //intent.putExtra(x,y);
                 startActivity(intent);
             }
         });
-
 
         about = findViewById(R.id.about);
         about.setOnClickListener(new View.OnClickListener() {
