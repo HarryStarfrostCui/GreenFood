@@ -46,7 +46,8 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/check" />
+                android:src="@drawable/check"
+                android:onClick="check"/>
 
         </LinearLayout>
 
@@ -54,13 +55,62 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/headerView"
-            android:background="@drawable/background">
+            android:layout_below="@id/headerView">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/beefPic"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="0.5"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/beef" />
+                    <RadioGroup
+                        android:id="@+id/beefRadioGroup"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="Beef"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="High Amount"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Medium Amount"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Low Amount"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="None"/>
+                    </RadioGroup>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -68,25 +118,45 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
-
-                    <Button
-                        android:id="@+id/beefImage"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <RadioGroup
+                        android:id = "@+id/lambRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
                         android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:text="HELLO"
-                        android:textColor="#FFFFFF"
-                        android:textAlignment="gravity"
-                        android:background="@drawable/beef" />
-                    <Button
-                        android:id="@+id/lambImage"
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="Lamb"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="More"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Less"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="None"/>
+                    </RadioGroup>
+
+                    <ImageView
+                        android:id="@+id/lambPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
@@ -100,27 +170,48 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
-
-                    <Button
-                        android:id="@+id/chickenImage"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/chickenPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
                         android:background="@drawable/chicken" />
-
-                    <Button
-                        android:id="@+id/porkImg"
+                    <RadioGroup
+                        android:id="@+id/chickenRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
                         android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/pork" />
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="Chicken"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="A lot"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Not too much"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="A little"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="None"/>
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -130,23 +221,45 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
-
-                    <Button
-                        android:id="@+id/vegImg"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <RadioGroup
+                        android:id="@+id/fishRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
                         android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/bok" />
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="Fish"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Venti"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Grande"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tall"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Drink Stopper"/>
+                    </RadioGroup>
 
-                    <Button
-                        android:id="@+id/fishImg"
+                    <ImageView
+                        android:id="@+id/fishPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
@@ -160,27 +273,48 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
-
-                    <Button
-                        android:id="@+id/cheeseImg"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/porkPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
-                        android:background="@drawable/cheese" />
-
-                    <Button
-                        android:id="@+id/potatoImg"
+                        android:background="@drawable/pork" />
+                    <RadioGroup
+                        android:id="@+id/porkRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
                         android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/potato" />
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="PORK"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Big Mac"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="McChicken"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jr. Chicken"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ketchup Packet"/>
+                    </RadioGroup>
 
                 </LinearLayout>
 
@@ -190,53 +324,45 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
-
-                    <Button
-                        android:id="@+id/tofuImg"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <RadioGroup
+                        android:id="@+id/eggRadioGroup"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
                         android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/tofu" />
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="EGG"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Grandpa"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Teen"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baby"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Root Beer"/>
+                    </RadioGroup>
 
-                    <Button
-                        android:id="@+id/yogurtImg"
+                    <ImageView
+                        android:id="@+id/eggPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/yogurt" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingRight="10dp"
-                    android:paddingLeft="10dp">
-
-                    <Button
-                        android:id="@+id/beansImg"
-                        android:layout_width="350dp"
-                        android:layout_height="180dp"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.5"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/beans" />
-
-                    <Button
-                        android:id="@+id/eggImg"
-                        android:layout_width="350dp"
-                        android:layout_height="180dp"
-                        android:layout_margin="5dp"
                         android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
@@ -244,11 +370,109 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/vegPic"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="0.5"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/veg" />
+                    <RadioGroup
+                        android:id="@+id/vegRadioGroup"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="Veggies"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="King Size"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Queen Size"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Twin Size"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Just the Frame"/>
+                    </RadioGroup>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp">
+                    <RadioGroup
+                        android:id="@+id/breadRadioGroup"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/box">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="25dp"
+                            android:text="Bread"
+                            android:textColor="#000000"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Burj Khalifa"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Big Ben"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Your House"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Below Sea Level"/>
+                    </RadioGroup>
+
+                    <ImageView
+                        android:id="@+id/breadPic"
+                        android:layout_width="350dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="0.5"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/bread" />
+
+                </LinearLayout>
             </LinearLayout>
-
-
         </ScrollView>
     </RelativeLayout>
-
 </android.support.design.widget.CoordinatorLayout>
