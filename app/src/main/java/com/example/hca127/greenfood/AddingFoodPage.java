@@ -34,7 +34,7 @@ public class AddingFoodPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adding_food_page);
+        setContentView(R.layout.activity_adding_food);
     }
 
     public void check(View v)
