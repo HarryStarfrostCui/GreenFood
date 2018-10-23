@@ -20,11 +20,10 @@
             android:name=".AboutActivity"
             android:label="@string/title_activity_about_page"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".AddingFoodActivity"
-            android:label="">
-        </activity>
+            android:label=""></activity>
+        <activity android:name=".ResultActivity"></activity>
     </application>
 
 </manifest>

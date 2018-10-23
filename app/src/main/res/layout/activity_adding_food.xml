@@ -36,19 +36,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="ADD FOOD"
+                android:text="@string/adding_food_activity_title"
                 android:textColor="#000000"
                 android:textSize="20sp" />
-
-            <ImageButton
-                android:id="@+id/checkMark"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/check"
-                android:onClick="check"/>
-
         </LinearLayout>
 
 
@@ -92,22 +82,30 @@
                             android:textSize="25dp"
                             android:text="Beef"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/beefRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="High Amount"/>
+                            android:text="@string/beef1" />
+
                         <RadioButton
+                            android:id="@+id/beefRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Medium Amount"/>
+                            android:text="@string/beef2" />
+
                         <RadioButton
+                            android:id="@+id/beefRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Low Amount"/>
+                            android:text="@string/beef3" />
+
                         <RadioButton
+                            android:id="@+id/beefRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="None"/>
+                            android:text="@string/beef4" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -135,22 +133,30 @@
                             android:textSize="25dp"
                             android:text="Lamb"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/lambRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="More"/>
+                            android:text="@string/lamb1" />
+
                         <RadioButton
+                            android:id="@+id/lambRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Average"/>
+                            android:text="@string/lamb2" />
+
                         <RadioButton
+                            android:id="@+id/lambRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Less"/>
+                            android:text="@string/lamb3" />
+
                         <RadioButton
+                            android:id="@+id/lambRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="None"/>
+                            android:text="@string/lamb4" />
                     </RadioGroup>
 
                     <ImageView
@@ -195,22 +201,30 @@
                             android:textSize="25dp"
                             android:text="Chicken"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/chickenRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="A lot"/>
+                            android:text="@string/chicken1" />
+
                         <RadioButton
+                            android:id="@+id/chickenRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Not too much"/>
+                            android:text="@string/chicken2" />
+
                         <RadioButton
+                            android:id="@+id/chickenRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="A little"/>
+                            android:text="@string/chicken3" />
+
                         <RadioButton
+                            android:id="@+id/chickenRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="None"/>
+                            android:text="@string/chicken4" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -238,22 +252,29 @@
                             android:textSize="25dp"
                             android:text="Fish"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/fishRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Venti"/>
+                            android:text="@string/fish1" />
+
                         <RadioButton
+                            android:id="@+id/fishRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Grande"/>
+                            android:text="@string/fish2" />
                         <RadioButton
+                            android:id="@+id/fishRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tall"/>
+
                         <RadioButton
+                            android:id="@+id/fishRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Drink Stopper"/>
+                            android:text="@string/fish4" />
                     </RadioGroup>
 
                     <ImageView
@@ -298,19 +319,26 @@
                             android:textSize="25dp"
                             android:text="PORK"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/porkRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Big Mac"/>
+                            android:text="@string/pork1" />
+
                         <RadioButton
+                            android:id="@+id/porkRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="McChicken"/>
+                            android:text="@string/pork2" />
+
                         <RadioButton
+                            android:id="@+id/porkRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Jr. Chicken"/>
+                            android:text="@string/pork3" />
                         <RadioButton
+                            android:id="@+id/porkRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ketchup Packet"/>
@@ -341,22 +369,30 @@
                             android:textSize="25dp"
                             android:text="EGG"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/eggRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Grandpa"/>
+                            android:text="@string/egg1" />
+
                         <RadioButton
+                            android:id="@+id/eggRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Teen"/>
+                            android:text="@string/egg2" />
+
                         <RadioButton
+                            android:id="@+id/eggRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Baby"/>
+                            android:text="@string/egg3" />
+
                         <RadioButton
+                            android:id="@+id/eggRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Root Beer"/>
+                            android:text="@string/egg4" />
                     </RadioGroup>
 
                     <ImageView
@@ -401,22 +437,30 @@
                             android:textSize="25dp"
                             android:text="Veggies"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/veggieRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="King Size"/>
+                            android:text="@string/veggie1" />
+
                         <RadioButton
+                            android:id="@+id/veggieRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Queen Size"/>
+                            android:text="@string/veggie2" />
+
                         <RadioButton
+                            android:id="@+id/veggieRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Twin Size"/>
+                            android:text="@string/veggie3" />
+
                         <RadioButton
+                            android:id="@+id/veggieRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Just the Frame"/>
+                            android:text="@string/veggie4" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -444,22 +488,30 @@
                             android:textSize="25dp"
                             android:text="Bread"
                             android:textColor="#000000"/>
+
                         <RadioButton
+                            android:id="@+id/breadRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Burj Khalifa"/>
+                            android:text="@string/bread1" />
+
                         <RadioButton
+                            android:id="@+id/breadRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Big Ben"/>
+                            android:text="@string/bread2" />
+
                         <RadioButton
+                            android:id="@+id/breadRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your House"/>
+                            android:text="@string/bread3" />
+
                         <RadioButton
+                            android:id="@+id/breadRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Below Sea Level"/>
+                            android:text="@string/bread4" />
                     </RadioGroup>
 
                     <ImageView
@@ -472,6 +524,14 @@
                         android:background="@drawable/bread" />
 
                 </LinearLayout>
+                <ImageButton
+                    android:id="@+id/nextButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/check"
+                    android:layout_gravity="center|bottom"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

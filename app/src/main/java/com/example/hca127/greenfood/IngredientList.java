@@ -15,29 +15,16 @@ public class IngredientList {
         return plate.get(index).getCarbon_coefficient();
     }
 
-    double getServing_weight(int index) {        return plate.get(index).getServing_weight();    }
-
-    int getAmout(int index) {
-        return plate.get(index).getAmount();
-    }
-
     int getsize() {
         return plate.size();
     }
 
-    void addIng(String food_name, double Carbon, double serve_size) {
-        Ingredient newcomer = new Ingredient(food_name, Carbon, serve_size);
+    void addIng(String food_name, double carbon) {
+        Ingredient newcomer = new Ingredient(food_name, carbon);
         plate.add(newcomer);
     }
 
-    boolean setIngAmount(int index, int Amount) {
-        if (index >= getsize()) {
-            return false;
-        }
-        plate.get(index).setAmount(Amount);
-        return true;
-    }
-
+    /* TODO: FIX
     double getTotalEmit() {
         int i;
         double sum = 0;
@@ -46,7 +33,9 @@ public class IngredientList {
         }
         return sum;
     }
+    */
 
+    /* TODO: FIX
     private ArrayList<Integer> getFavList(){
         //stage 1: 7 food the user like most
         ArrayList<Integer> favourite = new ArrayList<>();
@@ -80,7 +69,10 @@ public class IngredientList {
         }
         return Index;
     }
+    */
 
+
+    /* TODO: FIX
     public int getSuggestionIndex() {  //later can be use for suggestion
         ArrayList<Integer> favourite = getFavList();
         int index = favourite.get(0);
@@ -100,5 +92,6 @@ public class IngredientList {
         }
         return index;
     }
+    */
 
 }
