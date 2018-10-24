@@ -16,8 +16,8 @@
     <string name="about_activity_challenge_header">The Green Food Challenge</string>
     <string name="about_activity_challenge_text">
         This challenge aims to raise awareness about the impact of our diets on the environment
-        and offer some suggestions on possible changes. The application aims to make it easy to
-        for users to get an estimate of their own dietary carbon impact.
+        and offer some suggestions on possible changes. 20% of a person\'s consumption based
+        greenhouse gas emissions come from food.
     </string>
     <string name="about_activity_C02e_header">What is C0<sub><small>2</small></sub>e?</string>
     <string name="about_activity_C02e_text">
@@ -27,7 +27,7 @@
         For food production, the most common gas is methane.
     </string>
 
-    <string name="adding_food_activity_title">I eat...</string>
+    <string name="adding_food_activity_title">I eat&#8230;</string>
 
     <string name="beef1">High amount</string>
     <string name="beef2">Medium amount</string>
