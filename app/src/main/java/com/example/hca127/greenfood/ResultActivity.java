@@ -21,7 +21,10 @@ public class ResultActivity extends AppCompatActivity {
     TextView mSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 1.5f; // in tCo2e
+    private float averageCarbon = 15000f;
+    private float lowCarbonPercentage = 0.9f;
+    private float averageCarbonPercentage = 1.1f;
+
 
     private ArrayList<Ingredient> basket;
 
@@ -40,51 +43,43 @@ public class ResultActivity extends AppCompatActivity {
         //Toast.makeText(this, "carbon coef: " + Double.toString(basket.get(0).getCarbon_coefficient()) + " . Average consum: " + Double.toString(basket.get(0).getAverage_consumption()) + " . User consum: " + Double.toString(basket.get(0).getUser_consumption()) + " = " + Double.toString(basket.get(0).getUser_co2_emission()), Toast.LENGTH_LONG).show();
 
         //userCarbon = 2.0f; //insert calculated carbon in tC02e
-        suggestedCarbon = .75f; // insert suggested carbon here
-
-
+        suggestedCarbon = 12000f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
         mSuggestionText = findViewById(R.id.suggestionText);
 
-        if (userCarbon < 1.25) {
+        if (userCarbon < averageCarbon*lowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
-        } else if (userCarbon < 1.75) {
+        } else if (userCarbon < averageCarbon*averageCarbonPercentage) {
             mResultText.setText(R.string.average_carbon_result);
         } else {
             mResultText.setText(R.string.high_carbon_result);
         }
 
         mResultChart = findViewById(R.id.resultChart);
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, userCarbon));
-        entries.add(new BarEntry(1, averageCarbon));
-        BarDataSet set = new BarDataSet(entries, "BarDataSet");
-        set.setColors(ColorTemplate.COLORFUL_COLORS);
-
-        BarData data = new BarData(set);
-        mResultChart.getXAxis().setDrawGridLines(false);
-
-        mResultChart.setData(data);
-        mResultChart.animateY(1200);
-        mResultChart.invalidate();
-
+        setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
         mSuggestionText.setText(R.string.temp_text);
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
-        ArrayList<BarEntry> suggestionEntries = new ArrayList<>();
-        suggestionEntries.add(new BarEntry(0, suggestedCarbon));
-        suggestionEntries.add(new BarEntry(1, averageCarbon));
-        BarDataSet suggestionSet = new BarDataSet(suggestionEntries, "BarDataSet");
-        suggestionSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
-        BarData suggestionData = new BarData(suggestionSet);
-        mSuggestionChart.getXAxis().setDrawGridLines(false);
-
-        mSuggestionChart.setData(suggestionData);
-        mSuggestionChart.animateY(2400);
-        mSuggestionChart.invalidate();
+        setUpHorizontalBarChart(mSuggestionChart, averageCarbon, suggestedCarbon);
 
     }
+
+    private void setUpHorizontalBarChart(HorizontalBarChart chart, float valueOne, float valueTwo) {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, valueOne));
+        entries.add(new BarEntry(1, valueTwo));
+
+        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        BarData suggestionData = new BarData(barDataSet);
+        chart.getXAxis().setDrawGridLines(false);
+
+        chart.setData(suggestionData);
+        chart.animateY(1200);
+        chart.invalidate();
+    }
+
 }
