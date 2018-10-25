@@ -10,7 +10,7 @@ public class Ingredient implements Serializable {
     private double user_co2_emission;
     private double standard_co2_emission;
 
-    Ingredient(String foodName, double carbon_coefficient, double average_consumption, double user_consumption){
+    Ingredient(String foodName, double carbon_coefficient, double average_consumption, int user_consumption){
         this.foodName = foodName;
         this.carbon_coefficient = carbon_coefficient;
         this.average_consumption = average_consumption;
@@ -56,7 +56,7 @@ public class Ingredient implements Serializable {
         return user_consumption;
     }
 
-    public void setUser_consumption(double user_consumption) {
+    public void setUser_consumption(int user_consumption) {
         if(user_consumption == 1)
                 this.user_consumption = 1.5;
         else if(user_consumption == 2)
