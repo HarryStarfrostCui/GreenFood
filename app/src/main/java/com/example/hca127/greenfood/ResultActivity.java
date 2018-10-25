@@ -23,6 +23,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 public class ResultActivity extends AppCompatActivity {
     HorizontalBarChart mResultChart;
     HorizontalBarChart mSuggestionChart;
+    PieChart mUserEmissionSplit;
     TextView mResultText;
     TextView mSuggestionText;
     private float userCarbon;
@@ -70,6 +71,9 @@ public class ResultActivity extends AppCompatActivity {
         mSuggestionChart = findViewById(R.id.suggestionChart);
         setUpHorizontalBarChart(mSuggestionChart, averageCarbon, suggestedCarbon);
 
+        mUserEmissionSplit = findViewById(R.id.emissionSplitChart);
+        setupPieChart();
+
     }
 
     private void setUpHorizontalBarChart(HorizontalBarChart chart, float valueOne, float valueTwo) {
@@ -91,15 +95,15 @@ public class ResultActivity extends AppCompatActivity {
     private void setupPieChart() {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
-        for (int i = 0; i < emissionAmount.length; i++) {
-            pieEntries.add(new PieEntry(emissionAmount[i], emissionName[i]));
+        for (int i = 0; i < basket.size(); i++) {
+            pieEntries.add(new PieEntry((float)basket.get(i).getUser_co2_emission(), "temp"));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "Consumption-Based GHG Emissions, 2015");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData data = new PieData(dataSet);
 
-        PieChart chart = findViewById(R.id.emissionChart);
+        PieChart chart = findViewById(R.id.emissionSplitChart);
         Legend legend = chart.getLegend();
         legend.setWordWrapEnabled(true);
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
