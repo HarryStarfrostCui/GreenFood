@@ -17,18 +17,18 @@
         <LinearLayout
             android:id="@+id/headerView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:background="#F3EEEA"
             android:orientation="horizontal">
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/back" />
-
+-->
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="fill_parent"
@@ -37,6 +37,7 @@
                 android:gravity="center"
                 android:text="@string/adding_food_activity_title"
                 android:textColor="#000000"
+                android:textStyle="bold"
                 android:textSize="20sp" />
         </LinearLayout>
 
