@@ -77,6 +77,11 @@
     <string name="bread3">Your house</string>
     <string name="bread4">Below sea level</string>
 
+    <string name="result_greeting">
+        Phew! You made it through. I was worried  that we\'d need to ask clippy to help.
+        On the bright side, I\'ve got some results for you:
+    </string>
+
     <string name="low_carbon_result">
         Good News! The greenhouse gas emissions required to produce your diet are very low!
     </string>
