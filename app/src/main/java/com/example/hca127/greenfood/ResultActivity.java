@@ -6,6 +6,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -32,8 +34,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Bundle extras = getIntent().getExtras();
-        basket =(ArrayList<Ingredient>)getIntent().getSerializableExtra("basket");
-        for(int i = 0; i < basket.size() ; i++){
+        basket = (ArrayList<Ingredient>) getIntent().getSerializableExtra("basket");
+        for (int i = 0; i < basket.size(); i++) {
             userCarbon += basket.get(i).getUser_co2_emission();
         }
 
@@ -42,7 +44,6 @@ public class ResultActivity extends AppCompatActivity {
 
         //userCarbon = 2.0f; //insert calculated carbon in tC02e
         suggestedCarbon = .75f; // insert suggested carbon here
-
 
 
         mResultText = findViewById(R.id.resultText);
@@ -99,37 +100,44 @@ public class ResultActivity extends AppCompatActivity {
         return standard;
     }*/
 
+    public void sortArrayListBasedOnCarbon_coefficient() {
+        for (int i = 0; i < basket.size(); i++) {
+            for (int j = i + 1; j < basket.size(); j++) {
+                if (basket.get(i).getCarbon_coefficient() < basket.get(j).getCarbon_coefficient()) {
+                    Ingredient temp = basket.get(i);
+                    basket.set(i, basket.get(j));
+                    basket.set(j, temp);
+                }
+            }
+        }
+    }
+
+
     //in this function, suggestionResult to store the result of all type food suggestions
     //in for loop, if consume is higher than standard suggest standard amount
     //else if consume equal to standard, give next food standard amount
     //else set suggestion to NULL and do not show it in result
-    public void getSuggestion()
-    {
-        //ArrayList<IngredientList> standard;
-        //double standardAmount;
-        //standard = setupStandard(array);
-        for (int i = 0; i < basket.size(); i++)
-        {
-            if (basket.get(i).getUser_co2_emission() > basket.get(i).getStandard_co2_emission())
-            {
-                suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
+    public void getSuggestion() {
+        sortArrayListBasedOnCarbon_coefficient();
+        for (int i = 0; i < basket.size(); i++) {
+            if (basket.get(i).getUser_co2_emission() > basket.get(i).getStandard_co2_emission()) {
                 basket.get(i).setupStandard();
+                suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
                 //if I don\t call the constructor, will the variable be setting up?
                 suggestionResult.get(i).setUser_co2_emission(basket.get(i).getStandard_co2_emission());
-            }
-            else if (basket.get(i).getUser_co2_emission() == basket.get(i).getStandard_co2_emission())
-            {
-                if (i+1 == basket.size())
-                {
+            } else if (basket.get(i).getUser_co2_emission() == basket.get(i).getStandard_co2_emission()) {
+                basket.get(i).setupStandard();
+                if (i + 1 == basket.size()) {
                     suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
-                    suggestionResult.get(i).setUser_co2_emission(basket.get(i+1).getUser_co2_emission());
+                    suggestionResult.get(i).setUser_co2_emission(basket.get(i).getStandard_co2_emission() * 0.4);
+                    break;
                 }
                 //if food 1 is equal, then give food2, if food 2 is greater, give food2 as well. This will be a problem
-                suggestionResult.get(i).addIng(standard.get(i+1).getName(i+1), standard.get(i+1).getCarbon(i+1));
-            }
-            else
-            {
-                suggestionResult.get(i).addIng("NULL", 0);
+                double saved_co2_emission = basket.get(i + 1).getCarbon_coefficient() * basket.get(i).getAverage_consumption() * basket.get(i).getUser_consumption();
+                suggestionResult.get(i).setFoodName(basket.get(i + 1).getFoodName());
+                suggestionResult.get(i).setUser_co2_emission(saved_co2_emission);
+            } else {
+                suggestionResult.get(i).setFoodName("");
             }
         }
         removeDuplicate(suggestionResult);
@@ -137,12 +145,9 @@ public class ResultActivity extends AppCompatActivity {
 
     private void removeDuplicate(ArrayList<IngredientList> suggestionResult) {
         double count = 0.0;
-        for (int i = 0; i < suggestionResult.size(); i++)
-        {
-            for (int j = i+1; j < suggestionResult.size(); j++)
-            {
-                if (suggestionResult.get(i).getName(i) == suggestionResult.get(j).getName(j))
-                {
+        for (int i = 0; i < suggestionResult.size(); i++) {
+            for (int j = i + 1; j < suggestionResult.size(); j++) {
+                if (suggestionResult.get(i).getName(i) == suggestionResult.get(j).getName(j)) {
                     count = count + suggestionResult.get(j).getCarbon(j);
                     suggestionResult.get(j).addIng("", 0);
                 }
@@ -152,65 +157,39 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
-    private ArrayList<Double> changeSuggestionCarbonToAmount(ArrayList<IngredientList> resultArray, ArrayList<IngredientList> array)
-    {
-        double carbon;
-        ArrayList<Double> amount = new ArrayList<>();
-        for (int i = 0; i < resultArray.size(); i++)
+    public void printSuggestion() {
+        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText);
+        for (int i = 0; i < suggestionResult.size(); i++)
         {
-            carbon = resultArray.get(i).getCarbon(i);
-            amount.add(carbon*1000/array.get(i).getCarbon(i));
+            for (int j = i+1; j < suggestionResult.size(); j++)
+            {
+                if(suggestionResult.get(i).getFoodName().equals(suggestionResult.get(j).getFoodName()))
+                {
+                    suggestionResult.get(i).setUser_co2_emission();
+                }
+            }
         }
-        return amount;
     }
 
-    public void printSuggestion()
-    {
-        ArrayList<Double> amount;
-        amount = changeSuggestionCarbonToAmount(suggestionResult, array);
-        TextView suggestionTextView = (TextView) findViewById(R.id.suggestion);
-        suggestionTextView.setText(suggestionResult.get(0).getName(0) + amount.get(0).toString());
-    }
-
-    public double calculateSavingAmountCarbon(ArrayList<IngredientList>array)
-    {
+    public double calculateSavingAmountCarbon() {
         double difference;
         double total = 0.0;
-        for (int i = 0; i < array.size(); i++)
-        {
-            difference = array.get(i).getCarbon(i) - suggestionResult.get(i).getCarbon(i);
+        for (int i = 0; i < basket.size(); i++) {
+            difference = basket.get(i).getUser_co2_emission() - suggestionResult.get(i).getUser_co2_emission();
             total += difference;
         }
         return total;
     }
 
-    public double calculateCarbonEquivalent()
-    {
-        double total = calculateSavingAmountCarbon(array);
+    public double calculateCarbonEquivalent() {
+        double total = calculateSavingAmountCarbon();
         int treeAbsorbAnnually = 22;
-        return total/treeAbsorbAnnually;
+        return total / treeAbsorbAnnually;
     }
 
-    public double calcultateSavingInMetroVan()
-    {
-        double total = calculateSavingAmountCarbon(array);
-        double nonVegetarians = 0.9*2463000;
+    public double calcultateSavingInMetroVan() {
+        double total = calculateSavingAmountCarbon();
+        double nonVegetarians = 0.9 * 2463000;
         return total * nonVegetarians;
-    }
-  /*
-    public int getSuggestionIndex() {  //later can be use for suggestion
-        ArrayList<Integer> favourite = getFavList();
-        int index = favourite.get(0);
-        int initual = index;
-
-        double current, temp;
-        for(int i = 1; i<favourite.size();i++){
-            current = plate.get(index).getCarbon_coefficient() * plate.get(index).getEmit();
-            temp = plate.get(favourite.get(i)).getCarbon_coefficient() * plate.get(favourite.get(i)).getEmit();
-            if(temp < current){
-                index = i;
-            }
-        }
-
     }
 }
