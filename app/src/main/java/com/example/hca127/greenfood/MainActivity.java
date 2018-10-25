@@ -7,16 +7,16 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button weekly, about;
+    private Button mAddingFoodButton;
+    private Button mAboutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        weekly = findViewById(R.id.weekly);
-        weekly.setOnClickListener(new View.OnClickListener() {
+        mAddingFoodButton = findViewById(R.id.addingFoodButton);
+        mAddingFoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddingFoodActivity.class);
@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        about = findViewById(R.id.about);
-        about.setOnClickListener(new View.OnClickListener() {
+        mAboutButton = findViewById(R.id.aboutButton);
+        mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), AboutActivity.class);
