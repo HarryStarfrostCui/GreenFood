@@ -21,7 +21,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView mSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 15000f;
+    private float averageCarbon = 1500f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
