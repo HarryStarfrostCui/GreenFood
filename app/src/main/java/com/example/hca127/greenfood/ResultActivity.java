@@ -24,7 +24,7 @@ public class ResultActivity extends AppCompatActivity {
     private float averageCarbon = 1.5f; // in tCo2e
 
     private ArrayList<Ingredient> basket;
-    private ArrayList<IngredientList> suggestionResult = new ArrayList<>();
+    private ArrayList<Ingredient> suggestionResult = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,37 +89,40 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     //check if array.get(i).getCarbon is for year, if not, remember to time the date of year
-    public ArrayList<IngredientList> setupStandard(ArrayList<IngredientList> array)
+   /* public ArrayList<Double> setupStandard()
     {
-        ArrayList<IngredientList> standard = new ArrayList<>();
-        for (int i = 0; i < array.size(); i++)
+        ArrayList<Double> standard = new ArrayList<>();
+        for (int i = 0; i < basket.size(); i++)
         {
-            standard.get(i).addIng(array.get(i).getName(i), 225* 0.5 *array.get(i).getCarbon(i)/1000.0);
+            standard.get(i) = basket.get(i).getStandard_co2_emission();
         }
         return standard;
-    }
+    }*/
 
     //in this function, suggestionResult to store the result of all type food suggestions
     //in for loop, if consume is higher than standard suggest standard amount
     //else if consume equal to standard, give next food standard amount
     //else set suggestion to NULL and do not show it in result
-    public void getSuggestion(ArrayList<IngredientList> array)
+    public void getSuggestion()
     {
-        ArrayList<IngredientList> standard;
+        //ArrayList<IngredientList> standard;
         //double standardAmount;
-        standard = setupStandard(array);
-        for (int i = 0; i < array.size(); i++)
+        //standard = setupStandard(array);
+        for (int i = 0; i < basket.size(); i++)
         {
-            if (array.get(i).getUserConsumption() > standard.get(i).getCarbon(i))
+            if (basket.get(i).getUser_co2_emission() > basket.get(i).getStandard_co2_emission())
             {
-                //standardAmount =  (standard.get(i).getCarbon(i)*1000)/array.get(i).getCarbon(i);
-                suggestionResult.get(i).addIng(standard.get(i).getName(i), standard.get(i).getCarbon(i));
+                suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
+                basket.get(i).setupStandard();
+                //if I don\t call the constructor, will the variable be setting up?
+                suggestionResult.get(i).setUser_co2_emission(basket.get(i).getStandard_co2_emission());
             }
-            else if (array.get(i).getUserConsumption() == standard.get(i).getCarbon(i))
+            else if (basket.get(i).getUser_co2_emission() == basket.get(i).getStandard_co2_emission())
             {
-                if (i+1 == array.size())
+                if (i+1 == basket.size())
                 {
-                    suggestionResult.get(i).addIng(standard.get(i).getName(i), standard.get(i).getCarbon(i));
+                    suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
+                    suggestionResult.get(i).setUser_co2_emission(basket.get(i+1).getUser_co2_emission());
                 }
                 //if food 1 is equal, then give food2, if food 2 is greater, give food2 as well. This will be a problem
                 suggestionResult.get(i).addIng(standard.get(i+1).getName(i+1), standard.get(i+1).getCarbon(i+1));

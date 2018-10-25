@@ -8,6 +8,7 @@ public class Ingredient implements Serializable {
     private double average_consumption;
     private double user_consumption;
     private double user_co2_emission;
+    private double standard_co2_emission;
 
     Ingredient(String foodName, double carbon_coefficient, double average_consumption, double user_consumption){
         this.foodName = foodName;
@@ -68,4 +69,19 @@ public class Ingredient implements Serializable {
         this.user_co2_emission = calculate_user_co2_emission();
     }
 
+    public double getStandard_co2_emission() {
+        return standard_co2_emission;
+    }
+
+    public void setStandard_co2_emission(double standard_co2_emmsion) {
+        this.standard_co2_emission = standard_co2_emmsion;
+    }
+
+    public void setupStandard() {
+        standard_co2_emission = 0.5*carbon_coefficient*average_consumption;
+    }
+
+    public void setUser_co2_emission(double user_co2_emission) {
+        this.user_co2_emission = user_co2_emission;
+    }
 }
