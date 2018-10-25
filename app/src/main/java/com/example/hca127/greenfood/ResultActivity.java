@@ -140,10 +140,10 @@ public class ResultActivity extends AppCompatActivity {
                 suggestionResult.get(i).setFoodName("");
             }
         }
-        removeDuplicate(suggestionResult);
+        //removeDuplicate(suggestionResult);
     }
 
-    private void removeDuplicate(ArrayList<IngredientList> suggestionResult) {
+    /*private void removeDuplicate(ArrayList<IngredientList> suggestionResult) {
         double count = 0.0;
         for (int i = 0; i < suggestionResult.size(); i++) {
             for (int j = i + 1; j < suggestionResult.size(); j++) {
@@ -155,7 +155,7 @@ public class ResultActivity extends AppCompatActivity {
             count = count + suggestionResult.get(i).getCarbon(i);
             suggestionResult.get(i).addIng(suggestionResult.get(i).getName(i), count);
         }
-    }
+    }*/
 
     public void printSuggestion() {
         TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText);
@@ -165,8 +165,17 @@ public class ResultActivity extends AppCompatActivity {
             {
                 if(suggestionResult.get(i).getFoodName().equals(suggestionResult.get(j).getFoodName()))
                 {
-                    suggestionResult.get(i).setUser_co2_emission();
+                    suggestionResult.get(i).setUser_co2_emission(suggestionResult.get(i).getUser_co2_emission()+suggestionResult.get(j).getUser_co2_emission());
+                    suggestionResult.get(j).setFoodName("");
                 }
+            }
+            if (suggestionResult.get(i).getFoodName().equals(""))
+            {
+                continue;
+            }
+            else
+            {
+                suggestionTextView.setText(getString());
             }
         }
     }
