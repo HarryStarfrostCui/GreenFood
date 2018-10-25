@@ -74,13 +74,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="Beef"
-                            android:textColor="#000000"/>
+                            android:text="@string/beef"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/beefRadio1"
@@ -125,13 +126,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="Lamb"
-                            android:textColor="#000000"/>
+                            android:text="@string/lamb"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/lambRadio1"
@@ -193,13 +195,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="Chicken"
-                            android:textColor="#000000"/>
+                            android:text="@string/chicken"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/chickenRadio1"
@@ -244,13 +247,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="Fish"
-                            android:textColor="#000000"/>
+                            android:text="@string/fish"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/fishRadio1"
@@ -311,13 +315,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="PORK"
-                            android:textColor="#000000"/>
+                            android:text="@string/pork"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/porkRadio1"
@@ -361,13 +366,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="EGG"
-                            android:textColor="#000000"/>
+                            android:text="@string/egg"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/eggRadio1"
@@ -429,13 +435,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="Veggies"
-                            android:textColor="#000000"/>
+                            android:text="@string/veggie"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/veggieRadio1"
@@ -480,13 +487,14 @@
                         android:paddingLeft="10dp"
                         android:layout_weight="0.5"
                         android:background="@drawable/box">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textSize="25dp"
-                            android:text="Bread"
-                            android:textColor="#000000"/>
+                            android:text="@string/bread"
+                            android:textColor="#000000"
+                            android:textSize="25dp" />
 
                         <RadioButton
                             android:id="@+id/breadRadio1"
