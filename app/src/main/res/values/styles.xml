@@ -20,7 +20,11 @@
     <style name="GreenHeading" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">#228B22</item>
         <item name="android:padding">8dp</item>
+    </style>
 
+    <style name="GreenHeadingSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">#228B22</item>
+        <item name="android:padding">8dp</item>
     </style>
 
     <style name="BlackText" parent="@android:style/TextAppearance">
