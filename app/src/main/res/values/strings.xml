@@ -92,6 +92,8 @@
         This is temp, put some more contextual details here!
     </string>
 
+    <string name="calculate_my_diet_button">Calculate My Diet</string>
+    <string name="what_is_co2e_button">What is C02e?</string>
 
     <string name="logo_content_description">Green Challenge Logo</string>
 
