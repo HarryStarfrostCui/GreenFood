@@ -3,6 +3,7 @@ package com.example.hca127.greenfood;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,15 +23,26 @@ public class ResultActivity extends AppCompatActivity {
     private float suggestedCarbon;
     private float averageCarbon = 1.5f; // in tCo2e
 
-    private ArrayList<Integer> basket;
+    private ArrayList<Ingredient> basket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        userCarbon = 2.0f; //insert calculated carbon in tC02e
+        Bundle extras = getIntent().getExtras();
+        basket =(ArrayList<Ingredient>)getIntent().getSerializableExtra("basket");
+        for(int i = 0; i < basket.size() ; i++){
+            userCarbon += basket.get(i).getUser_co2_emission();
+        }
+
+        Toast.makeText(this, "total = " + userCarbon, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "carbon coef: " + Double.toString(basket.get(0).getCarbon_coefficient()) + " . Average consum: " + Double.toString(basket.get(0).getAverage_consumption()) + " . User consum: " + Double.toString(basket.get(0).getUser_consumption()) + " = " + Double.toString(basket.get(0).getUser_co2_emission()), Toast.LENGTH_LONG).show();
+
+        //userCarbon = 2.0f; //insert calculated carbon in tC02e
         suggestedCarbon = .75f; // insert suggested carbon here
+
+
 
         mResultText = findViewById(R.id.resultText);
         mSuggestionText = findViewById(R.id.suggestionText);
@@ -76,11 +88,3 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 }
-
-//        Bundle extras = getIntent().getExtras();
-//        basket = extras.getIntegerArrayList("basket");
-//        Toast.makeText(ResultActivity.this,
-//                "its " +   basket.get(0).toString() + " "  + basket.get(1).toString() + " " + basket.get(2).toString() + " "  +
-//                                basket.get(3).toString() + " "  + basket.get(4).toString() + " " + basket.get(5).toString() + " "  +
-//                                basket.get(6).toString() + " "  + basket.get(7).toString(),
-//                Toast.LENGTH_LONG).show();
