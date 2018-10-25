@@ -75,47 +75,23 @@
     <string-array name="Ingredient_Name">
         <item>Lamb</item>
         <item>Beef</item>
-        <item>Cheese</item>
         <item>Pork</item>
-        <item>Salmon</item>
-        <item>Turkey</item>
         <item>Chicken</item>
-        <item>Tuna</item>
         <item>Eggs</item>
-        <item>Potatoes</item>
-        <item>Rice</item>
-        <item>Peanut Butter</item>
-        <item>Nuts</item>
-        <item>Yogurt</item>
         <item>Broccoli</item>
-        <item>Tofu</item>
-        <item>Dry Beans</item>
         <item>Milk(2%)</item>
-        <item>Tomatoes</item>
-        <item>Lentils</item>
+        <item>Bread</item>
     </string-array>
 
     <integer-array name="carbon_coefficient">
-        <item>392</item>
-        <item>270</item>
-        <item>135</item>
-        <item>121</item>
-        <item>119</item>
-        <item>109</item>
-        <item>69</item>
-        <item>61</item>
-        <item>48</item>
-        <item>29</item>
-        <item>27</item>
-        <item>25</item>
-        <item>23</item>
-        <item>22</item>
-        <item>20</item>
-        <item>20</item>
-        <item>20</item>
-        <item>19</item>
-        <item>11</item>
-        <item>9</item>
+        <item>392</item> <!--lamb-->
+        <item>270</item> <!--beef-->
+        <item>121</item> <!--pork-->
+        <item>69</item> <!--chicken-->
+        <item>48</item> <!--eggs-->
+        <item>20</item> <!--broccoli-->
+        <item>19</item> <!--milk-->
+        <item>27</item> <!--break-->
     </integer-array>
 
 </resources>
