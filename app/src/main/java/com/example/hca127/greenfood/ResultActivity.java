@@ -28,7 +28,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView mSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 15000f;
+    private float averageCarbon = 1500f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
@@ -50,7 +50,7 @@ public class ResultActivity extends AppCompatActivity {
         //Toast.makeText(this, "carbon coef: " + Double.toString(basket.get(0).getCarbon_coefficient()) + " . Average consum: " + Double.toString(basket.get(0).getAverage_consumption()) + " . User consum: " + Double.toString(basket.get(0).getUser_consumption()) + " = " + Double.toString(basket.get(0).getUser_co2_emission()), Toast.LENGTH_LONG).show();
 
         //userCarbon = 2.0f; //insert calculated carbon in tC02e
-        suggestedCarbon = 12000f; // insert suggested carbon here
+        suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
         mSuggestionText = findViewById(R.id.suggestionText);

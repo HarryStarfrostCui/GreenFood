@@ -45,14 +45,14 @@ public class AddingFoodActivity extends AppCompatActivity {
         basket = new ArrayList<Ingredient>(FOOD_TYPES);
         userChoices = new ArrayList<Integer>(FOOD_TYPES);
 
-        backButton = (ImageButton) findViewById(R.id.backButton);
+       /* backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(AddingFoodActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         nextButton = (ImageButton) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -76,14 +76,14 @@ public class AddingFoodActivity extends AppCompatActivity {
         veggieRadioGroup = (RadioGroup) findViewById(R.id.vegRadioGroup);
         breadRadioGroup = (RadioGroup) findViewById(R.id.breadRadioGroup);
 
-        beefRadioGroup.check(R.id.beefRadio4);
-        lambRadioGroup.check(R.id.lambRadio4);
-        chickenRadioGroup.check(R.id.chickenRadio4);
-        fishRadioGroup.check(R.id.fishRadio4);
-        porkRadioGroup.check(R.id.porkRadio4);
-        eggRadioGroup.check(R.id.eggRadio4);
-        veggieRadioGroup.check(R.id.veggieRadio4);
-        breadRadioGroup.check(R.id.breadRadio4);
+        beefRadioGroup.check(R.id.beefRadio2);
+        lambRadioGroup.check(R.id.lambRadio2);
+        chickenRadioGroup.check(R.id.chickenRadio2);
+        fishRadioGroup.check(R.id.fishRadio2);
+        porkRadioGroup.check(R.id.porkRadio2);
+        eggRadioGroup.check(R.id.eggRadio2);
+        veggieRadioGroup.check(R.id.veggieRadio2);
+        breadRadioGroup.check(R.id.breadRadio2);
     }
 
     public void getUserInput() {
