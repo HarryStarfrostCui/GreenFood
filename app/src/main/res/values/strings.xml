@@ -95,7 +95,7 @@
 
     <string name="logo_content_description">Green Challenge Logo</string>
 
-    <string-array name="Ingredient_Name">
+    <string-array name="ingredient_name">
         <item>Lamb</item>
         <item>Beef</item>
         <item>Lamb</item>
