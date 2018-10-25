@@ -75,10 +75,11 @@
     <string-array name="Ingredient_Name">
         <item>Lamb</item>
         <item>Beef</item>
+        <item>Fish</item>
         <item>Pork</item>
         <item>Chicken</item>
         <item>Eggs</item>
-        <item>Broccoli</item>
+        <item>Veg</item>
         <item>Milk(2%)</item>
         <item>Bread</item>
     </string-array>
@@ -86,12 +87,25 @@
     <integer-array name="carbon_coefficient">
         <item>392</item> <!--lamb-->
         <item>270</item> <!--beef-->
+        <item>119</item> <!--fish-->
         <item>121</item> <!--pork-->
         <item>69</item> <!--chicken-->
         <item>48</item> <!--eggs-->
-        <item>20</item> <!--broccoli-->
+        <item>20</item> <!--veg-->
         <item>19</item> <!--milk-->
-        <item>27</item> <!--break-->
+        <item>27</item> <!--bread-->
+    </integer-array>
+
+    <integer-array name="annaul_average_consumption"> <!-- kg / year-->
+        <item>1</item> <!--lamb-->
+        <item>25</item> <!--beef-->
+        <item>9</item> <!--fish-->
+        <item>21</item> <!--pork-->
+        <item>33</item> <!--chicken-->
+        <item>10</item> <!--240 eggs @40g each-->
+        <item>40</item> <!--veg-->
+        <item>71</item> <!--milk-->
+        <item>32</item> <!--bread-->
     </integer-array>
 
 </resources>
