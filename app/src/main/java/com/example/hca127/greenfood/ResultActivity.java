@@ -165,8 +165,7 @@ public class ResultActivity extends AppCompatActivity {
             {
                 if(suggestionResult.get(i).getFoodName().equals(suggestionResult.get(j).getFoodName()))
                 {
-                    suggestionResult.get(i).setUser_co2_emission(suggestionResult.get(i).getUser_co2_emission()+suggestionResult.get(j).getUser_co2_emission());
-                    suggestionResult.get(j).setFoodName("");
+                    //suggestionResult.get(i).setUser_co2_emission();
                 }
             }
             if (suggestionResult.get(i).getFoodName().equals(""))
