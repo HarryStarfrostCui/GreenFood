@@ -86,6 +86,8 @@
     <string name="temp_text">
         This is temp, put some more contextual details here!
     </string>
+    <string name="calculate_my_diet">Calculate my diet</string>
+    <string name="what_is_co2e">What is CO2e?</string>
 
     <string-array name="Ingredient_Name">
         <item>Lamb</item>
