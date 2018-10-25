@@ -96,7 +96,7 @@
         <item>27</item> <!--bread-->
     </integer-array>
 
-    <integer-array name="annaul_average_consumption"> <!-- kg / year-->
+    <integer-array name="annual_average_consumption"> <!-- kg / year-->
         <item>1</item> <!--lamb-->
         <item>25</item> <!--beef-->
         <item>9</item> <!--fish-->
