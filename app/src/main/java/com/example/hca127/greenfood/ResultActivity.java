@@ -1,5 +1,6 @@
 package com.example.hca127.greenfood;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -8,9 +9,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 
@@ -80,6 +86,33 @@ public class ResultActivity extends AppCompatActivity {
         chart.setData(suggestionData);
         chart.animateY(1200);
         chart.invalidate();
+    }
+
+    private void setupPieChart() {
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+
+        for (int i = 0; i < emissionAmount.length; i++) {
+            pieEntries.add(new PieEntry(emissionAmount[i], emissionName[i]));
+        }
+
+        PieDataSet dataSet = new PieDataSet(pieEntries, "Consumption-Based GHG Emissions, 2015");
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        PieData data = new PieData(dataSet);
+
+        PieChart chart = findViewById(R.id.emissionChart);
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+
+        chart.setEntryLabelColor(Color.BLACK);
+
+        chart.setData(data);
+        chart.animateY(1200);
+        chart.invalidate();
+
+
     }
 
 }

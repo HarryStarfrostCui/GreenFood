@@ -81,6 +81,10 @@
         Phew! You made it through. I was worried  that we\'d need to ask clippy to help.
         On the bright side, I\'ve got some results for you:
     </string>
+    <string name="emission_split_text">
+        Here\'s how we estimate the greenhouse gas emissions are split from the production of
+        various food groups.
+    </string>
 
     <string name="low_carbon_result">
         Good News! The greenhouse gas emissions required to produce your diet are very low!
