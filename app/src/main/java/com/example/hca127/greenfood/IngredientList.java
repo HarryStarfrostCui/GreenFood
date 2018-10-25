@@ -9,7 +9,7 @@ public class IngredientList {
         plate = new ArrayList<Ingredient>();
     }
 
-    String getName(int index) {        return plate.get(index).getName();    }
+    String getName(int index) {        return plate.get(index).getFoodName();    }
 
     double getCarbon(int index) {
         return plate.get(index).getCarbon_coefficient();
@@ -19,11 +19,11 @@ public class IngredientList {
         return plate.size();
     }
 
-    void addIng(String food_name, double carbon) {
+    /*void addIng(String food_name, double carbon) {
         Ingredient newcomer = new Ingredient(food_name, carbon);
         plate.add(newcomer);
     }
-
+*/
     /* TODO: FIX
     double getTotalEmit() {
         int i;
