@@ -72,6 +72,21 @@
 
     <string name="logo_content_description">Green Challenge Logo</string>
 
+    <string name="low_carbon_result">
+        Good News! The greenhouse gas emissions required to produce your diet are very low!
+    </string>
+    <string name="average_carbon_result">
+        The greenhouse gas emissions required to produce your diet are similar to the average
+        Vancouver resident.
+    </string>
+    <string name="high_carbon_result">
+        The greenhouse gas emissions required to produce your diet are higher than the average
+        Vancouver resident.
+    </string>
+    <string name="temp_text">
+        This is temp, put some more contextual details here!
+    </string>
+
     <string-array name="Ingredient_Name">
         <item>Lamb</item>
         <item>Beef</item>
