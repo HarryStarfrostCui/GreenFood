@@ -40,14 +40,14 @@ public class AddingFoodActivity extends AppCompatActivity {
 
         basket = new ArrayList<Integer>(8);
 
-        backButton = (ImageButton) findViewById(R.id.backButton);
+       /* backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(AddingFoodActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         nextButton = (ImageButton) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {

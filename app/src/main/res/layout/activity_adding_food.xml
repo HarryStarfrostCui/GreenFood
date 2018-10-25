@@ -17,26 +17,26 @@
         <LinearLayout
             android:id="@+id/headerView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#F3EEEA"
+            android:layout_height="30dp"
+            android:background="#FFFFFF"
             android:orientation="horizontal">
 
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/back" />
+                android:src="@drawable/back" />-->
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/adding_food_activity_title"
                 android:textColor="#000000"
+                android:textStyle="bold"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -44,7 +44,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/headerView">
+            android:layout_below="@id/headerView"
+            android:background="@drawable/background">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,31 +81,36 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="Beef"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/beefRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/beef1" />
+                            android:text="@string/beef1"
+                            android:textStyle="bold" />
 
                         <RadioButton
                             android:id="@+id/beefRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/beef2" />
+                            android:text="@string/beef2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/beefRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/beef3" />
+                            android:text="@string/beef3"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/beefRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/beef4" />
+                            android:text="@string/beef4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                 </LinearLayout>
@@ -131,31 +137,36 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="Lamb"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/lambRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/lamb1" />
+                            android:text="@string/lamb1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/lambRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/lamb2" />
+                            android:text="@string/lamb2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/lambRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/lamb3" />
+                            android:text="@string/lamb3"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/lambRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/lamb4" />
+                            android:text="@string/lamb4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                     <ImageView
@@ -199,31 +210,36 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="Chicken"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/chickenRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/chicken1" />
+                            android:text="@string/chicken1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/chickenRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/chicken2" />
+                            android:text="@string/chicken2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/chickenRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/chicken3" />
+                            android:text="@string/chicken3"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/chickenRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/chicken4" />
+                            android:text="@string/chicken4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                 </LinearLayout>
@@ -250,30 +266,35 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="Fish"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/fishRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/fish1" />
+                            android:text="@string/fish1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/fishRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/fish2" />
+                            android:text="@string/fish2"
+                            android:textStyle="bold"/>
                         <RadioButton
                             android:id="@+id/fishRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tall"/>
+                            android:text="Tall"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/fishRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/fish4" />
+                            android:text="@string/fish4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                     <ImageView
@@ -317,30 +338,35 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="PORK"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/porkRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pork1" />
+                            android:text="@string/pork1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/porkRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pork2" />
+                            android:text="@string/pork2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/porkRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pork3" />
+                            android:text="@string/pork3"
+                            android:textStyle="bold"/>
                         <RadioButton
                             android:id="@+id/porkRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ketchup Packet"/>
+                            android:text="@string/pork4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                 </LinearLayout>
@@ -367,31 +393,36 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="EGG"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/eggRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/egg1" />
+                            android:text="@string/egg1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/eggRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/egg2" />
+                            android:text="@string/egg2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/eggRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/egg3" />
+                            android:text="@string/egg3"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/eggRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/egg4" />
+                            android:text="@string/egg4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                     <ImageView
@@ -435,31 +466,36 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="Veggies"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/veggieRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/veggie1" />
+                            android:text="@string/veggie1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/veggieRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/veggie2" />
+                            android:text="@string/veggie2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/veggieRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/veggie3" />
+                            android:text="@string/veggie3"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/veggieRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/veggie4" />
+                            android:text="@string/veggie4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                 </LinearLayout>
@@ -486,31 +522,36 @@
                             android:layout_gravity="center"
                             android:textSize="25dp"
                             android:text="Bread"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/breadRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/bread1" />
+                            android:text="@string/bread1"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/breadRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/bread2" />
+                            android:text="@string/bread2"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/breadRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/bread3" />
+                            android:text="@string/bread3"
+                            android:textStyle="bold"/>
 
                         <RadioButton
                             android:id="@+id/breadRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/bread4" />
+                            android:text="@string/bread4"
+                            android:textStyle="bold"/>
                     </RadioGroup>
 
                     <ImageView
