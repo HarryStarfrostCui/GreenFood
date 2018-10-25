@@ -77,6 +77,11 @@
     <string name="bread3">Your house</string>
     <string name="bread4">Below sea level</string>
 
+    <string name="result_greeting">
+        Phew! You made it through. I was worried  that we\'d need to ask clippy to help.
+        On the bright side, I\'ve got some results for you:
+    </string>
+
     <string name="low_carbon_result">
         Good News! The greenhouse gas emissions required to produce your diet are very low!
     </string>
@@ -92,6 +97,8 @@
         This is temp, put some more contextual details here!
     </string>
 
+    <string name="calculate_my_diet_button">Calculate My Diet</string>
+    <string name="what_is_co2e_button">What is C02e?</string>
 
     <string name="logo_content_description">Green Challenge Logo</string>
 
