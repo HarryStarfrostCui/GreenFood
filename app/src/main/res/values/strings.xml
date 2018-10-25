@@ -97,9 +97,18 @@
         The greenhouse gas emissions required to produce your diet are higher than the average
         Vancouver resident.
     </string>
-    <string name="temp_text">
-        This is temp, put some more contextual details here!
+    <string name="suggestion_text_1">
+        Eating a bit less
     </string>
+    <string name="suggestion_text_2">
+        and a bit more
+    </string>
+    <string name="suggestion_text_3">
+        would change the greenhouse gas emissions like this:
+    </string>
+    <string name="user_legend">User Diet</string>
+    <string name="average_legend">Average Diet</string>
+    <string name="suggestion_legend">Suggested Diet</string>
 
     <string name="calculate_my_diet_button">Calculate My Diet</string>
     <string name="what_is_co2e_button">What is C02e?</string>
@@ -108,7 +117,6 @@
     <string name="clippy_description">Clippy Image</string>
 
     <string-array name="ingredient_name">
-        <item>Lamb</item>
         <item>Beef</item>
         <item>Lamb</item>
         <item>Chicken</item>
