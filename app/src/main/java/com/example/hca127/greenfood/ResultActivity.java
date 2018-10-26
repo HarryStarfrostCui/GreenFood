@@ -72,7 +72,6 @@ public class ResultActivity extends AppCompatActivity {
 
         mReduceSuggestionText.setText(diet.getIngName(maxIndex));
 
-
         mSuggestionChart = findViewById(R.id.suggestionChart);
         setUpHorizontalBarChart(mSuggestionChart, suggestedCarbon, userCarbon);
 

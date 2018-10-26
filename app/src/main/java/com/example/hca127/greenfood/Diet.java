@@ -19,6 +19,8 @@ public class Diet implements Serializable {
 
     public String getIngName(int index){        return basket.get(index).getFoodName();    }
     public float getIngCarbon(int index){   return basket.get(index).getCarbon_coefficient();}
+    public float getAvgConsumption(int index){  return basket.get(index).getAverage_consumption();}
+    public float getUserConsumption(int index){     return basket.get(index).getUser_consumption();}
     public float getIngUserCo2Emission(int index) {        return basket.get(index).getUser_co2_emission();    }
     public int getSize(){        return basket.size();    }
 
@@ -52,8 +54,7 @@ public class Diet implements Serializable {
         return total_user_co2_emission;
     }
 
-    private void calculate_total_user_co2_emission(){
-        total_user_co2_emission = 0;
+    public void calculate_total_user_co2_emission(){
         for(int i = 0; i < basket.size() ; i++){
             total_user_co2_emission += basket.get(i).getUser_co2_emission();
         }
