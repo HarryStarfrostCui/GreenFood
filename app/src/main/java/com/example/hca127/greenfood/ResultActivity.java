@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import com.example.hca127.greenfood.Diet;
+import com.example.hca127.greenfood.Ingredient;
+import com.example.hca127.greenfood.R;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -71,6 +74,7 @@ public class ResultActivity extends AppCompatActivity {
 
         mReduceSuggestionText.setText(diet.getIngName(maxIndex));
 
+
         mSuggestionChart = findViewById(R.id.suggestionChart);
         setUpHorizontalBarChart(mSuggestionChart, suggestedCarbon, userCarbon);
 
@@ -102,7 +106,7 @@ public class ResultActivity extends AppCompatActivity {
     private void setupPieChart(PieChart chart) {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
-        for (int i = 0; i < diet.getSize(); i++) {
+        for (int i = 0; i <diet.getSize(); i++) {
             pieEntries.add(new PieEntry((float)diet.getIngUserCo2Emission(i), diet.getIngName(i)));
         }
 
@@ -136,9 +140,14 @@ public class ResultActivity extends AppCompatActivity {
 
 
     public float calculateSavingAmountCarbon() {
+        float difference;
+
         int maxIndex = diet.getSuggestionMaxIndex();
         int minIndex = diet.getSuggestionMinIndex();
-        return diet.getIngCarbon(maxIndex)-diet.getIngCarbon(minIndex);
+
+        difference = (float) (diet.getIngCarbon(maxIndex) - diet.getIngCarbon(minIndex));
+
+        return difference;
     }
 
     public double calculateCarbonEquivalent() {
