@@ -47,14 +47,19 @@ public class Diet implements Serializable {
                                     Float.parseFloat(average_consumption.get(i)),
                                     userChoices.get(i));
         }
-        calculate_total_user_co2_emission();
+        calculateTotalUserCo2Emission();
     }
 
-    public float get_total_user_co2_emission(){
+    public float getUserDietEmission(){
         return total_user_co2_emission;
     }
 
-    public void calculate_total_user_co2_emission(){
+    public float getSuggestedDietEmission(){
+        return 1200f;
+    }
+
+
+    public void calculateTotalUserCo2Emission(){
         for(int i = 0; i < basket.size() ; i++){
             total_user_co2_emission += basket.get(i).getUser_co2_emission();
         }
@@ -133,8 +138,8 @@ public class Diet implements Serializable {
 
         for(int i = 1; i < favourite.size(); i++)
         {
-            current = basket.get(index).getCarbon_coefficient();
-            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
+            current = basket.get(index).getUser_co2_emission();
+            temp = basket.get(favourite.get(i)).getUser_co2_emission();
             if (temp > current)
             {
                 index = favourite.get(i);

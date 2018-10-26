@@ -6,21 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import com.example.hca127.greenfood.Diet;
-import com.example.hca127.greenfood.Ingredient;
-import com.example.hca127.greenfood.R;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -45,7 +36,7 @@ public class ResultActivity extends AppCompatActivity {
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
 
-        userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
+        userCarbon = diet.getUserDietEmission(); //insert calculated mCarbonSaved in tC02e
 
         mResultText = findViewById(R.id.resultText);
 

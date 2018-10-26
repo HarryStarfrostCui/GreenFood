@@ -3,8 +3,6 @@ package com.example.hca127.greenfood;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class DietTest {
@@ -43,8 +41,8 @@ public class DietTest {
 
     @Test
     public void getIngUserCo2Emission() {
-        testDiet.calculate_total_user_co2_emission();
-        assertEquals(400, testDiet.get_total_user_co2_emission(), 0.001);
+        testDiet.calculateTotalUserCo2Emission();
+        assertEquals(400, testDiet.getUserDietEmission(), 0.001);
     }
 
 
@@ -62,8 +60,8 @@ public class DietTest {
 
     @Test
     public void get_total_user_co2_emission() {
-        testDiet.calculate_total_user_co2_emission();
-        float testFloat = testDiet.get_total_user_co2_emission();
+        testDiet.calculateTotalUserCo2Emission();
+        float testFloat = testDiet.getUserDietEmission();
         assertEquals(400, testFloat, 0.001);
     }
 
@@ -77,8 +75,8 @@ public class DietTest {
                     testDiet.getAvgConsumption(i);
         }
 
-        testDiet.calculate_total_user_co2_emission();
-        assertEquals(testFloat, testDiet.get_total_user_co2_emission(), 0.001);
+        testDiet.calculateTotalUserCo2Emission();
+        assertEquals(testFloat, testDiet.getUserDietEmission(), 0.001);
     }
 
     @Test
