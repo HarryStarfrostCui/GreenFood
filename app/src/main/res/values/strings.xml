@@ -135,6 +135,9 @@
         <item>32</item> <!--bread-->
     </string-array>
 
+    <string name="suggestionResult">
+        Hi, for each kg of %1$s you eat instead of %2$s, you will save %3$.2f of CO2, which is
+    %4$.2f tree per year.</string>
 
 
 </resources>

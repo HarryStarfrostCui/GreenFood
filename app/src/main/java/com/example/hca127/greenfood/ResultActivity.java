@@ -1,18 +1,25 @@
 package com.example.hca127.greenfood;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 
@@ -23,7 +30,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView mSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 15000f;
+    private float averageCarbon = 1500f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
@@ -37,23 +44,23 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Bundle extras = getIntent().getExtras();
-        basket =(ArrayList<Ingredient>)getIntent().getSerializableExtra("basket");
-        for(int i = 0; i < basket.size(); i++){
+        basket = (ArrayList<Ingredient>) getIntent().getSerializableExtra("basket");
+        for (int i = 0; i < basket.size(); i++) {
             userCarbon += basket.get(i).getUser_co2_emission();
         }
 
-        Toast.makeText(this, "total = " + userCarbon, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, "carbon coef: " + Double.toString(basket.get(0).getCarbon_coefficient()) + " . Average consum: " + Double.toString(basket.get(0).getAverage_consumption()) + " . User consum: " + Double.toString(basket.get(0).getUser_consumption()) + " = " + Double.toString(basket.get(0).getUser_co2_emission()), Toast.LENGTH_LONG).show();
-
-        //userCarbon = 2.0f; //insert calculated carbon in tC02e
-        suggestedCarbon = 12000f; // insert suggested carbon here
+        int minIndex = getSuggestionMinIndex();
+        int maxIndex = getSuggestionMaxIndex();
+        float totalSave = calculateSavingAmountCarbon();
+        printSuggestion(minIndex, maxIndex, totalSave);
+        suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
-        mSuggestionText = findViewById(R.id.suggestionText);
+        //mSuggestionText = findViewById(R.id.suggestionText);
 
-        if (userCarbon < averageCarbon*lowCarbonPercentage) {
+        if (userCarbon < averageCarbon * lowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
-        } else if (userCarbon < averageCarbon*averageCarbonPercentage) {
+        } else if (userCarbon < averageCarbon * averageCarbonPercentage) {
             mResultText.setText(R.string.average_carbon_result);
         } else {
             mResultText.setText(R.string.high_carbon_result);
@@ -62,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
         mResultChart = findViewById(R.id.resultChart);
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
-        mSuggestionText.setText(R.string.temp_text);
+        //mSuggestionText.setText(R.string.temp_text);
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
         setUpHorizontalBarChart(mSuggestionChart, averageCarbon, suggestedCarbon);
@@ -85,104 +92,99 @@ public class ResultActivity extends AppCompatActivity {
         chart.invalidate();
     }
 
-    //check if array.get(i).getCarbon is for year, if not, remember to time the date of year
-   /* public ArrayList<Double> setupStandard()
+    public ArrayList<Integer> getFavList()
     {
-        ArrayList<Double> standard = new ArrayList<>();
+        ArrayList<Double> favourite = new ArrayList<>();
+        ArrayList<Integer> index = new ArrayList<>();
         for (int i = 0; i < basket.size(); i++)
         {
-            standard.get(i) = basket.get(i).getStandard_co2_emission();
-        }
-        return standard;
-    }*/
-
-    public void sortArrayListBasedOnCarbon_coefficient() {
-        for (int i = 0; i < basket.size(); i++) {
-            for (int j = i + 1; j < basket.size(); j++) {
-                if (basket.get(i).getCarbon_coefficient() < basket.get(j).getCarbon_coefficient()) {
-                    Ingredient temp = basket.get(i);
-                    basket.set(i, basket.get(j));
-                    basket.set(j, temp);
-                }
+            if(basket.get(i).getUser_consumption()>0.2){
+                double temp = Math.round(basket.get(i).getUser_consumption()*100)/100;
+                favourite.add(temp);
+                index.add(i);
             }
         }
-    }
 
-
-    //in this function, suggestionResult to store the result of all type food suggestions
-    //in for loop, if consume is higher than standard suggest standard amount
-    //else if consume equal to standard, give next food standard amount
-    //else set suggestion to NULL and do not show it in result
-    public void getSuggestion() {
-        sortArrayListBasedOnCarbon_coefficient();
-        for (int i = 0; i < basket.size(); i++) {
-            if (basket.get(i).getUser_co2_emission() > basket.get(i).getStandard_co2_emission()) {
-                basket.get(i).setupStandard();
-                suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
-                //if I don\t call the constructor, will the variable be setting up?
-                suggestionResult.get(i).setUser_co2_emission(basket.get(i).getStandard_co2_emission());
-            } else if (basket.get(i).getUser_co2_emission() == basket.get(i).getStandard_co2_emission()) {
-                basket.get(i).setupStandard();
-                if (i + 1 == basket.size()) {
-                    suggestionResult.get(i).setFoodName(basket.get(i).getFoodName());
-                    suggestionResult.get(i).setUser_co2_emission(basket.get(i).getStandard_co2_emission() * 0.4);
+        double temp;
+        for (int i = 1; i < favourite.size()-1; i++)
+        {
+            for (int j = i-1; j >= 0; j--)
+            {
+                if (favourite.get(j) < favourite.get(j+1))
+                {
+                    temp = favourite.get(j);
+                    favourite.set(j, favourite.get(j+1));
+                    favourite.set(j+1, temp);
+                    temp = index.get(j);
+                    index.set(j, index.get(j+1));
+                    index.set(j+1, (int)temp);
+                }
+                else
+                {
                     break;
                 }
-                //if food 1 is equal, then give food2, if food 2 is greater, give food2 as well. This will be a problem
-                double saved_co2_emission = basket.get(i + 1).getCarbon_coefficient() * basket.get(i).getAverage_consumption() * basket.get(i).getUser_consumption();
-                suggestionResult.get(i).setFoodName(basket.get(i + 1).getFoodName());
-                suggestionResult.get(i).setUser_co2_emission(saved_co2_emission);
-            } else {
-                suggestionResult.get(i).setFoodName("");
             }
         }
-        //removeDuplicate(suggestionResult);
+        return index;
     }
 
-    /*private void removeDuplicate(ArrayList<IngredientList> suggestionResult) {
-        double count = 0.0;
-        for (int i = 0; i < suggestionResult.size(); i++) {
-            for (int j = i + 1; j < suggestionResult.size(); j++) {
-                if (suggestionResult.get(i).getName(i) == suggestionResult.get(j).getName(j)) {
-                    count = count + suggestionResult.get(j).getCarbon(j);
-                    suggestionResult.get(j).addIng("", 0);
-                }
-            }
-            count = count + suggestionResult.get(i).getCarbon(i);
-            suggestionResult.get(i).addIng(suggestionResult.get(i).getName(i), count);
-        }
-    }*/
+    public int getSuggestionMinIndex()
+    {
+        ArrayList<Integer> favourite = getFavList();
+        int index = favourite.get(0);
+        double current, temp;
 
-    public void printSuggestion() {
-        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText);
-        for (int i = 0; i < suggestionResult.size(); i++)
+        for(int i = 1; i < favourite.size(); i++)
         {
-            for (int j = i+1; j < suggestionResult.size(); j++)
+            current = basket.get(index).getCarbon_coefficient()*basket.get(index).getUser_co2_emission();
+            temp = basket.get(favourite.get(i)).getCarbon_coefficient()*basket.get(favourite.get(i)).getUser_co2_emission();
+            if (temp < current)
             {
-                if(suggestionResult.get(i).getFoodName().equals(suggestionResult.get(j).getFoodName()))
-                {
-                    //suggestionResult.get(i).setUser_co2_emission();
-                }
-            }
-            if (suggestionResult.get(i).getFoodName().equals(""))
-            {
-                continue;
-            }
-            else
-            {
-                suggestionTextView.setText(getString());
+                index = favourite.get(i);
             }
         }
+        return index;
     }
 
-    public double calculateSavingAmountCarbon() {
-        double difference;
-        double total = 0.0;
-        for (int i = 0; i < basket.size(); i++) {
-            difference = basket.get(i).getUser_co2_emission() - suggestionResult.get(i).getUser_co2_emission();
-            total += difference;
+    public int getSuggestionMaxIndex()
+    {
+        ArrayList<Integer> favourite = getFavList();
+        int index = favourite.get(0);
+        double current, temp;
+
+        for(int i = 1; i < favourite.size(); i++)
+        {
+            current = basket.get(index).getCarbon_coefficient()*basket.get(index).getCarbon_coefficient()*basket.get(index).getUser_co2_emission();
+            temp = basket.get(favourite.get(i)).getCarbon_coefficient()*basket.get(favourite.get(i)).getCarbon_coefficient()*basket.get(favourite.get(i)).getUser_co2_emission();
+            if (temp > current)
+            {
+                index = favourite.get(i);
+            }
         }
-        return total;
+        return index;
+    }
+
+
+    public void printSuggestion(int minIndex, int maxIndex, float difference) {
+        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText);
+        suggestionTextView.setText(getString(R.string.suggestionResult, suggestionResult.get(minIndex).getFoodName(),
+                suggestionResult.get(maxIndex).getFoodName(),
+                difference, difference/22));
+    }
+
+
+    public float calculateSavingAmountCarbon() {
+        float difference;
+        for (int i = 0; i < basket.size(); i++) {
+            suggestionResult.add(i, basket.get(i));
+        }
+
+        int maxIndex = getSuggestionMaxIndex();
+        int minIndex = getSuggestionMinIndex();
+
+        difference = (float) (suggestionResult.get(maxIndex).getCarbon_coefficient() - suggestionResult.get(minIndex).getCarbon_coefficient());
+
+        return difference;
     }
 
     public double calculateCarbonEquivalent() {
@@ -191,7 +193,7 @@ public class ResultActivity extends AppCompatActivity {
         return total / treeAbsorbAnnually;
     }
 
-    public double calcultateSavingInMetroVan() {
+    public double calculateSavingInMetroVan() {
         double total = calculateSavingAmountCarbon();
         double nonVegetarians = 0.9 * 2463000;
         return total * nonVegetarians;
