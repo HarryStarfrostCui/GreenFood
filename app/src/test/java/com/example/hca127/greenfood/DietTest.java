@@ -80,4 +80,19 @@ public class DietTest {
         testDiet.calculate_total_user_co2_emission();
         assertEquals(testFloat, testDiet.get_total_user_co2_emission(), 0.001);
     }
+
+    @Test
+    public void getSuggestionMinIndex()
+    {
+        testDiet.addNewIngredient("secondTest", 30, 30 ,2);
+        int min = testDiet.getSuggestionMinIndex();
+        assertEquals(0, min);
+    }
+
+    @Test
+    public void getSuggestionMaxIndex(){
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        int max = testDiet.getSuggestionMaxIndex();
+        assertEquals(1,max);
+    }
 }
