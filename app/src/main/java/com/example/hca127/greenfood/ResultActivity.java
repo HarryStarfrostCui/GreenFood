@@ -23,17 +23,19 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 public class ResultActivity extends AppCompatActivity {
     HorizontalBarChart mResultChart;
     HorizontalBarChart mSuggestionChart;
-    PieChart mUserEmissionSplit;
+    PieChart mUserEmissionSplitChart;
     TextView mResultText;
-    TextView mSuggestionText;
+    TextView mReduceSuggestionText;
+    TextView mIncreaseSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 1500f;
+    private float averageCarbon = 15000f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
 
     private Diet diet;
+    private ArrayList<Ingredient> basket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,14 @@ public class ResultActivity extends AppCompatActivity {
         Bundle extras = this.getIntent().getExtras();
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
+        basket = diet.getBasket();
 
         userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
-
         suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
-        mSuggestionText = findViewById(R.id.suggestionText);
+        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
+        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
 
         if (userCarbon < averageCarbon*lowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
@@ -63,13 +66,15 @@ public class ResultActivity extends AppCompatActivity {
         mResultChart = findViewById(R.id.resultChart);
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
-        mSuggestionText.setText(R.string.temp_text);
+        mReduceSuggestionText.setText(basket.get(0).getFoodName());
+        mIncreaseSuggestionText.setText(basket.get(2).getFoodName());
+
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
-        setUpHorizontalBarChart(mSuggestionChart, averageCarbon, suggestedCarbon);
+        setUpHorizontalBarChart(mSuggestionChart, suggestedCarbon, userCarbon);
 
-        mUserEmissionSplit = findViewById(R.id.emissionSplitChart);
-        setupPieChart();
+        mUserEmissionSplitChart = findViewById(R.id.emissionSplitChart);
+        setupPieChart(mUserEmissionSplitChart);
 
     }
 
@@ -83,24 +88,25 @@ public class ResultActivity extends AppCompatActivity {
 
         BarData suggestionData = new BarData(barDataSet);
         chart.getXAxis().setDrawGridLines(false);
+        chart.getLegend().setEnabled(false);
 
         chart.setData(suggestionData);
         chart.animateY(1200);
         chart.invalidate();
     }
 
-    private void setupPieChart() {
+    private void setupPieChart(PieChart chart) {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
-        for (int i = 0; i < diet.getBasket().size(); i++) {
+        for (int i = 0; i < basket.size(); i++) {
             pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), "temp"));
         }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Consumption-Based GHG Emissions, 2015");
+        PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData data = new PieData(dataSet);
 
-        PieChart chart = findViewById(R.id.emissionSplitChart);
+        chart = findViewById(R.id.emissionSplitChart);
         Legend legend = chart.getLegend();
         legend.setWordWrapEnabled(true);
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
@@ -115,4 +121,5 @@ public class ResultActivity extends AppCompatActivity {
 
 
     }
+
 }
