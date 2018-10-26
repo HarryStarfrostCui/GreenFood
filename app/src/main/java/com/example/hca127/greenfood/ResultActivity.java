@@ -45,8 +45,6 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        Bundle extras = getIntent().getExtras();
-
         diet = (Diet)getIntent().getSerializableExtra("diet");
         basket = diet.getBasket();
 

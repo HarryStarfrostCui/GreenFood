@@ -38,18 +38,9 @@ public class AddingFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adding_food);
 
         diet = new Diet();
-    /*
-       backButton = (ImageButton) findViewById(R.id.backButton);
-       backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(AddingFoodActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-       });
-*/
+
         nextButton = (ImageButton) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        /*nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();
@@ -60,7 +51,7 @@ public class AddingFoodActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        */
         beefRadioGroup = (RadioGroup) findViewById(R.id.beefRadioGroup);
         lambRadioGroup = (RadioGroup) findViewById(R.id.lambRadioGroup);
         chickenRadioGroup = (RadioGroup) findViewById(R.id.chickenRadioGroup);
