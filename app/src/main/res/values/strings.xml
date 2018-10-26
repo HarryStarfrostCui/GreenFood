@@ -101,10 +101,14 @@
         Eating a bit less
     </string>
     <string name="suggestion_text_2">
-        and a bit more
+        and a bit more Veggies
     </string>
     <string name="suggestion_text_3">
         would change the greenhouse gas emissions like this:
+    </string>
+
+    <string name="all_vancouver">
+        If Everyone in Vancouver also made your change, then we would save:
     </string>
     <string name="user_legend">User Diet</string>
     <string name="average_legend">Average Diet</string>

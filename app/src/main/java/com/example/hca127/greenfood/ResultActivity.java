@@ -55,7 +55,6 @@ public class ResultActivity extends AppCompatActivity {
 
         mResultText = findViewById(R.id.resultText);
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
-        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
 
         if (userCarbon < averageCarbon*lowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
@@ -69,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
         mReduceSuggestionText.setText(basket.get(0).getFoodName());
-        mIncreaseSuggestionText.setText(basket.get(2).getFoodName());
+
 
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
