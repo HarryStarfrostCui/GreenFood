@@ -12,17 +12,17 @@ public class IngredientTest {
     public void ingredient(){
         Ingredient testing = new Ingredient("lamb",20,20,2);
         assertEquals("lamb", testing.getFoodName());
-        assertEquals(20, testing.getCarbon_coefficient(),0.001);
-        assertEquals(20, testing.getAverage_consumption(), 0.001);
-        assertEquals(1.0, testing.getUser_consumption(),0.001);
+        assertEquals(20, testing.getCarbonCoefficient(),0.001);
+        assertEquals(20, testing.getAverageConsumption(), 0.001);
+        assertEquals(1.0, testing.getUserConsumption(),0.001);
     }
 
     @Test
     public void getUser_co2_emission() {
-        double carbon_test_double = test.getCarbon_coefficient();
-        double avg_consumption_test_double = test.getAverage_consumption();
-        double user_consumption_test_double = test.getUser_consumption();
-        assertEquals(carbon_test_double*avg_consumption_test_double*user_consumption_test_double, test.getUser_co2_emission(),0.001);
+        double carbon_test_double = test.getCarbonCoefficient();
+        double avg_consumption_test_double = test.getAverageConsumption();
+        double user_consumption_test_double = test.getUserConsumption();
+        assertEquals(carbon_test_double*avg_consumption_test_double*user_consumption_test_double, test.getUserCarbonEmission(),0.001);
     }
 
     @Test
@@ -38,42 +38,42 @@ public class IngredientTest {
 
     @Test
     public void getCarbon_coefficient() {
-        assertEquals(20,test.getCarbon_coefficient(), 0.001);
+        assertEquals(20,test.getCarbonCoefficient(), 0.001);
     }
 
     @Test
     public void setCarbon_coefficient() {
-        test.setCarbon_coefficient(50);
-        assertEquals(50, test.getCarbon_coefficient(), 0.001);
+        test.setCarbonCoefficient(50);
+        assertEquals(50, test.getCarbonCoefficient(), 0.001);
     }
 
     @Test
     public void getAverage_consumption() {
-        assertEquals(20, test.getAverage_consumption(), 0.001);
+        assertEquals(20, test.getAverageConsumption(), 0.001);
     }
 
     @Test
     public void setAverage_consumption() {
-        test.setAverage_consumption(50);
-        assertNotEquals(20, test.getUser_consumption(), 0.001);
-        assertEquals(50, test.getAverage_consumption(), 0.001);
+        test.setAverageConsumption(50);
+        assertNotEquals(20, test.getUserConsumption(), 0.001);
+        assertEquals(50, test.getAverageConsumption(), 0.001);
     }
 
     @Test
     public void getUser_consumption() {
-        assertEquals(1, test.getUser_consumption(), 0.001);
+        assertEquals(1, test.getUserConsumption(), 0.001);
     }
 
     @Test
     public void setUser_consumption() {
-        test.setUser_consumption(1);
-        assertEquals(1.5, test.getUser_consumption(),0.001);
-        test.setUser_consumption(2);
-        assertEquals(1, test.getUser_consumption(),0.001);
-        test.setUser_consumption(3);
-        assertEquals(0.5, test.getUser_consumption(),0.001);
-        test.setUser_consumption(4);
-        assertEquals(0, test.getUser_consumption(),0.001);
+        test.setUserConsumption(1);
+        assertEquals(1.5, test.getUserConsumption(),0.001);
+        test.setUserConsumption(2);
+        assertEquals(1, test.getUserConsumption(),0.001);
+        test.setUserConsumption(3);
+        assertEquals(0.5, test.getUserConsumption(),0.001);
+        test.setUserConsumption(4);
+        assertEquals(0, test.getUserConsumption(),0.001);
 
     }
 }
