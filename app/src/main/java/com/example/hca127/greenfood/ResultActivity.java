@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import com.example.hca127.greenfood.Diet;
+import com.example.hca127.greenfood.Ingredient;
+import com.example.hca127.greenfood.R;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -35,10 +38,7 @@ public class ResultActivity extends AppCompatActivity {
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
-
     private Diet diet;
-    private ArrayList<Ingredient> basket;
-    private ArrayList<Ingredient> suggestionResult = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +46,11 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
-        basket = diet.getBasket();
 
         userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
         suggestedCarbon = 1200f; // insert suggested carbon here
-        int minIndex = getSuggestionMinIndex();
-        int maxIndex = getSuggestionMaxIndex();
+        int minIndex = diet.getSuggestionMinIndex();
+        int maxIndex = diet.getSuggestionMaxIndex();
 
         float totalSave = calculateSavingAmountCarbon();
         printSuggestion(minIndex, maxIndex, totalSave);
@@ -71,8 +70,7 @@ public class ResultActivity extends AppCompatActivity {
         mResultChart = findViewById(R.id.resultChart);
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
-        mReduceSuggestionText.setText(basket.get(maxIndex).getFoodName());
-
+        mReduceSuggestionText.setText(diet.getIngName(maxIndex));
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
         setUpHorizontalBarChart(mSuggestionChart, suggestedCarbon, userCarbon);
@@ -105,10 +103,8 @@ public class ResultActivity extends AppCompatActivity {
     private void setupPieChart(PieChart chart) {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
-        for (int i = 0; i < basket.size(); i++) {
-            if (basket.get(i).getUser_consumption() != 0) {
-                pieEntries.add(new PieEntry((float) diet.getBasket().get(i).getUser_co2_emission(), diet.getBasket().get(i).getFoodName()));
-            }
+        for (int i = 0; i <diet.getSize(); i++) {
+            pieEntries.add(new PieEntry((float)diet.getIngUserCo2Emission(i), diet.getIngName(i)));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
@@ -131,81 +127,6 @@ public class ResultActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Integer> getFavList()
-    {
-        ArrayList<Double> favourite = new ArrayList<>();
-        ArrayList<Integer> index = new ArrayList<>();
-        for (int i = 0; i < basket.size(); i++)
-        {
-            if(basket.get(i).getUser_consumption()>0.2){
-                double temp = Math.round(basket.get(i).getUser_consumption()*100)/100;
-                favourite.add(temp);
-                index.add(i);
-            }
-        }
-
-        double temp;
-        for (int i = 1; i < favourite.size()-1; i++)
-        {
-            for (int j = i-1; j >= 0; j--)
-            {
-                if (favourite.get(j) < favourite.get(j+1))
-                {
-                    temp = favourite.get(j);
-                    favourite.set(j, favourite.get(j+1));
-                    favourite.set(j+1, temp);
-                    temp = index.get(j);
-                    index.set(j, index.get(j+1));
-                    index.set(j+1, (int)temp);
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return index;
-    }
-
-    public int getSuggestionMinIndex()
-    {
-        ArrayList<Integer> favourite = getFavList();
-        int index = favourite.get(0);
-        double current, temp;
-
-        for(int i = 1; i < favourite.size(); i++)
-        {
-            current = basket.get(index).getCarbon_coefficient();
-            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
-            if (temp < current)
-            {
-                index = favourite.get(i);
-            }
-        }
-        if(index == getSuggestionMaxIndex()){
-            return 7; //veggie defult
-        }
-        return index;
-    }
-
-    public int getSuggestionMaxIndex()
-    {
-        ArrayList<Integer> favourite = getFavList();
-        int index = favourite.get(0);
-        double current, temp;
-
-        for(int i = 1; i < favourite.size(); i++)
-        {
-            current = basket.get(index).getCarbon_coefficient();
-            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
-            if (temp > current)
-            {
-                index = favourite.get(i);
-            }
-        }
-        return index;
-    }
-
 
     public void printSuggestion(int minIndex, int maxIndex, float difference) {
         carbon = findViewById(R.id.carbonSaved);
@@ -217,14 +138,11 @@ public class ResultActivity extends AppCompatActivity {
 
     public float calculateSavingAmountCarbon() {
         float difference;
-        for (int i = 0; i < basket.size(); i++) {
-            suggestionResult.add(i, basket.get(i));
-        }
 
-        int maxIndex = getSuggestionMaxIndex();
-        int minIndex = getSuggestionMinIndex();
+        int maxIndex = diet.getSuggestionMaxIndex();
+        int minIndex = diet.getSuggestionMinIndex();
 
-        difference = (float) (suggestionResult.get(maxIndex).getCarbon_coefficient() - suggestionResult.get(minIndex).getCarbon_coefficient());
+        difference = (float) (diet.getIngCarbon(maxIndex) - diet.getIngCarbon(minIndex));
 
         return difference;
     }
