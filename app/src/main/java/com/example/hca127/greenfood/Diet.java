@@ -62,7 +62,7 @@ public class Diet implements Serializable {
         return total_user_co2_emission;
     }
 
-    private void calculate_total_user_co2_emission(){
+    public void calculate_total_user_co2_emission(){
         for(int i = 0; i < basket.size() ; i++){
             total_user_co2_emission += basket.get(i).getUser_co2_emission();
         }
