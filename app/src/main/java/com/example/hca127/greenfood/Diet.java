@@ -7,32 +7,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Diet implements Serializable {
-    private ArrayList<Ingredient> basket;
-    private ArrayList<Integer> userChoices;
+    private ArrayList<Ingredient> mBasket;
+    private ArrayList<Integer> mUserChoices;
     private int NUMBER_OF_FOOD_TYPES = 8;
-    private float total_user_co2_emission = 0;
+    private float mTotalUserCo2Emission = 0;
 
     Diet(){
-        basket = new ArrayList<Ingredient>(NUMBER_OF_FOOD_TYPES);
-        userChoices = new ArrayList<Integer>(NUMBER_OF_FOOD_TYPES);
+        mBasket = new ArrayList<Ingredient>(NUMBER_OF_FOOD_TYPES);
+        mUserChoices = new ArrayList<Integer>(NUMBER_OF_FOOD_TYPES);
     }
 
-    public String getIngName(int index){        return basket.get(index).getFoodName();    }
-    public float getIngCarbon(int index){   return basket.get(index).getCarbonCoefficient();}
-    public float getAvgConsumption(int index){  return basket.get(index).getAverageConsumption();}
-    public float getUserConsumption(int index){     return basket.get(index).getUserConsumption();}
-    public float getIngUserCo2Emission(int index) {        return basket.get(index).getUserCarbonEmission();    }
-    public int getSize(){        return basket.size();    }
+    public String getIngName(int index){        return mBasket.get(index).getFoodName();    }
+    public float getIngCarbon(int index){   return mBasket.get(index).getCarbonCoefficient();}
+    public float getAvgConsumption(int index){  return mBasket.get(index).getAverageConsumption();}
+    public float getUserConsumption(int index){     return mBasket.get(index).getUserConsumption();}
+    public float getIngUserCo2Emission(int index) {        return mBasket.get(index).getUserCarbonEmission();    }
+    public int getSize(){        return mBasket.size();    }
 
-    public void addNewIngredient(String foodName, float carbon_coefficient, float average_consumption, float user_consumption){
-        Ingredient i = new Ingredient(foodName, carbon_coefficient, average_consumption, user_consumption);
-        basket.add(i);
+    public void addNewIngredient(String foodName, float carbonCoefficient, float averageConsumption, float userConsumption){
+        Ingredient i = new Ingredient(foodName, carbonCoefficient, averageConsumption, userConsumption);
+        mBasket.add(i);
     }
 
     public void assignUserInput(String userChoiceAsString){
         String temp = userChoiceAsString.substring( userChoiceAsString.length()-1, userChoiceAsString.length());
         int option = Integer.parseInt(temp);
-        userChoices.add(option);
+        mUserChoices.add(option);
     }
 
 
@@ -45,23 +45,25 @@ public class Diet implements Serializable {
              addNewIngredient(      names.get(i),
                                     Float.parseFloat(carbon_coefficient.get(i)),
                                     Float.parseFloat(average_consumption.get(i)),
-                                    userChoices.get(i));
+                                    mUserChoices.get(i));
         }
         calculateTotalUserCo2Emission();
     }
 
     public float getUserDietEmission(){
-        return total_user_co2_emission;
+        return mTotalUserCo2Emission;
     }
 
     public float getSuggestedDietEmission(){
-        return 1200f;
+        float loweredFoodDifference = mBasket.get(getSuggestionMaxIndex()).getLoweredEmission();
+        float increasedFoodDifference = mBasket.get(getSuggestionMinIndex()).getIncreasedEmission();
+
+        return this.mTotalUserCo2Emission - loweredFoodDifference + increasedFoodDifference;
     }
 
-
     public void calculateTotalUserCo2Emission(){
-        for(int i = 0; i < basket.size() ; i++){
-            total_user_co2_emission += basket.get(i).getUserCarbonEmission();
+        for(int i = 0; i < mBasket.size() ; i++){
+            mTotalUserCo2Emission += mBasket.get(i).getUserCarbonEmission();
         }
     }
 
@@ -69,10 +71,10 @@ public class Diet implements Serializable {
     {
         ArrayList<Double> favourite = new ArrayList<>();
         ArrayList<Integer> index = new ArrayList<>();
-        for (int i = 0; i < basket.size(); i++)
+        for (int i = 0; i < mBasket.size(); i++)
         {
-            if(basket.get(i).getUserConsumption()>0.01){
-                double temp = Math.round(basket.get(i).getUserConsumption()*100)/100;
+            if(mBasket.get(i).getUserConsumption()>0.01){
+                double temp = Math.round(mBasket.get(i).getUserConsumption()*100)/100;
                 favourite.add(temp);
                 index.add(i);
             }
@@ -112,8 +114,8 @@ public class Diet implements Serializable {
 
         for(int i = 1; i < favourite.size(); i++)
         {
-            current = basket.get(index).getCarbonCoefficient();
-            temp = basket.get(favourite.get(i)).getCarbonCoefficient();
+            current = mBasket.get(index).getUserCarbonEmission();
+            temp = mBasket.get(favourite.get(i)).getUserCarbonEmission();
             if (temp < current)
             {
                 index = favourite.get(i);
@@ -138,8 +140,8 @@ public class Diet implements Serializable {
 
         for(int i = 1; i < favourite.size(); i++)
         {
-            current = basket.get(index).getUserCarbonEmission();
-            temp = basket.get(favourite.get(i)).getUserCarbonEmission();
+            current = mBasket.get(index).getUserCarbonEmission();
+            temp = mBasket.get(favourite.get(i)).getUserCarbonEmission();
             if (temp > current)
             {
                 index = favourite.get(i);
@@ -147,5 +149,6 @@ public class Diet implements Serializable {
         }
         return index;
     }
+
 
 }

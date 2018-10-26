@@ -7,6 +7,8 @@ public class Ingredient implements Serializable {
     private float mCarbonCoefficient;
     private float mAverageConsumption;
     private float mUserConsumption;
+    private float mLoweredConsumption;
+    private float mIncreasedConsumption;
     private float mUserCarbonEmission;
 
     Ingredient(String foodName, float mCarbonCoefficient, float mAverageConsumption, float mUserConsumption){
@@ -14,15 +16,23 @@ public class Ingredient implements Serializable {
         this.mCarbonCoefficient = mCarbonCoefficient;
         this.mAverageConsumption = mAverageConsumption;
         setUserConsumption(mUserConsumption);
-        this.mUserCarbonEmission = calculate_user_co2_emission();
+        this.mUserCarbonEmission = calculateUserCo2Emission();
     }
 
-    private float calculate_user_co2_emission(){
+    private float calculateUserCo2Emission(){
         return (mCarbonCoefficient)*(mAverageConsumption)*(mUserConsumption);
     }
 
     public float getUserCarbonEmission(){
         return mUserCarbonEmission;
+    }
+
+    public float getIncreasedEmission() {
+        return (mCarbonCoefficient)*(mIncreasedConsumption)*(mUserConsumption);
+    }
+
+    public float getLoweredEmission() {
+        return this.mUserCarbonEmission - (mCarbonCoefficient)*(mLoweredConsumption)*(mUserConsumption);
     }
 
     public String getFoodName() {
@@ -39,7 +49,7 @@ public class Ingredient implements Serializable {
 
     public void setCarbonCoefficient(float carbonCoefficient) {
         this.mCarbonCoefficient = carbonCoefficient;
-        this.mUserCarbonEmission = calculate_user_co2_emission();
+        this.mUserCarbonEmission = calculateUserCo2Emission();
     }
 
     public float getAverageConsumption() {
@@ -48,7 +58,7 @@ public class Ingredient implements Serializable {
 
     public void setAverageConsumption(float averageConsumption) {
         this.mAverageConsumption = averageConsumption;
-        this.mUserCarbonEmission = calculate_user_co2_emission();
+        this.mUserCarbonEmission = calculateUserCo2Emission();
     }
 
     public float getUserConsumption() {
@@ -56,18 +66,25 @@ public class Ingredient implements Serializable {
     }
 
     public void setUserConsumption(float userConsumption) {
-        if(userConsumption == 0)
-                this.mUserConsumption = 1.8f;
-        else if(userConsumption == 1)
-                this.mUserConsumption = 1.5f;
-        else if(userConsumption == 2)
-                this.mUserConsumption = 1f;
-        else if(userConsumption == 3)
-                this.mUserConsumption = 0.5f;
-        else if(userConsumption == 4)
-                this.mUserConsumption = 0;
 
-        this.mUserCarbonEmission = calculate_user_co2_emission();
+        if (userConsumption == 1) {
+            this.mUserConsumption = 1.5f;
+            this.mIncreasedConsumption = 1.8f;
+            this.mLoweredConsumption = 1.0f;
+        } else if (userConsumption == 2) {
+            this.mUserConsumption = 1f;
+            this.mIncreasedConsumption = 1.5f;
+            this.mLoweredConsumption = 0.5f;
+        } else if (userConsumption == 3) {
+            this.mUserConsumption = 0.5f;
+            this.mIncreasedConsumption = 1f;
+            this.mLoweredConsumption = 0f;
+        } else {
+            this.mUserConsumption = 0;
+            this.mIncreasedConsumption = 0.5f;
+            this.mLoweredConsumption = 0f;
+        }
+        this.mUserCarbonEmission = calculateUserCo2Emission();
     }
 
 }
