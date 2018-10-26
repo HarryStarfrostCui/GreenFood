@@ -1,17 +1,5 @@
 <resources>
     <string name="app_name">Green Food Challenge</string>
-    <string name="main_activity_banner">Welcome to the Green Food\nC0<sub><small>2</small></sub>e calculator</string>
-    <string name="main_activity_calculate_button">Calculate My Diet</string>
-    <string name="main_activity_about_button">What is CO2E?</string>
-
-    <string name="title_activity_weekly_calc">Weekly Diet Calculator</string>
-
-    <string name="large_text">
-        cause it was way too long, well it is called large_text.... ... .. .
-    </string>
-    <string name="text_about_page">Nanana this is new text</string>
-    <string name="title_activity_about_page">About CO2e and The Green food Challenge</string>
-    <string name="title_activity_meal_calc">Meal Plan Calculator</string>
 
     <string name="about_activity_challenge_header">The Green Food Challenge</string>
     <string name="about_activity_challenge_text">
@@ -47,19 +35,16 @@
     <string name="chicken3">A little</string>
     <string name="chicken4">None</string>
 
-    <string name="fish">Fish</string>
     <string name="fish1">Venti</string>
     <string name="fish2">Grande</string>
     <string name="fish3">Tall</string>
     <string name="fish4">Drink stopper</string>
 
-    <string name="pork">Pork</string>
     <string name="pork1">Big Mac</string>
     <string name="pork2">McChicken</string>
     <string name="pork3">Jr. Chicken</string>
     <string name="pork4">Ketchup packet</string>
 
-    <string name="egg">Eggs</string>
     <string name="egg1">Grandpa</string>
     <string name="egg2">Teen</string>
     <string name="egg3">Baby</string>
@@ -116,9 +101,6 @@
     <string name="carbon_save">Carbon Saved:</string>
     <string name="trees_save">Trees Saved:</string>
 
-    <string name="calculate_my_diet_button">Calculate My Diet</string>
-    <string name="what_is_co2e_button">What is C02e?</string>
-
     <string name="logo_content_description">Green Challenge Logo</string>
 
     <string-array name="ingredient_name">
@@ -153,10 +135,6 @@
         <item>40</item> <!--veg-->
         <item>32</item> <!--bread-->
     </string-array>
-
-    <string name="suggestionResult">
-        Hi, for each kg of %1$s you eat instead of %2$s, you will save %3$.2f of CO2, which is
-    %4$.2f tree per year.</string>
 
 
 </resources>

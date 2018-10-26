@@ -30,7 +30,6 @@
                 android:src="@drawable/back" />
 -->
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -61,7 +60,6 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <ImageView
-                        android:id="@+id/beefPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -87,7 +85,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/beefRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/beef1"
@@ -103,7 +100,6 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
-                            android:id="@+id/beefRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/beef3"
@@ -111,7 +107,6 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
-                            android:id="@+id/beefRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/beef4"
@@ -149,7 +144,6 @@
 
 
                         <RadioButton
-                            android:id="@+id/lambRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lamb1"
@@ -165,7 +159,6 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
-                            android:id="@+id/lambRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lamb3"
@@ -173,7 +166,6 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
-                            android:id="@+id/lambRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lamb4"
@@ -182,7 +174,6 @@
                     </RadioGroup>
 
                     <ImageView
-                        android:id="@+id/lambPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -201,7 +192,6 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <ImageView
-                        android:id="@+id/chickenPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -227,7 +217,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/chickenRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chicken1"
@@ -241,14 +230,12 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/chickenRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chicken3"
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/chickenRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chicken4"
@@ -284,7 +271,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/fishRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fish1"
@@ -301,7 +287,6 @@
                             android:textStyle="bold"
                             android:buttonTint="#036635"/>
                         <RadioButton
-                            android:id="@+id/fishRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fish3"
@@ -310,7 +295,6 @@
                             android:buttonTint="#036635"/>
 
                         <RadioButton
-                            android:id="@+id/fishRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fish4"
@@ -320,7 +304,6 @@
                     </RadioGroup>
 
                     <ImageView
-                        android:id="@+id/fishPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -339,7 +322,6 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <ImageView
-                        android:id="@+id/porkPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -364,7 +346,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/porkRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pork1"
@@ -382,7 +363,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/porkRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pork3"
@@ -390,7 +370,6 @@
                             android:buttonTint="#FFFF00"
                             android:textStyle="bold"/>
                         <RadioButton
-                            android:id="@+id/porkRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pork4"
@@ -428,7 +407,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/eggRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/egg1"
@@ -446,7 +424,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/eggRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/egg3"
@@ -455,7 +432,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/eggRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/egg4"
@@ -465,7 +441,6 @@
                     </RadioGroup>
 
                     <ImageView
-                        android:id="@+id/eggPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -484,7 +459,6 @@
                     android:paddingLeft="10dp"
                     android:paddingBottom="10dp">
                     <ImageView
-                        android:id="@+id/vegPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"
@@ -511,7 +485,6 @@
 
 
                         <RadioButton
-                            android:id="@+id/veggieRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/veggie1"
@@ -529,7 +502,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/veggieRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/veggie3"
@@ -538,7 +510,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/veggieRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/veggie4"
@@ -576,7 +547,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/breadRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bread1"
@@ -594,7 +564,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/breadRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bread3"
@@ -603,7 +572,6 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
-                            android:id="@+id/breadRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bread4"
@@ -613,7 +581,6 @@
                     </RadioGroup>
 
                     <ImageView
-                        android:id="@+id/breadPic"
                         android:layout_width="350dp"
                         android:layout_height="180dp"
                         android:layout_weight="0.5"

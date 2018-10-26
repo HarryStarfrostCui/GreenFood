@@ -45,8 +45,6 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        Bundle extras = getIntent().getExtras();
-
         diet = (Diet)getIntent().getSerializableExtra("diet");
 
         userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
