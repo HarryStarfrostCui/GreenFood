@@ -136,12 +136,15 @@ public class ResultActivity extends AppCompatActivity {
 
         for(int i = 1; i < favourite.size(); i++)
         {
-            current = basket.get(index).getCarbon_coefficient()*basket.get(index).getUser_co2_emission();
-            temp = basket.get(favourite.get(i)).getCarbon_coefficient()*basket.get(favourite.get(i)).getUser_co2_emission();
+            current = basket.get(index).getCarbon_coefficient();
+            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
             if (temp < current)
             {
                 index = favourite.get(i);
             }
+        }
+        if(index == getSuggestionMaxIndex()){
+            return 7; //veggie defult
         }
         return index;
     }
@@ -154,8 +157,8 @@ public class ResultActivity extends AppCompatActivity {
 
         for(int i = 1; i < favourite.size(); i++)
         {
-            current = basket.get(index).getCarbon_coefficient()*basket.get(index).getCarbon_coefficient()*basket.get(index).getUser_co2_emission();
-            temp = basket.get(favourite.get(i)).getCarbon_coefficient()*basket.get(favourite.get(i)).getCarbon_coefficient()*basket.get(favourite.get(i)).getUser_co2_emission();
+            current = basket.get(index).getCarbon_coefficient();
+            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
             if (temp > current)
             {
                 index = favourite.get(i);
