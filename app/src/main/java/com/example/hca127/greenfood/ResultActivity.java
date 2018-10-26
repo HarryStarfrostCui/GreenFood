@@ -29,7 +29,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView mIncreaseSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 15000f;
+    private float averageCarbon = 1500f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
@@ -44,7 +44,6 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Bundle extras = getIntent().getExtras();
-        basket = (ArrayList<Ingredient>) getIntent().getSerializableExtra("basket");
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
         basket = diet.getBasket();
@@ -72,7 +71,6 @@ public class ResultActivity extends AppCompatActivity {
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
         mReduceSuggestionText.setText(basket.get(0).getFoodName());
-        mIncreaseSuggestionText.setText(basket.get(2).getFoodName());
 
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
