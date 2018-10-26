@@ -113,6 +113,8 @@
     <string name="user_legend">User Diet</string>
     <string name="average_legend">Average Diet</string>
     <string name="suggestion_legend">Suggested Diet</string>
+    <string name="carbon_save">Carbon Saved:</string>
+    <string name="trees_save">Trees Saved:</string>
 
     <string name="calculate_my_diet_button">Calculate My Diet</string>
     <string name="what_is_co2e_button">What is C02e?</string>

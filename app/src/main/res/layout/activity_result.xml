@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -100,7 +100,7 @@
             style="@style/BlackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:text="@string/suggestion_text_1"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,8 @@
             style="@style/BlackText"
             android:layout_width="334dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/suggestion_text_3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
@@ -165,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             android:text="@string/user_legend"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
@@ -175,11 +176,69 @@
             style="@style/GreenText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:text="@string/suggestion_legend"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
+
+        <TextView
+            android:id="@+id/vancouverText"
+            style="@style/BlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/all_vancouver"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionChart" />
+
+        <TextView
+            android:id="@+id/carbonHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/carbon_save"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vancouverText"
+            style="@style/GreenHeading"/>
+
+        <TextView
+            android:id="@+id/carbonSaved"
+            style="@style/BlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toEndOf="@+id/carbonHeading"
+            app:layout_constraintTop_toBottomOf="@+id/vancouverText" />
+
+        <TextView
+            android:id="@+id/treeHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/trees_save"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carbonHeading"
+            style="@style/GreenHeading"/>
+
+        <TextView
+            android:id="@+id/treesSaved"
+            style="@style/BlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toEndOf="@+id/treeHeading"
+            app:layout_constraintTop_toBottomOf="@+id/carbonHeading" />
+
+
+
 
 
     </android.support.constraint.ConstraintLayout>

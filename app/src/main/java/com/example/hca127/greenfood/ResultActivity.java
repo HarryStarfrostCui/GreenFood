@@ -53,7 +53,7 @@ public class ResultActivity extends AppCompatActivity {
         int minIndex = getSuggestionMinIndex();
         int maxIndex = getSuggestionMaxIndex();
         float totalSave = calculateSavingAmountCarbon();
-        printSuggestion(minIndex, maxIndex, totalSave);
+        //printSuggestion(minIndex, maxIndex, totalSave);
         suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
@@ -104,7 +104,7 @@ public class ResultActivity extends AppCompatActivity {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
         for (int i = 0; i < basket.size(); i++) {
-            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), "temp"));
+            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), diet.getBasket().get(i).getFoodName()));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
