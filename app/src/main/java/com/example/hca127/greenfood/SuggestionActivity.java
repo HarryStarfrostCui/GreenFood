@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class SuggestionActivity extends AppCompatActivity {
     BarChart mSuggestionChart;
     Button mAboutButton;
-    Diet diet;
+    Diet mDiet;
     TextView mReduceSuggestionText;
     TextView mCarbonSaved;
     TextView mTreesSaved;
@@ -28,17 +29,17 @@ public class SuggestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggestion);
 
-        diet = (Diet)getIntent().getSerializableExtra("diet");
+        mDiet = (Diet)getIntent().getSerializableExtra("diet");
 
-        int minIndex = diet.getSuggestionMinIndex();
-        int maxIndex = diet.getSuggestionMaxIndex();
+        int minIndex = mDiet.getSuggestionMinIndex();
+        int maxIndex = mDiet.getSuggestionMaxIndex();
 
         mAboutButton = (Button) findViewById(R.id.aboutButton);
         mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
-                intent.putExtra("diet", diet);
+                intent.putExtra("diet", mDiet);
                 startActivity(intent);
                 finish();
             }
@@ -47,15 +48,13 @@ public class SuggestionActivity extends AppCompatActivity {
         mSuggestionChart = findViewById(R.id.suggestionChart);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, diet.getUserDietEmission()));
+        entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
         entries.add(new BarEntry(1, 1500f));
-        entries.add(new BarEntry(2, diet.getSuggestedDietEmission()));
+        entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
 
 
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
-        float totalSave = calculateSavingAmountCarbon();
-        printSuggestion(minIndex, maxIndex, totalSave);
-        mReduceSuggestionText.setText(diet.getIngName(maxIndex));
+        mReduceSuggestionText.setText(mDiet.getIngName(maxIndex));
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -71,40 +70,16 @@ public class SuggestionActivity extends AppCompatActivity {
         mSuggestionChart.animateY(1200);
         mSuggestionChart.invalidate();
 
+        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
+        float treesSaved = carbonSaved/22;
 
-    }
 
-    public float calculateSavingAmountCarbon() {
-        float difference;
-
-        int maxIndex = diet.getSuggestionMaxIndex();
-        int minIndex = diet.getSuggestionMinIndex();
-
-        difference = (float) (diet.getIngCarbon(maxIndex) - diet.getIngCarbon(minIndex));
-
-        return difference;
-    }
-    public void printSuggestion(int minIndex, int maxIndex, float difference) {
         mCarbonSaved = findViewById(R.id.carbonSaved);
-        mCarbonSaved.setText(difference*2463 + " tons");
         mTreesSaved = findViewById(R.id.treesSaved);
-        mTreesSaved.setText(Math.round(difference/22 *2463000)/1000 + " thousand trees");
+        mCarbonSaved.setText(String.valueOf(carbonSaved));
+        mTreesSaved.setText(String.valueOf(treesSaved));
+
     }
-
-
-    public double calculateCarbonEquivalent() {
-        double total = calculateSavingAmountCarbon();
-        int treeAbsorbAnnually = 22;
-        return total / treeAbsorbAnnually;
-    }
-
-    public double calculateSavingInMetroVan() {
-        double total = calculateSavingAmountCarbon();
-        double nonVegetarians = 0.9 * 2463000;
-        return total * nonVegetarians;
-    }
-
-
 }
 
 

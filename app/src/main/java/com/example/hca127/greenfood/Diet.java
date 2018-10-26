@@ -61,6 +61,13 @@ public class Diet implements Serializable {
         return this.mTotalUserCo2Emission - loweredFoodDifference + increasedFoodDifference;
     }
 
+    public float getSuggestedDietSavingAmount() {
+        float loweredFoodDifference = mBasket.get(getSuggestionMaxIndex()).getLoweredEmission();
+        float increasedFoodDifference = mBasket.get(getSuggestionMinIndex()).getIncreasedEmission();
+
+        return loweredFoodDifference - increasedFoodDifference;
+    }
+
     public void calculateTotalUserCo2Emission(){
         for(int i = 0; i < mBasket.size() ; i++){
             mTotalUserCo2Emission += mBasket.get(i).getUserCarbonEmission();
