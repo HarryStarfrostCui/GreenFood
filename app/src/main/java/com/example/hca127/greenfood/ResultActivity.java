@@ -45,11 +45,6 @@ public class ResultActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         basket = (ArrayList<Ingredient>) getIntent().getSerializableExtra("basket");
-        for (int i = 0; i < basket.size(); i++) {
-            userCarbon += basket.get(i).getUser_co2_emission();
-        }
-
-        Bundle extras = this.getIntent().getExtras();
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
         basket = diet.getBasket();
@@ -210,7 +205,7 @@ public class ResultActivity extends AppCompatActivity {
 
 
     public void printSuggestion(int minIndex, int maxIndex, float difference) {
-        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText);
+        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText1);
         suggestionTextView.setText(getString(R.string.suggestionResult, suggestionResult.get(minIndex).getFoodName(),
                 suggestionResult.get(maxIndex).getFoodName(),
                 difference, difference/22));
