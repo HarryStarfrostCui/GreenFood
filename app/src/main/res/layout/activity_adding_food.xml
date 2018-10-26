@@ -85,6 +85,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/beefRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/beef1"
@@ -100,6 +101,7 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
+                            android:id="@+id/beefRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/beef3"
@@ -107,6 +109,7 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
+                            android:id="@+id/beefRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/beef4"
@@ -144,6 +147,7 @@
 
 
                         <RadioButton
+                            android:id="@+id/lambRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lamb1"
@@ -159,6 +163,7 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
+                            android:id="@+id/lambRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lamb3"
@@ -166,6 +171,7 @@
                             android:buttonTint="#000000"/>
 
                         <RadioButton
+                            android:id="@+id/lambRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lamb4"
@@ -217,6 +223,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/chickenRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chicken1"
@@ -230,12 +237,14 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/chickeRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chicken3"
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/chickeRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chicken4"
@@ -271,6 +280,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/fishRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fish1"
@@ -286,7 +296,9 @@
                             android:textColor="#036635"
                             android:textStyle="bold"
                             android:buttonTint="#036635"/>
+
                         <RadioButton
+                            android:id="@+id/fishRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fish3"
@@ -295,6 +307,7 @@
                             android:buttonTint="#036635"/>
 
                         <RadioButton
+                            android:id="@+id/fishRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/fish4"
@@ -346,6 +359,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/porkRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pork1"
@@ -363,6 +377,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/porkRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pork3"
@@ -370,6 +385,7 @@
                             android:buttonTint="#FFFF00"
                             android:textStyle="bold"/>
                         <RadioButton
+                            android:id="@+id/porkRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pork4"
@@ -407,6 +423,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/eggRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/egg1"
@@ -424,6 +441,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/eggRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/egg3"
@@ -432,6 +450,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/eggRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/egg4"
@@ -485,6 +504,7 @@
 
 
                         <RadioButton
+                            android:id="@+id/veggieRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/veggie1"
@@ -502,6 +522,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/veggieRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/veggie3"
@@ -510,6 +531,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/veggieRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/veggie4"
@@ -547,6 +569,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/breadRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bread1"
@@ -564,6 +587,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/breadRadio3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bread3"
@@ -572,6 +596,7 @@
                             android:textStyle="bold"/>
 
                         <RadioButton
+                            android:id="@+id/breadRadio4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bread4"
