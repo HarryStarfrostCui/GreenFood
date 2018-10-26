@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -26,15 +23,18 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 public class ResultActivity extends AppCompatActivity {
     HorizontalBarChart mResultChart;
     HorizontalBarChart mSuggestionChart;
+    PieChart mUserEmissionSplitChart;
     TextView mResultText;
-    TextView mSuggestionText;
+    TextView mReduceSuggestionText;
+    TextView mIncreaseSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 1500f;
+    private float averageCarbon = 15000f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
 
+    private Diet diet;
     private ArrayList<Ingredient> basket;
     private ArrayList<Ingredient> suggestionResult = new ArrayList<>();
 
@@ -49,6 +49,13 @@ public class ResultActivity extends AppCompatActivity {
             userCarbon += basket.get(i).getUser_co2_emission();
         }
 
+        Bundle extras = this.getIntent().getExtras();
+
+        diet = (Diet)getIntent().getSerializableExtra("diet");
+        basket = diet.getBasket();
+
+        userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
+        suggestedCarbon = 1200f; // insert suggested carbon here
         int minIndex = getSuggestionMinIndex();
         int maxIndex = getSuggestionMaxIndex();
         float totalSave = calculateSavingAmountCarbon();
@@ -56,11 +63,12 @@ public class ResultActivity extends AppCompatActivity {
         suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
-        //mSuggestionText = findViewById(R.id.suggestionText);
+        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
+        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
 
-        if (userCarbon < averageCarbon * lowCarbonPercentage) {
+        if (userCarbon < averageCarbon*lowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
-        } else if (userCarbon < averageCarbon * averageCarbonPercentage) {
+        } else if (userCarbon < averageCarbon*averageCarbonPercentage) {
             mResultText.setText(R.string.average_carbon_result);
         } else {
             mResultText.setText(R.string.high_carbon_result);
@@ -69,10 +77,15 @@ public class ResultActivity extends AppCompatActivity {
         mResultChart = findViewById(R.id.resultChart);
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
-        //mSuggestionText.setText(R.string.temp_text);
+        mReduceSuggestionText.setText(basket.get(0).getFoodName());
+        mIncreaseSuggestionText.setText(basket.get(2).getFoodName());
+
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
-        setUpHorizontalBarChart(mSuggestionChart, averageCarbon, suggestedCarbon);
+        setUpHorizontalBarChart(mSuggestionChart, suggestedCarbon, userCarbon);
+
+        mUserEmissionSplitChart = findViewById(R.id.emissionSplitChart);
+        setupPieChart(mUserEmissionSplitChart);
 
     }
 
@@ -86,10 +99,38 @@ public class ResultActivity extends AppCompatActivity {
 
         BarData suggestionData = new BarData(barDataSet);
         chart.getXAxis().setDrawGridLines(false);
+        chart.getLegend().setEnabled(false);
 
         chart.setData(suggestionData);
         chart.animateY(1200);
         chart.invalidate();
+    }
+
+    private void setupPieChart(PieChart chart) {
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
+
+        for (int i = 0; i < basket.size(); i++) {
+            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), "temp"));
+        }
+
+        PieDataSet dataSet = new PieDataSet(pieEntries, "");
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        PieData data = new PieData(dataSet);
+
+        chart = findViewById(R.id.emissionSplitChart);
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+
+        chart.setEntryLabelColor(Color.BLACK);
+
+        chart.setData(data);
+        chart.animateY(1200);
+        chart.invalidate();
+
+
     }
 
     public ArrayList<Integer> getFavList()

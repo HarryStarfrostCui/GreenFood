@@ -9,8 +9,35 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/resultGreeter"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/result_greeting"
+            app:layout_constraintEnd_toStartOf="@+id/clippyImage2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/GreenHeadingSmall"/>
+
+        <ImageView
+            android:id="@+id/clippyImage2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/result_greeting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/clippy" />
+
+
         <TextView
             android:id="@+id/resultText"
+            style="@style/BlackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -18,40 +45,153 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/BlackText"/>
+            app:layout_constraintTop_toBottomOf="@+id/resultGreeter" />
 
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/resultChart"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultText" />
 
         <TextView
-            android:id="@+id/suggestionText"
+            android:id="@+id/emissionSplitText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:text="@string/emission_split_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultChart"
             style="@style/BlackText"/>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/emissionSplitChart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emissionSplitText" />
+
 
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/suggestionChart"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="52dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/suggestionText" />
+            app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
+
+        <TextView
+            android:id="@+id/suggestionText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/suggestion_text_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart"
+            style="@style/BlackText" />
+
+        <TextView
+            android:id="@+id/reduceSuggestionText"
+            style="@style/BlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/suggestionText1"
+            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
+
+        <TextView
+            android:id="@+id/suggestionText2"
+            style="@style/BlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/suggestion_text_2"
+            app:layout_constraintStart_toEndOf="@+id/reduceSuggestionText"
+            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
+
+        <TextView
+            android:id="@+id/increaseSuggestionText"
+            style="@style/BlackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/suggestionText2"
+            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
+
+        <TextView
+            android:id="@+id/suggestionText3"
+            style="@style/BlackText"
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/suggestion_text_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
+
+        <TextView
+            android:id="@+id/userLegend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/user_legend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultText"
+            style="@style/YellowText"/>
+
+        <TextView
+            android:id="@+id/averageLegend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/average_legend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultText"
+            style="@style/GreenText"/>
+
+        <TextView
+            android:id="@+id/userLegend2"
+            style="@style/YellowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/user_legend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
+
+        <TextView
+            android:id="@+id/suggestionLegen"
+            style="@style/GreenText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/suggestion_legend"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
+
 
     </android.support.constraint.ConstraintLayout>
 

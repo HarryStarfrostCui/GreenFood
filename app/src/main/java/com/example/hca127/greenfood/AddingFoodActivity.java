@@ -6,41 +6,48 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AddingFoodActivity extends AppCompatActivity {
 
+    private Diet diet;
+
     private ImageButton nextButton;
     private ImageButton backButton;
-    private ArrayList<Ingredient> basket;
-    private ArrayList<Integer> userChoices;
-    private int FOOD_TYPES = 8;
 
-    private ArrayList<RadioGroup> rategroups;
+    private RadioGroup beefRadioGroup;
+    private RadioGroup lambRadioGroup;
+    private RadioGroup chickenRadioGroup;
+    private RadioGroup fishRadioGroup;
+    private RadioGroup porkRadioGroup;
+    private RadioGroup eggRadioGroup;
+    private RadioGroup veggieRadioGroup;
+    private RadioGroup breadRadioGroup;
 
-    private int RadioChoice;
+    private int beefRadioChoice;
+    private int lambRadioChoice;
+    private int chickenRadioChoice;
+    private int fishRadioChoice;
+    private int porkRadioChoice;
+    private int eggRadioChoice;
+    private int veggieRadioChoice;
+    private int breadRadioChoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_food);
 
-        basket = new ArrayList<Ingredient>(FOOD_TYPES);
-        userChoices = new ArrayList<Integer>(FOOD_TYPES);
-        rategroups = new ArrayList<>();
-
-        backButton = (ImageButton) findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        diet = new Diet();
+    /*
+       backButton = (ImageButton) findViewById(R.id.backButton);
+       backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(AddingFoodActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
-
+       });
+*/
         nextButton = (ImageButton) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,67 +55,57 @@ public class AddingFoodActivity extends AppCompatActivity {
                 getUserInput();
 
                 Intent intent = new Intent(AddingFoodActivity.this, ResultActivity.class);
-                intent.putExtra("basket", basket);
+                intent.putExtra("diet", diet);
                 startActivity(intent);
                 finish();
             }
         });
 
-        final int[] group_id = {
-                R.id.beefRadioGroup, R.id.lambRadioGroup, R.id.chickenRadioGroup, R.id.fishRadioGroup,
-                R.id.porkRadioGroup, R.id.eggRadioGroup, R.id.vegRadioGroup, R.id.breadRadioGroup
-        };
-        final int[] checklist = {
-                R.id.beefRadio2, R.id.lambRadio2, R.id.chickenRadio2, R.id.fishRadio2,
-                R.id.porkRadio2, R.id.eggRadio2, R.id.veggieRadio2, R.id.breadRadio2
-        };
+        beefRadioGroup = (RadioGroup) findViewById(R.id.beefRadioGroup);
+        lambRadioGroup = (RadioGroup) findViewById(R.id.lambRadioGroup);
+        chickenRadioGroup = (RadioGroup) findViewById(R.id.chickenRadioGroup);
+        fishRadioGroup = (RadioGroup) findViewById(R.id.fishRadioGroup);
+        porkRadioGroup = (RadioGroup) findViewById(R.id.porkRadioGroup);
+        eggRadioGroup = (RadioGroup) findViewById(R.id.eggRadioGroup);
+        veggieRadioGroup = (RadioGroup) findViewById(R.id.vegRadioGroup);
+        breadRadioGroup = (RadioGroup) findViewById(R.id.breadRadioGroup);
 
-        for(int i = 0; i<group_id.length; i++){
-            rategroups.add((RadioGroup)findViewById(group_id[i]));
-            rategroups.get(i).check(checklist[i]);
-        }
+        beefRadioGroup.check(R.id.beefRadio2);
+        lambRadioGroup.check(R.id.lambRadio2);
+        chickenRadioGroup.check(R.id.chickenRadio2);
+        fishRadioGroup.check(R.id.fishRadio2);
+        porkRadioGroup.check(R.id.porkRadio2);
+        eggRadioGroup.check(R.id.eggRadio2);
+        veggieRadioGroup.check(R.id.veggieRadio2);
+        breadRadioGroup.check(R.id.breadRadio2);
     }
 
     public void getUserInput() {
 
-        for(int i = 0; i<rategroups.size(); i++){
-            RadioChoice = rategroups.get(i).getCheckedRadioButtonId();
-            assignUserInput(getResources().getResourceEntryName(RadioChoice));
-        }
+        beefRadioChoice = beefRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(beefRadioChoice)); //integer 1 2 3 4, 1 = high, 4 = none
 
-        populateArrayList();
-    }
+        lambRadioChoice = lambRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(lambRadioChoice));
 
-    private void assignUserInput(String userChoiceAsString){
-        String num = userChoiceAsString.substring(userChoiceAsString.length()-1, userChoiceAsString.length());
-        switch(num){
-            case "1":
-                userChoices.add(1);
-                break;
-            case "2":
-                userChoices.add(2);
-                break;
-            case "3":
-                userChoices.add(3);
-                break;
-            case "4":
-                userChoices.add(4);
-                break;
-        }
-    }
+        chickenRadioChoice = chickenRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(chickenRadioChoice));
 
-    private void populateArrayList(){
-        ArrayList<String> names = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.ingredient_name)));
-        ArrayList<String> carbon_coefficient = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.carbon_coefficient)));
-        ArrayList<String> average_consumption = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.annual_average_consumption)));
+        fishRadioChoice = fishRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(fishRadioChoice));
 
-        for(int i = 0; i < FOOD_TYPES ; i++){
-            Ingredient ing = new Ingredient(    names.get(i),
-                                                Double.parseDouble(carbon_coefficient.get(i)),
-                                                Double.parseDouble(average_consumption.get(i)),
-                                                userChoices.get(i));
+        porkRadioChoice = porkRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(porkRadioChoice));
 
-            basket.add(ing);
-        }
+        eggRadioChoice = eggRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(eggRadioChoice));
+
+        veggieRadioChoice = veggieRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(veggieRadioChoice));
+
+        breadRadioChoice = breadRadioGroup.getCheckedRadioButtonId();
+        diet.assignUserInput(getResources().getResourceEntryName(breadRadioChoice));
+
+        diet.populateBasket(this);
     }
 }

@@ -27,7 +27,7 @@
         For food production, the most common gas is methane.
     </string>
 
-    <string name="adding_food_activity_title">I eat&#8230;</string>
+    <string name="adding_food_activity_title">I EAT&#8230;</string>
 
     <string name="beef">Beef</string>
     <string name="beef1">High amount</string>
@@ -81,6 +81,10 @@
         Phew! You made it through. I was worried  that we\'d need to ask clippy to help.
         On the bright side, I\'ve got some results for you:
     </string>
+    <string name="emission_split_text">
+        Here\'s how we estimate the greenhouse gas emissions are split from the production of
+        various food groups.
+    </string>
 
     <string name="low_carbon_result">
         Good News! The greenhouse gas emissions required to produce your diet are very low!
@@ -93,9 +97,18 @@
         The greenhouse gas emissions required to produce your diet are higher than the average
         Vancouver resident.
     </string>
-    <string name="temp_text">
-        This is temp, put some more contextual details here!
+    <string name="suggestion_text_1">
+        Eating a bit less
     </string>
+    <string name="suggestion_text_2">
+        and a bit more
+    </string>
+    <string name="suggestion_text_3">
+        would change the greenhouse gas emissions like this:
+    </string>
+    <string name="user_legend">User Diet</string>
+    <string name="average_legend">Average Diet</string>
+    <string name="suggestion_legend">Suggested Diet</string>
 
     <string name="calculate_my_diet_button">Calculate My Diet</string>
     <string name="what_is_co2e_button">What is C02e?</string>
