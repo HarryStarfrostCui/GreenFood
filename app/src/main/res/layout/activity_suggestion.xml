@@ -77,9 +77,10 @@
             android:id="@+id/suggestionChart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/userLegend"
-            tools:layout_editor_absoluteX="8dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userLegend" />
 
         <TextView
             android:id="@+id/vancouverText"
@@ -92,7 +93,7 @@
             android:text="@string/all_vancouver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
+            app:layout_constraintTop_toBottomOf="@+id/suggestionChart" />
 
         <TextView
             android:id="@+id/carbonHeading"
@@ -138,15 +139,15 @@
 
         <Button
             android:id="@+id/aboutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="52dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/about_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
+            app:layout_constraintTop_toBottomOf="@+id/treeHeading" />
 
 
     </android.support.constraint.ConstraintLayout>

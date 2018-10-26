@@ -53,7 +53,7 @@ public class SuggestionActivity extends AppCompatActivity {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, diet.get_total_user_co2_emission()));
         entries.add(new BarEntry(1, 1500f));
-        //entries.add(new BarEntry(2, diet.get_total_user_co2_emission()-3*calculateSavingAmountCarbon()));
+        entries.add(new BarEntry(2, diet.get_total_user_co2_emission()-3*calculateSavingAmountCarbon()));
 
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
@@ -64,6 +64,7 @@ public class SuggestionActivity extends AppCompatActivity {
         mSuggestionChart.getLegend().setEnabled(false);
         mSuggestionChart.getAxisRight().setAxisMinimum(0f);
         mSuggestionChart.getAxisLeft().setAxisMinimum(0f);
+        mSuggestionChart.getDescription().setEnabled(false);
 
         mSuggestionChart.setData(suggestionData);
         mSuggestionChart.animateY(1200);
