@@ -86,11 +86,13 @@
         Eating a bit less
     </string>
     <string name="suggestion_text_2">
-        and a bit more Veggies
+        and a bit more
     </string>
     <string name="suggestion_text_3">
         would change the greenhouse gas emissions like this:
     </string>
+    <string name="get_suggestion">Get Suggestions</string>
+    <string name="about_button">What is C02E?</string>
 
     <string name="all_vancouver">
         If Everyone in Vancouver also made your change, then we would save:
@@ -135,6 +137,7 @@
         <item>40</item> <!--veg-->
         <item>32</item> <!--bread-->
     </string-array>
+    <string name="title_activity_suggestion">SuggestionActivity</string>
 
 
 </resources>
