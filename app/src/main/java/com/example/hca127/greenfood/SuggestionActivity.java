@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -25,6 +26,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 public class SuggestionActivity extends AppCompatActivity {
+    BarChart mSuggestionChart;
     private Button mAboutButton;
     private Diet diet;
 
@@ -46,7 +48,39 @@ public class SuggestionActivity extends AppCompatActivity {
             }
         });
 
+        mSuggestionChart = findViewById(R.id.suggestionChart);
 
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, diet.get_total_user_co2_emission()));
+        entries.add(new BarEntry(1, 1500f));
+        //entries.add(new BarEntry(2, diet.get_total_user_co2_emission()-3*calculateSavingAmountCarbon()));
+
+
+        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        BarData suggestionData = new BarData(barDataSet);
+        mSuggestionChart.getXAxis().setDrawGridLines(false);
+        mSuggestionChart.getLegend().setEnabled(false);
+        mSuggestionChart.getAxisRight().setAxisMinimum(0f);
+        mSuggestionChart.getAxisLeft().setAxisMinimum(0f);
+
+        mSuggestionChart.setData(suggestionData);
+        mSuggestionChart.animateY(1200);
+        mSuggestionChart.invalidate();
+
+
+    }
+
+    public float calculateSavingAmountCarbon() {
+        float difference;
+
+        int maxIndex = diet.getSuggestionMaxIndex();
+        int minIndex = diet.getSuggestionMinIndex();
+
+        difference = (float) (diet.getIngCarbon(maxIndex) - diet.getIngCarbon(minIndex));
+
+        return difference;
     }
 
 }

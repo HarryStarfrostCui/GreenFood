@@ -74,6 +74,7 @@
             app:layout_constraintTop_toBottomOf="@+id/suggestionText1" />
 
         <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/suggestionChart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginTop="8dp"
