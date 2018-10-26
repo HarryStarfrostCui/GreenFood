@@ -114,7 +114,6 @@
     <string name="what_is_co2e_button">What is C02e?</string>
 
     <string name="logo_content_description">Green Challenge Logo</string>
-    <string name="clippy_description">Clippy Image</string>
 
     <string-array name="ingredient_name">
         <item>Beef</item>

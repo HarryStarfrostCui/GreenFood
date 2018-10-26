@@ -34,6 +34,7 @@ public class ResultActivity extends AppCompatActivity {
     private float averageCarbonPercentage = 1.1f;
 
 
+    private Diet diet;
     private ArrayList<Ingredient> basket;
 
     @Override
@@ -41,17 +42,14 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        Bundle extras = getIntent().getExtras();
-        basket =(ArrayList<Ingredient>)getIntent().getSerializableExtra("basket");
-        for(int i = 0; i < basket.size() ; i++){
-            userCarbon += basket.get(i).getUser_co2_emission();
-        }
 
-        Toast.makeText(this, "total = " + userCarbon, Toast.LENGTH_LONG).show();
-        //Toast.makeText(this, "carbon coef: " + Double.toString(basket.get(0).getCarbon_coefficient()) + " . Average consum: " + Double.toString(basket.get(0).getAverage_consumption()) + " . User consum: " + Double.toString(basket.get(0).getUser_consumption()) + " = " + Double.toString(basket.get(0).getUser_co2_emission()), Toast.LENGTH_LONG).show();
+        Bundle extras = this.getIntent().getExtras();
 
-        //userCarbon = 2.0f; //insert calculated carbon in tC02e
-        suggestedCarbon = 12000f; // insert suggested carbon here
+        diet = (Diet)getIntent().getSerializableExtra("diet");
+        basket = diet.getBasket();
+
+        userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
+        suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
@@ -101,8 +99,7 @@ public class ResultActivity extends AppCompatActivity {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
         for (int i = 0; i < basket.size(); i++) {
-            pieEntries.add(new PieEntry((float)basket.get(i).getUser_co2_emission(),
-                                            basket.get(i).getFoodName()));
+            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), "temp"));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
