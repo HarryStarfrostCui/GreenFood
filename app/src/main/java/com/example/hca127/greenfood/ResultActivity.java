@@ -51,7 +51,7 @@ public class ResultActivity extends AppCompatActivity {
         //Toast.makeText(this, "carbon coef: " + Double.toString(basket.get(0).getCarbon_coefficient()) + " . Average consum: " + Double.toString(basket.get(0).getAverage_consumption()) + " . User consum: " + Double.toString(basket.get(0).getUser_consumption()) + " = " + Double.toString(basket.get(0).getUser_co2_emission()), Toast.LENGTH_LONG).show();
 
         //userCarbon = 2.0f; //insert calculated carbon in tC02e
-        suggestedCarbon = 12000f; // insert suggested carbon here
+        suggestedCarbon = 10000f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
@@ -91,6 +91,8 @@ public class ResultActivity extends AppCompatActivity {
         BarData suggestionData = new BarData(barDataSet);
         chart.getXAxis().setDrawGridLines(false);
         chart.getLegend().setEnabled(false);
+        chart.getAxisRight().setAxisMinimum(0f);
+        chart.getAxisLeft().setAxisMinimum(0f);
 
         chart.setData(suggestionData);
         chart.animateY(1200);

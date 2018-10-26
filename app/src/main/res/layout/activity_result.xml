@@ -97,14 +97,14 @@
 
         <TextView
             android:id="@+id/suggestionText1"
+            style="@style/BlackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="32dp"
             android:text="@string/suggestion_text_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart"
-            style="@style/BlackText" />
+            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
 
         <TextView
             android:id="@+id/reduceSuggestionText"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintStart_toEndOf="@+id/suggestionText1"
             app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
 
@@ -122,19 +122,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:text="@string/suggestion_text_2"
             app:layout_constraintStart_toEndOf="@+id/reduceSuggestionText"
-            app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
-
-        <TextView
-            android:id="@+id/increaseSuggestionText"
-            style="@style/BlackText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/suggestionText2"
             app:layout_constraintTop_toBottomOf="@+id/emissionSplitChart" />
 
         <TextView
@@ -142,8 +132,7 @@
             style="@style/BlackText"
             android:layout_width="334dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="36dp"
             android:text="@string/suggestion_text_3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
