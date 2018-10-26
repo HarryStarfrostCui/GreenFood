@@ -1,5 +1,6 @@
 package com.example.hca127.greenfood;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class AddingFoodActivity extends AppCompatActivity {
         diet = new Diet();
 
         nextButton = (ImageButton) findViewById(R.id.nextButton);
-        /*nextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();
@@ -48,10 +49,10 @@ public class AddingFoodActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddingFoodActivity.this, ResultActivity.class);
                 intent.putExtra("diet", diet);
                 startActivity(intent);
-                finish();
+                recreate();
             }
         });
-        */
+
         beefRadioGroup = (RadioGroup) findViewById(R.id.beefRadioGroup);
         lambRadioGroup = (RadioGroup) findViewById(R.id.lambRadioGroup);
         chickenRadioGroup = (RadioGroup) findViewById(R.id.chickenRadioGroup);
@@ -99,4 +100,12 @@ public class AddingFoodActivity extends AppCompatActivity {
 
         diet.populateBasket(this);
     }
+
+    /*
+    @Override
+    public void onResume(){
+        super.onResume();
+        diet = new Diet();
+    }
+    */
 }
