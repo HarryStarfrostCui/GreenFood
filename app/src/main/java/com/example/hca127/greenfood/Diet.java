@@ -43,6 +43,7 @@ public class Diet implements Serializable {
         }
     }
 
+
     public void populateBasket(Context context){
         ArrayList<String> names = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.ingredient_name)));
         ArrayList<String> carbon_coefficient = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.carbon_coefficient)));
