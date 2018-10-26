@@ -29,6 +29,9 @@ public class SuggestionActivity extends AppCompatActivity {
     BarChart mSuggestionChart;
     private Button mAboutButton;
     private Diet diet;
+    TextView mReduceSuggestionText;
+    TextView carbon;
+    TextView tree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,9 @@ public class SuggestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_suggestion);
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
+
+        int minIndex = diet.getSuggestionMinIndex();
+        int maxIndex = diet.getSuggestionMaxIndex();
 
         mAboutButton = (Button) findViewById(R.id.aboutButton);
         mAboutButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +61,10 @@ public class SuggestionActivity extends AppCompatActivity {
         entries.add(new BarEntry(1, 1500f));
         entries.add(new BarEntry(2, diet.get_total_user_co2_emission()-3*calculateSavingAmountCarbon()));
 
+        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
+        float totalSave = calculateSavingAmountCarbon();
+        printSuggestion(minIndex, maxIndex, totalSave);
+        mReduceSuggestionText.setText(diet.getIngName(maxIndex));
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -83,24 +93,39 @@ public class SuggestionActivity extends AppCompatActivity {
 
         return difference;
     }
+    public void printSuggestion(int minIndex, int maxIndex, float difference) {
+        carbon = findViewById(R.id.carbonSaved);
+        carbon.setText(difference*2463 + " tons");
+        tree = findViewById(R.id.treesSaved);
+        tree.setText(Math.round(difference/22 *2463000)/1000 + " thousand trees");
+    }
+
+
+    public double calculateCarbonEquivalent() {
+        double total = calculateSavingAmountCarbon();
+        int treeAbsorbAnnually = 22;
+        return total / treeAbsorbAnnually;
+    }
+
+    public double calculateSavingInMetroVan() {
+        double total = calculateSavingAmountCarbon();
+        double nonVegetarians = 0.9 * 2463000;
+        return total * nonVegetarians;
+    }
+
+
 
 }
 
 
-//    HorizontalBarChart mResultChart;
-//    HorizontalBarChart mSuggestionChart;
-//    PieChart mUserEmissionSplitChart;
-//    TextView mResultText;
+
 //    TextView mReduceSuggestionText;
 //    TextView carbon;
 //    TextView tree;
 //    private float userCarbon;
 //    private float suggestedCarbon;
-//    private float averageCarbon = 1500f;
-//    private float lowCarbonPercentage = 0.9f;
-//    private float averageCarbonPercentage = 1.1f;
-//
-//    private Diet diet;
+
+
 //
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -161,33 +186,6 @@ public class SuggestionActivity extends AppCompatActivity {
 //        chart.setData(suggestionData);
 //        chart.animateY(1200);
 //        chart.invalidate();
-//    }
-//
-//    private void setupPieChart(PieChart chart) {
-//        ArrayList<PieEntry> pieEntries = new ArrayList<>();
-//
-//        for (int i = 0; i <diet.getSize(); i++) {
-//            pieEntries.add(new PieEntry((float)diet.getIngUserCo2Emission(i), diet.getIngName(i)));
-//        }
-//
-//        PieDataSet dataSet = new PieDataSet(pieEntries, "");
-//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//        PieData data = new PieData(dataSet);
-//
-//        chart = findViewById(R.id.emissionSplitChart);
-//        Legend legend = chart.getLegend();
-//        legend.setWordWrapEnabled(true);
-//        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
-//        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-//        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
-//
-//        chart.setEntryLabelColor(Color.BLACK);
-//
-//        chart.setData(data);
-//        chart.animateY(1200);
-//        chart.invalidate();
-//
-//
 //    }
 //
 //
