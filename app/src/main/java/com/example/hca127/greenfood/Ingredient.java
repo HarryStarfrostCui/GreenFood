@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class Ingredient implements Serializable {
     private String foodName;
-    private double carbon_coefficient;
-    private double average_consumption;
-    private double user_consumption;
-    private double user_co2_emission;
+    private float carbon_coefficient;
+    private float average_consumption;
+    private float user_consumption;
+    private float user_co2_emission;
 
-    Ingredient(String foodName, double carbon_coefficient, double average_consumption, double user_consumption){
+    Ingredient(String foodName, float carbon_coefficient, float average_consumption, float user_consumption){
         this.foodName = foodName;
         this.carbon_coefficient = carbon_coefficient;
         this.average_consumption = average_consumption;
@@ -17,11 +17,11 @@ public class Ingredient implements Serializable {
         this.user_co2_emission = calculate_user_co2_emission();
     }
 
-    private double calculate_user_co2_emission(){
+    private float calculate_user_co2_emission(){
         return (carbon_coefficient)*(average_consumption)*(user_consumption);
     }
 
-    public double getUser_co2_emission(){
+    public float getUser_co2_emission(){
         return user_co2_emission;
     }
 
@@ -33,35 +33,37 @@ public class Ingredient implements Serializable {
         this.foodName = foodName;
     }
 
-    public double getCarbon_coefficient() {
+    public float getCarbon_coefficient() {
         return carbon_coefficient;
     }
 
-    public void setCarbon_coefficient(double carbon_coefficient) {
+    public void setCarbon_coefficient(float carbon_coefficient) {
         this.carbon_coefficient = carbon_coefficient;
         this.user_co2_emission = calculate_user_co2_emission();
     }
 
-    public double getAverage_consumption() {
+    public float getAverage_consumption() {
         return average_consumption;
     }
 
-    public void setAverage_consumption(double average_consumption) {
+    public void setAverage_consumption(float average_consumption) {
         this.average_consumption = average_consumption;
         this.user_co2_emission = calculate_user_co2_emission();
     }
 
-    public double getUser_consumption() {
+    public float getUser_consumption() {
         return user_consumption;
     }
 
-    public void setUser_consumption(double user_consumption) {
-        if(user_consumption == 1)
-                this.user_consumption = 1.5;
+    public void setUser_consumption(float user_consumption) {
+        if(user_consumption == 0)
+                this.user_consumption = 1.8f;
+        else if(user_consumption == 1)
+                this.user_consumption = 1.5f;
         else if(user_consumption == 2)
-                this.user_consumption = 1;
+                this.user_consumption = 1f;
         else if(user_consumption == 3)
-                this.user_consumption = 0.5;
+                this.user_consumption = 0.5f;
         else if(user_consumption == 4)
                 this.user_consumption = 0;
 

@@ -44,6 +44,7 @@ captures/
 .idea/libraries
 .idea/caches
 .idea/CodeStyles
+.idea/CodeStyles/
 .idea/misc.xml
 .idea/modules.xml
 .idea/runConfigurations.xml
