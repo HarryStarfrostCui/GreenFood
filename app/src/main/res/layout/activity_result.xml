@@ -12,6 +12,7 @@
 
         <TextView
             android:id="@+id/resultGreeter"
+            style="@style/GreenHeadingSmall"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -20,8 +21,7 @@
             android:text="@string/result_greeting"
             app:layout_constraintEnd_toStartOf="@+id/clippyImage2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/GreenHeadingSmall"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/clippyImage2"
@@ -61,6 +61,7 @@
 
         <TextView
             android:id="@+id/emissionSplitText"
+            style="@style/BlackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -68,8 +69,7 @@
             android:text="@string/emission_split_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultChart"
-            style="@style/BlackText"/>
+            app:layout_constraintTop_toBottomOf="@+id/resultChart" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/emissionSplitChart"
@@ -140,25 +140,25 @@
 
         <TextView
             android:id="@+id/userLegend"
+            style="@style/YellowText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/user_legend"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultText"
-            style="@style/YellowText"/>
+            app:layout_constraintTop_toBottomOf="@+id/resultText" />
 
         <TextView
             android:id="@+id/averageLegend"
+            style="@style/GreenText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/average_legend"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/resultText"
-            style="@style/GreenText"/>
+            app:layout_constraintTop_toBottomOf="@+id/resultText" />
 
         <TextView
             android:id="@+id/userLegend2"
@@ -197,14 +197,14 @@
 
         <TextView
             android:id="@+id/carbonHeading"
+            style="@style/GreenHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text="@string/carbon_save"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vancouverText"
-            style="@style/GreenHeading"/>
+            app:layout_constraintTop_toBottomOf="@+id/vancouverText" />
 
         <TextView
             android:id="@+id/carbonSaved"
@@ -218,14 +218,14 @@
 
         <TextView
             android:id="@+id/treeHeading"
+            style="@style/GreenHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text="@string/trees_save"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/carbonHeading"
-            style="@style/GreenHeading"/>
+            app:layout_constraintTop_toBottomOf="@+id/carbonHeading" />
 
         <TextView
             android:id="@+id/treesSaved"
@@ -236,9 +236,6 @@
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toEndOf="@+id/treeHeading"
             app:layout_constraintTop_toBottomOf="@+id/carbonHeading" />
-
-
-
 
 
     </android.support.constraint.ConstraintLayout>

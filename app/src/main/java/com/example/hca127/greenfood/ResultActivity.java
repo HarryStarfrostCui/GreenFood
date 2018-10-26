@@ -27,6 +27,8 @@ public class ResultActivity extends AppCompatActivity {
     TextView mResultText;
     TextView mReduceSuggestionText;
     TextView mIncreaseSuggestionText;
+    TextView carbon;
+    TextView tree;
     private float userCarbon;
     private float suggestedCarbon;
     private float averageCarbon = 1500f;
@@ -52,8 +54,9 @@ public class ResultActivity extends AppCompatActivity {
         suggestedCarbon = 1200f; // insert suggested carbon here
         int minIndex = getSuggestionMinIndex();
         int maxIndex = getSuggestionMaxIndex();
+
         float totalSave = calculateSavingAmountCarbon();
-        //printSuggestion(minIndex, maxIndex, totalSave);
+        printSuggestion(minIndex, maxIndex, totalSave);
         suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
@@ -70,7 +73,7 @@ public class ResultActivity extends AppCompatActivity {
         mResultChart = findViewById(R.id.resultChart);
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
-        mReduceSuggestionText.setText(basket.get(0).getFoodName());
+        mReduceSuggestionText.setText(basket.get(maxIndex).getFoodName());
 
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
@@ -78,6 +81,7 @@ public class ResultActivity extends AppCompatActivity {
 
         mUserEmissionSplitChart = findViewById(R.id.emissionSplitChart);
         setupPieChart(mUserEmissionSplitChart);
+
 
     }
 
@@ -204,10 +208,10 @@ public class ResultActivity extends AppCompatActivity {
 
 
     public void printSuggestion(int minIndex, int maxIndex, float difference) {
-        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText1);
-        suggestionTextView.setText(getString(R.string.suggestionResult, suggestionResult.get(minIndex).getFoodName(),
-                suggestionResult.get(maxIndex).getFoodName(),
-                difference, difference/22));
+        carbon = findViewById(R.id.carbonSaved);
+        carbon.setText(difference*2463 + " tons");
+        tree = findViewById(R.id.treesSaved);
+        tree.setText(Math.round(difference/22 *2463000)/1000 + " thousand trees");
     }
 
 
