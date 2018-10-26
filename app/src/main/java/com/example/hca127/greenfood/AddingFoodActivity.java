@@ -38,7 +38,7 @@ public class AddingFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adding_food);
 
         diet = new Diet();
-
+    /*
        backButton = (ImageButton) findViewById(R.id.backButton);
        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +47,7 @@ public class AddingFoodActivity extends AppCompatActivity {
                 startActivity(intent);
             }
        });
-
+*/
         nextButton = (ImageButton) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
