@@ -98,6 +98,9 @@ public class Diet implements Serializable {
 
     public int getSuggestionMinIndex()
     {
+        if(getFavList().size()==0){
+            return 0;
+        }
         ArrayList<Integer> favourite = getFavList();
         int index = favourite.get(0);
         double current, temp;
@@ -114,11 +117,16 @@ public class Diet implements Serializable {
         if(index == getSuggestionMaxIndex()){
             return 7; //veggie defult
         }
+
         return index;
     }
 
     public int getSuggestionMaxIndex()
     {
+        if(getFavList().size()==0){
+            return 0;
+        }
+
         ArrayList<Integer> favourite = getFavList();
         int index = favourite.get(0);
         double current, temp;
