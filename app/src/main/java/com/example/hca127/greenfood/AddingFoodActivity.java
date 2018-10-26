@@ -40,7 +40,7 @@ public class AddingFoodActivity extends AppCompatActivity {
         diet = new Diet();
 
         nextButton = (ImageButton) findViewById(R.id.nextButton);
-        /*nextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();
@@ -51,7 +51,7 @@ public class AddingFoodActivity extends AppCompatActivity {
                 finish();
             }
         });
-        */
+
         beefRadioGroup = (RadioGroup) findViewById(R.id.beefRadioGroup);
         lambRadioGroup = (RadioGroup) findViewById(R.id.lambRadioGroup);
         chickenRadioGroup = (RadioGroup) findViewById(R.id.chickenRadioGroup);
