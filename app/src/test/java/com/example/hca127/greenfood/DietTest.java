@@ -46,4 +46,18 @@ public class DietTest {
 
         assertEquals(400, testDiet.get_total_user_co2_emission(), 0.001);
     }
+
+    @Test
+    public void calculate_total_user_co2_emission(){
+        testDiet.addNewIngredient("anotherTestFood", 30, 30, 1);
+        float testFloat = 0;
+        for(int i = 0; i < testDiet.getBasket().size(); i++) {
+            testFloat += testDiet.getBasket().get(i).getCarbon_coefficient() *
+                    testDiet.getBasket().get(i).getAverage_consumption()*
+                    testDiet.getBasket().get(i).getUser_consumption();
+        }
+
+        testDiet.calculate_total_user_co2_emission();
+        assertEquals(testFloat, testDiet.get_total_user_co2_emission(), 0.001);
+    }
 }
