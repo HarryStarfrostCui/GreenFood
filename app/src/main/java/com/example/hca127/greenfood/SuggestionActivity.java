@@ -59,7 +59,7 @@ public class SuggestionActivity extends AppCompatActivity {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, diet.get_total_user_co2_emission()));
         entries.add(new BarEntry(1, 1500f));
-        entries.add(new BarEntry(2, diet.get_total_user_co2_emission()-3*calculateSavingAmountCarbon()));
+        /*entries.add(new BarEntry(2, diet.get_total_user_co2_emission()-3*calculateSavingAmountCarbon()));*/
 
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
         float totalSave = calculateSavingAmountCarbon();
