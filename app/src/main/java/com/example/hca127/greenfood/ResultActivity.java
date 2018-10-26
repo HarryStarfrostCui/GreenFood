@@ -108,7 +108,9 @@ public class ResultActivity extends AppCompatActivity {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
         for (int i = 0; i < basket.size(); i++) {
-            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), diet.getBasket().get(i).getFoodName()));
+            if (basket.get(i).getUser_consumption() != 0) {
+                pieEntries.add(new PieEntry((float) diet.getBasket().get(i).getUser_co2_emission(), diet.getBasket().get(i).getFoodName()));
+            }
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
