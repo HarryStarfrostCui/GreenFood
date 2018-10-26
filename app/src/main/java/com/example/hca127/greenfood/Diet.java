@@ -18,7 +18,6 @@ public class Diet implements Serializable {
     }
 
     public String getIngName(int index){        return basket.get(index).getFoodName();    }
-    public ArrayList<Ingredient> getBasket(){   return basket;  }
     public float getIngCarbon(int index){   return basket.get(index).getCarbon_coefficient();}
     public float getIngUserCo2Emission(int index) {        return basket.get(index).getUser_co2_emission();    }
     public int getSize(){        return basket.size();    }
@@ -30,32 +29,8 @@ public class Diet implements Serializable {
 
     public void assignUserInput(String userChoiceAsString){
         String temp = userChoiceAsString.substring( userChoiceAsString.length()-1, userChoiceAsString.length());
-        switch(userChoiceAsString){
-            /*case "1":
-                userChoices.add(1);
-                break;
-            case "2":
-                userChoices.add(2);
-                break;
-            case "3":
-                userChoices.add(3);
-                break;
-            case "4":
-                userChoices.add(4);
-                break;*/
-            case "beefRadio1": case "lambRadio1" : case "chickenRadio1" : case "fishRadio1" : case "porkRadio1" : case "eggRadio1" : case "veggieRadio1" : case "breadRadio1":
-                userChoices.add(1);
-                break;
-            case "beefRadio2": case "lambRadio2" : case "chickenRadio2" : case "fishRadio2" : case "porkRadio2" : case "eggRadio2" : case "veggieRadio2" : case "breadRadio2":
-                userChoices.add(2);
-                break;
-            case "beefRadio3": case "lambRadio3" : case "chickenRadio3" : case "fishRadio3" : case "porkRadio3" : case "eggRadio3" : case "veggieRadio3" : case "breadRadio3":
-                userChoices.add(3);
-                break;
-            case "beefRadio4": case "lambRadio4" : case "chickenRadio4" : case "fishRadio4" : case "porkRadio4" : case "eggRadio4" : case "veggieRadio4" : case "breadRadio4":
-                userChoices.add(4);
-                break;
-        }
+        int option = Integer.parseInt(temp);
+        userChoices.add(option);
     }
 
     public void populateBasket(Context context){
