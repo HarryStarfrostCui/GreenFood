@@ -36,19 +36,25 @@ public class ResultActivity extends AppCompatActivity {
 
     private Diet diet;
     private ArrayList<Ingredient> basket;
+    private ArrayList<Ingredient> suggestionResult = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-
-        Bundle extras = this.getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
+        basket = (ArrayList<Ingredient>) getIntent().getSerializableExtra("basket");
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
         basket = diet.getBasket();
 
         userCarbon = diet.get_total_user_co2_emission(); //insert calculated carbon in tC02e
+        suggestedCarbon = 1200f; // insert suggested carbon here
+        int minIndex = getSuggestionMinIndex();
+        int maxIndex = getSuggestionMaxIndex();
+        float totalSave = calculateSavingAmountCarbon();
+        printSuggestion(minIndex, maxIndex, totalSave);
         suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
@@ -120,6 +126,116 @@ public class ResultActivity extends AppCompatActivity {
         chart.invalidate();
 
 
+    }
+
+    public ArrayList<Integer> getFavList()
+    {
+        ArrayList<Double> favourite = new ArrayList<>();
+        ArrayList<Integer> index = new ArrayList<>();
+        for (int i = 0; i < basket.size(); i++)
+        {
+            if(basket.get(i).getUser_consumption()>0.2){
+                double temp = Math.round(basket.get(i).getUser_consumption()*100)/100;
+                favourite.add(temp);
+                index.add(i);
+            }
+        }
+
+        double temp;
+        for (int i = 1; i < favourite.size()-1; i++)
+        {
+            for (int j = i-1; j >= 0; j--)
+            {
+                if (favourite.get(j) < favourite.get(j+1))
+                {
+                    temp = favourite.get(j);
+                    favourite.set(j, favourite.get(j+1));
+                    favourite.set(j+1, temp);
+                    temp = index.get(j);
+                    index.set(j, index.get(j+1));
+                    index.set(j+1, (int)temp);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    public int getSuggestionMinIndex()
+    {
+        ArrayList<Integer> favourite = getFavList();
+        int index = favourite.get(0);
+        double current, temp;
+
+        for(int i = 1; i < favourite.size(); i++)
+        {
+            current = basket.get(index).getCarbon_coefficient();
+            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
+            if (temp < current)
+            {
+                index = favourite.get(i);
+            }
+        }
+        if(index == getSuggestionMaxIndex()){
+            return 7; //veggie defult
+        }
+        return index;
+    }
+
+    public int getSuggestionMaxIndex()
+    {
+        ArrayList<Integer> favourite = getFavList();
+        int index = favourite.get(0);
+        double current, temp;
+
+        for(int i = 1; i < favourite.size(); i++)
+        {
+            current = basket.get(index).getCarbon_coefficient();
+            temp = basket.get(favourite.get(i)).getCarbon_coefficient();
+            if (temp > current)
+            {
+                index = favourite.get(i);
+            }
+        }
+        return index;
+    }
+
+
+    public void printSuggestion(int minIndex, int maxIndex, float difference) {
+        TextView suggestionTextView = (TextView) findViewById(R.id.suggestionText1);
+        suggestionTextView.setText(getString(R.string.suggestionResult, suggestionResult.get(minIndex).getFoodName(),
+                suggestionResult.get(maxIndex).getFoodName(),
+                difference, difference/22));
+    }
+
+
+    public float calculateSavingAmountCarbon() {
+        float difference;
+        for (int i = 0; i < basket.size(); i++) {
+            suggestionResult.add(i, basket.get(i));
+        }
+
+        int maxIndex = getSuggestionMaxIndex();
+        int minIndex = getSuggestionMinIndex();
+
+        difference = (float) (suggestionResult.get(maxIndex).getCarbon_coefficient() - suggestionResult.get(minIndex).getCarbon_coefficient());
+
+        return difference;
+    }
+
+    public double calculateCarbonEquivalent() {
+        double total = calculateSavingAmountCarbon();
+        int treeAbsorbAnnually = 22;
+        return total / treeAbsorbAnnually;
+    }
+
+    public double calculateSavingInMetroVan() {
+        double total = calculateSavingAmountCarbon();
+        double nonVegetarians = 0.9 * 2463000;
+        return total * nonVegetarians;
     }
 
 }

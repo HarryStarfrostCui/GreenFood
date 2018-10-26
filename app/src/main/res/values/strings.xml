@@ -127,14 +127,14 @@
     </string-array>
 
     <string-array name="carbon_coefficient">
-        <item>270</item> <!--beef-->
-        <item>392</item> <!--lamb-->
-        <item>69</item> <!--chicken-->
-        <item>119</item> <!--fish-->
-        <item>121</item> <!--pork-->
-        <item>48</item> <!--eggs-->
-        <item>20</item> <!--veg-->
-        <item>27</item> <!--bread-->
+        <item>27.0</item> <!--beef-->
+        <item>39.2</item> <!--lamb-->
+        <item>6.9</item> <!--chicken-->
+        <item>11.9</item> <!--fish-->
+        <item>12.1</item> <!--pork-->
+        <item>4.8</item> <!--eggs-->
+        <item>2.0</item> <!--veg-->
+        <item>2.7</item> <!--bread-->
     </string-array>
 
     <string-array name="annual_average_consumption"> <!-- kg / year-->
@@ -147,6 +147,10 @@
         <item>40</item> <!--veg-->
         <item>32</item> <!--bread-->
     </string-array>
+
+    <string name="suggestionResult">
+        Hi, for each kg of %1$s you eat instead of %2$s, you will save %3$.2f of CO2, which is
+    %4$.2f tree per year.</string>
 
 
 </resources>

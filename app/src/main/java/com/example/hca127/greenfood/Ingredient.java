@@ -56,7 +56,9 @@ public class Ingredient implements Serializable {
     }
 
     public void setUser_consumption(float user_consumption) {
-        if(user_consumption == 1)
+        if(user_consumption == 0)
+                this.user_consumption = 1.8f;
+        else if(user_consumption == 1)
                 this.user_consumption = 1.5f;
         else if(user_consumption == 2)
                 this.user_consumption = 1f;
