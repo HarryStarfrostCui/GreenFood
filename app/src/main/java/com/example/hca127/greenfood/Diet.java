@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Diet implements Serializable {
-    private ArrayList<Ingredient> mBasket;
+    private ArrayList<Food> mBasket;
     private ArrayList<Integer> mUserChoices;
     private int NUMBER_OF_FOOD_TYPES = 8;
     private float mTotalUserCo2Emission = 0;
 
     Diet(){
-        mBasket = new ArrayList<Ingredient>(NUMBER_OF_FOOD_TYPES);
+        mBasket = new ArrayList<Food>(NUMBER_OF_FOOD_TYPES);
         mUserChoices = new ArrayList<Integer>(NUMBER_OF_FOOD_TYPES);
     }
 
@@ -25,7 +25,7 @@ public class Diet implements Serializable {
     public int getSize(){        return mBasket.size();    }
 
     public void addNewIngredient(String foodName, float carbonCoefficient, float averageConsumption, float userConsumption){
-        Ingredient i = new Ingredient(foodName, carbonCoefficient, averageConsumption, userConsumption);
+        Food i = new Food(foodName, carbonCoefficient, averageConsumption, userConsumption);
         mBasket.add(i);
     }
 

@@ -2,8 +2,8 @@ package com.example.hca127.greenfood;
 
 import java.io.Serializable;
 
-public class Ingredient implements Serializable {
-    private String foodName;
+public class Food implements Serializable {
+    private String mFoodName;
     private float mCarbonCoefficient;
     private float mAverageConsumption;
     private float mUserConsumption;
@@ -11,8 +11,8 @@ public class Ingredient implements Serializable {
     private float mIncreasedConsumption;
     private float mUserCarbonEmission;
 
-    Ingredient(String foodName, float mCarbonCoefficient, float mAverageConsumption, float mUserConsumption){
-        this.foodName = foodName;
+    Food(String foodName, float mCarbonCoefficient, float mAverageConsumption, float mUserConsumption){
+        this.mFoodName = foodName;
         this.mCarbonCoefficient = mCarbonCoefficient;
         this.mAverageConsumption = mAverageConsumption;
         setUserConsumption(mUserConsumption);
@@ -36,11 +36,11 @@ public class Ingredient implements Serializable {
     }
 
     public String getFoodName() {
-        return foodName;
+        return mFoodName;
     }
 
     public void setFoodName(String foodName) {
-        this.foodName = foodName;
+        this.mFoodName = foodName;
     }
 
     public float getCarbonCoefficient() {

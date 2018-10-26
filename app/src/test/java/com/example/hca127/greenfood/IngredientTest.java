@@ -6,11 +6,11 @@ import static org.junit.Assert.*;
 
 public class IngredientTest {
 
-    Ingredient test = new Ingredient("beef", 20, 20,2);
+    Food test = new Food("beef", 20, 20,2);
 
     @Test
     public void ingredient(){
-        Ingredient testing = new Ingredient("lamb",20,20,2);
+        Food testing = new Food("lamb",20,20,2);
         assertEquals("lamb", testing.getFoodName());
         assertEquals(20, testing.getCarbonCoefficient(),0.001);
         assertEquals(20, testing.getAverageConsumption(), 0.001);

@@ -24,6 +24,8 @@ public class SuggestionActivity extends AppCompatActivity {
     TextView mCarbonSaved;
     TextView mTreesSaved;
 
+    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +80,9 @@ public class SuggestionActivity extends AppCompatActivity {
         mTreesSaved = findViewById(R.id.treesSaved);
         mCarbonSaved.setText(String.valueOf(carbonSaved));
         mTreesSaved.setText(String.valueOf(treesSaved));
-
     }
+
+
 }
 
 
