@@ -29,7 +29,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView mIncreaseSuggestionText;
     private float userCarbon;
     private float suggestedCarbon;
-    private float averageCarbon = 15000f;
+    private float averageCarbon = 1500f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
 
@@ -44,7 +44,6 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Bundle extras = getIntent().getExtras();
-        basket = (ArrayList<Ingredient>) getIntent().getSerializableExtra("basket");
 
         diet = (Diet)getIntent().getSerializableExtra("diet");
         basket = diet.getBasket();
@@ -54,12 +53,11 @@ public class ResultActivity extends AppCompatActivity {
         int minIndex = getSuggestionMinIndex();
         int maxIndex = getSuggestionMaxIndex();
         float totalSave = calculateSavingAmountCarbon();
-        printSuggestion(minIndex, maxIndex, totalSave);
+        //printSuggestion(minIndex, maxIndex, totalSave);
         suggestedCarbon = 1200f; // insert suggested carbon here
 
         mResultText = findViewById(R.id.resultText);
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
-        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
 
         if (userCarbon < averageCarbon*lowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
@@ -73,7 +71,6 @@ public class ResultActivity extends AppCompatActivity {
         setUpHorizontalBarChart(mResultChart, averageCarbon, userCarbon);
 
         mReduceSuggestionText.setText(basket.get(0).getFoodName());
-        mIncreaseSuggestionText.setText(basket.get(2).getFoodName());
 
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
@@ -95,6 +92,8 @@ public class ResultActivity extends AppCompatActivity {
         BarData suggestionData = new BarData(barDataSet);
         chart.getXAxis().setDrawGridLines(false);
         chart.getLegend().setEnabled(false);
+        chart.getAxisRight().setAxisMinimum(0f);
+        chart.getAxisLeft().setAxisMinimum(0f);
 
         chart.setData(suggestionData);
         chart.animateY(1200);
@@ -105,7 +104,7 @@ public class ResultActivity extends AppCompatActivity {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
         for (int i = 0; i < basket.size(); i++) {
-            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), "temp"));
+            pieEntries.add(new PieEntry((float)diet.getBasket().get(i).getUser_co2_emission(), diet.getBasket().get(i).getFoodName()));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
