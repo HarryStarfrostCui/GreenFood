@@ -94,19 +94,7 @@ public class DietTest {
     }
 
     @Test
-    public void basketTest() {
-        // I feel like a basket case, after all this testing, lolz
-        Diet basketCase = new Diet();
-
-        basketCase.assignUserInput("beefRadio3");
-        basketCase.assignUserInput("lambRadio3");
-        basketCase.assignUserInput("chickenRadio3");
-        basketCase.assignUserInput("fishRadio3");
-        basketCase.assignUserInput("porkRadio3");
-        basketCase.assignUserInput("eggsRadio3");
-        basketCase.assignUserInput("veggiesRadio3");
-        basketCase.assignUserInput("breadRadio3");
-
+    public void getSuggestedDietEmissionTest() {
 
     }
 }

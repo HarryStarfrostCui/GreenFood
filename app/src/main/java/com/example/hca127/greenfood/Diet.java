@@ -27,26 +27,13 @@ public class Diet implements Serializable {
     public void addNewIngredient(String foodName, float carbonCoefficient, float averageConsumption, float userConsumption){
         Food i = new Food(foodName, carbonCoefficient, averageConsumption, userConsumption);
         mBasket.add(i);
+        calculateTotalUserCo2Emission();
     }
 
     public void assignUserInput(String userChoiceAsString){
         String temp = userChoiceAsString.substring( userChoiceAsString.length()-1, userChoiceAsString.length());
         int option = Integer.parseInt(temp);
         mUserChoices.add(option);
-    }
-
-    public void populateBasket(Context context){
-        ArrayList<String> names = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.ingredient_name)));
-        ArrayList<String> carbon_coefficient = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.carbon_coefficient)));
-        ArrayList<String> average_consumption = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.annual_average_consumption)));
-
-        for(int i = 0; i < NUMBER_OF_FOOD_TYPES; i++){
-             addNewIngredient(      names.get(i),
-                                    Float.parseFloat(carbon_coefficient.get(i)),
-                                    Float.parseFloat(average_consumption.get(i)),
-                                    mUserChoices.get(i));
-        }
-        calculateTotalUserCo2Emission();
     }
 
     public float getUserDietEmission(){
@@ -68,6 +55,7 @@ public class Diet implements Serializable {
     }
 
     public void calculateTotalUserCo2Emission(){
+        mTotalUserCo2Emission = 0;
         for(int i = 0; i < mBasket.size() ; i++){
             mTotalUserCo2Emission += mBasket.get(i).getUserCarbonEmission();
         }
