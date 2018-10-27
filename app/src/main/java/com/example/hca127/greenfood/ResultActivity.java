@@ -18,13 +18,13 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 
 public class ResultActivity extends AppCompatActivity {
-    PieChart mUserEmissionSplitChart;
-    TextView mResultText;
+    private PieChart mUserEmissionPieChart;
+    private TextView mResultText;
     private float userCarbon;
     private float averageCarbon = 1500f;
     private float lowCarbonPercentage = 0.9f;
     private float averageCarbonPercentage = 1.1f;
-    Button mGetSuggestion;
+    private Button mGetSuggestion;
 
     private Diet diet;
 
@@ -47,8 +47,8 @@ public class ResultActivity extends AppCompatActivity {
             mResultText.setText(R.string.high_carbon_result);
         }
 
-        mUserEmissionSplitChart = findViewById(R.id.emissionSplitChart);
-        setupPieChart(mUserEmissionSplitChart);
+        mUserEmissionPieChart = findViewById(R.id.emissionSplitChart);
+        setupPieChart(mUserEmissionPieChart);
 
         mGetSuggestion = (Button) findViewById(R.id.getSuggestion);
         mGetSuggestion.setOnClickListener(new View.OnClickListener() {
@@ -60,9 +60,7 @@ public class ResultActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
 
     private void setupPieChart(PieChart chart) {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
@@ -80,7 +78,6 @@ public class ResultActivity extends AppCompatActivity {
 
         chart = findViewById(R.id.emissionSplitChart);
         chart.getLegend().setEnabled(false);
-
         chart.setEntryLabelColor(Color.BLACK);
         chart.getDescription().setEnabled(false);
 
@@ -88,5 +85,4 @@ public class ResultActivity extends AppCompatActivity {
         chart.animateY(1200);
         chart.invalidate();
     }
-
 }

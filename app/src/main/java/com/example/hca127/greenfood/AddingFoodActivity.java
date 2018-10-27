@@ -13,7 +13,6 @@ public class AddingFoodActivity extends AppCompatActivity {
     private Diet diet;
 
     private ImageButton nextButton;
-    private ImageButton backButton;
 
     private RadioGroup beefRadioGroup;
     private RadioGroup lambRadioGroup;

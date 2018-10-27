@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class IngredientTest {
+public class FoodTest {
 
     Food test = new Food("beef", 20, 20,2);
 
     @Test
-    public void ingredient(){
+    public void foodTest(){
         Food testing = new Food("lamb",20,20,2);
         assertEquals("lamb", testing.getFoodName());
         assertEquals(20, testing.getCarbonCoefficient(),0.001);
@@ -18,7 +18,7 @@ public class IngredientTest {
     }
 
     @Test
-    public void getUser_co2_emission() {
+    public void getUserCarbonEmissionTest() {
         double carbon_test_double = test.getCarbonCoefficient();
         double avg_consumption_test_double = test.getAverageConsumption();
         double user_consumption_test_double = test.getUserConsumption();
@@ -26,18 +26,18 @@ public class IngredientTest {
     }
 
     @Test
-    public void getFoodName() {
+    public void getFoodNameTest() {
         assertEquals("beef",test.getFoodName());
     }
 
     @Test
-    public void setFoodName() {
+    public void setFoodNameTest() {
         test.setFoodName("lamb");
         assertEquals("lamb",test.getFoodName());
     }
 
     @Test
-    public void getCarbon_coefficient() {
+    public void getCarbonCoefficientTest() {
         assertEquals(20,test.getCarbonCoefficient(), 0.001);
     }
 
@@ -75,5 +75,29 @@ public class IngredientTest {
         test.setUserConsumption(4);
         assertEquals(0, test.getUserConsumption(),0.001);
 
+    }
+
+    @Test
+    public void getLoweredEmissionTest() {
+        test.setUserConsumption(4);
+        assertEquals(0, test.getLoweredEmission(),0.001);
+        test.setUserConsumption(3);
+        assertEquals(0, test.getLoweredEmission(),0.001);
+        test.setUserConsumption(2);
+        assertEquals(200, test.getLoweredEmission(),0.001);
+        test.setUserConsumption(1);
+        assertEquals(400, test.getLoweredEmission(),0.001);
+    }
+
+    @Test
+    public void getIncreasedEmissionTest() {
+        test.setUserConsumption(4);
+        assertEquals(200, test.getIncreasedEmission(),0.001);
+        test.setUserConsumption(3);
+        assertEquals(400, test.getIncreasedEmission(),0.001);
+        test.setUserConsumption(2);
+        assertEquals(600, test.getIncreasedEmission(),0.001);
+        test.setUserConsumption(1);
+        assertEquals(720, test.getIncreasedEmission(),0.001);
     }
 }

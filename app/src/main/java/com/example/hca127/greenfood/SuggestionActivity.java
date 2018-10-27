@@ -16,14 +16,14 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 public class SuggestionActivity extends AppCompatActivity {
-    BarChart mSuggestionChart;
-    Button mAboutButton;
-    Diet mDiet;
-    TextView mReduceSuggestionText;
-    TextView mIncreaseSuggestionText;
-    TextView mUserEmissionSaving;
-    TextView mCarbonSaved;
-    TextView mTreesSaved;
+    private BarChart mSuggestionChart;
+    private Button mAboutButton;
+    private Diet mDiet;
+    private TextView mReduceSuggestionText;
+    private TextView mIncreaseSuggestionText;
+    private TextView mUserEmissionSaving;
+    private TextView mCarbonSaved;
+    private TextView mTreesSaved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

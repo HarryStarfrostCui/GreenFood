@@ -16,23 +16,23 @@ public class Food implements Serializable {
         this.mCarbonCoefficient = mCarbonCoefficient;
         this.mAverageConsumption = mAverageConsumption;
         setUserConsumption(mUserConsumption);
-        this.mUserCarbonEmission = calculateUserCo2Emission();
-    }
-
-    private float calculateUserCo2Emission(){
-        return (mCarbonCoefficient)*(mAverageConsumption)*(mUserConsumption);
+        this.mUserCarbonEmission = calculateUserCarbonEmission();
     }
 
     public float getUserCarbonEmission(){
         return mUserCarbonEmission;
     }
 
+    private float calculateUserCarbonEmission(){
+        return (mCarbonCoefficient)*(mAverageConsumption)*(mUserConsumption);
+    }
+
     public float getIncreasedEmission() {
-        return (mCarbonCoefficient)*(mIncreasedConsumption)*(mUserConsumption);
+        return (mCarbonCoefficient)*(mAverageConsumption)*(mIncreasedConsumption);
     }
 
     public float getLoweredEmission() {
-        return this.mUserCarbonEmission - (mCarbonCoefficient)*(mLoweredConsumption)*(mUserConsumption);
+        return (mCarbonCoefficient)*(mAverageConsumption)*(mLoweredConsumption);
     }
 
     public String getFoodName() {
@@ -49,7 +49,7 @@ public class Food implements Serializable {
 
     public void setCarbonCoefficient(float carbonCoefficient) {
         this.mCarbonCoefficient = carbonCoefficient;
-        this.mUserCarbonEmission = calculateUserCo2Emission();
+        this.mUserCarbonEmission = calculateUserCarbonEmission();
     }
 
     public float getAverageConsumption() {
@@ -58,7 +58,7 @@ public class Food implements Serializable {
 
     public void setAverageConsumption(float averageConsumption) {
         this.mAverageConsumption = averageConsumption;
-        this.mUserCarbonEmission = calculateUserCo2Emission();
+        this.mUserCarbonEmission = calculateUserCarbonEmission();
     }
 
     public float getUserConsumption() {
@@ -84,7 +84,7 @@ public class Food implements Serializable {
             this.mIncreasedConsumption = 0.5f;
             this.mLoweredConsumption = 0f;
         }
-        this.mUserCarbonEmission = calculateUserCo2Emission();
+        this.mUserCarbonEmission = calculateUserCarbonEmission();
     }
 
 }
