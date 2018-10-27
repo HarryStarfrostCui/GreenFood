@@ -95,6 +95,25 @@ public class DietTest {
 
     @Test
     public void getSuggestedDietEmissionTest() {
-
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 50, 30, 2);
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        testDiet.addNewIngredient("secondTest", 20, 30, 2);
+        assertEquals(3600, testDiet.getSuggestedDietEmission(), 0.001);
     }
+
+    @Test
+    public void getSuggestedDietSavingAmountTest() {
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 20, 30, 2);
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        testDiet.addNewIngredient("secondTest", 40, 30, 1);
+        testDiet.addNewIngredient("secondTest", 30, 30, 1);
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        assertEquals(300, testDiet.getSuggestedDietSavingAmount(), 0.001);
+    }
+
 }

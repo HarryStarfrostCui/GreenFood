@@ -61,86 +61,38 @@ public class Diet implements Serializable {
         }
     }
 
-    private ArrayList<Integer> getFavList()
-    {
-        ArrayList<Double> favourite = new ArrayList<>();
-        ArrayList<Integer> index = new ArrayList<>();
-        for (int i = 0; i < mBasket.size(); i++)
-        {
-            if(mBasket.get(i).getUserConsumption()>0.01){
-                double temp = Math.round(mBasket.get(i).getUserConsumption()*100)/100;
-                favourite.add(temp);
-                index.add(i);
-            }
-        }
-
-        double temp;
-        for (int i = 1; i < favourite.size()-1; i++)
-        {
-            for (int j = i-1; j >= 0; j--)
-            {
-                if (favourite.get(j) < favourite.get(j+1))
-                {
-                    temp = favourite.get(j);
-                    favourite.set(j, favourite.get(j+1));
-                    favourite.set(j+1, temp);
-                    temp = index.get(j);
-                    index.set(j, index.get(j+1));
-                    index.set(j+1, (int)temp);
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return index;
-    }
 
     public int getSuggestionMinIndex()
     {
-        if(getFavList().size()==0){
-            return 0;
-        }
-        ArrayList<Integer> favourite = getFavList();
-        int index = favourite.get(0);
-        double current, temp;
+        int minIndex = 0;
+        float minValue = 10000f;
 
-        for(int i = 1; i < favourite.size(); i++)
-        {
-            current = mBasket.get(index).getUserCarbonEmission();
-            temp = mBasket.get(favourite.get(i)).getUserCarbonEmission();
-            if (temp < current)
-            {
-                index = favourite.get(i);
+        float temp;
+        for (int i = 0; i < mBasket.size(); i++) {
+            temp = mBasket.get(i).getCarbonCoefficient();
+            if ( minValue > temp) {
+                temp = minValue;
+                minIndex = i;
             }
         }
-        if(index == getSuggestionMaxIndex()){
-            return 7; //veggie defult
-        }
 
-        return index;
+        return minValue;
     }
 
     public int getSuggestionMaxIndex()
     {
-        if(getFavList().size()==0){
-            return 0;
-        }
+        int maxIndex = 0;
+        float maxValue = 0;
 
-        ArrayList<Integer> favourite = getFavList();
-        int index = favourite.get(0);
-        double current, temp;
-
-        for(int i = 1; i < favourite.size(); i++)
-        {
-            current = mBasket.get(index).getUserCarbonEmission();
-            temp = mBasket.get(favourite.get(i)).getUserCarbonEmission();
-            if (temp > current)
-            {
-                index = favourite.get(i);
+        float temp;
+        for (int i = 0; i < mBasket.size(); i++) {
+            temp = mBasket.get(i).getUserCarbonEmission();
+            if ( maxValue < temp) {
+                temp = maxValue;
+                maxIndex = i;
             }
         }
-        return index;
+
+        return maxIndex;
     }
 }
