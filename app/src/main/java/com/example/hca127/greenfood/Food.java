@@ -20,7 +20,7 @@ public class Food implements Serializable {
     }
 
     public float getUserCarbonEmission(){
-        return mUserCarbonEmission;
+        return (mCarbonCoefficient)*(mAverageConsumption)*(mUserConsumption);
     }
 
     private float calculateUserCarbonEmission(){

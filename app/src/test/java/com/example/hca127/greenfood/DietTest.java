@@ -81,6 +81,9 @@ public class DietTest {
     @Test
     public void getSuggestionMinIndex()
     {
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 30, 30, 2);
+        testDiet.addNewIngredient("secondTest", 10, 30, 2);
         testDiet.addNewIngredient("secondTest", 30, 30 ,2);
         int min = testDiet.getSuggestionMinIndex();
         assertEquals(0, min);
@@ -88,9 +91,11 @@ public class DietTest {
 
     @Test
     public void getSuggestionMaxIndex(){
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 20, 30, 2);
         testDiet.addNewIngredient("secondTest", 30, 30, 2);
         int max = testDiet.getSuggestionMaxIndex();
-        assertEquals(1,max);
+        assertEquals(0,max);
     }
 
     @Test

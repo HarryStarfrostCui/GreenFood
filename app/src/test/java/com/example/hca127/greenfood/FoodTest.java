@@ -26,6 +26,14 @@ public class FoodTest {
     }
 
     @Test
+    public void userCarbonTestTwo() {
+
+        assertEquals(400.0, test.getUserCarbonEmission(),0.001);
+    }
+
+
+
+    @Test
     public void getFoodNameTest() {
         assertEquals("beef",test.getFoodName());
     }
@@ -100,4 +108,6 @@ public class FoodTest {
         test.setUserConsumption(1);
         assertEquals(720, test.getIncreasedEmission(),0.001);
     }
+
+
 }
