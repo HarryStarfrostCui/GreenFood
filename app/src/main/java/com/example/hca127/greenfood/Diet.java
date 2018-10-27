@@ -1,10 +1,7 @@
 package com.example.hca127.greenfood;
 
-import android.content.Context;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Diet implements Serializable {
     private ArrayList<Food> mBasket;
@@ -13,8 +10,8 @@ public class Diet implements Serializable {
     private float mTotalUserCo2Emission = 0;
 
     Diet(){
-        mBasket = new ArrayList<Food>(NUMBER_OF_FOOD_TYPES);
-        mUserChoices = new ArrayList<Integer>(NUMBER_OF_FOOD_TYPES);
+        mBasket = new ArrayList<>();
+        mUserChoices = new ArrayList<>();
     }
 
     public String getFoodName(int index){ return mBasket.get(index).getFoodName();}
@@ -41,17 +38,13 @@ public class Diet implements Serializable {
     }
 
     public float getSuggestedDietEmission(){
-        float loweredFoodDifference = mBasket.get(getSuggestionMaxIndex()).getLoweredEmission();
-        float increasedFoodDifference = mBasket.get(getSuggestionMinIndex()).getIncreasedEmission();
-
-        return this.mTotalUserCo2Emission - loweredFoodDifference + increasedFoodDifference;
+        return this.mTotalUserCo2Emission - this.getSuggestedDietSavingAmount();
     }
 
     public float getSuggestedDietSavingAmount() {
-        float loweredFoodDifference = mBasket.get(getSuggestionMaxIndex()).getLoweredEmission();
-        float increasedFoodDifference = mBasket.get(getSuggestionMinIndex()).getIncreasedEmission();
-
-        return loweredFoodDifference - increasedFoodDifference;
+        float emissionIncrease = mBasket.get(getSuggestionMinIndex()).getEmissionIncrease();
+        float emissionReduction = mBasket.get(getSuggestionMaxIndex()).getEmissionReduction();
+        return emissionReduction - emissionIncrease;
     }
 
     public void calculateTotalUserCo2Emission(){
@@ -62,37 +55,39 @@ public class Diet implements Serializable {
     }
 
 
-    public int getSuggestionMinIndex()
-    {
+    public int getSuggestionMinIndex() {
         int minIndex = 0;
-        float minValue = 10000f;
+        float minValue = 99999;
 
         float temp;
-        for (int i = 0; i < mBasket.size(); i++) {
+        for(int i = 0; i < mBasket.size() ; i++){
             temp = mBasket.get(i).getCarbonCoefficient();
-            if ( minValue < temp) {
-                temp = minValue;
+            if (temp < minValue) {
+                minValue = temp;
                 minIndex = i;
             }
         }
 
-        return minIndex;
+        return minIndex; // everyone should eat veggies, lol
     }
 
-    public int getSuggestionMaxIndex()
-    {
+    public int getSuggestionMaxIndex() {
         int maxIndex = 0;
         float maxValue = 0;
 
         float temp;
-        for (int i = 0; i < mBasket.size(); i++) {
+        for(int i = 0; i < mBasket.size() ; i++){
             temp = mBasket.get(i).getUserCarbonEmission();
-            if ( maxValue > temp) {
-                temp = maxValue;
+            if (maxValue < temp) {
+                maxValue = temp;
                 maxIndex = i;
             }
         }
 
         return maxIndex;
+    }
+
+    public float getCarbonFromSpecificFood(int index) {
+        return mBasket.get(index).getUserCarbonEmission();
     }
 }

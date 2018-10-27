@@ -27,12 +27,12 @@ public class Food implements Serializable {
         return (mCarbonCoefficient)*(mAverageConsumption)*(mUserConsumption);
     }
 
-    public float getIncreasedEmission() {
-        return (mCarbonCoefficient)*(mAverageConsumption)*(mIncreasedConsumption);
+    public float getEmissionIncrease() {
+        return (mCarbonCoefficient)*(mAverageConsumption)*(mIncreasedConsumption)-this.mUserCarbonEmission;
     }
 
-    public float getLoweredEmission() {
-        return (mCarbonCoefficient)*(mAverageConsumption)*(mLoweredConsumption);
+    public float getEmissionReduction() {
+        return this.mUserCarbonEmission-(mCarbonCoefficient)*(mAverageConsumption)*(mLoweredConsumption);
     }
 
     public String getFoodName() {

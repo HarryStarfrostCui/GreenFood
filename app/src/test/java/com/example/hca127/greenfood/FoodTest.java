@@ -31,8 +31,6 @@ public class FoodTest {
         assertEquals(400.0, test.getUserCarbonEmission(),0.001);
     }
 
-
-
     @Test
     public void getFoodNameTest() {
         assertEquals("beef",test.getFoodName());
@@ -87,26 +85,42 @@ public class FoodTest {
 
     @Test
     public void getLoweredEmissionTest() {
-        test.setUserConsumption(4);
-        assertEquals(0, test.getLoweredEmission(),0.001);
-        test.setUserConsumption(3);
-        assertEquals(0, test.getLoweredEmission(),0.001);
+        test = new Food("basketCase", 20, 20,1);
+        assertEquals(600, test.getUserCarbonEmission(), 0.001);
+        assertEquals(200, test.getEmissionReduction(), 0.001);
+
         test.setUserConsumption(2);
-        assertEquals(200, test.getLoweredEmission(),0.001);
-        test.setUserConsumption(1);
-        assertEquals(400, test.getLoweredEmission(),0.001);
+        assertEquals(400, test.getUserCarbonEmission(), 0.001);
+        assertEquals(200, test.getEmissionReduction(), 0.001);
+
+        test.setUserConsumption(3);
+        assertEquals(200, test.getUserCarbonEmission(), 0.001);
+        assertEquals(200, test.getEmissionReduction(), 0.001);
+
+        test.setUserConsumption(4);
+        assertEquals(0, test.getUserCarbonEmission(), 0.001);
+        assertEquals(0, test.getEmissionReduction(), 0.001);
+
     }
 
     @Test
     public void getIncreasedEmissionTest() {
-        test.setUserConsumption(4);
-        assertEquals(200, test.getIncreasedEmission(),0.001);
+        test = new Food("basketCase", 20, 20,4);
+        assertEquals(0, test.getUserCarbonEmission(), 0.001);
+        assertEquals(200, test.getEmissionIncrease(), 0.001);
+
         test.setUserConsumption(3);
-        assertEquals(400, test.getIncreasedEmission(),0.001);
+        assertEquals(200, test.getUserCarbonEmission(), 0.001);
+        assertEquals(200, test.getEmissionIncrease(), 0.001);
+
         test.setUserConsumption(2);
-        assertEquals(600, test.getIncreasedEmission(),0.001);
+        assertEquals(400, test.getUserCarbonEmission(), 0.001);
+        assertEquals(200, test.getEmissionIncrease(), 0.001);
+
         test.setUserConsumption(1);
-        assertEquals(720, test.getIncreasedEmission(),0.001);
+        assertEquals(600, test.getUserCarbonEmission(), 0.001);
+        assertEquals(120, test.getEmissionIncrease(), 0.001);
+
     }
 
 

@@ -82,43 +82,61 @@ public class DietTest {
     public void getSuggestionMinIndex()
     {
         testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 123, 30, 2);
+        testDiet.addNewIngredient("secondTest", 17, 30, 2);
         testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        testDiet.addNewIngredient("secondTest", 10, 30, 2);
-        testDiet.addNewIngredient("secondTest", 30, 30 ,2);
-        int min = testDiet.getSuggestionMinIndex();
-        assertEquals(0, min);
+        assertEquals(1, testDiet.getSuggestionMinIndex());
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 10, 10, 3);
+        testDiet.addNewIngredient("secondTest", 20, 10, 2);
+        testDiet.addNewIngredient("secondTest", 30, 10, 1);
+        assertEquals(0, testDiet.getSuggestionMinIndex());
     }
 
     @Test
     public void getSuggestionMaxIndex(){
         testDiet = new Diet();
         testDiet.addNewIngredient("secondTest", 20, 30, 2);
+        testDiet.addNewIngredient("secondTest", 40, 30, 2);
         testDiet.addNewIngredient("secondTest", 30, 30, 2);
         int max = testDiet.getSuggestionMaxIndex();
-        assertEquals(0,max);
+        assertEquals(1,max);
+
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 10, 10, 3);
+        assertEquals(50f, testDiet.getUserDietEmission(), 0.001);
+
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 20, 10, 2);
+        assertEquals(200f, testDiet.getUserDietEmission(), 0.001) ;
+
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 30, 10, 1);
+        assertEquals(450f, testDiet.getUserDietEmission(), 0.001) ;
+
+        testDiet = new Diet();
+        testDiet.addNewIngredient("secondTest", 10, 10, 3);
+        testDiet.addNewIngredient("secondTest", 20, 10, 2);
+        testDiet.addNewIngredient("secondTest", 30, 10, 1);
+
+        assertEquals(50f, testDiet.getCarbonFromSpecificFood(0), 0.001) ;
+        assertEquals(200f, testDiet.getCarbonFromSpecificFood(1), 0.001) ;
+        assertEquals(450f, testDiet.getCarbonFromSpecificFood(2), 0.001) ;
+
+        assertEquals(700f, testDiet.getUserDietEmission(), 0.001) ;
+        assertEquals(2,testDiet.getSuggestionMaxIndex());
     }
 
     @Test
     public void getSuggestedDietEmissionTest() {
         testDiet = new Diet();
-        testDiet.addNewIngredient("secondTest", 50, 30, 2);
-        testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        testDiet.addNewIngredient("secondTest", 20, 30, 2);
-        assertEquals(3600, testDiet.getSuggestedDietEmission(), 0.001);
+        testDiet.addNewIngredient("secondTest", 10, 10, 3);
+        testDiet.addNewIngredient("secondTest", 20, 10, 2);
+        testDiet.addNewIngredient("secondTest", 30, 10, 1);
+        assertEquals(700f, testDiet.getUserDietEmission(), 0.001);
+        assertEquals(100f, testDiet.getSuggestedDietSavingAmount(), 0.001);
+        assertEquals(600f, testDiet.getSuggestedDietEmission(), 0.001);
     }
 
-    @Test
-    public void getSuggestedDietSavingAmountTest() {
-        testDiet = new Diet();
-        testDiet.addNewIngredient("secondTest", 20, 30, 2);
-        testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        testDiet.addNewIngredient("secondTest", 40, 30, 1);
-        testDiet.addNewIngredient("secondTest", 30, 30, 1);
-        testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        testDiet.addNewIngredient("secondTest", 30, 30, 2);
-        assertEquals(300, testDiet.getSuggestedDietSavingAmount(), 0.001);
-    }
 
 }
