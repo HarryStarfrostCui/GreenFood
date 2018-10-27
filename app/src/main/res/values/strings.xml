@@ -83,25 +83,28 @@
         Vancouver resident.
     </string>
     <string name="suggestion_text_1">
-        Please eat a bit less
+        Would you consider eating a bit less
     </string>
     <string name="suggestion_text_2">
         and a bit more
     </string>
+    <string name="question_mark">\?</string>
     <string name="suggestion_text_3">
-        would change the greenhouse gas emissions like this:
+        Every year that would save (in kg of C02e):
     </string>
-    <string name="get_suggestion">Get Suggestions</string>
-    <string name="about_button">What is C02E?</string>
 
     <string name="all_vancouver">
-        If Everyone in Vancouver also made your change, then we would save:
+        If Everyone in Vancouver also made your change, then there would be:
     </string>
+    <string name="tree_offset">To offset that amount greenhouse gases we would need to plant:</string>
     <string name="user_legend">User Diet</string>
     <string name="average_legend">Average Diet</string>
     <string name="suggestion_legend">Suggested Diet</string>
-    <string name="carbon_save">Carbon Saved:</string>
-    <string name="trees_save">Trees Saved:</string>
+    <string name="carbon_save">kg of C0<sub><small>2</small></sub>e Saved:</string>
+    <string name="trees_save">trees!!</string>
+
+    <string name="get_suggestion">Get Suggestions</string>
+    <string name="about_button">What is C02E?</string>
 
     <string name="logo_content_description">Green Challenge Logo</string>
 

@@ -20,7 +20,7 @@ public class DietTest {
 
     @Test
     public void getIngName() {
-        assertEquals("testFood", testDiet.getIngName(0));
+        assertEquals("testFood", testDiet.getFoodName(0));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class DietTest {
     @Test
     public void addNewIngredient() {
         testDiet.addNewIngredient("testFood2", 20, 20, 2);
-        assertEquals("testFood2", testDiet.getIngName(1));
+        assertEquals("testFood2", testDiet.getFoodName(1));
     }
 
     @Test

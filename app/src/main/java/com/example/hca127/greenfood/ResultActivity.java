@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -70,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
 
         for (int i = 0; i <diet.getSize(); i++) {
             if (diet.getIngUserCo2Emission(i) != 0) {
-                pieEntries.add(new PieEntry((float) diet.getIngUserCo2Emission(i), diet.getIngName(i)));
+                pieEntries.add(new PieEntry((float) diet.getIngUserCo2Emission(i), diet.getFoodName(i)));
             }
         }
 
@@ -80,11 +79,7 @@ public class ResultActivity extends AppCompatActivity {
         PieData data = new PieData(dataSet);
 
         chart = findViewById(R.id.emissionSplitChart);
-        Legend legend = chart.getLegend();
-        legend.setEnabled(false);
-        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        chart.getLegend().setEnabled(false);
 
         chart.setEntryLabelColor(Color.BLACK);
         chart.getDescription().setEnabled(false);
@@ -92,8 +87,6 @@ public class ResultActivity extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(1200);
         chart.invalidate();
-
-
     }
 
 }

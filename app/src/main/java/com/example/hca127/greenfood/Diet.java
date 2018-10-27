@@ -17,7 +17,7 @@ public class Diet implements Serializable {
         mUserChoices = new ArrayList<Integer>(NUMBER_OF_FOOD_TYPES);
     }
 
-    public String getIngName(int index){        return mBasket.get(index).getFoodName();    }
+    public String getFoodName(int index){        return mBasket.get(index).getFoodName();    }
     public float getIngCarbon(int index){   return mBasket.get(index).getCarbonCoefficient();}
     public float getAvgConsumption(int index){  return mBasket.get(index).getAverageConsumption();}
     public float getUserConsumption(int index){     return mBasket.get(index).getUserConsumption();}

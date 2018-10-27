@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -21,10 +20,10 @@ public class SuggestionActivity extends AppCompatActivity {
     Button mAboutButton;
     Diet mDiet;
     TextView mReduceSuggestionText;
+    TextView mIncreaseSuggestionText;
+    TextView mUserEmissionSaving;
     TextView mCarbonSaved;
     TextView mTreesSaved;
-
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +32,14 @@ public class SuggestionActivity extends AppCompatActivity {
 
         mDiet = (Diet)getIntent().getSerializableExtra("diet");
 
-        int minIndex = mDiet.getSuggestionMinIndex();
-        int maxIndex = mDiet.getSuggestionMaxIndex();
+        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
+        mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
 
-        mAboutButton = (Button) findViewById(R.id.aboutButton);
-        mAboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
-                intent.putExtra("diet", mDiet);
-                startActivity(intent);
-                finish();
-            }
-        });
+        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
+        mIncreaseSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+
+        mUserEmissionSaving = findViewById(R.id.userEmissionSaving);
+        mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
         mSuggestionChart = findViewById(R.id.suggestionChart);
 
@@ -53,10 +47,6 @@ public class SuggestionActivity extends AppCompatActivity {
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
         entries.add(new BarEntry(1, 1500f));
         entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
-
-
-        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
-        mReduceSuggestionText.setText(mDiet.getIngName(maxIndex));
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -73,16 +63,25 @@ public class SuggestionActivity extends AppCompatActivity {
         mSuggestionChart.invalidate();
 
         float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
-        float treesSaved = carbonSaved/22;
-
+        float treesSaved = carbonSaved/22;  // carbon offset of trees
 
         mCarbonSaved = findViewById(R.id.carbonSaved);
-        mTreesSaved = findViewById(R.id.treesSaved);
         mCarbonSaved.setText(String.valueOf(carbonSaved));
+
+        mTreesSaved = findViewById(R.id.treesSaved);
         mTreesSaved.setText(String.valueOf(treesSaved));
+
+        mAboutButton = (Button) findViewById(R.id.aboutButton);
+        mAboutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
+                intent.putExtra("diet", mDiet);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
-
-
 }
 
 
