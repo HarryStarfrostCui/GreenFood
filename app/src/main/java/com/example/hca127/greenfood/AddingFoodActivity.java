@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class AddingFoodActivity extends AppCompatActivity {
 
     private Diet diet;
@@ -73,8 +76,16 @@ public class AddingFoodActivity extends AppCompatActivity {
 
     public void getUserInput() {
 
+        ArrayList<String> mFoodNames = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.ingredient_name)));
+        ArrayList<String> mCarbonCoefficient = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.carbon_coefficient)));
+        ArrayList<String> mAverageConsumption = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.annual_average_consumption)));
+
         beefRadioChoice = beefRadioGroup.getCheckedRadioButtonId();
-        diet.assignUserInput(getResources().getResourceEntryName(beefRadioChoice)); //integer 1 2 3 4, 1 = high, 4 = none
+        String mBeefChoice = getResources().getResourceEntryName(beefRadioChoice);
+        String mBeefLevel = mBeefChoice.substring( mBeefChoice.length()-1, mBeefChoice.length());
+        diet.addNewIngredient(mFoodNames.get(0), Float.parseFloat(mCarbonCoefficient.get(0)),
+                                                 Float.parseFloat(mAverageConsumption.get(0)),
+                                                 Float.parseFloat(mBeefLevel));
 
         lambRadioChoice = lambRadioGroup.getCheckedRadioButtonId();
         diet.assignUserInput(getResources().getResourceEntryName(lambRadioChoice));
@@ -97,7 +108,7 @@ public class AddingFoodActivity extends AppCompatActivity {
         breadRadioChoice = breadRadioGroup.getCheckedRadioButtonId();
         diet.assignUserInput(getResources().getResourceEntryName(breadRadioChoice));
 
-        diet.populateBasket(this);
+        //diet.populateBasket(this);
     }
 
     /*

@@ -3,6 +3,7 @@ package com.example.hca127.greenfood;
 import org.junit.Before;
 import org.junit.Test;
 
+import static java.security.AccessController.getContext;
 import static org.junit.Assert.*;
 
 public class DietTest {
@@ -11,10 +12,10 @@ public class DietTest {
 
     @Before
     public void setup() {
-        float total_user_co2_emission = 0;
+        float totalUserCarbonEmission = 0;
         testDiet.addNewIngredient("testFood", 20, 20, 2);
         for (int i = 0; i < testDiet.getSize(); i++) {
-            total_user_co2_emission += testDiet.getIngUserCo2Emission(i);
+            totalUserCarbonEmission += testDiet.getIngUserCo2Emission(i);
         }
     }
 
@@ -27,7 +28,6 @@ public class DietTest {
     public void getIngCarbon() {
         assertEquals(20, testDiet.getIngCarbon(0), 0.001);
     }
-
 
     @Test
     public void getUserConsumption() {
@@ -44,7 +44,6 @@ public class DietTest {
         testDiet.calculateTotalUserCo2Emission();
         assertEquals(400, testDiet.getUserDietEmission(), 0.001);
     }
-
 
     @Test
     public void addNewIngredient() {
@@ -92,5 +91,22 @@ public class DietTest {
         testDiet.addNewIngredient("secondTest", 30, 30, 2);
         int max = testDiet.getSuggestionMaxIndex();
         assertEquals(1,max);
+    }
+
+    @Test
+    public void basketTest() {
+        // I feel like a basket case, after all this testing, lolz
+        Diet basketCase = new Diet();
+
+        basketCase.assignUserInput("beefRadio3");
+        basketCase.assignUserInput("lambRadio3");
+        basketCase.assignUserInput("chickenRadio3");
+        basketCase.assignUserInput("fishRadio3");
+        basketCase.assignUserInput("porkRadio3");
+        basketCase.assignUserInput("eggsRadio3");
+        basketCase.assignUserInput("veggiesRadio3");
+        basketCase.assignUserInput("breadRadio3");
+
+
     }
 }

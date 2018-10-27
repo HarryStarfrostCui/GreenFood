@@ -17,12 +17,12 @@ public class Diet implements Serializable {
         mUserChoices = new ArrayList<Integer>(NUMBER_OF_FOOD_TYPES);
     }
 
-    public String getFoodName(int index){        return mBasket.get(index).getFoodName();    }
-    public float getIngCarbon(int index){   return mBasket.get(index).getCarbonCoefficient();}
-    public float getAvgConsumption(int index){  return mBasket.get(index).getAverageConsumption();}
-    public float getUserConsumption(int index){     return mBasket.get(index).getUserConsumption();}
-    public float getIngUserCo2Emission(int index) {        return mBasket.get(index).getUserCarbonEmission();    }
-    public int getSize(){        return mBasket.size();    }
+    public String getFoodName(int index){ return mBasket.get(index).getFoodName();}
+    public float getIngCarbon(int index){ return mBasket.get(index).getCarbonCoefficient();}
+    public float getAvgConsumption(int index){ return mBasket.get(index).getAverageConsumption();}
+    public float getUserConsumption(int index){ return mBasket.get(index).getUserConsumption();}
+    public float getIngUserCo2Emission(int index){ return mBasket.get(index).getUserCarbonEmission();}
+    public int getSize(){ return mBasket.size();}
 
     public void addNewIngredient(String foodName, float carbonCoefficient, float averageConsumption, float userConsumption){
         Food i = new Food(foodName, carbonCoefficient, averageConsumption, userConsumption);
@@ -34,7 +34,6 @@ public class Diet implements Serializable {
         int option = Integer.parseInt(temp);
         mUserChoices.add(option);
     }
-
 
     public void populateBasket(Context context){
         ArrayList<String> names = new ArrayList<>(Arrays.asList(context.getResources().getStringArray(R.array.ingredient_name)));
@@ -156,6 +155,4 @@ public class Diet implements Serializable {
         }
         return index;
     }
-
-
 }
