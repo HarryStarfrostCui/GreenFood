@@ -65,6 +65,12 @@ public class SuggestionActivity extends AppCompatActivity {
         float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
         float treesSaved = carbonSaved/22;  // carbon offset of trees
 
+        if(carbonSaved < 0)
+        {
+            carbonSaved = 0;
+            treesSaved = 0;
+        }
+
         mCarbonSaved = findViewById(R.id.carbonSaved);
         mCarbonSaved.setText(String.valueOf(carbonSaved));
 
