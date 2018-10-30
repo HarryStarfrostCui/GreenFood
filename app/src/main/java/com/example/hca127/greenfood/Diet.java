@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Diet implements Serializable {
     private ArrayList<Food> mBasket;
     private ArrayList<Integer> mUserChoices;
-    private int NUMBER_OF_FOOD_TYPES = 8;
+    //private int NUMBER_OF_FOOD_TYPES = 8;
     private float mTotalUserCo2Emission = 0;
 
     Diet(){
@@ -57,10 +57,10 @@ public class Diet implements Serializable {
 
     public int getSuggestionMinIndex() {
         int minIndex = 0;
-        float minValue = 99999;
+        float minValue = mBasket.get(0).getCarbonCoefficient();
 
         float temp;
-        for(int i = 0; i < mBasket.size() ; i++){
+        for(int i = 1; i < mBasket.size() ; i++){
             temp = mBasket.get(i).getCarbonCoefficient();
             if (temp < minValue) {
                 minValue = temp;
@@ -73,10 +73,10 @@ public class Diet implements Serializable {
 
     public int getSuggestionMaxIndex() {
         int maxIndex = 0;
-        float maxValue = 0;
+        float maxValue = mBasket.get(0).getUserCarbonEmission();
 
         float temp;
-        for(int i = 0; i < mBasket.size() ; i++){
+        for(int i = 1; i < mBasket.size() ; i++){
             temp = mBasket.get(i).getUserCarbonEmission();
             if (maxValue < temp) {
                 maxValue = temp;

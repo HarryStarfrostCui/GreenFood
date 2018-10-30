@@ -614,14 +614,15 @@
                         android:background="@drawable/bread" />
 
                 </LinearLayout>
+
                 <ImageButton
                     android:id="@+id/nextButton"
-                    android:layout_width="50dp"
+                    android:layout_width="155dp"
                     android:layout_height="50dp"
+                    android:layout_gravity="center|bottom"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/check"
-                    android:layout_gravity="center|bottom"/>
+                    android:src="@drawable/check" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
