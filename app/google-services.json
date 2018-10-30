@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "729621741617",
+    "firebase_url": "https://greenfood-a5dd0.firebaseio.com",
+    "project_id": "greenfood-a5dd0",
+    "storage_bucket": "greenfood-a5dd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729621741617:android:10f4a243327bc0f6",
+        "android_client_info": {
+          "package_name": "com.example.hca127.greenfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMdwjKlgI-I73UZ6_rQ0BwRBdi6bOjSqE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
