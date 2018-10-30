@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <!--
+        https://www.youtube.com/watch?v=fGcMLu1GJEc
+    -->
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_user"
+            android:icon="@drawable/ic_user"
+            android:title="User Name"/>
+
+        <item
+            android:id="@+id/calculator"
+            android:icon="@drawable/ic_mountain"
+            android:title="CO_2e calculator"/>
+
+        <item
+            android:id="@+id/About"
+            android:icon="@drawable/ic_smiley"
+            android:title="About CO_2e"/>
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/LogOff"
+                android:icon="@drawable/ic_exit"
+                android:title="Log off"/>
+        </menu>
+    </item>
+
+</menu>
