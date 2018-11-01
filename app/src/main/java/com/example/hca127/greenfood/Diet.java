@@ -2,16 +2,19 @@ package com.example.hca127.greenfood;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Diet implements Serializable {
     private ArrayList<Food> mBasket;
     private ArrayList<Integer> mUserChoices;
     //private int NUMBER_OF_FOOD_TYPES = 8;
     private float mTotalUserCo2Emission = 0;
+    private Date tictok;
 
     Diet(){
         mBasket = new ArrayList<>();
         mUserChoices = new ArrayList<>();
+        Date tiktok = new Date();
     }
 
     public String getFoodName(int index){ return mBasket.get(index).getFoodName();}
@@ -36,6 +39,8 @@ public class Diet implements Serializable {
     public float getUserDietEmission(){
         return mTotalUserCo2Emission;
     }
+
+    public Date getDate(){ return tictok;}
 
     public float getSuggestedDietEmission(){
         return this.mTotalUserCo2Emission - this.getSuggestedDietSavingAmount();
