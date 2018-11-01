@@ -84,7 +84,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
                 intent.putExtra("diet", mDiet);
                 startActivity(intent);
-                finish();
             }
         });
     }
