@@ -11,15 +11,15 @@
         <item
             android:id="@+id/menu_user"
             android:icon="@drawable/ic_user"
-            android:title="User Name"/>
+            android:title="User profile"/>
 
         <item
-            android:id="@+id/calculator"
+            android:id="@+id/menu_calculator"
             android:icon="@drawable/ic_mountain"
-            android:title="CO_2e calculator"/>
+            android:title="CO2e calculator"/>
 
         <item
-            android:id="@+id/About"
+            android:id="@+id/menu_about"
             android:icon="@drawable/ic_smiley"
             android:title="About CO_2e"/>
 
@@ -28,7 +28,7 @@
     <item android:title="">
         <menu>
             <item
-                android:id="@+id/LogOff"
+                android:id="@+id/menu_LogOff"
                 android:icon="@drawable/ic_exit"
                 android:title="Log off"/>
         </menu>
