@@ -15,8 +15,25 @@
         For food production, the most common gas is methane.
     </string>
 
+
+
     <string name="welcome">Welcome to your very own CO2 calculator! \n Please log in!</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="login_button">Login</string>
+    <string name="Sign_up_button">Sign Up</string>
+    <string name="login_slogan">Log in to make a change!</string>
+    <string name="remember_me">Remember Me</string>
+
+    <string name="create_account">Create your account</string>
+
+    <string name="account_overview">Account Overview</string>
+    <string name="user_id">User ID:</string>
+    <string name="user_real_name">Name:</string>
+    <string name="user_email">Email:</string>
+    <string name="city">City/Area:</string>
+    <string name="pledged_amount">Pleadged Amount:</string>
+
+    <string name="city_filter">City Filter:</string>
 
     <string name="adding_food_activity_title">I eat&#8230;</string>
 
@@ -143,6 +160,21 @@
         <item>40</item> <!--veg-->
         <item>32</item> <!--bread-->
     </string-array>
+
+    <string-array name="city_array">
+            <item>Abbotsford</item>
+            <item>Burnaby</item>
+            <item>Coquitlam</item>
+            <item>Delta</item>
+            <item>Langley</item>
+            <item>Maple Ridge</item>
+            <item>New Westminster</item>
+            <item>Richmond</item>
+            <item>Surrey</item>
+            <item>Vancouver</item>
+            <item>West/North Vancouver</item>
+    </string-array>
+
     <string name="title_activity_suggestion">SuggestionActivity</string>
 
 
