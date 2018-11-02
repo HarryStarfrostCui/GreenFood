@@ -3,45 +3,94 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/logo_mcd"
-            android:layout_gravity="left"
-            android:layout_weight="10"/>
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center" />
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="50"/>
-        <TextView
+            android:layout_weight="1"/>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/city_filter"
-            android:layout_weight="10"
-            android:layout_gravity="center"/>
-        <Spinner
-            android:id="@+id/cityList"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:entries="@array/city_array"
-            android:layout_weight="5"
-            android:layout_gravity="center"/>
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:paddingTop="10dp"
+                android:textSize="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/our_community"
+                android:layout_gravity="center"
+                android:textColor="@color/themeGreen" />
+            <TextView
+                android:paddingTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city_filter"
+                android:textColor="@color/themeGreen"
+                android:layout_gravity="right"
+                android:paddingRight="80dp"/>
+            <Spinner
+                android:id="@+id/cityList"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:entries="@array/city_array"
+                android:layout_gravity="right"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Participants:"/>
-    <TextView
-        android:layout_width="wrap_content"
+        android:paddingTop="30dp">
+        <TextView
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/participants"
+            android:textColor="@color/themeGreen" />
+        <TextView
+            android:paddingLeft="10dp"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total Pledged CO2 reduction:"/>
+        android:paddingTop="10dp">
+        <TextView
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_pledged"
+            android:textColor="@color/themeGreen"/>
+        <TextView
+            android:paddingLeft="10dp"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temp"/>
+    </LinearLayout>
+
+
 </LinearLayout>
 

@@ -174,6 +174,9 @@
             <item>Vancouver</item>
             <item>West/North Vancouver</item>
     </string-array>
+    <string name="participants">Number of Participants:</string>
+    <string name="total_pledged">Total Pledged CO2 Reduction:</string>
+    <string name="our_community">Our Community</string>
 
     <string name="title_activity_suggestion">SuggestionActivity</string>
 
