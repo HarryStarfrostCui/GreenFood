@@ -54,6 +54,7 @@ public class CalculatorFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ResultActivity.class);
                 intent.putExtra("diet", diet);
                 startActivity(intent);
+                getActivity().recreate();
             }
         });
 
