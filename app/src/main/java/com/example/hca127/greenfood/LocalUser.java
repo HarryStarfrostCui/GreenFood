@@ -1,38 +1,69 @@
 package com.example.hca127.greenfood;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class LocalUser {
-    private String User_Id;
-    private String Last_Name;
-    private String First_Name;
-    private String User_Password;
-    private String User_Email;
+    private String UserId;
+    private String LastName;
+    private String FirstName;
+    private String UserPassword;
+    private String UserEmail;
     private double Pledge;
-    private int City_index;
+    private int CityIndex;
+    ArrayList<Diet> DietList;
 
     public LocalUser(){
-        User_Id = "";
-        Last_Name = "";
-        First_Name = "";
-        User_Password = "";
-        User_Email = "";
+        UserId = "";
+        LastName = "";
+        FirstName = "";
+        UserPassword = "";
+        UserEmail = "";
         Pledge = 0.0;
-        City_index = 0;
+        CityIndex = 0;
+        DietList = new ArrayList<>();
     }
 
-    public String getUser_Id() {        return User_Id;    }
-    public String getLast_Name(){        return  Last_Name;    }
-    public String getFirst_Name() {        return First_Name;    }
-    public String getUser_Email() {        return User_Email;    }
+    public String getUserId() {        return UserId;    }
+    public String getLastName(){        return  LastName;    }
+    public String getFirstName() {        return FirstName;    }
+    public String getUserEmail() {        return UserEmail;    }
     public double getPledge() {        return Pledge;    }
-    public int getCity() {        return City_index;    }
+    public int getCity() {        return CityIndex;    }
 
-    private void setUser_Id(String user_Id) {        User_Id = user_Id;    }
-    public void setLast_Name(String last_Name) {        Last_Name = last_Name;    }
-    public void setFirst_Name(String first_Name) {        First_Name = first_Name;    }
-    public void setUser_Email(String user_Email) {        User_Email = user_Email;    }
+    public void addDiet(Diet newDiet){        DietList.add(newDiet);    }
+    public Diet getInitialDiet(){   return DietList.get(0);    }
+
+    public ArrayList<Date> getDietDateList() {
+        ArrayList<Date> dates = new ArrayList<>();
+        for(int i = 0; i<DietList.size(); i++){
+            dates.add(DietList.get(i).getDate());
+        }
+        return dates;
+    }
+
+    public ArrayList<Float> getEmissionList(){
+        ArrayList<Float> CO2e = new ArrayList<>();
+        for(int i = 0; i<DietList.size(); i++){
+            CO2e.add(DietList.get(i).getUserDietEmission());
+        }
+        return CO2e;
+    }
+
+    public void renewDiet(){
+        while(DietList.size()>1){
+            DietList.remove(0);
+        }
+    }
+
+    private void setUserId(String UserId) {        UserId = UserId;    }
+    public void setLastName(String lastName) {        LastName = lastName;    }
+    public void setFirstName(String firstName) {        FirstName = firstName;    }
+    public void setUserEmail(String userEmail) {        UserEmail = userEmail;    }
     public void setPledge(double pledge) {        Pledge = pledge;    }
-    public void setCity(int index) {        City_index = index;    }
+    public void setCity(int index) {        CityIndex = index;    }
+    public void setUserPassword(String userPassword) {        UserPassword = userPassword;    }
 
-    public boolean Check_Password(String Password){        return User_Password.equals(Password);    }
+    public boolean CheckPassword(String Password){        return UserPassword.equals(Password);    }
 
 }
