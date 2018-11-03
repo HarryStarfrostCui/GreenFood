@@ -174,11 +174,18 @@
             <item>Vancouver</item>
             <item>West/North Vancouver</item>
     </string-array>
-    <string name="participants">Number of Participants:</string>
-    <string name="total_pledged">Total Pledged CO2 Reduction:</string>
+    <string name="participants_text">Number of Participants:</string>
+    <string name="participants_number">TEMP</string>
+    <string name="total_pledged_text">Total Pledged CO2 Reduction:</string>
+    <string name="total_pledged_number">TEMP</string>
     <string name="our_community">Our Community</string>
+    <string name="trees_planted_text">= Trees Planted:</string>
+    <string name="trees_planted_number">TEMP</string>
+    <string name="avg_pledged_text">Average Amount Pledged:</string>
+    <string name="avg_pledged_number">TEMP</string>
 
     <string name="title_activity_suggestion">SuggestionActivity</string>
 
 
+    <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>

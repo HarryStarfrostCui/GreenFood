@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class AddingFoodActivity extends AppCompatActivity {
 
     private Diet diet;
 
-    private ImageButton nextButton;
+    private ImageView nextButton;
 
     private RadioGroup beefRadioGroup;
     private RadioGroup lambRadioGroup;
@@ -42,7 +43,7 @@ public class AddingFoodActivity extends AppCompatActivity {
 
         diet = new Diet();
 
-        nextButton = (ImageButton) findViewById(R.id.nextButton);
+        nextButton = (ImageView) findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
