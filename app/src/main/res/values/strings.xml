@@ -20,7 +20,6 @@
     <string name="Navigation_drawer_close">Close Navigation Drawer</string>
 
 
-
     <string name="welcome">Welcome to your very own CO2 calculator! \n Please log in!</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="login_button">Login</string>
@@ -187,9 +186,13 @@
     <string name="trees_planted_number">TEMP</string>
     <string name="avg_pledged_text">Average Amount Pledged:</string>
     <string name="avg_pledged_number">TEMP</string>
+    <string name="other_members">Others In The Community:</string>
 
     <string name="title_activity_suggestion">SuggestionActivity</string>
     <string name="title_activity_google_sign_in">GoogleSignInActivity</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
