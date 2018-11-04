@@ -194,6 +194,7 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
+    <string name="title_activity_pledge">pledge</string>
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
