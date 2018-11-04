@@ -120,12 +120,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = google_account_info.edit();
                     user = mAuth.getCurrentUser();
                     editor.putString("name",user.getDisplayName());
                     editor.putString("email", user.getEmail());
+                    editor.apply();
 
 
                     /*String account_name = user.getDisplayName();

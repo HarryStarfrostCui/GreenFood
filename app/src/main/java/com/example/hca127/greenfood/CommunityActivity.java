@@ -7,11 +7,14 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class CommunityActivity extends AppCompatActivity {
 
     private ImageView about_button;
+    private TextView temp;
     private String name;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +24,12 @@ public class CommunityActivity extends AppCompatActivity {
         /*Bundle google_account_info = getIntent().getExtras();
         name = google_account_info.get("name").toString();*/
 
-        SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String name = google_account_info.getString("name","");
         String email = google_account_info.getString("email","");
+
+        temp = findViewById(R.id.number_of_participants);
+        temp.setText(name);
 
 
         about_button = (ImageView) findViewById(R.id.about_button_community);
