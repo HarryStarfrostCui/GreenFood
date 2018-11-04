@@ -15,6 +15,11 @@
         For food production, the most common gas is methane.
     </string>
 
+    <string name="Navigation_drawer_open">Open Navigation Drawer</string>
+
+    <string name="Navigation_drawer_close">Close Navigation Drawer</string>
+
+
     <string name="adding_food_activity_title">I eat&#8230;</string>
 
     <string name="beef">Beef</string>

@@ -25,13 +25,15 @@
             android:name=".AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ResultActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SuggestionActivity"
             android:label="@string/title_activity_suggestion"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
