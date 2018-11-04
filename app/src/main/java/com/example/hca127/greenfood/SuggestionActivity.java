@@ -1,7 +1,9 @@
 package com.example.hca127.greenfood;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -30,7 +33,13 @@ public class SuggestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggestion);
 
-        mDiet = (Diet)getIntent().getSerializableExtra("diet");
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("mDiet", "");
+
+        //mDiet = (Diet)getIntent().getSerializableExtra("diet");
+        mDiet = gson.fromJson(json, Diet.class);
+
 
         mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
         mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
@@ -84,7 +93,6 @@ public class SuggestionActivity extends AppCompatActivity {
                 Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
                 intent.putExtra("diet", mDiet);
                 startActivity(intent);
-                finish();
             }
         });
     }
