@@ -1,8 +1,12 @@
 package com.example.hca127.greenfood;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +20,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     private SignInButton google_sign_in_button;
     private GoogleSignInAccount account;
     private Integer RC_SIGN_IN = 0;
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
 
     Bundle google_account = new Bundle();
 
@@ -67,31 +79,31 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         google_sign_in_options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+
+
+
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
 
         if (requestCode == RC_SIGN_IN) {
-           /* account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
-            String account_name = ((GoogleSignInAccount) account).getDisplayName();
-            String account_given_name = account.getGivenName();
-            String account_family_name = account.getFamilyName();
-            String account_email = account.getEmail();
-            String account_id = account.getId();
-            Uri account_photo = account.getPhotoUrl();
-
-            google_account.putSerializable("name",account_name);
-            google_account.putSerializable("given_name", account_given_name);
-            google_account.putSerializable("family_name",account_family_name);
-            google_account.putSerializable("email", account_email);
-            google_account.putSerializable("id",account_id);*/
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            findViewById(R.id.google_sign_in_button).setVisibility(View.GONE);
+            try {
+                account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
             Intent communityPage = new Intent(LoginActivity.this, CommunityActivity.class);
             communityPage.putExtras(google_account);
             startActivity(communityPage);
@@ -101,6 +113,33 @@ public class LoginActivity extends AppCompatActivity {
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
 
     }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    SharedPreferences.Editor editor = google_account_info.edit();
+                    user = mAuth.getCurrentUser();
+                    editor.putString("name",user.getDisplayName());
+                    editor.putString("email", user.getEmail());
+
+
+                    /*String account_name = user.getDisplayName();
+                    String account_email = user.getEmail();
+                    Uri account_photo = user.getPhotoUrl();
+
+                    google_account.putSerializable("name",account_name);
+                    google_account.putSerializable("email", account_email);*/
+                }
+            }
+        });
+    }
+
+
 
 
     /*public void signUp(View view) {
