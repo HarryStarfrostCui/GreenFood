@@ -109,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(communityPage);
 
         }
-
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
 
     }
@@ -120,11 +119,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    user = mAuth.getCurrentUser();
                     SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = google_account_info.edit();
-                    user = mAuth.getCurrentUser();
                     editor.putString("name",user.getDisplayName());
                     editor.putString("email", user.getEmail());
+                    editor.putString("temp","hello");
                     editor.apply();
 
 

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hca127.greenfood">
 
-    <uses-sdk android:minSdkVersion="11"
-        android:targetSdkVersion="21"/>
+    <!--<uses-sdk android:minSdkVersion="11"
+        android:targetSdkVersion="21"/>-->
 
     <application
         android:allowBackup="true"
