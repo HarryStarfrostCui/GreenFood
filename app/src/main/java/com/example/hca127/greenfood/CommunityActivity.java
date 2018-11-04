@@ -24,9 +24,9 @@ public class CommunityActivity extends AppCompatActivity {
         /*Bundle google_account_info = getIntent().getExtras();
         name = google_account_info.get("name").toString();*/
 
-        SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String name = google_account_info.getString("name","");
-        String email = google_account_info.getString("email","");
+        SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        name = google_account_info.getString("name","");
+        email = google_account_info.getString("email","");
 
         temp = findViewById(R.id.number_of_participants);
         temp.setText(name);
