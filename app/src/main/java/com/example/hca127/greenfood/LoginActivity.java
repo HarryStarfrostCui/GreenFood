@@ -1,6 +1,7 @@
 package com.example.hca127.greenfood;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,8 +26,10 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleSignInOptions google_sign_in_options;
     private SignInButton google_sign_in_button;
-    public Integer RC_SIGN_IN = 0;
+    private GoogleSignInAccount account;
+    private Integer RC_SIGN_IN = 0;
 
+    Bundle google_account = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,15 +74,32 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
+           /* account = GoogleSignIn.getLastSignedInAccount(LoginActivity.this);
+            String account_name = ((GoogleSignInAccount) account).getDisplayName();
+            String account_given_name = account.getGivenName();
+            String account_family_name = account.getFamilyName();
+            String account_email = account.getEmail();
+            String account_id = account.getId();
+            Uri account_photo = account.getPhotoUrl();
+
+            google_account.putSerializable("name",account_name);
+            google_account.putSerializable("given_name", account_given_name);
+            google_account.putSerializable("family_name",account_family_name);
+            google_account.putSerializable("email", account_email);
+            google_account.putSerializable("id",account_id);*/
+
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             findViewById(R.id.google_sign_in_button).setVisibility(View.GONE);
             Intent communityPage = new Intent(LoginActivity.this, CommunityActivity.class);
+            communityPage.putExtras(google_account);
             startActivity(communityPage);
+
         }
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+
     }
 
 

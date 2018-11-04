@@ -15,6 +15,8 @@ public class CommunityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
 
+        Bundle extras = getIntent().getExtras();
+
         about_button = (ImageView) findViewById(R.id.about_button_community);
         about_button.setOnClickListener(new View.OnClickListener() {
             @Override
