@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!--
-        https://www.youtube.com/watch?v=fGcMLu1GJEc
-    -->
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_user"
