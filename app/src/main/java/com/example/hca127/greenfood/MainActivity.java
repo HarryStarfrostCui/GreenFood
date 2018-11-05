@@ -1,5 +1,6 @@
 package com.example.hca127.greenfood;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -54,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
+            case R.id.menu_community:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CommunityFragment()).commit();
+                break;
             case R.id.menu_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new aboutFragment()).commit();
@@ -65,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
+                break;
+            case R.id.menu_Login:
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.menu_pledge:
