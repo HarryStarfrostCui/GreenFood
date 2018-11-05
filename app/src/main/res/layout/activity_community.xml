@@ -43,7 +43,7 @@
                 android:layout_gravity="right"
                 android:paddingRight="80dp"/>
             <Spinner
-                android:id="@+id/cityList"
+                android:id="@+id/city_filter_spinner_choice"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/city_array"
