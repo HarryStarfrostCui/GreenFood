@@ -75,12 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
-
-            case R.id.menu_pledge:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PledgeFragment()).commit();
-                break;
-
             case R.id.menu_LogOff:
                 Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
                 break;

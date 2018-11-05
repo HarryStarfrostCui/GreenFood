@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="5dp"
+    android:paddingTop="10dp"
     android:background="@drawable/background">
 
 
@@ -12,7 +12,7 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo_mcd"/>
     <TextView
         android:paddingTop="10dp"
         android:layout_width="300dp"
@@ -25,22 +25,6 @@
         android:gravity="center"
         android:paddingBottom="10dp"/>
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_sign_in_button"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-    </com.google.android.gms.common.SignInButton>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nah fam, too much work"
-        android:textColor="#000000"
-        android:layout_gravity="center"/>
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,8 +32,8 @@
         android:layout_gravity="center"
         android:paddingBottom="10dp">
         <ImageView
-            android:id="@+id/menu_add_food"
-            android:layout_width="100dp"
+            android:id="@+id/add_food_button_menu"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:src="@drawable/addfood"
             android:layout_weight="5"/>
@@ -57,10 +41,40 @@
             android:layout_width="5dp"
             android:layout_height="wrap_content" />
         <ImageView
-            android:id="@+id/menu_about"
-            android:layout_width="100dp"
+            android:id="@+id/community_button_menu"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:src="@drawable/community"
+            android:layout_weight="5"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/about_button_menu"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:src="@drawable/about"
             android:layout_weight="5"/>
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/login_button_menu"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:src="@drawable/login"
+            android:layout_weight="5"/>
     </LinearLayout>
+
+
+
+
+
+
+
+
 </LinearLayout>

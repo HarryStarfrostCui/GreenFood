@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         google_sign_in_options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.google_app_id))
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(communityPage);
 
         }
+
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
 
     }
@@ -119,13 +120,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    user = mAuth.getCurrentUser();
-                    SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    // Sign in success, update UI with the signed-in user's information
+                    SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                     SharedPreferences.Editor editor = google_account_info.edit();
+                    user = mAuth.getCurrentUser();
                     editor.putString("name",user.getDisplayName());
                     editor.putString("email", user.getEmail());
-                    editor.putString("temp","hello");
-                    editor.apply();
 
 
                     /*String account_name = user.getDisplayName();
