@@ -115,7 +115,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
@@ -123,13 +123,16 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
+
                 user = mAuth.getCurrentUser();
                 SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = google_account_info.edit();
-                Log.d("CHECK",user.getUid());
-               /* editor.putString("name",user.getDisplayName());
-                editor.putString("email", user.getEmail());*/
-                editor.putString("temp","hello");
+                Log.d("CHECK",account.getEmail());
+                Log.d("CHECK2", account.getId());
+                editor.putString("google_account_name",account.getDisplayName());
+                editor.putString("google_account_email", account.getEmail());
+                editor.putString("google_account_id", account.getId());
+                editor.putInt("city_choice",1);
                 editor.apply();
 
                 Intent intent = new Intent(MenuActivity.this, MainActivity.class);
