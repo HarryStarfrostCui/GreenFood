@@ -19,6 +19,11 @@
             android:icon="@drawable/ic_smiley"
             android:title="About CO_2e"/>
 
+        <item
+            android:id="@+id/menu_pledge"
+            android:icon="@drawable/ic_mountain"
+            android:title="Pledge"/>
+
     </group>
 
     <item android:title="">

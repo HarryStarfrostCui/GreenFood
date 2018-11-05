@@ -78,7 +78,9 @@ public class MenuActivity extends AppCompatActivity {
         google_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn();
+                
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
 
@@ -93,15 +95,8 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    private void signIn(){
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         if (requestCode == RC_SIGN_IN) {
 
@@ -127,13 +122,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                Log.d("good",user.getEmail());
 
                 user = mAuth.getCurrentUser();
                 SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = google_account_info.edit();
-                editor.putString("name",user.getDisplayName());
-                editor.putString("email", user.getEmail());
+               /* editor.putString("name",user.getDisplayName());
+                editor.putString("email", user.getEmail());*/
                 editor.putString("temp","hello");
                 editor.apply();
 

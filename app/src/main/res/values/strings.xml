@@ -201,7 +201,7 @@
     <string name="pledge_radio_button_medium">A decent amount</string>
     <string name="pledge_radio_button_low">A little bit at a time</string>
     <string name="pledge_radio_button_none">I\'m already doing great!</string>
-    
+
     <string name="display_name_promt">Display Name: </string>
     <string name="city_promt">City: </string>
     <string name="email_promt">Email: </string>
