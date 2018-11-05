@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity {
         google_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
@@ -91,6 +91,7 @@ public class MenuActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
 
         mAuth = FirebaseAuth.getInstance();
+
 
 
     }
@@ -122,10 +123,10 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-
                 user = mAuth.getCurrentUser();
                 SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = google_account_info.edit();
+                Log.d("CHECK",user.getUid());
                /* editor.putString("name",user.getDisplayName());
                 editor.putString("email", user.getEmail());*/
                 editor.putString("temp","hello");

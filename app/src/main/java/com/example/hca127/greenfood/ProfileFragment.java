@@ -25,7 +25,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_profile, container, false);
 
         SharedPreferences google_stuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        String name = google_stuff.getString("temp","");
+        String name = google_stuff.getString("pledge_amount","");
         display_name = (TextView) view.findViewById(R.id.display_name);
         display_name.setText(name);
         pencil = (ImageView) view.findViewById(R.id.edit_display_name_button);

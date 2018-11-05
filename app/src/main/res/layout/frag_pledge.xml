@@ -32,7 +32,7 @@
         android:paddingTop="10dp">
 
         <RadioButton
-            android:id="@+id/pledge_high"
+            android:id="@+id/pledge3"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:textSize="20dp"
@@ -42,7 +42,7 @@
             android:buttonTint="@color/themeGreen"/>
 
         <RadioButton
-            android:id="@+id/pledge_medium"
+            android:id="@+id/pledge2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:textSize="20dp"
@@ -52,7 +52,7 @@
             android:buttonTint="@color/themeGreen"/>
 
         <RadioButton
-            android:id="@+id/pledge_low"
+            android:id="@+id/pledge1"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:textSize="20dp"
@@ -62,7 +62,7 @@
             android:buttonTint="@color/themeGreen"/>
 
         <RadioButton
-            android:id="@+id/pledge_none"
+            android:id="@+id/pledge0"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:textSize="20dp"
@@ -73,6 +73,7 @@
     </RadioGroup>
 
     <ImageView
+        android:id="@+id/pledge_button"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:src="@drawable/pledge"
