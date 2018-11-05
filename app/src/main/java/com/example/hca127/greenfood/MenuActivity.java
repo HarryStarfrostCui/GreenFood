@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -77,13 +78,12 @@ public class MenuActivity extends AppCompatActivity {
         google_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent,RC_SIGN_IN);
+                signIn();
             }
         });
 
         google_sign_in_options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("AIzaSyC88_BSFhOx3ZnXSVh8mYstsJSdRH2nVg8")
+                .requestIdToken("729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com")
                         .requestEmail()
                         .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
@@ -91,6 +91,11 @@ public class MenuActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
+    }
+
+    private void signIn(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
@@ -113,13 +118,16 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-
+                Log.d("good",user.getEmail());
 
                 user = mAuth.getCurrentUser();
                 SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

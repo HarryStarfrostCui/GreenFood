@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "729621741617-450rq6ud4pt1j35vesmq1n8hfqn866jh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hca127.greenfood",
+            "certificate_hash": "3bd79f99e7bbf345c332fc8ae411d5add22ce383"
+          }
+        },
+        {
+          "client_id": "729621741617-q1lc2ci95p4er5iks20lkv37t3ajfvhd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hca127.greenfood",
+            "certificate_hash": "8bd0ac6e1e715f47aeae7b2b2de3ad63580ff518"
+          }
+        },
+        {
           "client_id": "729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
