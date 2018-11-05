@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
 
-    //  https://www.youtube.com/watch?v=zYVEMCiDcmY  (done)
     //  https://www.youtube.com/watch?v=bjYstsO1PgI&index=4&list=PLrnPJCHvNZuDQ-jWPw13-wY2J57Z6ep6G&t=0s
 
     @Override
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new ProfileFragment()).commit();
                 break;
             case R.id.menu_LogOff:
-                Toast.makeText(this, "this creates the logoff warning popup,\n with option o log off", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
