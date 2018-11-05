@@ -194,6 +194,20 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
+    <string name="title_activity_pledge">pledge</string>
+
+    <string name="pledge">I Pledge to Reduce my CO2 Emission By:</string>
+    <string name="pledge_radio_button_high">A TON! (Literally)</string>
+    <string name="pledge_radio_button_medium">A decent amount</string>
+    <string name="pledge_radio_button_low">A little bit at a time</string>
+    <string name="pledge_radio_button_none">I\'m already doing great!</string>
+
+    <string name="display_name_promt">Display Name: </string>
+    <string name="city_promt">City: </string>
+    <string name="email_promt">Email: </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
