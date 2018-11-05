@@ -195,6 +195,8 @@
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
 
+    <string name="facebook_app_id">337483050352224</string>
+    <string name="facebook_login_protocol_scheme">fb337483050352224</string>
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
