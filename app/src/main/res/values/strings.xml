@@ -194,6 +194,11 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
+    
+    <string name="display_name_promt">User Name: </string>
+    <string name="city_promt">City: </string>
+    <string name="email_promt">Email: </string>
+
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
