@@ -121,7 +121,7 @@ public class ProfileFragment extends Fragment {
                 editor.apply();
             }
         });
-        
+
         return view;
     }
 }

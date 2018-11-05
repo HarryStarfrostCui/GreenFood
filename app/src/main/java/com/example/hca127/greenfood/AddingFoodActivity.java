@@ -21,7 +21,7 @@ public class AddingFoodActivity extends AppCompatActivity {
 
     private Diet mDiet;
 
-    private ImageView mNextButton;
+    private ImageView nextButton;
 
     private RadioGroup beefRadioGroup;
     private RadioGroup lambRadioGroup;
@@ -48,8 +48,8 @@ public class AddingFoodActivity extends AppCompatActivity {
 
         mDiet = new Diet();
 
-        mNextButton = (ImageView) findViewById(R.id.nextButton);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton = (ImageView) findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();

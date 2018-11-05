@@ -18,7 +18,11 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ResultActivity"
@@ -40,25 +44,6 @@
         <activity
             android:name=".CommunityActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".PledgeActivity"
-            android:label="@string/title_activity_pledge"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
-    <meta-data
-        android:name="com.google.firebase.auth.API_KEY"
-        android:value="AIzaSyDMdwjKlgI-I73UZ6_rQ0BwRBdi6bOjSqE" />
 
 </manifest>
