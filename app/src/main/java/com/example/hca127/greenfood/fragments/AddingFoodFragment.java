@@ -69,6 +69,8 @@ public class AddingFoodFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), ResultActivity.class);
                 //intent.putExtra("mDiet", mDiet);
                 startActivity(intent);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AddingFoodFragment()).commit();
             }
         });
 
