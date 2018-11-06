@@ -15,6 +15,7 @@ import com.example.hca127.greenfood.fragments.AboutFragment;
 import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
             case R.id.menu_LogOff:
+                FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
                 break;
         }

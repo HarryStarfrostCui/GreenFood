@@ -15,7 +15,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo_mcd" />
+            android:background="@drawable/logo" />
 
         <TextView
             android:layout_width="match_parent"
@@ -57,14 +57,14 @@
             android:layout_gravity="center" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/login_button"
+    <ImageView
+        android:id="@+id/sign_up_button"
         android:onClick="something"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/login_button"
+        android:src="@drawable/login"
         android:textColor="@color/themeGreen"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

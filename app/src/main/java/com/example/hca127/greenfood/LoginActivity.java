@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,7 +33,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity {
 
     private ImageView signUp;
-    private ImageView logoCommunity;
+    private ImageView logIn;
+    private EditText email;
+    private EditText password;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleSignInOptions google_sign_in_options;
     private SignInButton google_sign_in_button;
@@ -46,23 +49,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText email_input = (EditText) findViewById(R.id.email_input);
-        email_input.requestFocus();
+        email = (EditText) findViewById(R.id.email_input);
+        password = (EditText) findViewById(R.id.password_input);
+        logIn = (ImageView) findViewById(R.id.login_button);
+        /*email_input.requestFocus();*/
+
 
         signUp = (ImageView) findViewById(R.id.sign_up_button);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        logoCommunity = (ImageView) findViewById(R.id.logo_community);
-        logoCommunity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CommunityActivity.class);
                 startActivity(intent);
             }
         });
@@ -82,7 +79,35 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
 
-        mAuth = FirebaseAuth.getInstance();
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("Check", "signInWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Toast.makeText(LoginActivity.this, user.getDisplayName(),
+                                            Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("Check", "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                                // ...
+                            }
+                        });
+
+            }
+        });
+
 
 
 
@@ -115,8 +140,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-
-                user = mAuth.getCurrentUser();
                 SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = google_account_info.edit();
                 Log.d("CHECK",account.getEmail());
