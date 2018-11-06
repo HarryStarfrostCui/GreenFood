@@ -41,8 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth mAuth;
 
-    Bundle google_account = new Bundle();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         google_sign_in_options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.request_token))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
@@ -94,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == RC_SIGN_IN) {
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -104,37 +101,41 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
             }
-            Intent communityPage = new Intent(LoginActivity.this, CommunityActivity.class);
-            communityPage.putExtras(google_account);
-            startActivity(communityPage);
 
         }
-
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
 
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                    SharedPreferences.Editor editor = google_account_info.edit();
-                    user = mAuth.getCurrentUser();
-                    editor.putString("name",user.getDisplayName());
-                    editor.putString("email", user.getEmail());
 
 
-                    /*String account_name = user.getDisplayName();
-                    String account_email = user.getEmail();
-                    Uri account_photo = user.getPhotoUrl();
+                user = mAuth.getCurrentUser();
+                SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = google_account_info.edit();
+                Log.d("CHECK",account.getEmail());
+                Log.d("CHECK2", account.getId());
+                editor.putString("google_account_name",account.getDisplayName());
+                editor.putString("google_account_email", account.getEmail());
+                editor.putString("google_account_id", account.getId());
+                editor.putInt("city_choice",1);
+                editor.apply();
 
-                    google_account.putSerializable("name",account_name);
-                    google_account.putSerializable("email", account_email);*/
-                }
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                /*String account_name = user.getDisplayName();
+                String account_email = user.getEmail();
+                Uri account_photo = user.getPhotoUrl();
+
+                google_account.putSerializable("name",account_name);
+                google_account.putSerializable("email", account_email);*/
             }
         });
     }
