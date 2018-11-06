@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 
-import com.example.hca127.greenfood.AddingFoodActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.ResultActivity;
 import com.example.hca127.greenfood.objects.Diet;
@@ -22,11 +22,11 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CalculatorFragment extends Fragment {
+public class AddingFoodFragment extends Fragment {
 
     private Diet mDiet;
 
-    private ImageButton nextButton;
+    private ImageView mNextImageView;
 
     private RadioGroup beefRadioGroup;
     private RadioGroup lambRadioGroup;
@@ -49,12 +49,12 @@ public class CalculatorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_calculator, container, false);
+        View view = inflater.inflate(R.layout.fragment_adding_food, container, false);
 
         mDiet = new Diet();
 
-        nextButton = (ImageButton) view.findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        mNextImageView = view.findViewById(R.id.nextImageView);
+        mNextImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();

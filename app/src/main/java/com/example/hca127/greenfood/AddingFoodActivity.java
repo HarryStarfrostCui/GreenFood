@@ -46,7 +46,7 @@ public class AddingFoodActivity extends AppCompatActivity {
 
         mDiet = new Diet();
 
-        nextButton = (ImageView) findViewById(R.id.nextButton);
+        nextButton = (ImageView) findViewById(R.id.nextImageView);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){

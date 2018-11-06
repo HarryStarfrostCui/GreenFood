@@ -1,9 +1,6 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -13,13 +10,12 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.hca127.greenfood.R;
 
 public class ProfileFragment extends Fragment {
 
@@ -35,7 +31,7 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         name_check = view.findViewById(R.id.edit_display_name_button_check);
         name_check.setVisibility(ImageView.GONE);

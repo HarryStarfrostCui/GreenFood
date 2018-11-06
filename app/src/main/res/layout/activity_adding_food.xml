@@ -622,7 +622,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/nextButton"
+                android:id="@+id/nextImageView"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"

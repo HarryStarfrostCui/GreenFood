@@ -12,8 +12,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.hca127.greenfood.fragments.AboutFragment;
-import com.example.hca127.greenfood.fragments.CalculatorFragment;
+import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
+import com.example.hca127.greenfood.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //open defult fragment, currently defult = calculator
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new CalculatorFragment()).commit();
+                    new AddingFoodFragment()).commit();
             navigationView.setCheckedItem(R.id.menu_calculator);
         }
     }
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_calculator:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CalculatorFragment()).commit();
+                        new AddingFoodFragment()).commit();
                 break;
             case R.id.menu_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
