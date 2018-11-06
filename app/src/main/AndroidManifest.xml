@@ -30,9 +30,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name=".SignUpActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
