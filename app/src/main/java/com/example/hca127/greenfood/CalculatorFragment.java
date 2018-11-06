@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
+import com.example.hca127.greenfood.objects.Diet;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

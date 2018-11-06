@@ -1,17 +1,15 @@
 package com.example.hca127.greenfood;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
+import com.example.hca127.greenfood.objects.Diet;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

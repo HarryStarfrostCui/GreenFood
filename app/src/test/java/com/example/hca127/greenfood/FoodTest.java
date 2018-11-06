@@ -1,5 +1,7 @@
 package com.example.hca127.greenfood;
 
+import com.example.hca127.greenfood.objects.Food;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

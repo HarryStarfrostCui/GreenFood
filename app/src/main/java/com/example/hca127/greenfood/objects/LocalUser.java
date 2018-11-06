@@ -1,4 +1,6 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.objects;
+
+import com.example.hca127.greenfood.objects.Diet;
 
 import java.util.ArrayList;
 import java.util.Date;

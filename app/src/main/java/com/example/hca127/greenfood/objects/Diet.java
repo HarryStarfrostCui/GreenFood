@@ -1,4 +1,4 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Diet implements Serializable {
     private float mTotalUserCo2Emission = 0;
     private Date tictok;
 
-    Diet(){
+    public Diet(){
         mBasket = new ArrayList<>();
         mUserChoices = new ArrayList<>();
         Date tiktok = new Date();

@@ -1,9 +1,10 @@
 package com.example.hca127.greenfood;
 
+import com.example.hca127.greenfood.objects.Diet;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import static java.security.AccessController.getContext;
 import static org.junit.Assert.*;
 
 public class DietTest {

@@ -1,4 +1,4 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.objects;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ public class Food implements Serializable {
     private float mIncreasedConsumption;
     private float mUserCarbonEmission;
 
-    Food(String foodName, float mCarbonCoefficient, float mAverageConsumption, float mUserConsumption){
+    public Food(String foodName, float mCarbonCoefficient, float mAverageConsumption, float mUserConsumption){
         this.mFoodName = foodName;
         this.mCarbonCoefficient = mCarbonCoefficient;
         this.mAverageConsumption = mAverageConsumption;
