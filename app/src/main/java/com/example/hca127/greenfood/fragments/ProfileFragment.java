@@ -45,8 +45,8 @@ public class ProfileFragment extends Fragment {
 
 
         final SharedPreferences google_stuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        String google_name = google_stuff.getString("google_account_name","");
-        String google_email = google_stuff.getString("google_account_email","");
+        String google_name = google_stuff.getString("account_name","");
+        String google_email = google_stuff.getString("account_email","");
         int city = google_stuff.getInt("city_choice",0);
         city_choice.setSelection(city);
         display_name = (EditText) view.findViewById(R.id.display_name);

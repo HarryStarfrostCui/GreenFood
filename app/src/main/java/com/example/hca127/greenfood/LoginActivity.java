@@ -10,7 +10,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +35,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity {
 
     private ImageView signUp;
-    private ImageView logIn;
+    private ImageButton logIn;
     private EditText email;
     private EditText password;
+    private CheckBox remember;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleSignInOptions google_sign_in_options;
     private SignInButton google_sign_in_button;
@@ -44,15 +47,27 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth mAuth;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        SharedPreferences.Editor editor = account_info.edit();
+
         email = (EditText) findViewById(R.id.email_input);
+        email.setText(account_info.getString("saved_email",""));
         password = (EditText) findViewById(R.id.password_input);
-        logIn = (ImageView) findViewById(R.id.login_button);
+        password.setText(account_info.getString("saved_password",""));
+        logIn = (ImageButton) findViewById(R.id.login_button);
+        remember = (CheckBox) findViewById(R.id.remember_me);
+        if(account_info.getString("saved_email","")!="" ){
+            remember.setChecked(true);
+        }
         /*email_input.requestFocus();*/
+
 
 
         signUp = (ImageView) findViewById(R.id.sign_up_button);
@@ -91,8 +106,27 @@ public class LoginActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("Check", "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(LoginActivity.this, user.getDisplayName(),
+                                    Toast.makeText(LoginActivity.this, "Signed in with "+user.getEmail(),
                                             Toast.LENGTH_LONG).show();
+
+                                    SharedPreferences account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                                    SharedPreferences.Editor editor = account_info.edit();
+
+                                    editor.putString("account_name",user.getDisplayName());
+                                    editor.putString("account_email", user.getEmail());
+                                    editor.putString("account_id", user.getUid());
+                                    editor.putInt("city_choice",1);
+                                    editor.apply();
+
+                                    if(remember.isChecked()){
+                                        editor.putString("saved_email", email.getText().toString());
+                                        editor.putString("saved_password", password.getText().toString());
+                                        editor.apply();
+                                    }
+
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+
 
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -140,15 +174,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = google_account_info.edit();
+                SharedPreferences account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                SharedPreferences.Editor editor = account_info.edit();
+
+
                 Log.d("CHECK",account.getEmail());
                 Log.d("CHECK2", account.getId());
-                editor.putString("google_account_name",account.getDisplayName());
-                editor.putString("google_account_email", account.getEmail());
-                editor.putString("google_account_id", account.getId());
+                editor.putString("account_name",account.getDisplayName());
+                editor.putString("account_email", account.getEmail());
+                editor.putString("account_id", account.getId());
                 editor.putInt("city_choice",1);
                 editor.apply();
+
+                Toast.makeText(LoginActivity.this,"Logged in with Google",Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
