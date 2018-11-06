@@ -1,4 +1,4 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hca127.greenfood.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -18,7 +19,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
-public class aboutFragment extends Fragment {
+public class AboutFragment extends Fragment {
 
     private float emissionAmount[] = { 1.5f, 1.9f, 1.2f, 3.1f };
     private String emissionName[] = {"Food", "Buildings", "Consumables & Waste", "Transportation"};

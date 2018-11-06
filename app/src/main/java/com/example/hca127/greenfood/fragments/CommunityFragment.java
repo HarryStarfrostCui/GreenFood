@@ -1,4 +1,4 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.hca127.greenfood.R;
 
 public class CommunityFragment extends Fragment {
 
