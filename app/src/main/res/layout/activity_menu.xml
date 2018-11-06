@@ -32,7 +32,7 @@
         android:layout_gravity="center"
         android:paddingBottom="10dp">
         <ImageView
-            android:id="@+id/add_food_button_menu"
+            android:id="@+id/menu_add_food"
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:src="@drawable/addfood"
