@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class DietTest {
 
-    Diet testDiet = new Diet();
+    private Diet testDiet = new Diet();
 
     @Before
     public void setup() {
@@ -50,12 +50,6 @@ public class DietTest {
     public void addNewIngredient() {
         testDiet.addNewIngredient("testFood2", 20, 20, 2);
         assertEquals("testFood2", testDiet.getFoodName(1));
-    }
-
-    @Test
-    public void assignUserInput() {
-        testDiet.assignUserInput("beefRadio1");
-        assertEquals(1, testDiet.getUserConsumption(0), 0.001);
     }
 
     @Test
