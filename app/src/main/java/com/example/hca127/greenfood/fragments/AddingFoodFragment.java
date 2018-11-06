@@ -1,27 +1,32 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
+import com.example.hca127.greenfood.R;
+import com.example.hca127.greenfood.ResultActivity;
+import com.example.hca127.greenfood.objects.Diet;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AddingFoodActivity extends AppCompatActivity {
+public class AddingFoodFragment extends Fragment {
 
     private Diet mDiet;
 
-    private ImageView nextButton;
+    private ImageView mNextImageView;
 
     private RadioGroup beefRadioGroup;
     private RadioGroup lambRadioGroup;
@@ -41,41 +46,42 @@ public class AddingFoodActivity extends AppCompatActivity {
     private int veggieRadioChoice;
     private int breadRadioChoice;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adding_food);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_adding_food, container, false);
 
         mDiet = new Diet();
 
-        nextButton = (ImageView) findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
+        mNextImageView = view.findViewById(R.id.nextImageView);
+        mNextImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();
 
-                SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(mDiet);
                 prefsEditor.putString("mDiet", json);
                 prefsEditor.apply();
 
-                Intent intent = new Intent(AddingFoodActivity.this, ResultActivity.class);
+                Intent intent = new Intent(getActivity(), ResultActivity.class);
                 //intent.putExtra("mDiet", mDiet);
                 startActivity(intent);
-                recreate();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AddingFoodFragment()).commit();
             }
         });
 
-        beefRadioGroup = (RadioGroup) findViewById(R.id.beefRadioGroup);
-        lambRadioGroup = (RadioGroup) findViewById(R.id.lambRadioGroup);
-        chickenRadioGroup = (RadioGroup) findViewById(R.id.chickenRadioGroup);
-        fishRadioGroup = (RadioGroup) findViewById(R.id.fishRadioGroup);
-        porkRadioGroup = (RadioGroup) findViewById(R.id.porkRadioGroup);
-        eggRadioGroup = (RadioGroup) findViewById(R.id.eggRadioGroup);
-        veggieRadioGroup = (RadioGroup) findViewById(R.id.vegRadioGroup);
-        breadRadioGroup = (RadioGroup) findViewById(R.id.breadRadioGroup);
+        beefRadioGroup = (RadioGroup) view.findViewById(R.id.beefRadioGroup);
+        lambRadioGroup = (RadioGroup) view.findViewById(R.id.lambRadioGroup);
+        chickenRadioGroup = (RadioGroup) view.findViewById(R.id.chickenRadioGroup);
+        fishRadioGroup = (RadioGroup) view.findViewById(R.id.fishRadioGroup);
+        porkRadioGroup = (RadioGroup) view.findViewById(R.id.porkRadioGroup);
+        eggRadioGroup = (RadioGroup) view.findViewById(R.id.eggRadioGroup);
+        veggieRadioGroup = (RadioGroup) view.findViewById(R.id.vegRadioGroup);
+        breadRadioGroup = (RadioGroup) view.findViewById(R.id.breadRadioGroup);
 
         beefRadioGroup.check(R.id.beefRadio2);
         lambRadioGroup.check(R.id.lambRadio2);
@@ -85,6 +91,7 @@ public class AddingFoodActivity extends AppCompatActivity {
         eggRadioGroup.check(R.id.eggRadio2);
         veggieRadioGroup.check(R.id.veggieRadio2);
         breadRadioGroup.check(R.id.breadRadio2);
+        return view;
     }
 
     public void getUserInput() {
@@ -99,59 +106,61 @@ public class AddingFoodActivity extends AppCompatActivity {
         mChoice = getResources().getResourceEntryName(beefRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(0), Float.parseFloat(mCarbonCoefficient.get(0)),
-                                                 Float.parseFloat(mAverageConsumption.get(0)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(0)),
+                Float.parseFloat(mLevel));
 
         lambRadioChoice = lambRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(lambRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(1), Float.parseFloat(mCarbonCoefficient.get(1)),
-                                                 Float.parseFloat(mAverageConsumption.get(1)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(1)),
+                Float.parseFloat(mLevel));
 
         chickenRadioChoice = chickenRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(chickenRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(2), Float.parseFloat(mCarbonCoefficient.get(2)),
-                                                 Float.parseFloat(mAverageConsumption.get(2)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(2)),
+                Float.parseFloat(mLevel));
 
         fishRadioChoice = fishRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(fishRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(3), Float.parseFloat(mCarbonCoefficient.get(3)),
-                                                 Float.parseFloat(mAverageConsumption.get(3)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(3)),
+                Float.parseFloat(mLevel));
 
         porkRadioChoice = porkRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(porkRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(4), Float.parseFloat(mCarbonCoefficient.get(4)),
-                                                 Float.parseFloat(mAverageConsumption.get(4)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(4)),
+                Float.parseFloat(mLevel));
 
         eggRadioChoice = eggRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(eggRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(5), Float.parseFloat(mCarbonCoefficient.get(5)),
-                                                 Float.parseFloat(mAverageConsumption.get(5)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(5)),
+                Float.parseFloat(mLevel));
 
         veggieRadioChoice = veggieRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(veggieRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(6), Float.parseFloat(mCarbonCoefficient.get(6)),
-                                                 Float.parseFloat(mAverageConsumption.get(6)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(6)),
+                Float.parseFloat(mLevel));
 
 
         breadRadioChoice = breadRadioGroup.getCheckedRadioButtonId();
         mChoice = getResources().getResourceEntryName(breadRadioChoice);
         mLevel = mChoice.substring( mChoice.length()-1, mChoice.length());
         mDiet.addNewIngredient(mFoodNames.get(7), Float.parseFloat(mCarbonCoefficient.get(7)),
-                                                 Float.parseFloat(mAverageConsumption.get(7)),
-                                                 Float.parseFloat(mLevel));
+                Float.parseFloat(mAverageConsumption.get(7)),
+                Float.parseFloat(mLevel));
 
     }
+
+
 
 }

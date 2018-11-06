@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hca127.greenfood.objects.Diet;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -86,15 +87,6 @@ public class SuggestionActivity extends AppCompatActivity {
         mTreesSaved = findViewById(R.id.treesSaved);
         mTreesSaved.setText(String.valueOf(treesSaved));
 
-        mAboutButton = (Button) findViewById(R.id.aboutButton);
-        mAboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
-                intent.putExtra("diet", mDiet);
-                startActivity(intent);
-            }
-        });
     }
 }
 

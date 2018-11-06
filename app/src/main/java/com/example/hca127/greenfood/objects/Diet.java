@@ -1,4 +1,4 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,15 +6,12 @@ import java.util.Date;
 
 public class Diet implements Serializable {
     private ArrayList<Food> mBasket;
-    private ArrayList<Integer> mUserChoices;
-    //private int NUMBER_OF_FOOD_TYPES = 8;
     private float mTotalUserCo2Emission = 0;
-    private Date tictok;
+    private Date mDate;
 
-    Diet(){
+    public Diet(){
         mBasket = new ArrayList<>();
-        mUserChoices = new ArrayList<>();
-        Date tiktok = new Date();
+        mDate = new Date();
     }
 
     public String getFoodName(int index){ return mBasket.get(index).getFoodName();}
@@ -25,22 +22,30 @@ public class Diet implements Serializable {
     public int getSize(){ return mBasket.size();}
 
     public void addNewIngredient(String foodName, float carbonCoefficient, float averageConsumption, float userConsumption){
-        Food i = new Food(foodName, carbonCoefficient, averageConsumption, userConsumption);
-        mBasket.add(i);
-        calculateTotalUserCo2Emission();
-    }
 
-    public void assignUserInput(String userChoiceAsString){
-        String temp = userChoiceAsString.substring( userChoiceAsString.length()-1, userChoiceAsString.length());
-        int option = Integer.parseInt(temp);
-        mUserChoices.add(option);
+        boolean duplicate = false;
+        for (int i = 0; i < mBasket.size(); i++) {
+            if (foodName.equals(mBasket.get(i).getFoodName())) {
+                mBasket.get(i).setCarbonCoefficient(carbonCoefficient);
+                mBasket.get(i).setAverageConsumption(averageConsumption);
+                mBasket.get(i).setUserConsumption(userConsumption);
+
+                duplicate = true;
+            }
+        }
+
+        if (!duplicate) {
+            Food i = new Food(foodName, carbonCoefficient, averageConsumption, userConsumption);
+            mBasket.add(i);
+        }
+        calculateTotalUserCo2Emission();
     }
 
     public float getUserDietEmission(){
         return mTotalUserCo2Emission;
     }
 
-    public Date getDate(){ return tictok;}
+    public Date getDate(){ return mDate;}
 
     public float getSuggestedDietEmission(){
         return this.mTotalUserCo2Emission - this.getSuggestedDietSavingAmount();

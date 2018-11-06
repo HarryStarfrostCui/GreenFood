@@ -194,6 +194,11 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
+    
+    <string name="display_name_promt">User Name: </string>
+    <string name="city_promt">City: </string>
+    <string name="email_promt">Email: </string>
+
 
     <string name="facebook_app_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
