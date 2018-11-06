@@ -56,14 +56,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        about = (ImageView) findViewById(R.id.menu_about);
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, AboutActivity.class);
-                startActivity(intent);
-            }
-        });
 
         /*login = (ImageView) findViewById(R.id.login_button_menu);
         login.setOnClickListener(new View.OnClickListener() {

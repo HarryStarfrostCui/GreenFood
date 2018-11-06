@@ -26,14 +26,6 @@ public class CommunityActivity extends AppCompatActivity {
         String email = google_account_info.getString("email","");
 
 
-        about_button = (ImageView) findViewById(R.id.about_button_community);
-        about_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CommunityActivity.this, AboutActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 

@@ -87,15 +87,6 @@ public class SuggestionActivity extends AppCompatActivity {
         mTreesSaved = findViewById(R.id.treesSaved);
         mTreesSaved.setText(String.valueOf(treesSaved));
 
-        mAboutButton = (Button) findViewById(R.id.aboutButton);
-        mAboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(SuggestionActivity.this, AboutActivity.class);
-                intent.putExtra("diet", mDiet);
-                startActivity(intent);
-            }
-        });
     }
 }
 
