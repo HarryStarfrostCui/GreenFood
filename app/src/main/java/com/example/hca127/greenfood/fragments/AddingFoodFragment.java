@@ -66,7 +66,7 @@ public class AddingFoodFragment extends Fragment {
                 prefsEditor.apply();
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ResultFragment()).commit();
+                        new ResultFragment()).addToBackStack(null).commit();
             }
         });
 
