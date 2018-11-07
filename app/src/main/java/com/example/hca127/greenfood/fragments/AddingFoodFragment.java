@@ -66,11 +66,10 @@ public class AddingFoodFragment extends Fragment {
                 prefsEditor.putString("mDiet", json);
                 prefsEditor.apply();
 
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                //intent.putExtra("mDiet", mDiet);
-                startActivity(intent);
+                //Intent intent = new Intent(getActivity(), ResultActivity.class);
+                //startActivity(intent);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddingFoodFragment()).commit();
+                        new ResultFragment()).commit();
             }
         });
 

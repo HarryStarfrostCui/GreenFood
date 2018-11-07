@@ -1,71 +1,69 @@
 package com.example.hca127.greenfood.objects;
 
-import com.example.hca127.greenfood.objects.Diet;
-
 import java.util.ArrayList;
 import java.util.Date;
 
 public class LocalUser {
-    private String UserId;
-    private String LastName;
-    private String FirstName;
-    private String UserPassword;
-    private String UserEmail;
-    private double Pledge;
-    private int CityIndex;
-    ArrayList<Diet> DietList;
+    private String mUserId;
+    private String mLastName;
+    private String mFirstName;
+    private String mUserPassword;
+    private String mUserEmail;
+    private double mPledge;
+    private int mCityIndex;
+    ArrayList<Diet> mDietList;
 
     public LocalUser(){
-        UserId = "";
-        LastName = "";
-        FirstName = "";
-        UserPassword = "";
-        UserEmail = "";
-        Pledge = 0.0;
-        CityIndex = 0;
-        DietList = new ArrayList<>();
+        mUserId = "";
+        mLastName = "";
+        mFirstName = "";
+        mUserPassword = "";
+        mUserEmail = "";
+        mPledge = 0.0;
+        mCityIndex = 0;
+        mDietList = new ArrayList<>();
     }
 
-    public String getUserId() {        return UserId;    }
-    public String getLastName(){        return  LastName;    }
-    public String getFirstName() {        return FirstName;    }
-    public String getUserEmail() {        return UserEmail;    }
-    public double getPledge() {        return Pledge;    }
-    public int getCity() {        return CityIndex;    }
+    public String getUserId() {        return mUserId;    }
+    public String getLastName(){        return mLastName;    }
+    public String getFirstName() {        return mFirstName;    }
+    public String getUserEmail() {        return mUserEmail;    }
+    public double getPledge() {        return mPledge;    }
+    public int getCity() {        return mCityIndex;    }
 
-    public void addDiet(Diet newDiet){        DietList.add(newDiet);    }
-    public Diet getInitialDiet(){   return DietList.get(0);    }
+    public void addDiet(Diet newDiet){        mDietList.add(newDiet);    }
+    public Diet getInitialDiet(){   return mDietList.get(0);    }
 
     public ArrayList<Date> getDietDateList() {
         ArrayList<Date> dates = new ArrayList<>();
-        for(int i = 0; i<DietList.size(); i++){
-            dates.add(DietList.get(i).getDate());
+        for(int i = 0; i< mDietList.size(); i++){
+            dates.add(mDietList.get(i).getDate());
         }
         return dates;
     }
 
     public ArrayList<Float> getEmissionList(){
         ArrayList<Float> CO2e = new ArrayList<>();
-        for(int i = 0; i<DietList.size(); i++){
-            CO2e.add(DietList.get(i).getUserDietEmission());
+        for(int i = 0; i< mDietList.size(); i++){
+            CO2e.add(mDietList.get(i).getUserDietEmission());
         }
         return CO2e;
     }
 
     public void renewDiet(){
-        while(DietList.size()>1){
-            DietList.remove(0);
+        while(mDietList.size()>1){
+            mDietList.remove(0);
         }
     }
 
     private void setUserId(String UserId) {        UserId = UserId;    }
-    public void setLastName(String lastName) {        LastName = lastName;    }
-    public void setFirstName(String firstName) {        FirstName = firstName;    }
-    public void setUserEmail(String userEmail) {        UserEmail = userEmail;    }
-    public void setPledge(double pledge) {        Pledge = pledge;    }
-    public void setCity(int index) {        CityIndex = index;    }
-    public void setUserPassword(String userPassword) {        UserPassword = userPassword;    }
+    public void setLastName(String mLastName) {        this.mLastName = mLastName;    }
+    public void setFirstName(String mFirstName) {        this.mFirstName = mFirstName;    }
+    public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
+    public void setPledge(double pledge) {        mPledge = pledge;    }
+    public void setCity(int index) {        mCityIndex = index;    }
+    public void setUserPassword(String userPassword) {        mUserPassword = userPassword;    }
 
-    public boolean CheckPassword(String Password){        return UserPassword.equals(Password);    }
+    public boolean CheckPassword(String Password){        return mUserPassword.equals(Password);    }
 
 }
