@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.hca127.greenfood.R;
-import com.example.hca127.greenfood.ResultActivity;
 import com.example.hca127.greenfood.SuggestionActivity;
 import com.example.hca127.greenfood.objects.Diet;
 import com.github.mikephil.charting.charts.PieChart;
