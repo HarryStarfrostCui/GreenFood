@@ -49,7 +49,7 @@
     </style>
 
     <style name="NiceButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:colorButtonNormal">@color/themeGreen</item>
+        <item name="android:backgroundTint">@color/themeGreen</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
