@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //open defult fragment, currently defult = calculator
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new AddingFoodFragment()).commit();
+                    new CommunityFragment()).commit();
             navigationView.setCheckedItem(R.id.menu_calculator);
         }
     }
