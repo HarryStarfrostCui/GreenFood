@@ -196,6 +196,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
 
+        <ImageButton
+            android:id="@+id/facebookShare"
+            style="@style/GreenText"
+            android:layout_width="48dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.17"
+            app:layout_constraintStart_toEndOf="@+id/treeHeading"
+            app:layout_constraintTop_toBottomOf="@+id/treeHeading"
+            app:srcCompat="@android:drawable/ic_menu_share" />
 
 
     </android.support.constraint.ConstraintLayout>

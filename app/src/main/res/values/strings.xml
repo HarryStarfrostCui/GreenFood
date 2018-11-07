@@ -200,7 +200,7 @@
     <string name="email_promt">Email: </string>
 
 
-    <string name="facebook_app_id">337483050352224</string>
+    <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
