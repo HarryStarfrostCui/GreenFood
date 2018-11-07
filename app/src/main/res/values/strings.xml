@@ -21,11 +21,14 @@
 
 
     <string name="welcome">Welcome to your very own CO2 calculator! \n Please log in!</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="login_button">Login</string>
-    <string name="Sign_up_button">Sign Up</string>
+    <string name="sign_up_button">Sign Up</string>
     <string name="login_slogan">Log in to make a change!</string>
     <string name="remember_me">Remember Me</string>
+
 
     <string name="create_account">Create your account</string>
 
@@ -195,9 +198,9 @@
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
     
-    <string name="display_name_promt">User Name: </string>
-    <string name="city_promt">City: </string>
-    <string name="email_promt">Email: </string>
+    <string name="display_name_prompt">User Name: </string>
+    <string name="city_prompt">City: </string>
+    <string name="email_prompt">Email: </string>
 
 
 
