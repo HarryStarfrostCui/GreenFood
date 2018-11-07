@@ -27,6 +27,7 @@
     <string name="login_button">Login</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="login_slogan">Log in to make a change!</string>
+    <string name="logged_in">You are logged in</string>
     <string name="remember_me">Remember Me</string>
 
 
@@ -197,12 +198,10 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
-    
+
     <string name="display_name_prompt">User Name: </string>
     <string name="city_prompt">City: </string>
     <string name="email_prompt">Email: </string>
-
-
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
