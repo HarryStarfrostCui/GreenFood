@@ -3,6 +3,7 @@ package com.example.hca127.greenfood;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.example.hca127.greenfood.fragments.AboutFragment;
 import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
+import com.example.hca127.greenfood.fragments.LoginFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //open defult fragment, currently defult = calculator
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new AddingFoodFragment()).commit();
+                    new CommunityFragment()).commit();
             navigationView.setCheckedItem(R.id.menu_calculator);
         }
     }
@@ -51,8 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else {
-            super.onBackPressed();
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+            if (count == 0) {
+                super.onBackPressed();
+            } else {
+                getSupportFragmentManager().popBackStack();
+            }
         }
+
     }
 
     @Override
@@ -60,23 +68,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.menu_community:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CommunityFragment()).commit();
+                        new CommunityFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AboutFragment()).commit();
+                        new AboutFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_calculator:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddingFoodFragment()).commit();
+                        new AddingFoodFragment()).addToBackStack("AddingFoodFragment").commit();
                 break;
             case R.id.menu_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new ProfileFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_Login:
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new LoginFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_LogOff:
                 Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();

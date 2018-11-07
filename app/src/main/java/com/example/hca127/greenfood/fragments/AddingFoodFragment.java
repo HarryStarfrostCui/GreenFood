@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.example.hca127.greenfood.R;
-import com.example.hca127.greenfood.ResultActivity;
 import com.example.hca127.greenfood.objects.Diet;
 import com.google.gson.Gson;
 
@@ -66,11 +65,8 @@ public class AddingFoodFragment extends Fragment {
                 prefsEditor.putString("mDiet", json);
                 prefsEditor.apply();
 
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                //intent.putExtra("mDiet", mDiet);
-                startActivity(intent);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddingFoodFragment()).commit();
+                        new ResultFragment()).addToBackStack(null).commit();
             }
         });
 
