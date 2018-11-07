@@ -52,10 +52,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else {
-            if (getFragmentManager().getBackStackEntryCount() == 0) {
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+            if (count == 0) {
                 super.onBackPressed();
             } else {
-                getFragmentManager().popBackStack();
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         }
     }
@@ -65,23 +66,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.menu_community:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CommunityFragment()).commit();
+                        new CommunityFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AboutFragment()).commit();
+                        new AboutFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_calculator:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddingFoodFragment()).commit();
+                        new AddingFoodFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                        new ProfileFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LoginFragment()).commit();
+                        new LoginFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_LogOff:
                 Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
