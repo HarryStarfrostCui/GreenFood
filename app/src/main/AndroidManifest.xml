@@ -20,16 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SuggestionActivity"
-            android:label="@string/title_activity_suggestion"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".CommunityActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <provider
             android:authorities="com.facebook.app.FacebookContentProvider{337483050352224}"
             android:name="com.facebook.FacebookContentProvider"

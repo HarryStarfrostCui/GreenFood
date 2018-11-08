@@ -1,22 +1,19 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.fragments;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.hardware.camera2.TotalCaptureResult;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hca127.greenfood.MainActivity;
+import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -33,12 +30,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.gson.Gson;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
-public class SuggestionActivity extends AppCompatActivity {
+
+public class PledgeFragment extends Fragment {
     private BarChart mSuggestionChart;
     private Button mAboutButton;
     private ImageButton mFacebookShare;
@@ -51,30 +47,23 @@ public class SuggestionActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        callbackManager = CallbackManager.Factory.create();
-        setContentView(R.layout.activity_suggestion);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pledge, container, false);
 
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("mDiet", "");
+        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
 
-        //mDiet = (Diet)getIntent().getSerializableExtra("diet");
-        mDiet = gson.fromJson(json, Diet.class);
-
-
-        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
+        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
         mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
 
-        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
+        mIncreaseSuggestionText = view.findViewById(R.id.increaseSuggestionText);
         mIncreaseSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
 
-        mUserEmissionSaving = findViewById(R.id.userEmissionSaving);
+        mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
         mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
-        mSuggestionChart = findViewById(R.id.suggestionChart);
+        mSuggestionChart = view.findViewById(R.id.suggestionChart);
         mFacebookShare = findViewById(R.id.facebookShare);
         shareDialog = new ShareDialog(this);
 
@@ -86,7 +75,7 @@ public class SuggestionActivity extends AppCompatActivity {
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
-        final BarData suggestionData = new BarData(barDataSet);
+        BarData suggestionData = new BarData(barDataSet);
         mSuggestionChart.getXAxis().setDrawGridLines(false);
         mSuggestionChart.getLegend().setEnabled(false);
         mSuggestionChart.getAxisRight().setAxisMinimum(0f);
@@ -97,20 +86,22 @@ public class SuggestionActivity extends AppCompatActivity {
         mSuggestionChart.animateY(1200);
         mSuggestionChart.invalidate();
 
-        float carbonSaved = mDiet.getSuggestedDietSavingAmount() * .9f * 2463000f / 1000;
-        float treesSaved = carbonSaved / 22;  // carbon offset of trees
+        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
+        float treesSaved = carbonSaved/22;  // carbon offset of trees
 
-        if (carbonSaved < 0) {
+        if(carbonSaved < 0)
+        {
             carbonSaved = 0;
             treesSaved = 0;
         }
 
-        mCarbonSaved = findViewById(R.id.carbonSaved);
+        mCarbonSaved = view.findViewById(R.id.carbonSaved);
         mCarbonSaved.setText(String.valueOf(carbonSaved));
 
-        mTreesSaved = findViewById(R.id.treesSaved);
+        mTreesSaved = view.findViewById(R.id.treesSaved);
         mTreesSaved.setText(String.valueOf(treesSaved));
 
+        return view;
         //share stuff
         mFacebookShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +171,5 @@ public class SuggestionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
 }
-
-
-
