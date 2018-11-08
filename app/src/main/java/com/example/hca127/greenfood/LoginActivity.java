@@ -79,20 +79,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        google_sign_in_button = (SignInButton) findViewById(R.id.google_sign_in_button);
-        google_sign_in_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent,RC_SIGN_IN);
-            }
-        });
-
-        google_sign_in_options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.request_token))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, google_sign_in_options);
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,58 +134,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                e.printStackTrace();
-            }
-
-        }
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-
-    }
-
-    private void firebaseAuthWithGoogle(final GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
 
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                SharedPreferences account_info = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                SharedPreferences.Editor editor = account_info.edit();
-
-
-                Log.d("CHECK",account.getEmail());
-                Log.d("CHECK2", account.getId());
-                editor.putString("account_name",account.getDisplayName());
-                editor.putString("account_email", account.getEmail());
-                editor.putString("account_id", account.getId());
-                editor.putInt("city_choice",1);
-                editor.apply();
-
-                Toast.makeText(LoginActivity.this,"Logged in with Google",Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-
-                /*String account_name = user.getDisplayName();
-                String account_email = user.getEmail();
-                Uri account_photo = user.getPhotoUrl();
-
-                google_account.putSerializable("name",account_name);
-                google_account.putSerializable("email", account_email);*/
-            }
-        });
-    }
 
 
 

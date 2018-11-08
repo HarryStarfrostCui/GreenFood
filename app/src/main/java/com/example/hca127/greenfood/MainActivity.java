@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
                 break;
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
