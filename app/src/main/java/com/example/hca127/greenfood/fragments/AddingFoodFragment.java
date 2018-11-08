@@ -47,7 +47,7 @@ public class AddingFoodFragment extends Fragment {
         });
 
         int[] RadioId={
-                R.id.breadRadioGroup, R.id.lambRadioGroup, R.id.chickenRadioGroup,
+                R.id.beefRadioGroup, R.id.lambRadioGroup, R.id.chickenRadioGroup,
                 R.id.fishRadioGroup, R.id.porkRadioGroup, R.id.eggRadioGroup,
                 R.id.vegRadioGroup, R.id.breadRadioGroup
         };
