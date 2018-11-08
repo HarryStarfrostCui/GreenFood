@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
+import com.example.hca127.greenfood.objects.LocalUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +30,7 @@ public class LoginFragment extends Fragment {
     private EditText mPasswordInput;
     private Button mSignUpButton;
     private Button mLoginButton;
+    private LocalUser mLocalUser;
 
 
     @Nullable
@@ -42,6 +45,8 @@ public class LoginFragment extends Fragment {
         mPasswordInput = view.findViewById(R.id.passwordInput);
         mSignUpButton = view.findViewById(R.id.signUpButton);
         mLoginButton = view.findViewById(R.id.loginButton);
+
+        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
         mUser = mAuthentication.getCurrentUser();
         updateUser(mUser);
@@ -108,9 +113,14 @@ public class LoginFragment extends Fragment {
 
     private void updateUser(FirebaseUser user) {
         if(user != null) {
-            mStatusText.setText(R.string.logged_in);
+            mLocalUser.setFirstName("");
+            mLocalUser.setUserEmail(user.getEmail());
+            mLocalUser.setUserId(user.getUid());
+            ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+            String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
+            mStatusText.setText(dialog);
         } else {
-            mStatusText.setText(R.string.login_slogan);
+            mStatusText.setText(R.string.logged_out);
         }
     }
 
