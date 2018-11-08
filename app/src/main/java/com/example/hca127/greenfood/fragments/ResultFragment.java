@@ -1,11 +1,8 @@
 package com.example.hca127.greenfood.fragments;
 
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,15 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
-import com.example.hca127.greenfood.SuggestionActivity;
 import com.example.hca127.greenfood.objects.Diet;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -44,11 +40,13 @@ public class ResultFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("mDiet", "");
+//        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        Gson gson = new Gson();
+//        String json = appSharedPrefs.getString("mDiet", "");
+//
+//        mDiet = gson.fromJson(json, Diet.class);
 
-        mDiet = gson.fromJson(json, Diet.class);
+        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
         mUserCarbon = mDiet.getUserDietEmission(); //insert calculated mCarbonSaved in tC02e
 
         mResultText = view.findViewById(R.id.resultText);
@@ -68,9 +66,8 @@ public class ResultFragment extends Fragment {
         mGetSuggestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getActivity(), SuggestionActivity.class);
-                intent.putExtra("diet", mDiet);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PledgeFragment()).addToBackStack(null).commit();
             }
         });
 

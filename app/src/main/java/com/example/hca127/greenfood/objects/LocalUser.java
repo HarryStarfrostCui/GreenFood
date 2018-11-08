@@ -1,9 +1,10 @@
 package com.example.hca127.greenfood.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class LocalUser {
+public class LocalUser implements Serializable {
     private String mUserId;
     private String mLastName;
     private String mFirstName;
@@ -16,9 +17,9 @@ public class LocalUser {
     public LocalUser(){
         mUserId = "";
         mLastName = "";
-        mFirstName = "";
+        mFirstName = "anonymoose";
         mUserPassword = "";
-        mUserEmail = "";
+        mUserEmail = "anony@moose.com";
         mPledge = 0.0;
         mCityIndex = 0;
         mDietList = new ArrayList<>();
@@ -33,6 +34,15 @@ public class LocalUser {
 
     public void addDiet(Diet newDiet){        mDietList.add(newDiet);    }
     public Diet getInitialDiet(){   return mDietList.get(0);    }
+
+    public Diet getCurrentDiet() {
+        if( mDietList.size() == 0) {
+            return new Diet();
+        } else {
+            return mDietList.get(mDietList.size() - 1);
+        }
+
+    }
 
     public ArrayList<Date> getDietDateList() {
         ArrayList<Date> dates = new ArrayList<>();

@@ -44,7 +44,7 @@ public class LoginFragment extends Fragment {
         mLoginButton = view.findViewById(R.id.loginButton);
 
         mUser = mAuthentication.getCurrentUser();
-        updateUserInterface(mUser);
+        updateUser(mUser);
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        updateUserInterface(mAuthentication.getCurrentUser());
+                        updateUser(mAuthentication.getCurrentUser());
                     }
                 });
     }
@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment {
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        updateUserInterface(mAuthentication.getCurrentUser());
+                        updateUser(mAuthentication.getCurrentUser());
                     }
                 });
 
@@ -106,7 +106,7 @@ public class LoginFragment extends Fragment {
             return false;
     }
 
-    private void updateUserInterface(FirebaseUser user) {
+    private void updateUser(FirebaseUser user) {
         if(user != null) {
             mStatusText.setText(R.string.logged_in);
         } else {
