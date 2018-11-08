@@ -203,5 +203,7 @@
     <string name="city_prompt">City: </string>
     <string name="email_prompt">Email: </string>
 
+    <string name="request_token">729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com</string>
+
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
