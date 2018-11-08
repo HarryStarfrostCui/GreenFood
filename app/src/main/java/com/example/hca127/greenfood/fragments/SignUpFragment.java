@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.w3c.dom.Text;
 
@@ -33,6 +34,7 @@ public class SignUpFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private ImageView mSignUp;
+    private EditText mUserName;
     private EditText mEmail;
     private EditText mPassword;
     private EditText mPasswordConfirm;
@@ -40,6 +42,7 @@ public class SignUpFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        mUserName = (EditText) view.findViewById(R.id.create_username_input);
         mEmail = (EditText) view.findViewById(R.id.create_email_input);
         mPassword = (EditText) view.findViewById(R.id.create_password_input);
         mPasswordConfirm = (EditText) view.findViewById(R.id.create_confirm_password);
@@ -48,6 +51,7 @@ public class SignUpFragment extends Fragment {
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String userName = mUserName.getText().toString();
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
                 String passwordConfirm = mPasswordConfirm.getText().toString();
@@ -63,6 +67,9 @@ public class SignUpFragment extends Fragment {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d("Check", "createUserWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(userName).build();
+                                        user.updateProfile(profileUpdates);
                                         Toast.makeText(getActivity(), user.getEmail(),
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -85,7 +92,7 @@ public class SignUpFragment extends Fragment {
             }
 
             private void updateUser(FirebaseUser user) {
-                mLocalUser.setFirstName("");
+                mLocalUser.setFirstName(user.getDisplayName());
                 mLocalUser.setUserEmail(user.getEmail());
                 mLocalUser.setUserId(user.getUid());
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
