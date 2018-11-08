@@ -15,17 +15,21 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
+import com.example.hca127.greenfood.objects.LocalUser;
 
 public class ProfileFragment extends Fragment {
 
     private ImageView name_pencil;
-    private ImageView name_check;
+    private ImageView mNameCheck;
     private EditText display_name;
     private TextView email;
     private Spinner city_choice;
     private ImageView city_check;
     private ImageView city_pencil;
+
+    private LocalUser mLocalUser;
 
 
     @Nullable
@@ -33,8 +37,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        name_check = view.findViewById(R.id.edit_display_name_button_check);
-        name_check.setVisibility(ImageView.GONE);
+        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+
+        mNameCheck = view.findViewById(R.id.edit_display_name_button_check);
+        mNameCheck.setVisibility(ImageView.GONE);
 
         city_check = view.findViewById(R.id.edit_city_spinner_check);
         city_check.setVisibility(ImageView.GONE);
@@ -66,19 +72,23 @@ public class ProfileFragment extends Fragment {
                 display_name.setInputType(InputType.TYPE_CLASS_TEXT);
                 display_name.requestFocus();
                 name_pencil.setVisibility(ImageView.GONE);
-                name_check.setVisibility(ImageView.VISIBLE);
+                mNameCheck.setVisibility(ImageView.VISIBLE);
             }
         });
 
-        name_check.setOnClickListener(new View.OnClickListener() {
+        mNameCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 display_name.setEnabled(false);
-                String new_name = display_name.getText().toString();
+                String newName = display_name.getText().toString();
                 SharedPreferences.Editor editor = google_stuff.edit();
-                editor.putString("google_account_name",new_name);
+                editor.putString("google_account_name",newName);
                 editor.apply();
-                name_check.setVisibility(ImageView.GONE);
+
+                mLocalUser.setFirstName(newName);
+                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+
+                mNameCheck.setVisibility(ImageView.GONE);
                 name_pencil.setVisibility(ImageView.VISIBLE);
             }
         });

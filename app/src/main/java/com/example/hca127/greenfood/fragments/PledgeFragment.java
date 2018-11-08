@@ -1,27 +1,30 @@
-package com.example.hca127.greenfood;
+package com.example.hca127.greenfood.fragments;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hca127.greenfood.MainActivity;
+import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class SuggestionActivity extends AppCompatActivity {
+
+public class PledgeFragment extends Fragment {
     private BarChart mSuggestionChart;
-    private Button mAboutButton;
     private Diet mDiet;
     private TextView mReduceSuggestionText;
     private TextView mIncreaseSuggestionText;
@@ -29,29 +32,23 @@ public class SuggestionActivity extends AppCompatActivity {
     private TextView mCarbonSaved;
     private TextView mTreesSaved;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_suggestion);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pledge, container, false);
 
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("mDiet", "");
+        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
 
-        //mDiet = (Diet)getIntent().getSerializableExtra("diet");
-        mDiet = gson.fromJson(json, Diet.class);
-
-
-        mReduceSuggestionText = findViewById(R.id.reduceSuggestionText);
+        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
         mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
 
-        mIncreaseSuggestionText = findViewById(R.id.increaseSuggestionText);
+        mIncreaseSuggestionText = view.findViewById(R.id.increaseSuggestionText);
         mIncreaseSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
 
-        mUserEmissionSaving = findViewById(R.id.userEmissionSaving);
+        mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
         mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
-        mSuggestionChart = findViewById(R.id.suggestionChart);
+        mSuggestionChart = view.findViewById(R.id.suggestionChart);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
@@ -81,14 +78,13 @@ public class SuggestionActivity extends AppCompatActivity {
             treesSaved = 0;
         }
 
-        mCarbonSaved = findViewById(R.id.carbonSaved);
+        mCarbonSaved = view.findViewById(R.id.carbonSaved);
         mCarbonSaved.setText(String.valueOf(carbonSaved));
 
-        mTreesSaved = findViewById(R.id.treesSaved);
+        mTreesSaved = view.findViewById(R.id.treesSaved);
         mTreesSaved.setText(String.valueOf(treesSaved));
 
+        return view;
     }
+
 }
-
-
-
