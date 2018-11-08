@@ -68,13 +68,16 @@ public class LoginFragment extends Fragment {
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailInput.getText().toString();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SignUpFragment()).addToBackStack(null).commit();
+
+                /*String email = mEmailInput.getText().toString();
                 String password = mPasswordInput.getText().toString();
                 if( checkPassword(password) ) {
                     signUp(email, password);
                 } else {
                     Toast.makeText(getActivity(), "not a valid password", Toast.LENGTH_LONG ).show();
-                }
+                }*/
             }
         });
 
