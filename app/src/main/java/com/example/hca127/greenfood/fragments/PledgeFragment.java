@@ -1,6 +1,8 @@
 package com.example.hca127.greenfood.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +56,7 @@ public class PledgeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pledge, container, false);
 
-        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
+        mDiet = ((MainActivity) getActivity()).getLocalUserDiet();
 
         mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
         mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
@@ -64,7 +68,7 @@ public class PledgeFragment extends Fragment {
         mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);
-        mFacebookShare = findViewById(R.id.facebookShare);
+        mFacebookShare = view.findViewById(R.id.facebookShare);
         shareDialog = new ShareDialog(this);
 
         ArrayList<BarEntry> entries = new ArrayList<>();
@@ -86,11 +90,10 @@ public class PledgeFragment extends Fragment {
         mSuggestionChart.animateY(1200);
         mSuggestionChart.invalidate();
 
-        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
-        float treesSaved = carbonSaved/22;  // carbon offset of trees
+        float carbonSaved = mDiet.getSuggestedDietSavingAmount() * .9f * 2463000f / 1000;
+        float treesSaved = carbonSaved / 22;  // carbon offset of trees
 
-        if(carbonSaved < 0)
-        {
+        if (carbonSaved < 0) {
             carbonSaved = 0;
             treesSaved = 0;
         }
@@ -101,7 +104,6 @@ public class PledgeFragment extends Fragment {
         mTreesSaved = view.findViewById(R.id.treesSaved);
         mTreesSaved.setText(String.valueOf(treesSaved));
 
-        return view;
         //share stuff
         mFacebookShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,30 +111,30 @@ public class PledgeFragment extends Fragment {
                 shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
                     @Override
                     public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(SuggestionActivity.this, "share success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "share success!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(SuggestionActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-                        Toast.makeText(SuggestionActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-//                ShareLinkContent linkContent = new ShareLinkContent.Builder()
-//                        .setContentUrl(Uri.parse("https://cmpt276.sfu.rosielab.ca/project"))
-//                        .setQuote("testing")
-//                        .build();
-//                if (ShareDialog.canShow(ShareLinkContent.class))
-//                {
-//                    shareDialog.show(linkContent);
-//                }
+                ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                        .setContentUrl(Uri.parse("https://cmpt276.sfu.rosielab.ca/project"))
+                        .setQuote("testing")
+                        .build();
+                if (ShareDialog.canShow(ShareLinkContent.class))
+                {
+                    shareDialog.show(linkContent);
+                }
 
 
-                Bitmap mLogoImage = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.logo);
+                Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo);
                 SharePhoto mSharePhoto = new SharePhoto.Builder()
                         .setBitmap(mLogoImage)
                         .build();
@@ -141,8 +143,7 @@ public class PledgeFragment extends Fragment {
                         .setShareHashtag(new ShareHashtag.Builder().setHashtag("#I dialog").build())
                         .build();
                 ShareApi.share(content, null);
-                if (ShareDialog.canShow(SharePhotoContent.class))
-                {
+                if (ShareDialog.canShow(SharePhotoContent.class)) {
                     shareDialog.show(content);
                 }
             }
@@ -159,17 +160,15 @@ public class PledgeFragment extends Fragment {
 //            }
 //        });
 
-    }
+//        @Override
+//        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//            super.onActivityResult(requestCode, resultCode, data);
+//            callbackManager.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
 
-    private String getURLForResource(int resourceID) {
-        return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/"+resourceID).toString();
-    }
+        //}
 
-    //}
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        return view;
     }
-
 }
