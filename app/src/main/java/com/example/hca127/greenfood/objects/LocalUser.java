@@ -66,7 +66,7 @@ public class LocalUser implements Serializable {
         }
     }
 
-    private void setUserId(String UserId) {        UserId = UserId;    }
+    public void setUserId(String UserId) {        this.mUserId = UserId;    }
     public void setLastName(String mLastName) {        this.mLastName = mLastName;    }
     public void setFirstName(String mFirstName) {        this.mFirstName = mFirstName;    }
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }

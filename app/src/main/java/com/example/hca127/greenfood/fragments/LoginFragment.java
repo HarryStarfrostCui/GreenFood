@@ -113,7 +113,9 @@ public class LoginFragment extends Fragment {
 
     private void updateUser(FirebaseUser user) {
         if(user != null) {
+            mLocalUser.setFirstName("");
             mLocalUser.setUserEmail(user.getEmail());
+            mLocalUser.setUserId(user.getUid());
             ((MainActivity)getActivity()).setLocalUser(mLocalUser);
             String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
             mStatusText.setText(dialog);
