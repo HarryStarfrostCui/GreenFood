@@ -198,7 +198,7 @@
 
         <ImageButton
             android:id="@+id/facebookShare"
-            style="@style/GreenText"
+            style="@style/NiceButton"
             android:layout_width="48dp"
             android:layout_height="49dp"
             android:layout_marginStart="8dp"
