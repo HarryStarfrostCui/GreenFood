@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // load local user from shared Preferences
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         Gson gson = new Gson();
-        String json = appSharedPrefs.getString("user", "");
+        String json = appSharedPrefs.getString("mLocalUser", "");
 
         mLocalUser = gson.fromJson(json, LocalUser.class);
         if(mLocalUser == null)
             mLocalUser = new LocalUser();
 
         updateHeader();
-        
+
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new CommunityFragment()).commit();
@@ -129,6 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setLocalUser(LocalUser user) {
         mLocalUser = user;
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mLocalUser);
+        prefsEditor.putString("mLocalUser", json);
+        prefsEditor.apply();
         updateHeader();
     }
 
