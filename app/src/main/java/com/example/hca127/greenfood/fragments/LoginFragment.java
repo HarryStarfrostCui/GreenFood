@@ -116,7 +116,6 @@ public class LoginFragment extends Fragment {
 
     private void updateUser(FirebaseUser user) {
         if(user != null) {
-            mLocalUser.setFirstName("");
             mLocalUser.setUserEmail(user.getEmail());
             mLocalUser.setUserId(user.getUid());
             ((MainActivity)getActivity()).setLocalUser(mLocalUser);

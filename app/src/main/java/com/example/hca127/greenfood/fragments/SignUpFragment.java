@@ -59,8 +59,7 @@ public class SignUpFragment extends Fragment {
                 String passwordConfirm = mPasswordConfirm.getText().toString();
                 if(email.isEmpty() == false && password.isEmpty() == false && password.length()>6 && password.equals(passwordConfirm)) {
                     mAuth = FirebaseAuth.getInstance();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUser(user);
+
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -72,8 +71,7 @@ public class SignUpFragment extends Fragment {
                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                 .setDisplayName(userName).build();
                                         user.updateProfile(profileUpdates);
-                                        Toast.makeText(getActivity(), user.getEmail(),
-                                                Toast.LENGTH_SHORT).show();
+                                        updateUser(user);
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         startActivity(intent);
 
@@ -96,8 +94,12 @@ public class SignUpFragment extends Fragment {
                 mLocalUser.setFirstName(mUserNameLocal);
                 mLocalUser.setUserEmail(user.getEmail());
                 mLocalUser.setUserId(user.getUid());
+
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
 
+                String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
+                Toast.makeText(getActivity(), dialog,
+                        Toast.LENGTH_LONG).show();
             }
         });
 
