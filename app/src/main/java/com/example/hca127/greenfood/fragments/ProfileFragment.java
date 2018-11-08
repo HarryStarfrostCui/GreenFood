@@ -23,12 +23,11 @@ public class ProfileFragment extends Fragment {
 
     private ImageView name_pencil;
     private ImageView mNameCheck;
-    private EditText display_name;
-    private TextView email;
-    private Spinner city_choice;
-    private ImageView city_check;
-    private ImageView city_pencil;
-
+    private EditText mDisplayName;
+    private TextView mEmail;
+    private Spinner mCityChoice;
+    private ImageView mCityCheck;
+    private ImageView mCityPencil;
     private LocalUser mLocalUser;
 
 
@@ -42,35 +41,35 @@ public class ProfileFragment extends Fragment {
         mNameCheck = view.findViewById(R.id.edit_display_name_button_check);
         mNameCheck.setVisibility(ImageView.GONE);
 
-        city_check = view.findViewById(R.id.edit_city_spinner_check);
-        city_check.setVisibility(ImageView.GONE);
+        mCityCheck = view.findViewById(R.id.edit_city_spinner_check);
+        mCityCheck.setVisibility(ImageView.GONE);
 
-        city_choice = view.findViewById(R.id.edit_city_spinner_choice);
-        city_choice.setEnabled(false);
+        mCityChoice = view.findViewById(R.id.edit_city_spinner_choice);
+        mCityChoice.setEnabled(false);
 
 
 
         final SharedPreferences google_stuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        String google_name = google_stuff.getString("account_name","");
-        String google_email = google_stuff.getString("account_email","");
-        int city = google_stuff.getInt("city_choice",0);
-        city_choice.setSelection(city);
-        display_name = (EditText) view.findViewById(R.id.display_name);
-        display_name.setText(google_name);
-        display_name.setEnabled(false);
-        email = (TextView) view.findViewById(R.id.email);
-        email.setText(google_email);
+        /*String google_name = google_stuff.getString("google_account_name","");
+        String google_email = google_stuff.getString("google_account_email", mLocalUser.getUserEmail());
+        final int city = google_stuff.getInt("mCityChoice",0);*/
+        mCityChoice.setSelection(mLocalUser.getCity());
+        mDisplayName = (EditText) view.findViewById(R.id.display_name);
+        mDisplayName.setText(mLocalUser.getFirstName());
+        mDisplayName.setEnabled(false);
+        mEmail = (TextView) view.findViewById(R.id.email);
+        mEmail.setText(mLocalUser.getUserEmail());
 
 
         name_pencil = (ImageView) view.findViewById(R.id.edit_display_name_button);
         name_pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                display_name.setEnabled(true);
-                display_name.setCursorVisible(true);
-                display_name.setFocusableInTouchMode(true);
-                display_name.setInputType(InputType.TYPE_CLASS_TEXT);
-                display_name.requestFocus();
+                mDisplayName.setEnabled(true);
+                mDisplayName.setCursorVisible(true);
+                mDisplayName.setFocusableInTouchMode(true);
+                mDisplayName.setInputType(InputType.TYPE_CLASS_TEXT);
+                mDisplayName.requestFocus();
                 name_pencil.setVisibility(ImageView.GONE);
                 mNameCheck.setVisibility(ImageView.VISIBLE);
             }
@@ -79,8 +78,8 @@ public class ProfileFragment extends Fragment {
         mNameCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                display_name.setEnabled(false);
-                String newName = display_name.getText().toString();
+                mDisplayName.setEnabled(false);
+                String newName = mDisplayName.getText().toString();
                 SharedPreferences.Editor editor = google_stuff.edit();
                 editor.putString("google_account_name",newName);
                 editor.apply();
@@ -94,20 +93,20 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        city_pencil = (ImageView) view.findViewById(R.id.edit_city_spinner_button);
-        city_pencil.setOnClickListener(new View.OnClickListener() {
+        mCityPencil = (ImageView) view.findViewById(R.id.edit_city_spinner_button);
+        mCityPencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                city_choice.setEnabled(true);
-                city_pencil.setVisibility(ImageView.GONE);
-                city_check.setVisibility(ImageView.VISIBLE);
+                mCityChoice.setEnabled(true);
+                mCityPencil.setVisibility(ImageView.GONE);
+                mCityCheck.setVisibility(ImageView.VISIBLE);
 
-                /*city_choice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                /*mCityChoice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        int city = Integer.parseInt(city_choice.getItemAtPosition(position).toString());
+                        int city = Integer.parseInt(mCityChoice.getItemAtPosition(position).toString());
                         final SharedPreferences.Editor editor = google_stuff.edit();
-                        editor.putInt("city_choice",city);
+                        editor.putInt("mCityChoice",city);
                         editor.apply();
                     }
                 });*/
@@ -115,15 +114,17 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        city_check.setOnClickListener(new View.OnClickListener() {
+        mCityCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                city_choice.setEnabled(false);
-                city_pencil.setVisibility(ImageView.VISIBLE);
-                city_check.setVisibility(ImageView.GONE);
-                int city = city_choice.getSelectedItemPosition();
+                mCityChoice.setEnabled(false);
+                mCityPencil.setVisibility(ImageView.VISIBLE);
+                mCityCheck.setVisibility(ImageView.GONE);
+                int city = mCityChoice.getSelectedItemPosition();
+                mLocalUser.setCity(city);
+                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                 SharedPreferences.Editor editor = google_stuff.edit();
-                editor.putInt("city_choice",city);
+                editor.putInt("mCityChoice",city);
                 editor.apply();
             }
         });
