@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.SuggestionActivity;
 import com.example.hca127.greenfood.objects.Diet;
@@ -44,11 +45,13 @@ public class ResultFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("mDiet", "");
+//        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        Gson gson = new Gson();
+//        String json = appSharedPrefs.getString("mDiet", "");
+//
+//        mDiet = gson.fromJson(json, Diet.class);
 
-        mDiet = gson.fromJson(json, Diet.class);
+        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
         mUserCarbon = mDiet.getUserDietEmission(); //insert calculated mCarbonSaved in tC02e
 
         mResultText = view.findViewById(R.id.resultText);
