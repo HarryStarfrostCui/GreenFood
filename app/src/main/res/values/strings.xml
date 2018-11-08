@@ -27,7 +27,7 @@
     <string name="login_button">Login</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="login_slogan">Log in to make a change!</string>
-    <string name="logged_in">You are logged in</string>
+    <string name="logged_in">You are logged in as: %s</string>
     <string name="logged_out">Not Logged in</string>
     <string name="remember_me">Remember Me</string>
 

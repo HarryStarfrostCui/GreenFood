@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mLocalUser = new LocalUser();
 
         updateHeader();
-
-
+        
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new CommunityFragment()).commit();
@@ -130,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setLocalUser(LocalUser user) {
         mLocalUser = user;
+        updateHeader();
     }
 
     private void updateHeader() {
