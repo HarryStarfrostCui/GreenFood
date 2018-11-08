@@ -39,6 +39,7 @@ public class SignUpFragment extends Fragment {
     private EditText mPassword;
     private EditText mPasswordConfirm;
     private LocalUser mLocalUser;
+    private String mUserNameLocal;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
@@ -52,6 +53,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final String userName = mUserName.getText().toString();
+                mUserNameLocal = userName;
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
                 String passwordConfirm = mPasswordConfirm.getText().toString();
@@ -90,9 +92,8 @@ public class SignUpFragment extends Fragment {
                     Toast.makeText(getActivity(), "Sign up failed, please enter valid email and password!", Toast.LENGTH_LONG).show();
                 }
             }
-
             private void updateUser(FirebaseUser user) {
-                mLocalUser.setFirstName(user.getDisplayName());
+                mLocalUser.setFirstName(mUserNameLocal);
                 mLocalUser.setUserEmail(user.getEmail());
                 mLocalUser.setUserId(user.getUid());
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
