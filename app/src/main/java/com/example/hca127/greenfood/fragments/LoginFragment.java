@@ -110,7 +110,7 @@ public class LoginFragment extends Fragment {
         if(user != null) {
             mStatusText.setText(R.string.logged_in);
         } else {
-            mStatusText.setText(R.string.login_slogan);
+            mStatusText.setText(R.string.logged_out);
         }
     }
 
