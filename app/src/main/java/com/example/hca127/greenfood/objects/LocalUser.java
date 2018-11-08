@@ -16,9 +16,9 @@ public class LocalUser {
     public LocalUser(){
         mUserId = "";
         mLastName = "";
-        mFirstName = "";
+        mFirstName = "anonymoose";
         mUserPassword = "";
-        mUserEmail = "";
+        mUserEmail = "anony@moose.com";
         mPledge = 0.0;
         mCityIndex = 0;
         mDietList = new ArrayList<>();
