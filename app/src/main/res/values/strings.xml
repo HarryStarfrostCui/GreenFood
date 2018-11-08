@@ -202,6 +202,6 @@
     <string name="display_name_prompt">User Name: </string>
     <string name="city_prompt">City: </string>
     <string name="email_prompt">Email: </string>
-
+    
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
