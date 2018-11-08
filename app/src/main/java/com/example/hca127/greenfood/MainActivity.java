@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView mUserEmail;
     private TextView mUserName;
 
-    //  https://www.youtube.com/watch?v=bjYstsO1PgI&index=4&list=PLrnPJCHvNZuDQ-jWPw13-wY2J57Z6ep6G&t=0s
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.Navigation_drawer_open, R.string.Navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-        //open default fragment, currently default = calculator
 
         // load local user from shared Preferences
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
