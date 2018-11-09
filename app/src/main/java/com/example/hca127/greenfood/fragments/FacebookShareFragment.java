@@ -105,7 +105,7 @@ public class FacebookShareFragment extends Fragment {
                 if (ShareDialog.canShow(SharePhotoContent.class)) {
                     shareDialog.show(content);
                 }
-                
+
 
 
         //call intent
