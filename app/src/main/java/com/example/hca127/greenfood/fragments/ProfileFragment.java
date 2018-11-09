@@ -2,9 +2,6 @@ package com.example.hca127.greenfood.fragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -57,7 +54,7 @@ public class ProfileFragment extends Fragment {
         mCityChoice = view.findViewById(R.id.edit_city_spinner_choice);
         mCityChoice.setEnabled(false);
 
-        final SharedPreferences google_stuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+        final SharedPreferences googleStuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         /*String google_name = google_stuff.getString("google_account_name","");
         String google_email = google_stuff.getString("google_account_email", mLocalUser.getUserEmail());
         final int city = google_stuff.getInt("mCityChoice",0);*/
@@ -68,7 +65,7 @@ public class ProfileFragment extends Fragment {
         mEmail = (TextView) view.findViewById(R.id.email);
         mEmail.setText(mLocalUser.getUserEmail());
 
-        mProfilePicture = (ImageView)view.findViewById(R.id.ProfilePicture);
+        mProfilePicture = (ImageView)view.findViewById(R.id.profilePicture);
 
         mProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +95,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 mDisplayName.setEnabled(false);
                 String newName = mDisplayName.getText().toString();
-                SharedPreferences.Editor editor = google_stuff.edit();
+                SharedPreferences.Editor editor = googleStuff.edit();
                 editor.putString("google_account_name",newName);
                 editor.apply();
 
@@ -123,7 +120,7 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         int city = Integer.parseInt(mCityChoice.getItemAtPosition(position).toString());
-                        final SharedPreferences.Editor editor = google_stuff.edit();
+                        final SharedPreferences.Editor editor = googleStuff.edit();
                         editor.putInt("mCityChoice",city);
                         editor.apply();
                     }
@@ -141,7 +138,7 @@ public class ProfileFragment extends Fragment {
                 int city = mCityChoice.getSelectedItemPosition();
                 mLocalUser.setCity(city);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-                SharedPreferences.Editor editor = google_stuff.edit();
+                SharedPreferences.Editor editor = googleStuff.edit();
                 editor.putInt("mCityChoice",city);
                 editor.apply();
             }

@@ -2,6 +2,17 @@ package com.example.hca127.greenfood.objects;
 
 import java.io.Serializable;
 
+/*
+*   Food ingredient class
+*   holds:
+*   ingredient names
+*   carbon emittion coefficient
+*   average consumption in canada
+*   user's consumption
+*   generated suggestion amounts
+*   total emission by user's consumption of this ingredient
+*/
+
 public class Food implements Serializable {
     private String mFoodName;
     private float mCarbonCoefficient;
