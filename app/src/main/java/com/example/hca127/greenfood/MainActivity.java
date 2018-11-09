@@ -13,8 +13,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.hca127.greenfood.fragments.AboutFragment;
 import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new AddingFoodFragment()).commit();
+                    new CommunityFragment()).commit();
             navigationView.setCheckedItem(R.id.menu_community);
         }
 
@@ -146,7 +144,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new LoginFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_LogOff:
-                Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
+                mAuth.signOut();
+                mLocalUser = new LocalUser();
+                updateHeader();
+                android.support.v4.app.Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 break;
 
             case R.id.menu_facebook:
@@ -200,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserEmail = navigationView.getHeaderView(0).findViewById(R.id.userEmail);
         mUserEmail.setText(mLocalUser.getUserEmail());
         mUserName = navigationView.getHeaderView(0).findViewById(R.id.userName);
-        mUserName.setText(mLocalUser.getName());
+        mUserEmail.setText(mLocalUser.getName());
     }
 
     public void updateNavigationProfile(Drawable newProfile) {

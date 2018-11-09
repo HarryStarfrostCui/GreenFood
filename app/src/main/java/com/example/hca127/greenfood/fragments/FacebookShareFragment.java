@@ -1,29 +1,19 @@
 package com.example.hca127.greenfood.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
-import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.LocalUser;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -34,13 +24,6 @@ import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
-import java.util.ArrayList;
 
 
 public class FacebookShareFragment extends Fragment {
