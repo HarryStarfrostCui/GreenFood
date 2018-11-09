@@ -106,10 +106,8 @@ public class SignUpFragment extends Fragment {
                 mLocalUser.setUserEmail(user.getEmail());
                 mLocalUser.setUserId(user.getUid());
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-
             }
         });
-
 
         return view;
     }

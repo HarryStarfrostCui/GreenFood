@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.hca127.greenfood.fragments.AboutFragment;
 import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
+import com.example.hca127.greenfood.fragments.FacebookShareFragment;
 import com.example.hca127.greenfood.fragments.LoginFragment;
 import com.example.hca127.greenfood.fragments.PledgeFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.menu_facebook:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LoginFragment()).addToBackStack(null).commit();
+                        new FacebookShareFragment()).addToBackStack(null).commit();
                 break;
 
         }

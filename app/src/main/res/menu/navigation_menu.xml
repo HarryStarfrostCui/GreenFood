@@ -51,7 +51,7 @@
             <item
                 android:id="@+id/menu_facebook"
                 android:title="Share to facebook"
-                android:icon="@drawable/ic_share"/>
+                android:icon="@drawable/facebook"/>
         </menu>
     </item>
 
