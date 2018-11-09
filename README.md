@@ -6,3 +6,15 @@ result:
 
 about:
 ![alt text](img/about_page.png)
+
+community:
+![alt text](img/community.png)
+
+navigation_menu:
+![alt text](img/navigation_menu.png)
+
+suggestion:
+![alt text](img/suggestion.png)
+
+user_profile:
+![alt text](img/user_profile.png)
