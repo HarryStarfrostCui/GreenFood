@@ -172,8 +172,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void saveLocalUser() {
-
-
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mLocalUser);
+        prefsEditor.putString("mLocalUser", json);
+        prefsEditor.apply();
     }
 
     private void saveToDatabase() {
