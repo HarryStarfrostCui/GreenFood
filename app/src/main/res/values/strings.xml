@@ -111,10 +111,10 @@
         Vancouver resident.
     </string>
     <string name="suggestion_text_1">
-        Would you consider eating a bit less
+        Would you consider eating a bit less %s
     </string>
     <string name="suggestion_text_2">
-        and a bit more
+        and a bit more %s
     </string>
     <string name="question_mark">\?</string>
     <string name="suggestion_text_3">
