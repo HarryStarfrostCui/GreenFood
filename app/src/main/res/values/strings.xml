@@ -211,7 +211,7 @@
     <string name="pledge_radio_button_3">A TON! (Literally)</string>
     <string name="pledge_radio_button_2">A Decent Amount</string>
     <string name="pledge_radio_button_1">A Little At A Time</string>
-    <string name="pledge_radio_button_0">None, I\'m Doing Great!</string>
+    <string name="pledge_radio_button_0">Remove My Pledge</string>
     <string name="pledge_button_text">PLEDGE!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
