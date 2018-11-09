@@ -15,12 +15,12 @@
 
         <item
             android:id="@+id/menu_calculator"
-            android:icon="@drawable/ic_mountain"
+            android:icon="@drawable/calculator"
             android:title="CO2e calculator"/>
 
         <item
             android:id="@+id/menu_about"
-            android:icon="@drawable/ic_smiley"
+            android:icon="@drawable/about_icon"
             android:title="About CO_2e"/>
         <item
             android:id="@+id/menu_pledge"
@@ -28,11 +28,11 @@
             android:title="Pledge"/>
         <item
             android:id="@+id/menu_result"
-            android:icon="@drawable/shield"
+            android:icon="@drawable/result"
             android:title="Result"/>
         <item
             android:id="@+id/menu_suggestion"
-            android:icon="@drawable/shield"
+            android:icon="@drawable/chat"
             android:title="Suggestion"/>
     </group>
 
