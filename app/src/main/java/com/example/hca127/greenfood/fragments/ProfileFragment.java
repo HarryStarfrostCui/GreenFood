@@ -63,7 +63,7 @@ public class ProfileFragment extends Fragment {
         final int city = google_stuff.getInt("mCityChoice",0);*/
         mCityChoice.setSelection(mLocalUser.getCity());
         mDisplayName = (EditText) view.findViewById(R.id.display_name);
-        mDisplayName.setText(mLocalUser.getFirstName());
+        mDisplayName.setText(mLocalUser.getName());
         mDisplayName.setEnabled(false);
         mEmail = (TextView) view.findViewById(R.id.email);
         mEmail.setText(mLocalUser.getUserEmail());
