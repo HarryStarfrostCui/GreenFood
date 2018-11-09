@@ -1,6 +1,7 @@
 package com.example.hca127.greenfood.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -54,6 +55,7 @@ public class PledgeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        callbackManager = CallbackManager.Factory.create();
         View view = inflater.inflate(R.layout.fragment_pledge, container, false);
 
         mDiet = ((MainActivity) getActivity()).getLocalUserDiet();
@@ -111,12 +113,12 @@ public class PledgeFragment extends Fragment {
                 shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
                     @Override
                     public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(getActivity(), "share success!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Share succeed.", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(getActivity(), "cancel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Share cancelled.", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -124,17 +126,19 @@ public class PledgeFragment extends Fragment {
                         Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-                ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse("https://cmpt276.sfu.rosielab.ca/project"))
-                        .setQuote("testing")
-                        .build();
-                if (ShareDialog.canShow(ShareLinkContent.class))
-                {
-                    shareDialog.show(linkContent);
-                }
+//                ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                        .setContentUrl(Uri.parse("https://cmpt276.sfu.rosielab.ca/project"))
+//                        .setQuote("I plaged...")
+//                        .build();
+//                if (ShareDialog.canShow(ShareLinkContent.class))
+//                {
+//                    shareDialog.show(linkContent);
+//                }
+//            }
+//        });
 
+                Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo_original);
 
-                Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo);
                 SharePhoto mSharePhoto = new SharePhoto.Builder()
                         .setBitmap(mLogoImage)
                         .build();
@@ -147,7 +151,7 @@ public class PledgeFragment extends Fragment {
                     shareDialog.show(content);
                 }
             }
-        });
+         });
 
 //        mFacebookShare.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -160,15 +164,14 @@ public class PledgeFragment extends Fragment {
 //            }
 //        });
 
-//        @Override
-//        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//            super.onActivityResult(requestCode, resultCode, data);
-//            callbackManager.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
 
-        //}
 
         return view;
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
 }
