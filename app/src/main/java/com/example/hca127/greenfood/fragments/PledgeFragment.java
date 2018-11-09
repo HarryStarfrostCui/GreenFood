@@ -22,6 +22,7 @@ import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.LocalUser;
+import com.facebook.share.widget.DeviceShareButton;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -35,6 +36,7 @@ public class PledgeFragment extends Fragment {
     private RadioGroup mPledgeChoiceRadioGroup;
     private Integer mPledgeChoiceButton;
     private Button mPledgeButton;
+    private Button mFacebookPledgeButton;
     private LocalUser mLocalUser;
 
 
@@ -42,6 +44,7 @@ public class PledgeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_pledge, container, false);
+
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
@@ -60,10 +63,30 @@ public class PledgeFragment extends Fragment {
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
                 mLocalUser.setPledge(Double.parseDouble(mLevel));
-                Toast.makeText(getActivity(), mLevel, Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CommunityFragment()).commit();
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+            }
+        });
+
+        mFacebookPledgeButton = view.findViewById(R.id.share_pledge_button);
+        mFacebookPledgeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mPledgeChoiceRadioGroup = view.findViewById(R.id.pledge_radio_group);
+                mPledgeChoiceButton = mPledgeChoiceRadioGroup.getCheckedRadioButtonId();
+
+                String mChoice;
+                String mLevel;
+
+                mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
+                mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
+
+                mLocalUser.setPledge(Double.parseDouble(mLevel));
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FacebookShareFragment()).commit();
+
 
             }
         });
