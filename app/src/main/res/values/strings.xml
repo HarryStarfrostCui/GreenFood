@@ -204,6 +204,9 @@
     <string name="city_prompt">City: </string>
     <string name="email_prompt">Email: </string>
 
+    <string name="facebook_application_id">337483050352224</string>
+    <string name="facebook_login_protocol_scheme">fb337483050352224</string>
+
     <string name="pledge">I Pledge: </string>
     <string name="pledge_radio_button_3">A TON! (Literally)</string>
     <string name="pledge_radio_button_2">A Decent Amount</string>
