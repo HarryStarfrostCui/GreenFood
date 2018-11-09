@@ -58,8 +58,9 @@ public class AddingFoodFragment extends Fragment {
         };
 
         for(int i = 0; i<RadioId.length; i++){
-            mRadioGroups.add((RadioGroup) view.findViewById(RadioId[i]));
-            mRadioGroups.get(i).check(RadioCheck[i]);
+            RadioGroup tempGroup = (RadioGroup) view.findViewById(RadioId[i]);
+            mRadioGroups.add(tempGroup);
+            tempGroup.check(RadioCheck[i]);
         }
 
         return view;
