@@ -32,6 +32,8 @@ import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    private FirebaseAuth mAuth;
+
     private DrawerLayout mDrawer;
     private LocalUser mLocalUser;
     private TextView mUserEmail;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
         mDrawer = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -77,6 +80,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.menu_community);
         }
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
     }
 
     @Override
@@ -175,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserEmail = navigationView.getHeaderView(0).findViewById(R.id.userEmail);
         mUserEmail.setText(mLocalUser.getUserEmail());
         mUserName = navigationView.getHeaderView(0).findViewById(R.id.userName);
-        mUserName.setText(mLocalUser.getFirstName());
+        mUserName.setText(mLocalUser.getName());
     }
 
     public void updateNavigationProfile(Drawable newProfile) {

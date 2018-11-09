@@ -41,6 +41,9 @@ public class AddingFoodFragment extends Fragment {
 
                 ((MainActivity)getActivity()).setLocalUserDiet(mDiet);
 
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new AddingFoodFragment()).commit();
+
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ResultFragment()).addToBackStack(null).commit();
             }
