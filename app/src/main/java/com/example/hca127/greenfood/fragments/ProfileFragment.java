@@ -66,12 +66,12 @@ public class ProfileFragment extends Fragment {
         mEmail.setText(mLocalUser.getUserEmail());
 
         mProfilePicture = (ImageView)view.findViewById(R.id.profilePicture);
-
+        mProfilePicture.setImageResource(mLocalUser.getProfileIcon());
         mProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, mPickedPicture);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new UserIconFragment()).addToBackStack(null).commit();
             }
         });
 
