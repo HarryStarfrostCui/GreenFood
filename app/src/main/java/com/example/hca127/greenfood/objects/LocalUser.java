@@ -1,8 +1,11 @@
 package com.example.hca127.greenfood.objects;
 
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /*
     LocalUser class, holds a more general data than firebase
@@ -25,7 +28,8 @@ public class LocalUser implements Serializable { //
     private String mUserEmail;
     private double mPledge;
     private int mCityIndex;
-    ArrayList<Diet> mDietList;
+    private ArrayList<Diet> mDietList;
+    private int mProfileIconIndex;
 
     public LocalUser(){
         mUserId = "";
@@ -36,6 +40,8 @@ public class LocalUser implements Serializable { //
         mCityIndex = 0;
         mDietList = new ArrayList<Diet>();
         mDietList.add(new Diet(true));
+        Random rand = new Random();
+        mProfileIconIndex = rand.nextInt(6);
     }
 
     public String getUserId() {        return mUserId;    }
@@ -43,6 +49,7 @@ public class LocalUser implements Serializable { //
     public String getUserEmail() {        return mUserEmail;    }
     public double getPledge() {        return mPledge;    }
     public int getCity() {        return mCityIndex;    }
+    public int getProfileIcon(){   return mProfileIconIndex;    }
 
     public void addDiet(Diet newDiet){        mDietList.add(newDiet);    }
 
@@ -88,6 +95,7 @@ public class LocalUser implements Serializable { //
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
     public void setPledge(double pledge) {        mPledge = pledge;    }
     public void setCity(int index) {        mCityIndex = index;    }
+    public void setProfileIcon(int newIconIndex){   mProfileIconIndex = newIconIndex;     }
 
     //thtese two test in junit class, so this is used, if not, it will never use
     public void setUserPassword(String userPassword) {        mUserPassword = userPassword;    }

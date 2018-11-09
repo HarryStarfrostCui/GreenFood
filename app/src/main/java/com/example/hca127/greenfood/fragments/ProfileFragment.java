@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -66,12 +67,16 @@ public class ProfileFragment extends Fragment {
         mEmail.setText(mLocalUser.getUserEmail());
 
         mProfilePicture = (ImageView)view.findViewById(R.id.profilePicture);
-
+        int[] pictureIds = {
+                R.drawable.tree, R.drawable.sunglasses, R.drawable.dog,
+                R.drawable.cat, R.drawable.monkey, R.drawable.ghost
+        };
+        mProfilePicture.setImageResource(pictureIds[mLocalUser.getProfileIcon()]);
         mProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, mPickedPicture);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new UserIconFragment()).addToBackStack(null).commit();
             }
         });
 
@@ -145,16 +150,5 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == mPickedPicture && resultCode==RESULT_OK && data!=null){
-            Uri selectedImage = data.getData();
-            mProfilePicture.setImageURI(null);
-            mProfilePicture.setImageURI(selectedImage);
-            ((MainActivity)getActivity()).updateNavigationProfile(mProfilePicture.getDrawable());
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

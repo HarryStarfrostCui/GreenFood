@@ -31,17 +31,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private FirebaseAuth mAuth;
-
     private DrawerLayout mDrawer;
     private LocalUser mLocalUser;
     private TextView mUserEmail;
     private TextView mUserName;
     private FirebaseUser mFireUser;
     private FirebaseAuth mAuthentication;
-    private Drawable mProfile;
+    private ImageView mProfile;
+
+    private ArrayList<Integer> mIconIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String json = appSharedPrefs.getString("mLocalUser", "");
 
         mLocalUser = gson.fromJson(json, LocalUser.class);
-        if(mLocalUser == null)
+        if(mLocalUser == null){
             mLocalUser = new LocalUser();
+        }
+
+        mIconIds = new ArrayList<>(Arrays.asList(
+                R.drawable.tree, R.drawable.sunglasses, R.drawable.dog,
+                R.drawable.cat, R.drawable.monkey, R.drawable.ghost
+        ));
 
         updateHeader();
         // connect to Firebase Auth and update user if exist
@@ -204,12 +214,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserEmail.setText(mLocalUser.getUserEmail());
         mUserName = navigationView.getHeaderView(0).findViewById(R.id.userName);
         mUserName.setText(mLocalUser.getName());
+        mProfile = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profilePicture);
+        mProfile.setImageResource(mIconIds.get(mLocalUser.getProfileIcon()));
+
     }
 
-    public void updateNavigationProfile(Drawable newProfile) {
-        mProfile = newProfile;
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        ImageView profile = navigationView.getHeaderView(0).findViewById(R.id.profilePicture);
-        profile.setImageDrawable(newProfile);
-    }
 }
