@@ -1,8 +1,14 @@
 package com.example.hca127.greenfood.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +25,8 @@ import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ProfileFragment extends Fragment {
 
     private ImageView name_pencil;
@@ -29,6 +37,8 @@ public class ProfileFragment extends Fragment {
     private ImageView mCityCheck;
     private ImageView mCityPencil;
     private LocalUser mLocalUser;
+    private ImageView mProfilePicture;
+    private static final int mPickedPicture = 1;
 
 
     @Nullable
@@ -47,8 +57,6 @@ public class ProfileFragment extends Fragment {
         mCityChoice = view.findViewById(R.id.edit_city_spinner_choice);
         mCityChoice.setEnabled(false);
 
-
-
         final SharedPreferences google_stuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         /*String google_name = google_stuff.getString("google_account_name","");
         String google_email = google_stuff.getString("google_account_email", mLocalUser.getUserEmail());
@@ -59,6 +67,16 @@ public class ProfileFragment extends Fragment {
         mDisplayName.setEnabled(false);
         mEmail = (TextView) view.findViewById(R.id.email);
         mEmail.setText(mLocalUser.getUserEmail());
+
+        mProfilePicture = (ImageView)view.findViewById(R.id.ProfilePicture);
+
+        mProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, mPickedPicture);
+            }
+        });
 
 
         name_pencil = (ImageView) view.findViewById(R.id.edit_display_name_button);
@@ -130,5 +148,16 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == mPickedPicture && resultCode==RESULT_OK && data!=null){
+            Uri selectedImage = data.getData();
+            mProfilePicture.setImageURI(null);
+            mProfilePicture.setImageURI(selectedImage);
+            ((MainActivity)getActivity()).updateNavigationProfile(mProfilePicture.getDrawable());
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

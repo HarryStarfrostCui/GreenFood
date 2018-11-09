@@ -47,7 +47,7 @@ public class AddingFoodFragment extends Fragment {
         });
 
         int[] RadioId={
-                R.id.breadRadioGroup, R.id.lambRadioGroup, R.id.chickenRadioGroup,
+                R.id.beefRadioGroup, R.id.lambRadioGroup, R.id.chickenRadioGroup,
                 R.id.fishRadioGroup, R.id.porkRadioGroup, R.id.eggRadioGroup,
                 R.id.vegRadioGroup, R.id.breadRadioGroup
         };
@@ -58,8 +58,9 @@ public class AddingFoodFragment extends Fragment {
         };
 
         for(int i = 0; i<RadioId.length; i++){
-            mRadioGroups.add((RadioGroup) view.findViewById(RadioId[i]));
-            mRadioGroups.get(i).check(RadioCheck[i]);
+            RadioGroup tempGroup = (RadioGroup) view.findViewById(RadioId[i]);
+            mRadioGroups.add(tempGroup);
+            tempGroup.check(RadioCheck[i]);
         }
 
         return view;

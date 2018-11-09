@@ -1,6 +1,7 @@
 package com.example.hca127.greenfood;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView mUserName;
     private FirebaseUser mFireUser;
     private FirebaseAuth mAuthentication;
+    private Drawable mProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         // load local user from shared Preferences
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         Gson gson = new Gson();
@@ -65,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mLocalUser = new LocalUser();
 
         updateHeader();
-
         // connect to Firebase Auth and update user if exist
         mAuthentication = FirebaseAuth.getInstance();
         mFireUser = mAuthentication.getCurrentUser();
@@ -157,12 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void saveLocalUser() {
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(mLocalUser);
-        prefsEditor.putString("mLocalUser", json);
-        prefsEditor.apply();
+
 
     }
 
@@ -182,4 +178,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserName.setText(mLocalUser.getFirstName());
     }
 
+    public void updateNavigationProfile(Drawable newProfile) {
+        mProfile = newProfile;
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        ImageView profile = navigationView.getHeaderView(0).findViewById(R.id.profilePicture);
+        profile.setImageDrawable(newProfile);
+    }
 }
