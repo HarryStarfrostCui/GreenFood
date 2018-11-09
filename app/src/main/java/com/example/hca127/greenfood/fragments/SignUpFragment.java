@@ -39,15 +39,15 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class SignUpFragment extends Fragment {
 
-    private FirebaseAuth mAuth;
 
+    private FirebaseAuth mAuth;
     private ImageView mSignUp;
     private EditText mUserName;
     private EditText mEmail;
     private EditText mPassword;
     private EditText mPasswordConfirm;
     private LocalUser mLocalUser;
-    private String mUserNameLocal;
+    private String mLocalUserName;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
@@ -57,72 +57,58 @@ public class SignUpFragment extends Fragment {
         mPasswordConfirm = (EditText) view.findViewById(R.id.create_confirm_password);
         mSignUp = (ImageView) view.findViewById(R.id.sign_up_button);
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
-        mAuth = FirebaseAuth.getInstance();
-
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
-            }
-        });
+                final String userName = mUserName.getText().toString();
+                mLocalUserName = userName;
+                String email = mEmail.getText().toString();
+                String password = mPassword.getText().toString();
+                String passwordConfirm = mPasswordConfirm.getText().toString();
+                if(email.isEmpty() == false && password.isEmpty() == false && password.length()>6 && password.equals(passwordConfirm)) {
+                    mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("Check", "createUserWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                .setDisplayName(userName).build();
+                                        user.updateProfile(profileUpdates);
+                                        updateUser(user);
+                                        Toast.makeText(getActivity(), user.getEmail(),
+                                                Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(intent);
 
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("Check2", "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(getActivity(), "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
 
-        return view;
-    }
-
-    private void registerUser() {
-        final String userName = mUserName.getText().toString();
-        mUserNameLocal = userName;
-        String email = mEmail.getText().toString();
-        String password = mPassword.getText().toString();
-        String passwordConfirm = mPasswordConfirm.getText().toString();
-
-        if (email.isEmpty()) {
-            mEmail.setError("Email is required");
-            mEmail.requestFocus();
-            return;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mEmail.setError("Email is required");
-            mEmail.requestFocus();
-            return;
-        }
-        if (password.isEmpty()) {
-            mPassword.setError("Password is required");
-            mPassword.requestFocus();
-            return;
-        }
-        if (!password.equals(passwordConfirm)) {
-            mPasswordConfirm.setError("Passwords do not match!");
-            mPasswordConfirm.requestFocus();
-            return;
-        }
-        if (password.length()<6) {
-            mPassword.setError("Minimum lenght of password should be 6");
-            mPassword.requestFocus();
-            return;
-        }
-
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (!task.isSuccessful()) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new CommunityFragment()).commit();
-                    NavigationView navigationView = getActivity().findViewById(R.id.navigation_view);
-                    navigationView.setCheckedItem(R.id.menu_community);
+                                    // ...
+                                }
+                            });
 
                 } else {
-                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        Toast.makeText(getActivity().getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
+                    Toast.makeText(getActivity(), "Sign up failed, please enter valid email and password!", Toast.LENGTH_LONG).show();
                 }
+            }
+
+            private void updateUser(FirebaseUser user) {
+                mLocalUser.setFirstName(mLocalUserName);
+                mLocalUser.setUserEmail(user.getEmail());
+                mLocalUser.setUserId(user.getUid());
+                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
             }
         });
 
+        return view;
     }
 }

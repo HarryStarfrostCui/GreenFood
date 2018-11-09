@@ -32,6 +32,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
+    implementation 'com.facebook.android:facebook-share:[4,5)'
 
 }
 dependencies {
@@ -42,6 +43,10 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:+'
 }
 apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    implementation 'com.android.support:support-v4:28.+'
+}
 
 dependencies {
     implementation 'com.android.support:support-v4:28.+'

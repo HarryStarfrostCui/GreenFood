@@ -43,15 +43,9 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 
-public class SuggestionFragment extends Fragment {
-    private BarChart mSuggestionChart;
-    private Diet mDiet;
+public class FacebookShareFragment extends Fragment {
+
     private ImageButton mFacebookShare;
-    private TextView mReduceSuggestionText;
-    private TextView mIncreaseSuggestionText;
-    private TextView mUserEmissionSaving;
-    private TextView mCarbonSaved;
-    private TextView mTreesSaved;
     private LocalUser mLocalUser;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
@@ -60,64 +54,14 @@ public class SuggestionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         callbackManager = CallbackManager.Factory.create();
-        final View view = inflater.inflate(R.layout.fragment_suggestion, container, false);
+        final View view = inflater.inflate(R.layout.fragment_facebook_share, container, false);
         final Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo_share);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
-        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
-
         mFacebookShare = view.findViewById(R.id.facebookShare);
         shareDialog = new ShareDialog(this);
 
-        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
-        mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
 
-        mIncreaseSuggestionText = view.findViewById(R.id.increaseSuggestionText);
-        mIncreaseSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
-
-        mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
-        mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
-
-        mSuggestionChart = view.findViewById(R.id.suggestionChart);
-
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
-        entries.add(new BarEntry(1, 1500f));
-        entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
-
-        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-        BarData suggestionData = new BarData(barDataSet);
-        mSuggestionChart.getXAxis().setDrawGridLines(false);
-        mSuggestionChart.getLegend().setEnabled(false);
-        mSuggestionChart.getAxisRight().setAxisMinimum(0f);
-        mSuggestionChart.getAxisLeft().setAxisMinimum(0f);
-        mSuggestionChart.getDescription().setEnabled(false);
-
-        mSuggestionChart.setData(suggestionData);
-        mSuggestionChart.animateY(1200);
-        mSuggestionChart.invalidate();
-
-        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
-        float treesSaved = carbonSaved/22;  // carbon offset of trees
-
-        if(carbonSaved < 0)
-        {
-            carbonSaved = 0;
-            treesSaved = 0;
-        }
-
-        mCarbonSaved = view.findViewById(R.id.carbonSaved);
-        mCarbonSaved.setText(String.valueOf(carbonSaved));
-
-        mTreesSaved = view.findViewById(R.id.treesSaved);
-        mTreesSaved.setText(String.valueOf(treesSaved));
-
-        //share stuff
-        mFacebookShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
                     @Override
                     public void onSuccess(Sharer.Result result) {
@@ -161,8 +105,8 @@ public class SuggestionFragment extends Fragment {
                 if (ShareDialog.canShow(SharePhotoContent.class)) {
                     shareDialog.show(content);
                 }
-            }
-        });
+
+
 
         //call intent
 
