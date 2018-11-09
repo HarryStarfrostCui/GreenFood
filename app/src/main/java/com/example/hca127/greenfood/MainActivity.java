@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mLocalUser = new LocalUser();
 
         updateHeader();
-
         // connect to Firebase Auth and update user if exist
         mAuthentication = FirebaseAuth.getInstance();
         mFireUser = mAuthentication.getCurrentUser();
