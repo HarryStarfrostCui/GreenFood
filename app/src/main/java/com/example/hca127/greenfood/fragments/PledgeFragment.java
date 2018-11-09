@@ -1,19 +1,27 @@
 package com.example.hca127.greenfood.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
+import com.example.hca127.greenfood.objects.LocalUser;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -24,65 +32,41 @@ import java.util.ArrayList;
 
 
 public class PledgeFragment extends Fragment {
-    private BarChart mSuggestionChart;
-    private Diet mDiet;
-    private TextView mReduceSuggestionText;
-    private TextView mIncreaseSuggestionText;
-    private TextView mUserEmissionSaving;
-    private TextView mCarbonSaved;
-    private TextView mTreesSaved;
+    private RadioGroup mPledgeChoiceRadioGroup;
+    private Integer mPledgeChoiceButton;
+    private Button mPledgeButton;
+    private LocalUser mLocalUser;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pledge, container, false);
+        final View view = inflater.inflate(R.layout.fragment_pledge, container, false);
 
-        mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
+        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
-        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
-        mReduceSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
+        mPledgeButton = view.findViewById(R.id.pledge_button);
+        mPledgeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        mIncreaseSuggestionText = view.findViewById(R.id.increaseSuggestionText);
-        mIncreaseSuggestionText.setText(mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+                mPledgeChoiceRadioGroup = view.findViewById(R.id.pledge_radio_group);
+                mPledgeChoiceButton = mPledgeChoiceRadioGroup.getCheckedRadioButtonId();
 
-        mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
-        mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
+                String mChoice;
+                String mLevel;
 
-        mSuggestionChart = view.findViewById(R.id.suggestionChart);
+                mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
+                mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
-        entries.add(new BarEntry(1, 1500f));
-        entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
+                mLocalUser.setPledge(Double.parseDouble(mLevel));
+                Toast.makeText(getActivity(), mLevel, Toast.LENGTH_SHORT).show();
 
-        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
 
-        BarData suggestionData = new BarData(barDataSet);
-        mSuggestionChart.getXAxis().setDrawGridLines(false);
-        mSuggestionChart.getLegend().setEnabled(false);
-        mSuggestionChart.getAxisRight().setAxisMinimum(0f);
-        mSuggestionChart.getAxisLeft().setAxisMinimum(0f);
-        mSuggestionChart.getDescription().setEnabled(false);
-
-        mSuggestionChart.setData(suggestionData);
-        mSuggestionChart.animateY(1200);
-        mSuggestionChart.invalidate();
-
-        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
-        float treesSaved = carbonSaved/22;  // carbon offset of trees
-
-        if(carbonSaved < 0)
-        {
-            carbonSaved = 0;
-            treesSaved = 0;
-        }
-
-        mCarbonSaved = view.findViewById(R.id.carbonSaved);
-        mCarbonSaved.setText(String.valueOf(carbonSaved));
-
-        mTreesSaved = view.findViewById(R.id.treesSaved);
-        mTreesSaved.setText(String.valueOf(treesSaved));
+            }
+        });
 
         return view;
     }

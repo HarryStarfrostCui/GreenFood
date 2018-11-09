@@ -7,7 +7,7 @@
         <item
             android:id="@+id/menu_community"
             android:icon="@drawable/ic_home"
-            android:title="Home"/>
+            android:title="Community"/>
         <item
             android:id="@+id/menu_user"
             android:icon="@drawable/ic_user"
@@ -22,7 +22,18 @@
             android:id="@+id/menu_about"
             android:icon="@drawable/ic_smiley"
             android:title="About CO_2e"/>
-
+        <item
+            android:id="@+id/menu_pledge"
+            android:icon="@drawable/shield"
+            android:title="Pledge"/>
+        <item
+            android:id="@+id/menu_result"
+            android:icon="@drawable/shield"
+            android:title="Result"/>
+        <item
+            android:id="@+id/menu_suggestion"
+            android:icon="@drawable/shield"
+            android:title="Suggestion"/>
     </group>
 
     <item android:title="">
