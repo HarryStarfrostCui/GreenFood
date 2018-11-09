@@ -27,7 +27,8 @@
     <string name="login_button">Login</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="login_slogan">Log in to make a change!</string>
-    <string name="logged_in">You are logged in</string>
+    <string name="logged_in">You are logged in as: %s</string>
+    <string name="logged_out">Not Logged in</string>
     <string name="remember_me">Remember Me</string>
 
 
@@ -205,6 +206,16 @@
 
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
+
+    <string name="pledge">I Pledge: </string>
+    <string name="pledge_radio_button_3">A TON! (Literally)</string>
+    <string name="pledge_radio_button_2">A Decent Amount</string>
+    <string name="pledge_radio_button_1">A Little At A Time</string>
+    <string name="pledge_radio_button_0">None, I\'m Doing Great!</string>
+    <string name="pledge_button_text">PLEDGE!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>

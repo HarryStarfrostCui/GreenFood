@@ -1,6 +1,7 @@
 package com.example.hca127.greenfood;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +19,15 @@ import com.example.hca127.greenfood.fragments.AboutFragment;
 import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
 import com.example.hca127.greenfood.fragments.LoginFragment;
+import com.example.hca127.greenfood.fragments.PledgeFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
+import com.example.hca127.greenfood.fragments.ResultFragment;
+import com.example.hca127.greenfood.fragments.SuggestionFragment;
 import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.LocalUser;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -28,8 +36,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private LocalUser mLocalUser;
     private TextView mUserEmail;
     private TextView mUserName;
-
-    //  https://www.youtube.com/watch?v=bjYstsO1PgI&index=4&list=PLrnPJCHvNZuDQ-jWPw13-wY2J57Z6ep6G&t=0s
+    private FirebaseUser mFireUser;
+    private FirebaseAuth mAuthentication;
+    private Drawable mProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +56,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.Navigation_drawer_open, R.string.Navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-        //open default fragment, currently default = calculator
 
         // load local user from shared Preferences
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         Gson gson = new Gson();
-        String json = appSharedPrefs.getString("user", "");
+        String json = appSharedPrefs.getString("mLocalUser", "");
 
         mLocalUser = gson.fromJson(json, LocalUser.class);
         if(mLocalUser == null)
             mLocalUser = new LocalUser();
 
         updateHeader();
-
+        // connect to Firebase Auth and update user if exist
+        mAuthentication = FirebaseAuth.getInstance();
+        mFireUser = mAuthentication.getCurrentUser();
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new CommunityFragment()).commit();
-            navigationView.setCheckedItem(R.id.menu_calculator);
+            navigationView.setCheckedItem(R.id.menu_community);
         }
 
     }
@@ -104,6 +114,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).addToBackStack(null).commit();
                 break;
+            case R.id.menu_pledge:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PledgeFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.menu_result:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ResultFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.menu_suggestion:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SuggestionFragment()).addToBackStack(null).commit();
+                break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new LoginFragment()).addToBackStack(null).commit();
@@ -130,6 +152,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setLocalUser(LocalUser user) {
         mLocalUser = user;
+        saveLocalUser();
+        saveToDatabase();
+        updateHeader();
+    }
+
+    private void saveLocalUser() {
+
+
+    }
+
+    private void saveToDatabase() {
+        if (mFireUser !=null) {
+
+
+
+        }
     }
 
     private void updateHeader() {
@@ -140,4 +178,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserName.setText(mLocalUser.getFirstName());
     }
 
+    public void updateNavigationProfile(Drawable newProfile) {
+        mProfile = newProfile;
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        ImageView profile = navigationView.getHeaderView(0).findViewById(R.id.profilePicture);
+        profile.setImageDrawable(newProfile);
+    }
 }

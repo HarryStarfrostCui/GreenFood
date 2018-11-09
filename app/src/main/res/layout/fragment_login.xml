@@ -12,16 +12,37 @@
         android:paddingTop="10dp"
         android:background="@drawable/background">
 
-        <ImageView
-            android:id="@+id/logoCommunity"
-            android:contentDescription="@string/logo_content_description"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:background="@drawable/logo" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Space
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/logoCommunity"
+                android:contentDescription="@string/logo_content_description"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/logo" />
+
+            <Space
+                android:layout_width="60dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/NiceButton"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="@string/sign_up_button"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/statusText"
+            android:id="@+id/loginSlogan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -30,11 +51,21 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="40dp">
+            android:paddingTop="10dp">
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -94,24 +125,12 @@
         style="@style/NiceButton"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="@string/login_button"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/signUpButton"
-        style="@style/NiceButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/sign_up_button"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

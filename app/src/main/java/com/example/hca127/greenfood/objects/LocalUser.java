@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class LocalUser implements Serializable {
     private String mUserId;
-    private String mLastName;
-    private String mFirstName;
+    private String mName;
     private String mUserPassword;
     private String mUserEmail;
     private double mPledge;
@@ -16,8 +15,7 @@ public class LocalUser implements Serializable {
 
     public LocalUser(){
         mUserId = "";
-        mLastName = "";
-        mFirstName = "anonymoose";
+        mName = "anonymoose";
         mUserPassword = "";
         mUserEmail = "anony@moose.com";
         mPledge = 0.0;
@@ -26,8 +24,7 @@ public class LocalUser implements Serializable {
     }
 
     public String getUserId() {        return mUserId;    }
-    public String getLastName(){        return mLastName;    }
-    public String getFirstName() {        return mFirstName;    }
+    public String getFirstName() {        return mName;    }
     public String getUserEmail() {        return mUserEmail;    }
     public double getPledge() {        return mPledge;    }
     public int getCity() {        return mCityIndex;    }
@@ -66,9 +63,8 @@ public class LocalUser implements Serializable {
         }
     }
 
-    private void setUserId(String UserId) {        UserId = UserId;    }
-    public void setLastName(String mLastName) {        this.mLastName = mLastName;    }
-    public void setFirstName(String mFirstName) {        this.mFirstName = mFirstName;    }
+    public void setUserId(String UserId) {        this.mUserId = UserId;    }
+    public void setFirstName(String mFirstName) {        this.mName = mFirstName;    }
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
     public void setPledge(double pledge) {        mPledge = pledge;    }
     public void setCity(int index) {        mCityIndex = index;    }

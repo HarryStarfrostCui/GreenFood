@@ -1,177 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.PledgeFragment"
-    android:background="@drawable/background" >
 
-    <TextView
-        android:id="@+id/suggestionText1"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/suggestion_text_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/reduceSuggestionText"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/suggestionText1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/suggestionText"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:text="@string/suggestion_text_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText1" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".fragments.PledgeFragment"
+android:background="@drawable/background"
+android:orientation="vertical"
+android:paddingTop="5dp">
 
     <ImageView
-        android:id="@+id/clippyImage2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/result_greeting"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clippy" />
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo"/>
 
     <TextView
-        android:id="@+id/increaseSuggestionText"
-        style="@style/BlackText"
+        android:paddingTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/suggestionText"
-        app:layout_constraintTop_toBottomOf="@+id/reduceSuggestionText" />
+        android:text="@string/pledge"
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="18dp" />
 
-    <TextView
-        android:id="@+id/suggestionText2"
-        style="@style/BlackText"
+    <RadioGroup
+        android:id="@+id/pledge_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/suggestion_text_2"
-        app:layout_constraintStart_toEndOf="@+id/reduceSuggestionText"
-        app:layout_constraintTop_toBottomOf="parent" />
+        android:layout_gravity="center"
+        android:paddingTop="10dp">
 
-    <TextView
-        android:id="@+id/suggestionText3"
-        style="@style/BlackText"
-        android:layout_width="334dp"
+        <RadioButton
+            android:id="@+id/pledge3"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/pledge_radio_button_3"
+            android:textColor="@color/themeGreen"
+            android:buttonTint="@color/themeGreen"/>
+
+        <RadioButton
+            android:id="@+id/pledge2"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/pledge_radio_button_2"
+            android:textColor="@color/themeGreen"
+            android:buttonTint="@color/themeGreen"/>
+
+        <RadioButton
+            android:id="@+id/pledge1"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/pledge_radio_button_1"
+            android:textColor="@color/themeGreen"
+            android:buttonTint="@color/themeGreen"/>
+
+        <RadioButton
+            android:id="@+id/pledge0"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="@string/pledge_radio_button_0"
+            android:textColor="@color/themeGreen"
+            android:buttonTint="@color/themeGreen" />
+    </RadioGroup>
+
+    <Button
+        style="@style/NiceButton"
+        android:id="@+id/pledge_button"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/suggestion_text_3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText" />
+        android:text="@string/pledge_button_text"
+        android:layout_gravity="center"/>
+</LinearLayout>
 
-    <TextView
-        android:id="@+id/userEmissionSaving"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/suggestionText3"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText" />
-
-    <TextView
-        android:id="@+id/userLegend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/user_legend"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionChart"
-        style="@style/GreenText"/>
-
-    <TextView
-        android:id="@+id/averageLegend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/average_legend"
-        app:layout_constraintEnd_toStartOf="@+id/dietLegend"
-        app:layout_constraintStart_toEndOf="@+id/userLegend"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionChart"
-        style="@style/YellowText"/>
-
-    <TextView
-        android:id="@+id/dietLegend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:text="@string/suggestion_legend"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionChart"
-        style="@style/RedText"/>
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/suggestionChart"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
-
-    <TextView
-        android:id="@+id/vancouverText"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/all_vancouver"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/averageLegend" />
-
-    <TextView
-        android:id="@+id/vancouverText2"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/tree_offset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carbonHeading" />
-
-    <TextView
-        android:id="@+id/carbonHeading"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:text="@string/carbon_save"
-        app:layout_constraintStart_toEndOf="@+id/carbonSaved"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText" />
-
-    <TextView
-        android:id="@+id/carbonSaved"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText" />
 
     <TextView
         android:id="@+id/treeHeading"
