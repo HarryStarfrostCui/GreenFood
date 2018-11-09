@@ -20,11 +20,12 @@ public class LocalUser implements Serializable {
         mUserEmail = "anony@moose.com";
         mPledge = 0.0;
         mCityIndex = 0;
-        mDietList = new ArrayList<>();
+        mDietList = new ArrayList<Diet>();
+        mDietList.add(new Diet(true));
     }
 
     public String getUserId() {        return mUserId;    }
-    public String getFirstName() {        return mName;    }
+    public String getName() {        return mName;    }
     public String getUserEmail() {        return mUserEmail;    }
     public double getPledge() {        return mPledge;    }
     public int getCity() {        return mCityIndex;    }

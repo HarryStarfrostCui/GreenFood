@@ -31,6 +31,30 @@
           }
         },
         {
+          "client_id": "729621741617-eq20qae6cqjjjog5oqjmgmbs8pogpv16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hca127.greenfood",
+            "certificate_hash": "ff48996e31b7c805064522a3870a0419e1fbb28a"
+          }
+        },
+        {
+          "client_id": "729621741617-r7eckuh8cq8osidu7lgivg8b4fr9oki7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hca127.greenfood",
+            "certificate_hash": "3ebb14a6774fd906cad1193bf311326e499e627b"
+          }
+        },
+        {
+          "client_id": "729621741617-lp9moqe48khckrv8ojcufrkcepohr1lf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hca127.greenfood",
+            "certificate_hash": "7fba56081b21db3d85a9178e81c469ffb91e4900"
+          }
+        },
+        {
           "client_id": "729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com",
           "client_type": 3
         }
