@@ -45,7 +45,6 @@ import java.util.ArrayList;
 
 public class FacebookShareFragment extends Fragment {
 
-    private ImageButton mFacebookShare;
     private LocalUser mLocalUser;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
@@ -58,7 +57,6 @@ public class FacebookShareFragment extends Fragment {
         final Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo_share);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
-        mFacebookShare = view.findViewById(R.id.facebookShare);
         shareDialog = new ShareDialog(this);
 
 
