@@ -22,6 +22,9 @@ import com.example.hca127.greenfood.fragments.LoginFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
 import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.LocalUser;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private LocalUser mLocalUser;
     private TextView mUserEmail;
     private TextView mUserName;
+    private FirebaseUser mFireUser;
+    private FirebaseAuth mAuthentication;
     private Drawable mProfile;
 
     @Override
@@ -59,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mLocalUser = new LocalUser();
 
         updateHeader();
+
+        // connect to Firebase Auth and update user if exist
+        mAuthentication = FirebaseAuth.getInstance();
+        mFireUser = mAuthentication.getCurrentUser();
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -129,13 +138,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setLocalUser(LocalUser user) {
         mLocalUser = user;
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(mLocalUser);
-        prefsEditor.putString("mLocalUser", json);
-        prefsEditor.apply();
+        saveLocalUser();
+        saveToDatabase();
         updateHeader();
+    }
+
+    private void saveLocalUser() {
+
+
+    }
+
+    private void saveToDatabase() {
+        if (mFireUser !=null) {
+
+
+
+        }
     }
 
     private void updateHeader() {

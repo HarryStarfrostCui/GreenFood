@@ -1,5 +1,6 @@
 package com.example.hca127.greenfood.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,9 +15,11 @@ import android.widget.ImageView;
 
 import com.example.hca127.greenfood.R;
 
+import com.google.gson.Gson;
+
 public class CommunityFragment extends Fragment {
 
-    private String name;
+    private ImageView about;
 
     @Nullable
     @Override
