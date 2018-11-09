@@ -5,6 +5,8 @@ import com.example.hca127.greenfood.objects.Diet;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class DietTest {
@@ -131,6 +133,12 @@ public class DietTest {
         assertEquals(700f, testDiet.getUserDietEmission(), 0.001);
         assertEquals(100f, testDiet.getSuggestedDietSavingAmount(), 0.001);
         assertEquals(600f, testDiet.getSuggestedDietEmission(), 0.001);
+    }
+
+    @Test
+    public void getDate(){
+        Date date = new Date();
+        assertEquals(date.getMinutes(), testDiet.getDate().getMinutes());
     }
 
 

@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mAuth.signOut();
                 mLocalUser = new LocalUser();
                 updateHeader();
+                Toast.makeText(this, "Successfully Logged Off!",Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.menu_facebook:

@@ -45,6 +45,8 @@ public class LocalUser implements Serializable { //
     public int getCity() {        return mCityIndex;    }
 
     public void addDiet(Diet newDiet){        mDietList.add(newDiet);    }
+
+    //getInitialDiet used in junit test
     public Diet getInitialDiet(){   return mDietList.get(0);    }
 
     public Diet getCurrentDiet() {
@@ -56,6 +58,7 @@ public class LocalUser implements Serializable { //
 
     }
 
+    //getDietDateList used in junit test
     public ArrayList<Date> getDietDateList() {
         ArrayList<Date> dates = new ArrayList<>();
         for(int i = 0; i< mDietList.size(); i++){
@@ -64,6 +67,7 @@ public class LocalUser implements Serializable { //
         return dates;
     }
 
+    //getEmissionList used in junit test
     public ArrayList<Float> getEmissionList(){
         ArrayList<Float> CO2e = new ArrayList<>();
         for(int i = 0; i< mDietList.size(); i++){
@@ -72,6 +76,7 @@ public class LocalUser implements Serializable { //
         return CO2e;
     }
 
+    //renewDiet used in junit test
     public void renewDiet(){
         while(mDietList.size()>1){
             mDietList.remove(0);
@@ -83,8 +88,9 @@ public class LocalUser implements Serializable { //
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
     public void setPledge(double pledge) {        mPledge = pledge;    }
     public void setCity(int index) {        mCityIndex = index;    }
-    public void setUserPassword(String userPassword) {        mUserPassword = userPassword;    }
 
+    //thtese two test in junit class, so this is used, if not, it will never use
+    public void setUserPassword(String userPassword) {        mUserPassword = userPassword;    }
     public boolean CheckPassword(String Password){        return mUserPassword.equals(Password);    }
 
 }
