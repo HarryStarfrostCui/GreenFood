@@ -81,37 +81,3 @@ android:paddingTop="5dp">
         android:text="@string/pledge_button_text"
         android:layout_gravity="center"/>
 </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/treeHeading"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:text="@string/trees_save"
-        app:layout_constraintStart_toEndOf="@+id/treesSaved"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
-
-    <TextView
-        android:id="@+id/treesSaved"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
-
-    <ImageButton
-        android:id="@+id/facebookShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_share"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/treeHeading"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
-
-</android.support.constraint.ConstraintLayout>
