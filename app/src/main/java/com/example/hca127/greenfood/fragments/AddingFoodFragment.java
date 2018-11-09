@@ -44,6 +44,7 @@ public class AddingFoodFragment extends Fragment {
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ResultFragment()).addToBackStack(null).commit();
+                ((NavigationView)getActivity().findViewById(R.id.navigation_view)).setCheckedItem(R.id.menu_result);
             }
         });
 
