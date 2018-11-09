@@ -146,7 +146,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new LoginFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_LogOff:
-                Toast.makeText(this, "this creates the logoff warning popup,\n with option of continue logging off", Toast.LENGTH_LONG).show();
+                mAuth.signOut();
+                mLocalUser = new LocalUser();
+                updateHeader();
                 break;
 
             case R.id.menu_facebook:

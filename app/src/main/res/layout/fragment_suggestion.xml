@@ -18,17 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/reduceSuggestionText"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/suggestionText1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/suggestionText"
+        android:id="@+id/suggestionText2"
         style="@style/BlackText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,25 +39,6 @@
         app:srcCompat="@drawable/clippy" />
 
     <TextView
-        android:id="@+id/increaseSuggestionText"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/suggestionText"
-        app:layout_constraintTop_toBottomOf="@+id/reduceSuggestionText" />
-
-    <TextView
-        android:id="@+id/suggestionText2"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/suggestion_text_2"
-        app:layout_constraintStart_toEndOf="@+id/reduceSuggestionText"
-        app:layout_constraintTop_toBottomOf="parent" />
-
-    <TextView
         android:id="@+id/suggestionText3"
         style="@style/BlackText"
         android:layout_width="334dp"
@@ -75,7 +46,7 @@
         android:layout_marginTop="28dp"
         android:text="@string/suggestion_text_3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText" />
+        app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
 
     <TextView
         android:id="@+id/userEmissionSaving"
@@ -84,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/suggestionText3"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText" />
+        app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
 
     <TextView
         android:id="@+id/userLegend"
@@ -192,17 +163,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
 
-    <ImageButton
-        android:id="@+id/facebookShare"
+    <Button
+        android:id="@+id/pledge_button"
+        style="@style/NiceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_share"
+        android:text="@string/make_pledge_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/treeHeading"
         app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
+
 
 </android.support.constraint.ConstraintLayout>
 
