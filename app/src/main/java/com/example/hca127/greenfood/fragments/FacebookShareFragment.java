@@ -64,16 +64,24 @@ public class FacebookShareFragment extends Fragment {
                     @Override
                     public void onSuccess(Sharer.Result result) {
                         Toast.makeText(getActivity(), "Share Cancelled.", Toast.LENGTH_SHORT).show();
+
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new CommunityFragment()).commit();
                     }
 
                     @Override
                     public void onCancel() {
                         Toast.makeText(getActivity(), "Share succeed.", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new CommunityFragment()).commit();
                     }
 
                     @Override
                     public void onError(FacebookException error) {
                         Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new CommunityFragment()).commit();
                     }
                 });
 
@@ -103,6 +111,7 @@ public class FacebookShareFragment extends Fragment {
                 if (ShareDialog.canShow(SharePhotoContent.class)) {
                     shareDialog.show(content);
                 }
+
 
 
 

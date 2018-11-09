@@ -63,8 +63,8 @@ public class PledgeFragment extends Fragment {
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
                 mLocalUser.setPledge(Double.parseDouble(mLevel));
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CommunityFragment()).commit();
 
             }
         });
@@ -86,6 +86,7 @@ public class PledgeFragment extends Fragment {
                 mLocalUser.setPledge(Double.parseDouble(mLevel));
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FacebookShareFragment()).commit();
+
 
             }
         });
