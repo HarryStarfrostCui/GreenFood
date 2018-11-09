@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+*   holds a list of ingredients(food) that makes up a diet plan
+*   holds the yearly emittion of such diet and
+*   the date of record of the diet
+*/
+
 public class Diet implements Serializable {
     private ArrayList<Food> mBasket;
     private float mTotalUserCo2Emission = 0;

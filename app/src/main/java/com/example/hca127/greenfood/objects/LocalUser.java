@@ -7,6 +7,14 @@ import java.util.Date;
 /*
     LocalUser class, holds a more general data than firebase
     in local shared preference
+    holds:
+    user id
+    user name
+    user email
+    user password
+    user pledge
+    city area
+    current & previous meal plans
  */
 
 public class LocalUser implements Serializable { //
