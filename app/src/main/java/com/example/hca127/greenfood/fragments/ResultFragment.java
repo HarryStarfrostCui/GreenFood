@@ -1,6 +1,6 @@
 package com.example.hca127.greenfood.fragments;
 
-
+import android.support.design.widget.NavigationView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -62,6 +62,7 @@ public class ResultFragment extends Fragment {
             public void onClick(View v){
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SuggestionFragment()).addToBackStack(null).commit();
+                ((NavigationView)getActivity().findViewById(R.id.navigation_view)).setCheckedItem(R.id.menu_suggestion);
             }
         });
 

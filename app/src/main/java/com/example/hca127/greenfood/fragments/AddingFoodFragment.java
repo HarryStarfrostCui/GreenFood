@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class AddingFoodFragment extends Fragment {
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ResultFragment()).addToBackStack(null).commit();
+                ((NavigationView)getActivity().findViewById(R.id.navigation_view)).setCheckedItem(R.id.menu_result);
             }
         });
 
