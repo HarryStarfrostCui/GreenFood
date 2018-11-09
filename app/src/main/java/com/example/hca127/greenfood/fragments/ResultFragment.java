@@ -1,6 +1,6 @@
 package com.example.hca127.greenfood.fragments;
 
-
+import android.support.design.widget.NavigationView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

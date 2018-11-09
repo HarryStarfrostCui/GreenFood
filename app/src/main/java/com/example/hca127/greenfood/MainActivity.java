@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mAuth.signOut();
                 mLocalUser = new LocalUser();
                 updateHeader();
-                android.support.v4.app.Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
                 break;
 
             case R.id.menu_facebook:
@@ -201,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserEmail = navigationView.getHeaderView(0).findViewById(R.id.userEmail);
         mUserEmail.setText(mLocalUser.getUserEmail());
         mUserName = navigationView.getHeaderView(0).findViewById(R.id.userName);
-        mUserEmail.setText(mLocalUser.getName());
+        mUserName.setText(mLocalUser.getName());
     }
 
     public void updateNavigationProfile(Drawable newProfile) {

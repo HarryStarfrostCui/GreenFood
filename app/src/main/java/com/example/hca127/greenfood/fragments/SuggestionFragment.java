@@ -40,7 +40,7 @@ import java.util.ArrayList;
 public class SuggestionFragment extends Fragment {
     private BarChart mSuggestionChart;
     private Diet mDiet;
-    private ImageButton mFacebookShare;
+    private Button mPledgeButton;
     private TextView mReduceSuggestionText;
     private TextView mIncreaseSuggestionText;
     private TextView mUserEmissionSaving;
@@ -60,7 +60,14 @@ public class SuggestionFragment extends Fragment {
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
         mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
 
-        mFacebookShare = view.findViewById(R.id.facebookShare);
+        mPledgeButton = view.findViewById(R.id.pledge_button);
+        mPledgeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PledgeFragment()).addToBackStack(null).commit();
+            }
+        });
         shareDialog = new ShareDialog(this);
 
         mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
@@ -109,75 +116,8 @@ public class SuggestionFragment extends Fragment {
         mTreesSaved.setText(String.valueOf(treesSaved));
 
         //share stuff
-        mFacebookShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-                    @Override
-                    public void onSuccess(Sharer.Result result) {
-                        Toast.makeText(getActivity(), "Share Cancelled.", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(getActivity(), "Share succeed.", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                //Link share
-
-//                ShareLinkContent linkContent = new ShareLinkContent.Builder()
-//                        .setContentUrl(Uri.parse("https://cmpt276.sfu.rosielab.ca/project"))
-//                        .setQuote("I plaged...")
-//                        .build();
-//                if (ShareDialog.canShow(ShareLinkContent.class))
-//                {
-//                    shareDialog.show(linkContent);
-//                }
-//            }
-//        });
-
-//                Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo_share);
-
-                SharePhoto mSharePhoto = new SharePhoto.Builder()
-                        .setBitmap(mLogoImage)
-                        .build();
-                SharePhotoContent content = new SharePhotoContent.Builder()
-                        .addPhoto(mSharePhoto)
-                        .setShareHashtag(new ShareHashtag.Builder().setHashtag(String.valueOf("#GreenVancouverProject ")).build())
-                        .build();
-                ShareApi.share(content, null);
-                if (ShareDialog.canShow(SharePhotoContent.class)) {
-                    shareDialog.show(content);
-                }
-            }
-        });
-
-        //call intent
-
-
-//        mFacebookShare.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent shareIntent = new Intent();
-//                shareIntent.setAction(Intent.ACTION_SEND);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM,mLogoImage);
-//                shareIntent.setType("image/jpeg");
-//                startActivity(Intent.createChooser(shareIntent, "Share with"));
-//            }
-//        });
 
         return view;
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 }
