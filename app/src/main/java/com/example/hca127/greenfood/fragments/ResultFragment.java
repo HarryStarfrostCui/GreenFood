@@ -61,7 +61,7 @@ public class ResultFragment extends Fragment {
             @Override
             public void onClick(View v){
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PledgeFragment()).addToBackStack(null).commit();
+                        new SuggestionFragment()).addToBackStack(null).commit();
             }
         });
 

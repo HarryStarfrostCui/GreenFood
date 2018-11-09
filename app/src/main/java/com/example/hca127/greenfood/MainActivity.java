@@ -19,7 +19,10 @@ import com.example.hca127.greenfood.fragments.AboutFragment;
 import com.example.hca127.greenfood.fragments.AddingFoodFragment;
 import com.example.hca127.greenfood.fragments.CommunityFragment;
 import com.example.hca127.greenfood.fragments.LoginFragment;
+import com.example.hca127.greenfood.fragments.PledgeFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
+import com.example.hca127.greenfood.fragments.ResultFragment;
+import com.example.hca127.greenfood.fragments.SuggestionFragment;
 import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.LocalUser;
 
@@ -110,6 +113,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_user:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.menu_pledge:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PledgeFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.menu_result:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ResultFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.menu_suggestion:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SuggestionFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
