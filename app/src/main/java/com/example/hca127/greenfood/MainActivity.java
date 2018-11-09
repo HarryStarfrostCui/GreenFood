@@ -1,6 +1,7 @@
 package com.example.hca127.greenfood;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private LocalUser mLocalUser;
     private TextView mUserEmail;
     private TextView mUserName;
+    private Drawable mProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,4 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mUserName.setText(mLocalUser.getFirstName());
     }
 
+    public void updateNavigationProfile(Drawable newProfile) {
+        mProfile = newProfile;
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        ImageView profile = navigationView.getHeaderView(0).findViewById(R.id.profilePicture);
+        profile.setImageDrawable(newProfile);
+    }
 }
