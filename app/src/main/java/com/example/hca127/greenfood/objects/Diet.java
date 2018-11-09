@@ -13,6 +13,19 @@ public class Diet implements Serializable {
         mBasket = new ArrayList<>();
         mDate = new Date();
     }
+    
+     // instantiates an average diet
+    public Diet(boolean b){
+        this();
+        addNewIngredient("Beef", 27, 25, 1);
+        addNewIngredient("Lamb", 39.2f, 1, 1);
+        addNewIngredient("Chicken", 6.9f, 33, 1);
+        addNewIngredient("Fish", 11.9f, 9, 1);
+        addNewIngredient("Pork", 12.1f, 21, 1);
+        addNewIngredient("Eggs", 4.8f, 10, 1);
+        addNewIngredient("Veggies", 2, 40, 1);
+        addNewIngredient("Bread", 2.7f, 32, 1);
+    }
 
     public String getFoodName(int index){ return mBasket.get(index).getFoodName();}
     public float getIngCarbon(int index){ return mBasket.get(index).getCarbonCoefficient();}
