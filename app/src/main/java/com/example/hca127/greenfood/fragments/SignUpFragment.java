@@ -47,6 +47,7 @@ public class SignUpFragment extends Fragment {
     private EditText mPassword;
     private EditText mPasswordConfirm;
     private LocalUser mLocalUser;
+    private String mLocalUserName;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
@@ -60,13 +61,13 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final String userName = mUserName.getText().toString();
+                mLocalUserName = userName;
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
                 String passwordConfirm = mPasswordConfirm.getText().toString();
                 if(email.isEmpty() == false && password.isEmpty() == false && password.length()>6 && password.equals(passwordConfirm)) {
                     mAuth = FirebaseAuth.getInstance();
                     FirebaseUser user = mAuth.getCurrentUser();
-                    updateUser(user);
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -78,6 +79,7 @@ public class SignUpFragment extends Fragment {
                                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                                 .setDisplayName(userName).build();
                                         user.updateProfile(profileUpdates);
+                                        updateUser(user);
                                         Toast.makeText(getActivity(), user.getEmail(),
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -100,8 +102,7 @@ public class SignUpFragment extends Fragment {
             }
 
             private void updateUser(FirebaseUser user) {
-                mLocalUser.setFirstName("");
-                mLocalUser.setFirstName(user.getDisplayName());
+                mLocalUser.setFirstName(mLocalUserName);
                 mLocalUser.setUserEmail(user.getEmail());
                 mLocalUser.setUserId(user.getUid());
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
