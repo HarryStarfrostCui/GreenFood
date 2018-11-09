@@ -43,7 +43,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 
-public class SuggestionFragment extends Fragment {
+public class FacebookShareFragment extends Fragment {
     private BarChart mSuggestionChart;
     private Diet mDiet;
     private ImageButton mFacebookShare;
