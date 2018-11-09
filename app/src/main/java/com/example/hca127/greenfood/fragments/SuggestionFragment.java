@@ -155,7 +155,7 @@ public class SuggestionFragment extends Fragment {
                         .build();
                 SharePhotoContent content = new SharePhotoContent.Builder()
                         .addPhoto(mSharePhoto)
-                        .setShareHashtag(new ShareHashtag.Builder().setHashtag(String.valueOf("#"+mLocalUser.getPledge())).build())
+                        .setShareHashtag(new ShareHashtag.Builder().setHashtag(String.valueOf("#GreenVancouverProject "+"#"+mLocalUser.getPledge())+" ").build())
                         .build();
                 ShareApi.share(content, null);
                 if (ShareDialog.canShow(SharePhotoContent.class)) {
