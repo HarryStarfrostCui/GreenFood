@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
@@ -49,6 +50,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        Toast.makeText(getContext(), mLocalUser.getName(), Toast.LENGTH_SHORT).show();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mNameCheck = view.findViewById(R.id.edit_display_name_button_check);

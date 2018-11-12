@@ -89,17 +89,20 @@ public class LoginFragment extends Fragment {
             userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //Toast.makeText(getContext(), (String) dataSnapshot.child("name").getValue(), Toast.LENGTH_SHORT).show();
                     mLocalUser.setFirstName((String) dataSnapshot.child("name").getValue());
+                    //Toast.makeText(getContext(), mLocalUser.getName(), Toast.LENGTH_SHORT).show();
                     double temp_pledge = 0.0+(long)dataSnapshot.child("pledge").getValue();
                     mLocalUser.setPledge(temp_pledge);
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
+                    //Toast.makeText(getContext(), mLocalUser.getName(), Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             });
-            ((MainActivity)getActivity()).setLocalUser(mLocalUser);
             String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
             mStatusText.setText(dialog);
         } else {
