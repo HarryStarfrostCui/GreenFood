@@ -29,9 +29,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
@@ -40,6 +47,9 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 public class SignUpFragment extends Fragment {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mUserData;
+    private DatabaseReference mCommunity;
+    private DataSnapshot dataSnapshot;
 
     private ImageView mSignUp;
     private EditText mUserName;
@@ -47,7 +57,6 @@ public class SignUpFragment extends Fragment {
     private EditText mPassword;
     private EditText mPasswordConfirm;
     private LocalUser mLocalUser;
-    private String mUserNameLocal;
     ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +68,8 @@ public class SignUpFragment extends Fragment {
         mSignUp = (ImageView) view.findViewById(R.id.sign_up_button);
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
         mAuth = FirebaseAuth.getInstance();
+        mUserData = FirebaseDatabase.getInstance().getReference().child("users");
+        mCommunity = FirebaseDatabase.getInstance().getReference().child("Community pledge");
 
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +84,10 @@ public class SignUpFragment extends Fragment {
     }
 
     private void registerUser() {
-        final String userName = mUserName.getText().toString();
-        mUserNameLocal = userName;
-        String email = mEmail.getText().toString();
-        String password = mPassword.getText().toString();
-        String passwordConfirm = mPasswordConfirm.getText().toString();
+        final String userName = mUserName.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        String passwordConfirm = mPasswordConfirm.getText().toString().trim();
 
         if (email.isEmpty()) {
             mEmail.setError("Email is required");
@@ -114,6 +124,32 @@ public class SignUpFragment extends Fragment {
                     FirebaseUser user = mAuth.getCurrentUser();
                     mLocalUser.setUserEmail(user.getEmail());
                     mLocalUser.setUserId(user.getUid());
+                    mLocalUser.setFirstName(userName);
+                    DatabaseReference thisUser = mUserData.child(mLocalUser.getUserId());
+                    Date date = new Date();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    thisUser.child("name").setValue(userName);
+                    thisUser.child("city").setValue(0);
+                    thisUser.child("email").setValue(user.getEmail());
+                    thisUser.child("pledge").setValue(0.0);
+                    thisUser.child("emmisions").child(strDate).setValue(1500.0);
+                    thisUser.child("meals").child("NofMeal").setValue(0);
+                    thisUser.child("icon_index").setValue(mLocalUser.getProfileIcon());
+
+                    mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            long temp = (long)dataSnapshot.child("0").child("participant").getValue();
+                            dataSnapshot.child("0").child("participant").getRef().setValue(temp+1);
+                            temp = (long)dataSnapshot.child("total").child("participant").getValue();
+                            dataSnapshot.child("total").child("participant").getRef().setValue(temp+1);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+
                     ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                     String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
 
