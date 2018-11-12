@@ -55,6 +55,14 @@
           }
         },
         {
+          "client_id": "729621741617-24v4cb5vi7pb28pnbcv7pj1btj0tkubb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hca127.greenfood",
+            "certificate_hash": "a45ff775f6ba2b545770f133f67bef136bc0656e"
+          }
+        },
+        {
           "client_id": "729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com",
           "client_type": 3
         }
