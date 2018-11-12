@@ -23,11 +23,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginFragment extends Fragment {
     private FirebaseUser mUser;
     private FirebaseAuth mAuthentication;
+    private DatabaseReference mDatabase;
     private TextView mStatusText;
     private EditText mEmailInput;
     private EditText mPasswordInput;
@@ -51,6 +57,7 @@ public class LoginFragment extends Fragment {
         mLoginButton = view.findViewById(R.id.loginButton);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
 
         mUser = mAuthentication.getCurrentUser();
         updateUser(mUser);
@@ -78,6 +85,20 @@ public class LoginFragment extends Fragment {
         if(user != null) {
             mLocalUser.setUserEmail(user.getEmail());
             mLocalUser.setUserId(user.getUid());
+            DatabaseReference userDatabase = mDatabase.child(mLocalUser.getUserId());
+            userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mLocalUser.setFirstName((String) dataSnapshot.child("name").getValue());
+                    double temp_pledge = (double) dataSnapshot.child("pledge").getValue();
+                    mLocalUser.setPledge(temp_pledge);
+                    mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
+                    mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
             ((MainActivity)getActivity()).setLocalUser(mLocalUser);
             String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
             mStatusText.setText(dialog);
