@@ -22,11 +22,15 @@ import android.widget.TextView;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
 
+    private DatabaseReference mDatabase;
     private ImageView name_pencil;
     private ImageView mNameCheck;
     private EditText mDisplayName;
@@ -45,6 +49,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mNameCheck = view.findViewById(R.id.edit_display_name_button_check);
         mNameCheck.setVisibility(ImageView.GONE);
@@ -53,12 +58,10 @@ public class ProfileFragment extends Fragment {
         mCityCheck.setVisibility(ImageView.GONE);
 
         mCityChoice = view.findViewById(R.id.edit_city_spinner_choice);
+        mCityChoice.setSelection(mLocalUser.getCity());
         mCityChoice.setEnabled(false);
 
         final SharedPreferences googleStuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        /*String google_name = google_stuff.getString("google_account_name","");
-        String google_email = google_stuff.getString("google_account_email", mLocalUser.getUserEmail());
-        final int city = google_stuff.getInt("mCityChoice",0);*/
         mCityChoice.setSelection(mLocalUser.getCity());
         mDisplayName = (EditText) view.findViewById(R.id.display_name);
         mDisplayName.setText(mLocalUser.getName());
@@ -99,12 +102,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mDisplayName.setEnabled(false);
-                String newName = mDisplayName.getText().toString();
+                String newName = mDisplayName.getText().toString().trim();
                 SharedPreferences.Editor editor = googleStuff.edit();
                 editor.putString("google_account_name",newName);
                 editor.apply();
 
                 mLocalUser.setFirstName(newName);
+                mDatabase.child("name").setValue(newName);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
 
                 mNameCheck.setVisibility(ImageView.GONE);
@@ -120,16 +124,6 @@ public class ProfileFragment extends Fragment {
                 mCityChoice.setEnabled(true);
                 mCityPencil.setVisibility(ImageView.GONE);
                 mCityCheck.setVisibility(ImageView.VISIBLE);
-
-                /*mCityChoice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        int city = Integer.parseInt(mCityChoice.getItemAtPosition(position).toString());
-                        final SharedPreferences.Editor editor = googleStuff.edit();
-                        editor.putInt("mCityChoice",city);
-                        editor.apply();
-                    }
-                });*/
 
             }
         });

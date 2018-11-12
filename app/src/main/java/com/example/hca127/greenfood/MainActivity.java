@@ -29,6 +29,8 @@ import com.example.hca127.greenfood.objects.LocalUser;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -136,12 +138,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new AddingFoodFragment()).addToBackStack("AddingFoodFragment").commit();
                 break;
             case R.id.menu_user:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).addToBackStack(null).commit();
+                if(mLocalUser.getUserId().equals("")){
+                    Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LoginFragment()).addToBackStack(null).commit();
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    navigationView.setCheckedItem(R.id.menu_community);
+                }else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ProfileFragment()).addToBackStack(null).commit();
+                }
                 break;
             case R.id.menu_pledge:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PledgeFragment()).addToBackStack(null).commit();
+                if(mLocalUser.getUserId().equals("")){
+                    Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LoginFragment()).addToBackStack(null).commit();
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    navigationView.setCheckedItem(R.id.menu_community);
+                }else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new PledgeFragment()).addToBackStack(null).commit();
+                }
                 break;
             case R.id.menu_result:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -187,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setLocalUser(LocalUser user) {
         mLocalUser = user;
         saveLocalUser();
-        saveToDatabase();
         updateHeader();
     }
 
@@ -198,14 +215,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String json = gson.toJson(mLocalUser);
         prefsEditor.putString("mLocalUser", json);
         prefsEditor.apply();
-    }
-
-    private void saveToDatabase() {
-        if (mFireUser !=null) {
-
-
-
-        }
     }
 
     private void updateHeader() {

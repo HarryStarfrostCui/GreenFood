@@ -132,22 +132,21 @@ public class SignUpFragment extends Fragment {
                     thisUser.child("name").setValue(userName);
                     thisUser.child("city").setValue(0);
                     thisUser.child("email").setValue(user.getEmail());
-                    thisUser.child("pledge").setValue(0);
-                    thisUser.child("emmisions").child(strDate).setValue(1500);
+                    thisUser.child("pledge").setValue(0.0);
+                    thisUser.child("emmisions").child(strDate).setValue(1500.0);
                     thisUser.child("meals").child("NofMeal").setValue(0);
                     thisUser.child("icon_index").setValue(mLocalUser.getProfileIcon());
-                    DatabaseReference defult_community = mCommunity.child("0");
-                    defult_community.addValueEventListener(new ValueEventListener() {
+
+                    mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            long temp = (long)dataSnapshot.child("participant").getValue();
-                            Toast.makeText(getContext(),"read", Toast.LENGTH_SHORT).show();
-                            temp += 1;
-                            dataSnapshot.getRef().setValue(temp);
+                            long temp = (long)dataSnapshot.child("0").child("participant").getValue();
+                            dataSnapshot.child("0").child("participant").getRef().setValue(temp+1);
+                            temp = (long)dataSnapshot.child("total").child("participant").getValue();
+                            dataSnapshot.child("total").child("participant").getRef().setValue(temp+1);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(getContext(),databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
