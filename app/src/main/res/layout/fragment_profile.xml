@@ -25,6 +25,13 @@
             android:textSize="25dp" />
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/ProfilePicture"
+        android:src="@mipmap/ic_launcher_round"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/display_name_promt"
+            android:text="@string/display_name_prompt"
             android:layout_gravity="center"
             android:textSize="18dp"
             android:textColor="@color/themeGreen"/>
@@ -100,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/city_promt"
+            android:text="@string/city_prompt"
             android:layout_gravity="center"
             android:textSize="18dp"
             android:textColor="@color/themeGreen"/>
@@ -149,7 +156,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email_promt"
+            android:text="@string/email_prompt"
             android:layout_gravity="center"
             android:textSize="18dp"
             android:textColor="@color/themeGreen"/>

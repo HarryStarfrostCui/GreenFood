@@ -622,13 +622,14 @@
             </LinearLayout>
 
             <ImageView
+                android:paddingTop="5dp"
                 android:id="@+id/nextImageView"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|bottom"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/calculate" />
+                android:src="@drawable/addfood" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
