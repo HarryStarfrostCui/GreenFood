@@ -89,14 +89,11 @@ public class LoginFragment extends Fragment {
             userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    //Toast.makeText(getContext(), (String) dataSnapshot.child("name").getValue(), Toast.LENGTH_SHORT).show();
-                    mLocalUser.setFirstName((String) dataSnapshot.child("name").getValue());
-                    //Toast.makeText(getContext(), mLocalUser.getName(), Toast.LENGTH_SHORT).show();
+                    mLocalUser.setName((String) dataSnapshot.child("name").getValue());
                     double temp_pledge = 0.0+(long)dataSnapshot.child("pledge").getValue();
                     mLocalUser.setPledge(temp_pledge);
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
-                    //Toast.makeText(getContext(), mLocalUser.getName(), Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                 }
                 @Override

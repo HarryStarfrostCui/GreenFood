@@ -1,14 +1,10 @@
 package com.example.hca127.greenfood.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -23,11 +19,11 @@ import android.widget.Toast;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import static android.app.Activity.RESULT_OK;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
 
@@ -50,7 +46,6 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
-        Toast.makeText(getContext(), mLocalUser.getName(), Toast.LENGTH_SHORT).show();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mNameCheck = view.findViewById(R.id.edit_display_name_button_check);
@@ -109,7 +104,7 @@ public class ProfileFragment extends Fragment {
                 editor.putString("google_account_name",newName);
                 editor.apply();
 
-                mLocalUser.setFirstName(newName);
+                mLocalUser.setName(newName);
                 mDatabase.child("name").setValue(newName);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
 
@@ -136,12 +131,43 @@ public class ProfileFragment extends Fragment {
                 mCityChoice.setEnabled(false);
                 mCityPencil.setVisibility(ImageView.VISIBLE);
                 mCityCheck.setVisibility(ImageView.GONE);
-                int city = mCityChoice.getSelectedItemPosition();
-                mLocalUser.setCity(city);
-                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-                SharedPreferences.Editor editor = googleStuff.edit();
-                editor.putInt("mCityChoice",city);
-                editor.apply();
+
+                DatabaseReference userDatabase = mDatabase.child("Community pledge");
+                userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int city = mCityChoice.getSelectedItemPosition();
+                        if(city != mLocalUser.getCity()) {
+                            int participantTemp = (int) (long) dataSnapshot.child(Integer.toString(
+                                    mLocalUser.getCity())).child("participant").getValue();
+                            dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("participant")
+                                    .getRef().setValue(participantTemp - 1);
+                            double pledgeTemp = (double) dataSnapshot.child(Integer.toString(
+                                    mLocalUser.getCity())).child("pledge").getValue();
+                            dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("pledge")
+                                    .getRef().setValue(pledgeTemp - mLocalUser.getPledge());
+
+                            participantTemp = (int) (long) dataSnapshot.child(Integer.toString(
+                                    city)).child("participant").getValue();
+                            dataSnapshot.child(Integer.toString(city)).child("participant")
+                                    .getRef().setValue(participantTemp + 1);
+                            pledgeTemp = (double) dataSnapshot.child(Integer.toString(
+                                    city)).child("pledge").getValue();
+                            dataSnapshot.child(Integer.toString(city)).child("pledge")
+                                    .getRef().setValue(pledgeTemp + mLocalUser.getPledge());
+                            mLocalUser.setCity(city);
+                            ((MainActivity) getActivity()).setLocalUser(mLocalUser);
+                            SharedPreferences.Editor editor = googleStuff.edit();
+                            editor.putInt("mCityChoice", city);
+                            editor.apply();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(), databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

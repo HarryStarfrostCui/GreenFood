@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new PledgeFragment()).addToBackStack(null).commit();
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    navigationView.setCheckedItem(R.id.menu_pledge);
                 }
                 break;
             case R.id.menu_result:
@@ -195,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setLocalUserDiet(Diet diet) {
-        mLocalUser.addDiet(diet);
+        mLocalUser.setCurrentDiet(diet);
     }
 
     public LocalUser getLocalUser() {
