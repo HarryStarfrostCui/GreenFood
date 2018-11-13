@@ -55,7 +55,7 @@ public class SignUpFragment extends Fragment {
         mPassword = (EditText) view.findViewById(R.id.create_password_input);
         mPasswordConfirm = (EditText) view.findViewById(R.id.create_confirm_password);
         mSignUp = (ImageView) view.findViewById(R.id.sign_up_button);
-        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mLocalUser = new LocalUser();
         mAuth = FirebaseAuth.getInstance();
         mUserData = FirebaseDatabase.getInstance().getReference().child("users");
         mCommunity = FirebaseDatabase.getInstance().getReference().child("Community pledge");
@@ -122,8 +122,8 @@ public class SignUpFragment extends Fragment {
                     thisUser.child("city").setValue(0);
                     thisUser.child("email").setValue(user.getEmail());
                     thisUser.child("pledge").setValue(0.0);
-                    thisUser.child("emissions").child(strDate).setValue(1500.0);
-                    thisUser.child("meals").child("NofMeal").setValue(0);
+                    thisUser.child("emissions").child(mLocalUser.getEmissions().get(0).getStrdate())
+                            .setValue(mLocalUser.getEmissions().get(0).getAmount());
                     thisUser.child("icon_index").setValue(mLocalUser.getProfileIcon());
 
                     mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
