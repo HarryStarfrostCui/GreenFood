@@ -70,10 +70,11 @@ public class PledgeFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         double totalTemp = (double)dataSnapshot.child("total").child("pledge").getValue();
                         double cityTemp = (double)dataSnapshot.child(String.valueOf(mLocalUser.getCity())).child("pledge").getValue();
+                        Toast.makeText(getContext(),String.valueOf(mLocalUser.getPledge()),Toast.LENGTH_SHORT).show();
                         totalTemp = totalTemp - mLocalUser.getPledge();
                         cityTemp = cityTemp - mLocalUser.getPledge();
                         mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
-                        totalTemp = totalTemp + mLocalUser.getPledge();
+                        totalTemp += mLocalUser.getPledge();
                         cityTemp += mLocalUser.getPledge();
                         dataSnapshot.child("total").child("pledge").getRef().setValue(totalTemp);
                         dataSnapshot.child(String.valueOf(mLocalUser.getCity())).child("pledge").getRef().setValue(cityTemp);

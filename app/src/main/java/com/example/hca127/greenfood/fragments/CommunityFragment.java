@@ -86,7 +86,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                 if(numOParticipant != 0){
                     mAverageDisplay.setText(String.valueOf(Math.round(pledged/numOParticipant*100)/100));
                 }else {
-                    mAverageDisplay.setText("meh");
+                    mAverageDisplay.setText("0");
                 }
                 mTreesDisplay.setText(String.valueOf(Math.round(pledged/22*100)/100));
                 mProgressBar.setVisibility(View.GONE);
