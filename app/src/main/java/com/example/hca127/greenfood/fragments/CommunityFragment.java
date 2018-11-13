@@ -81,7 +81,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numOParticipant = (int)(long)dataSnapshot.child("participant").getValue();
                 String toBDisplayed = String.valueOf(numOParticipant);
-                Toast.makeText(getContext(),String.valueOf(numOParticipant),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),String.valueOf(numOParticipant),Toast.LENGTH_SHORT).show(); //<<<------------------------
                 mParticipantDisplay.setText(toBDisplayed);
                 double pledged = (double)dataSnapshot.child("pledge").getValue();
                 mParticipantDisplay.setText(String.valueOf(Math.round(pledged*100)/100));
