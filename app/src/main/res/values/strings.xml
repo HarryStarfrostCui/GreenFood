@@ -194,12 +194,28 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
-    
+
     <string name="display_name_promt">User Name: </string>
     <string name="city_promt">City: </string>
     <string name="email_promt">Email: </string>
     <string name="request_token">729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com</string>
 
+    <string name="restaurant_title">Share Your Meal!</string>
+    <string name="restaurant_name">Restaurant Name: </string>
+    <string name="meal_name">Meal Name:</string>
+    <string name="main_protein">Main Protein: </string>
+    <string name="second_ingredient">Second Ingredient: </string>
+    <string name="third_ingredient">Third Ingredient: </string>
+    <string name="share_location_text">Share Location? </string>
+
+
+    <string-array name="protein_array">
+        <item>Beef</item>
+        <item>Lamb</item>
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Pork</item>
+    </string-array>
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
