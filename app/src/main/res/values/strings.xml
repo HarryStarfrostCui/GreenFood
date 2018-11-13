@@ -201,9 +201,9 @@
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
 
 
-    <string name="display_name_promt">User Name: </string>
-    <string name="city_promt">City: </string>
-    <string name="email_promt">Email: </string>
+    <string name="display_name_prompt">User Name: </string>
+    <string name="city_prompt">City: </string>
+    <string name="email_prompt">Email: </string>
     <string name="request_token">729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com</string>
 
     <string name="facebook_application_id">337483050352224</string>
@@ -215,6 +215,8 @@
     <string name="second_ingredient">Second Ingredient: </string>
     <string name="third_ingredient">Third Ingredient: </string>
     <string name="share_location_text">Share Location? </string>
+    <string name="description_text">Describe Your Meal: </string>
+    <string name="share_facebook">&#160; &#160;Share to Facebook!</string>
 
 
     <string-array name="protein_array">
@@ -233,6 +235,7 @@
     <string name="pledge_button_text">PLEDGE!</string>
     <string name="make_pledge_button_text">MAKE A PLEDGE!</string>
     <string name="pledge_share">PLEDGE AND SHARE!</string>
+
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
