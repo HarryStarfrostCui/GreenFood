@@ -39,16 +39,16 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mParticipantDisplay = (TextView) view.findViewById(R.id.community_pledge_participant);
+        mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
+        mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
+        mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
+
         mCitySpinner = view.findViewById(R.id.community_cityList);
         mCitySpinner.setOnItemSelectedListener(this);
         mCurrentCity = "total";
         mCitySpinner.setSelection(0);
         mProgressBar = view.findViewById(R.id.community_progress_bar);
-
-        mParticipantDisplay = (TextView) view.findViewById(R.id.community_pledge_participant);
-        mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
-        mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
-        mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
 
         SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String name = google_account_info.getString("name","");
@@ -80,12 +80,14 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numOParticipant = (int)(long)dataSnapshot.child("participant").getValue();
-                String toBDisplayed = String.valueOf(numOParticipant);
-                Toast.makeText(getContext(),String.valueOf(numOParticipant),Toast.LENGTH_SHORT).show(); //<<<------------------------
-                mParticipantDisplay.setText(toBDisplayed);
+                mParticipantDisplay.setText(String.valueOf(numOParticipant));
                 double pledged = (double)dataSnapshot.child("pledge").getValue();
-                mParticipantDisplay.setText(String.valueOf(Math.round(pledged*100)/100));
-                mAverageDisplay.setText(String.valueOf(Math.round(pledged/numOParticipant*100)/100));
+                mReducedDisplay.setText(String.valueOf(Math.round(pledged*100)/100));
+                if(numOParticipant != 0){
+                    mAverageDisplay.setText(String.valueOf(Math.round(pledged/numOParticipant*100)/100));
+                }else {
+                    mAverageDisplay.setText("meh");
+                }
                 mTreesDisplay.setText(String.valueOf(Math.round(pledged/22*100)/100));
                 mProgressBar.setVisibility(View.GONE);
             }
