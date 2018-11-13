@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -23,10 +22,9 @@ public class LocalUserTest {
         testUser = new LocalUser();
         testUser.setUserId("123");
         testUser.setCity(0);
-        testUser.setFirstName("patrick");
+        testUser.setName("patrick");
         testUser.setPledge(10.23);
         testUser.setUserEmail("patrick@gmail.com");
-        testUser.setUserPassword("w123456");
         testDiet.addNewIngredient("Beef", 20, 20, 2);
         testDiet2.addNewIngredient("Chicken", 20, 20, 2);
         testLocalUserDiet = new ArrayList<Diet>();
@@ -59,43 +57,8 @@ public class LocalUserTest {
     }
 
     @Test
-    public void addDiet() {
-        testUser.addDiet(testDiet2);
-        assertEquals(testDiet2.getFoodName(0),testUser.getCurrentDiet().getFoodName(0));
-    }
-
-    @Test
-    public void getInitialDiet() {
-        assertEquals(testDiet.getFoodName(0), testUser.getInitialDiet().getFoodName(0));
-    }
-
-    @Test
     public void getCurrentDiet() {
         assertEquals(testLocalUserDiet.get(0).getFoodName(0),testUser.getCurrentDiet().getFoodName(0));
-    }
-
-    @Test
-    public void getDietDateList() {
-        assertEquals(testDiet.getDate(), testUser.getDietDateList().get(0));
-    }
-
-    @Test
-    public void getEmissionList() {
-        LocalUser testUser2 = new LocalUser();
-        float CO2e = 0;
-        for (int i = 0; i < testLocalUserDiet.size(); i++)
-        {
-            CO2e = CO2e + testDiet.getUserDietEmission();
-        }
-        assertEquals(2276.250244140625, testUser2.getEmissionList().get(0), 0.001);
-    }
-
-    @Test
-    public void renewDiet() {
-        testUser.addDiet(testDiet2);
-        testUser.addDiet(testDiet);
-        testUser.renewDiet();
-        assertEquals("Beef",testUser.getCurrentDiet().getFoodName(0));
     }
 
     @Test
@@ -107,7 +70,7 @@ public class LocalUserTest {
 
     @Test
     public void setFirstName() {
-        testUser.setFirstName("testUserName");
+        testUser.setName("testUserName");
         assertEquals("testUserName", testUser.getName());
     }
 
@@ -127,17 +90,5 @@ public class LocalUserTest {
     public void setCity() {
         testUser.setCity(1);
         assertEquals(1, testUser.getCity());
-    }
-
-    @Test
-    public void setUserPassword() {
-        testUser.setUserPassword("testUserPassword");
-        assertTrue(testUser.CheckPassword("testUserPassword"));
-    }
-
-    @Test
-    public void checkPassword() {
-        testUser.setUserPassword("testUserPassword");
-        assertTrue(testUser.CheckPassword("testUserPassword"));
     }
 }

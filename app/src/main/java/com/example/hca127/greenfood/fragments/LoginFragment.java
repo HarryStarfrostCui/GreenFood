@@ -89,7 +89,7 @@ public class LoginFragment extends Fragment {
             userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    mLocalUser.setFirstName((String) dataSnapshot.child("name").getValue());
+                    mLocalUser.setName((String) dataSnapshot.child("name").getValue());
                     double temp_pledge = 0.0+(long)dataSnapshot.child("pledge").getValue();
                     mLocalUser.setPledge(temp_pledge);
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());

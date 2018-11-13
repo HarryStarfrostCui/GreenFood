@@ -1,14 +1,10 @@
 package com.example.hca127.greenfood.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -23,14 +19,11 @@ import android.widget.Toast;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
 
@@ -111,7 +104,7 @@ public class ProfileFragment extends Fragment {
                 editor.putString("google_account_name",newName);
                 editor.apply();
 
-                mLocalUser.setFirstName(newName);
+                mLocalUser.setName(newName);
                 mDatabase.child("name").setValue(newName);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
 
@@ -162,6 +155,7 @@ public class ProfileFragment extends Fragment {
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(), databaseError.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
 

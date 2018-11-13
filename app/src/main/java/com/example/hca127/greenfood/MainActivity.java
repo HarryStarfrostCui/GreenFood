@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setLocalUserDiet(Diet diet) {
-        mLocalUser.addDiet(diet);
+        mLocalUser.setCurrentDiet(diet);
     }
 
     public LocalUser getLocalUser() {

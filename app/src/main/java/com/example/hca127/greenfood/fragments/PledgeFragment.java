@@ -62,7 +62,7 @@ public class PledgeFragment extends Fragment {
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                mLocalUser.setPledge(Double.parseDouble(mLevel));
+                mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CommunityFragment()).commit();
 
@@ -83,7 +83,7 @@ public class PledgeFragment extends Fragment {
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                mLocalUser.setPledge(Double.parseDouble(mLevel));
+                mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FacebookShareFragment()).commit();
 
