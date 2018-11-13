@@ -28,6 +28,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -38,13 +43,12 @@ public class PledgeFragment extends Fragment {
     private Button mPledgeButton;
     private Button mFacebookPledgeButton;
     private LocalUser mLocalUser;
-
+    private String mLevel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_pledge, container, false);
-
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
@@ -55,14 +59,32 @@ public class PledgeFragment extends Fragment {
 
                 mPledgeChoiceRadioGroup = view.findViewById(R.id.pledge_radio_group);
                 mPledgeChoiceButton = mPledgeChoiceRadioGroup.getCheckedRadioButtonId();
-
                 String mChoice;
-                String mLevel;
-
+                final String mLevel;
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
+                DatabaseReference community = FirebaseDatabase.getInstance().getReference().child("Community pledge");
+                community.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        double totalTemp = (double)dataSnapshot.child("total").child("pledge").getValue();
+                        double cityTemp = (double)dataSnapshot.child(String.valueOf(mLocalUser.getCity())).child("pledge").getValue();
+                        totalTemp = totalTemp - mLocalUser.getPledge();
+                        cityTemp = cityTemp - mLocalUser.getPledge();
+                        mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
+                        totalTemp = totalTemp + mLocalUser.getPledge();
+                        cityTemp += mLocalUser.getPledge();
+                        dataSnapshot.child("total").child("pledge").getRef().setValue(totalTemp);
+                        dataSnapshot.child(String.valueOf(mLocalUser.getCity())).child("pledge").getRef().setValue(cityTemp);
+                        ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CommunityFragment()).commit();
 

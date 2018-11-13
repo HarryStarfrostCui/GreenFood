@@ -138,14 +138,23 @@ public class ProfileFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int city = mCityChoice.getSelectedItemPosition();
                         if(city != mLocalUser.getCity()) {
-                            int temp = (int) (long) dataSnapshot.child(Integer.toString(
+                            int participantTemp = (int) (long) dataSnapshot.child(Integer.toString(
                                     mLocalUser.getCity())).child("participant").getValue();
                             dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("participant")
-                                    .getRef().setValue(temp - 1);
-                            temp = (int) (long) dataSnapshot.child(Integer.toString(
+                                    .getRef().setValue(participantTemp - 1);
+                            double pledgeTemp = (double) dataSnapshot.child(Integer.toString(
+                                    mLocalUser.getCity())).child("pledge").getValue();
+                            dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("pledge")
+                                    .getRef().setValue(pledgeTemp - mLocalUser.getPledge());
+
+                            participantTemp = (int) (long) dataSnapshot.child(Integer.toString(
                                     city)).child("participant").getValue();
                             dataSnapshot.child(Integer.toString(city)).child("participant")
-                                    .getRef().setValue(temp + 1);
+                                    .getRef().setValue(participantTemp + 1);
+                            pledgeTemp = (double) dataSnapshot.child(Integer.toString(
+                                    city)).child("pledge").getValue();
+                            dataSnapshot.child(Integer.toString(city)).child("pledge")
+                                    .getRef().setValue(pledgeTemp + mLocalUser.getPledge());
                             mLocalUser.setCity(city);
                             ((MainActivity) getActivity()).setLocalUser(mLocalUser);
                             SharedPreferences.Editor editor = googleStuff.edit();
