@@ -45,10 +45,10 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mCitySpinner.setSelection(0);
         mProgressBar = view.findViewById(R.id.community_progress_bar);
 
-        mParticipantDisplay = view.findViewById(R.id.community_pledge_participant);
-        mReducedDisplay = view.findViewById(R.id.community_pledge_total);
-        mTreesDisplay = view.findViewById(R.id.community_pledge_trees);
-        mAverageDisplay = view.findViewById(R.id.community_pledge_average);
+        mParticipantDisplay = (TextView) view.findViewById(R.id.community_pledge_participant);
+        mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
+        mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
+        mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
 
         SharedPreferences google_account_info = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String name = google_account_info.getString("name","");
@@ -80,8 +80,9 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numOParticipant = (int)(long)dataSnapshot.child("participant").getValue();
+                String toBDisplayed = String.valueOf(numOParticipant);
                 Toast.makeText(getContext(),String.valueOf(numOParticipant),Toast.LENGTH_SHORT).show();
-                mParticipantDisplay.setText(String.valueOf(numOParticipant));
+                mParticipantDisplay.setText(toBDisplayed);
                 double pledged = (double)dataSnapshot.child("pledge").getValue();
                 mParticipantDisplay.setText(String.valueOf(Math.round(pledged*100)/100));
                 mAverageDisplay.setText(String.valueOf(Math.round(pledged/numOParticipant*100)/100));
