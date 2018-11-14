@@ -171,7 +171,7 @@
     </string-array>
 
     <string-array name="city_array">
-        <item>-Defult-</item>
+        <item>-Default-</item>
         <item>Abbotsford</item>
         <item>Burnaby</item>
         <item>Coquitlam</item>
