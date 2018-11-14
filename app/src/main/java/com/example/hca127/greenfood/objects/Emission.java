@@ -20,4 +20,7 @@ public class Emission {
         SimpleDateFormat formatter=new SimpleDateFormat("MM dd, yyyy");
         return formatter.parse(mStrdate);
     }
+    public void setmStrdate(String mStrdate) {
+        this.mStrdate = mStrdate;
+    }
 }

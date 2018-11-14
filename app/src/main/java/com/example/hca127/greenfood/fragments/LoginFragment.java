@@ -92,6 +92,7 @@ public class LoginFragment extends Fragment {
                     mLocalUser.setName((String) dataSnapshot.child("name").getValue());
                     double temp_pledge = 0.0+(long)dataSnapshot.child("pledge").getValue();
                     mLocalUser.setPledge(temp_pledge);
+
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
                     ((MainActivity)getActivity()).setLocalUser(mLocalUser);
