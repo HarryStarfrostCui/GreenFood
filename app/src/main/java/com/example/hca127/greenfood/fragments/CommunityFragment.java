@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class CommunityFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private ImageView mabout;
@@ -35,6 +37,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     private DatabaseReference mDatabase;
     private ProgressBar mProgressBar;
     private TextView mOtherPledge1;
+    private ArrayList<TextView> mOtherPledges;
 
     @Nullable
     @Override
@@ -45,7 +48,14 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
         mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
         mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
+
+        mOtherPledges = new ArrayList<>();
         mOtherPledge1 = view.findViewById(R.id.otherPledge1);
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge0));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge1));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge2));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge3));
+
 
         mCitySpinner = view.findViewById(R.id.community_cityList);
         mCitySpinner.setOnItemSelectedListener(this);
@@ -112,10 +122,14 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> userChildren = dataSnapshot.getChildren();
 
+                int index = 0;
                 for (DataSnapshot user : userChildren) {
                     String temp = String.format(getResources().getString(R.string.community_other_pledge),
                             user.child("name").getValue(), user.child("pledge").getValue());
-                    mOtherPledge1.setText(temp);
+
+                    mOtherPledges.get(index).setText(temp);
+                    index++;
+
                 }
 
                 mProgressBar.setVisibility(View.GONE);
