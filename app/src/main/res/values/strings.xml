@@ -64,16 +64,19 @@
     <string name="chicken3">A little</string>
     <string name="chicken4">None</string>
 
+    <string name="fish">Fish</string>
     <string name="fish1">Venti</string>
     <string name="fish2">Grande</string>
     <string name="fish3">Tall</string>
     <string name="fish4">Drink stopper</string>
 
+    <string name="pork">Pork</string>
     <string name="pork1">Big Mac</string>
     <string name="pork2">McChicken</string>
     <string name="pork3">Jr. Chicken</string>
     <string name="pork4">Ketchup packet</string>
 
+    <string name="egg">Eggs</string>
     <string name="egg1">Grandpa</string>
     <string name="egg2">Teen</string>
     <string name="egg3">Baby</string>
@@ -90,6 +93,7 @@
     <string name="bread2">Big Ben</string>
     <string name="bread3">Your house</string>
     <string name="bread4">Below sea level</string>
+    <string name="add_food_button_text">Add Food!</string>
 
     <string name="result_greeting">
         Phew! You made it through. I was worried  that we\'d need to ask clippy to help.
@@ -201,7 +205,6 @@
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
 
-
     <string name="display_name_prompt">User Name: </string>
     <string name="city_prompt">City: </string>
     <string name="email_prompt">Email: </string>
@@ -237,6 +240,8 @@
     <string name="make_pledge_button_text">MAKE A PLEDGE!</string>
     <string name="pledge_share">PLEDGE AND SHARE!</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_google_maps">Map</string>
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
