@@ -71,16 +71,32 @@ public class SuggestionFragment extends Fragment {
         shareDialog = new ShareDialog(this);
 
         mReduceSuggestionText = view.findViewById(R.id.suggestionText1);
-        String temp = String.format(getResources().getString(R.string.suggestion_text_1),
-                                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
-        mReduceSuggestionText.setText(temp);
-
         mIncreaseSuggestionText = view.findViewById(R.id.suggestionText2);
-        String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
-                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
-        mIncreaseSuggestionText.setText(tempTwo);
-
         mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
+        float checker = 0;
+        for(int i = 0; i<mDiet.getSize(); i++){
+            checker += mDiet.getUserConsumption(i);
+        }
+        if(checker == 0){
+            mReduceSuggestionText.setText("Emm... you're doing great in term of carbon emission!");
+            mIncreaseSuggestionText.setText("But try to eat a bit more healthy, would ya? ;)");
+        }else if (checker == 1.5*mDiet.getSize()){
+            String temp = String.format(getResources().getString(R.string.suggestion_text_1),
+                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
+            mReduceSuggestionText.setText(temp);
+            String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
+                    "... actually just eat a bit less =)");
+            mIncreaseSuggestionText.setText(tempTwo);
+        }else {
+            String temp = String.format(getResources().getString(R.string.suggestion_text_1),
+                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
+            mReduceSuggestionText.setText(temp);
+
+            String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
+                    mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+            mIncreaseSuggestionText.setText(tempTwo);
+        }
+
         mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);

@@ -84,17 +84,17 @@ public class Diet implements Serializable {
         }
     }
 
-
     public int getSuggestionMinIndex() {
         int minIndex = 0;
         float minValue = mBasket.get(0).getCarbonCoefficient();
-
         float temp;
         for(int i = 1; i < mBasket.size() ; i++){
-            temp = mBasket.get(i).getCarbonCoefficient();
-            if (temp < minValue) {
-                minValue = temp;
-                minIndex = i;
+            if(mBasket.get(i).getUserConsumption() < 1.45f) {
+                temp = mBasket.get(i).getCarbonCoefficient();
+                if (temp < minValue) {
+                    minValue = temp;
+                    minIndex = i;
+                }
             }
         }
 
