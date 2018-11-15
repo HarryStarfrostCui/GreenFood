@@ -3,6 +3,7 @@ package com.example.hca127.greenfood.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -33,6 +34,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     private String mCurrentCity;
     private DatabaseReference mDatabase;
     private ProgressBar mProgressBar;
+    private TextView mOtherPledge1;
 
     @Nullable
     @Override
@@ -43,6 +45,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
         mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
         mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
+        mOtherPledge1 = view.findViewById(R.id.otherPledge1);
 
         mCitySpinner = view.findViewById(R.id.community_cityList);
         mCitySpinner.setOnItemSelectedListener(this);
@@ -64,6 +67,11 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                 navigationView.setCheckedItem(R.id.menu_about);
             }
         });
+
+
+
+
+
         return view;
     }
 
@@ -97,6 +105,28 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                 Toast.makeText(getContext(), databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+
+        final DatabaseReference userPledges = mDatabase.child("users");
+        userPledges.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> userChildren = dataSnapshot.getChildren();
+
+                for (DataSnapshot user : userChildren) {
+                    String temp = String.format(getResources().getString(R.string.community_other_pledge),
+                            user.child("name").getValue(), user.child("pledge").getValue());
+                    mOtherPledge1.setText(temp);
+                }
+
+                mProgressBar.setVisibility(View.GONE);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                mProgressBar.setVisibility(View.GONE);
+                Toast.makeText(getContext(), databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
         DatabaseReference users = mDatabase.child("users");
     }
     @Override
