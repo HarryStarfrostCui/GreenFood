@@ -201,12 +201,32 @@
 
     <string name="welcome_main_menu">Welcome to the Greener Vancouver Project!</string>
 
+
     <string name="display_name_prompt">User Name: </string>
     <string name="city_prompt">City: </string>
     <string name="email_prompt">Email: </string>
+    <string name="request_token">729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com</string>
 
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
+    <string name="restaurant_title">Share Your Meal!</string>
+    <string name="restaurant_name">Restaurant Name: </string>
+    <string name="meal_name">Meal Name:</string>
+    <string name="main_protein">Main Protein: </string>
+    <string name="second_ingredient">Second Ingredient: </string>
+    <string name="third_ingredient">Third Ingredient: </string>
+    <string name="share_location_text">Share Location? </string>
+    <string name="description_text">Describe Your Meal: </string>
+    <string name="share_facebook">&#160; &#160;Share to Facebook!</string>
+
+
+    <string-array name="protein_array">
+        <item>Beef</item>
+        <item>Lamb</item>
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Pork</item>
+    </string-array>
 
     <string name="pledge">I Pledge: </string>
     <string name="pledge_radio_button_3">A TON! (Literally)</string>
@@ -217,7 +237,6 @@
     <string name="make_pledge_button_text">MAKE A PLEDGE!</string>
     <string name="pledge_share">PLEDGE AND SHARE!</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>
