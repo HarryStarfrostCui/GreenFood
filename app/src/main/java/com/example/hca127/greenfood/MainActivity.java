@@ -92,12 +92,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
-                    Iterable<DataSnapshot> emissionReader = dataSnapshot.child("emission").getChildren();
+                    int n = (int)(long)dataSnapshot.child("emission").child("NofEmission").getValue();
                     ArrayList<Emission> nEmission = new ArrayList<>();
-                    Emission temp;
-                    for(DataSnapshot child:emissionReader){
-                        temp = new Emission(child.getKey(), (double)child.getValue());
-                        nEmission.add(temp);
+                    for(int i = 0; i<n; i++){
+                        String tempDate = (String) dataSnapshot.child("emission")
+                                .child(String.valueOf(i)).child("date").getValue();
+                        double tempAmount = (double) dataSnapshot.child("emission")
+                                .child(String.valueOf(i)).child("amount").getValue();
+                        nEmission.add(new Emission(tempDate,tempAmount));
                     }
                     mLocalUser.setEmission(nEmission);
                     setLocalUser(mLocalUser);

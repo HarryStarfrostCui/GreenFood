@@ -103,11 +103,13 @@ public class AddingFoodFragment extends Fragment {
 
     public void saveUserEmission(){
         ArrayList<Emission> mArr = ((MainActivity)getActivity()).getLocalUser().getEmissions();
-        HashMap<String, Double> emissionTree=new HashMap<>();
+        mUserData.child("emissions").child("NofEmission").setValue(mArr.size());
         for(int i = 0; i<mArr.size(); i++){
-            emissionTree.put(mArr.get(i).getStrdate(), mArr.get(i).getAmount());
+            mUserData.child("emissions").child(String.valueOf(i))
+                    .child("date").setValue(mArr.get(i).getStrdate());
+            mUserData.child("emissions").child(String.valueOf(i))
+                    .child("date").setValue(mArr.get(i).getAmount());
         }
-        mUserData.child("emissions").setValue(emissionTree);
     }
 
 }
