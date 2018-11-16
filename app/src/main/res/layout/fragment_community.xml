@@ -190,9 +190,10 @@
                     android:id="@+id/otherIcon0"/>
                 <TextView
                     android:id="@+id/otherPledge0"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
-                    android:layout_width="200dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:text="" />
             </LinearLayout>
@@ -207,7 +208,8 @@
                     android:id="@+id/otherIcon1"/>
                 <TextView
                     android:id="@+id/otherPledge1"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -224,7 +226,8 @@
                     android:id="@+id/otherIcon2"/>
                 <TextView
                     android:id="@+id/otherPledge2"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -241,7 +244,8 @@
                     android:id="@+id/otherIcon3"/>
                 <TextView
                     android:id="@+id/otherPledge3"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -258,7 +262,8 @@
                     android:id="@+id/otherIcon4"/>
                 <TextView
                     android:id="@+id/otherPledge4"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -275,7 +280,8 @@
                     android:id="@+id/otherIcon5"/>
                 <TextView
                     android:id="@+id/otherPledge5"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -292,7 +298,8 @@
                     android:id="@+id/otherIcon6"/>
                 <TextView
                     android:id="@+id/otherPledge6"
-                    android:paddingTop="16dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
                     android:textSize="18dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -309,8 +316,9 @@
                     android:id="@+id/otherIcon7"/>
                 <TextView
                     android:id="@+id/otherPledge7"
-                    android:paddingTop="16dp"
-                    android:textSize="18dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingStart="5dp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="" />
