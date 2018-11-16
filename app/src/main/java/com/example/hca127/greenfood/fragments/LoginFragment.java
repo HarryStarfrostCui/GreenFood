@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment {
 
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
-                    int n = (int)(long)dataSnapshot.child("emission").child("NofEmission").getValue();
+                    int n = (int)(long)dataSnapshot.child("emissions").child("NofEmission").getValue();
                     ArrayList<Emission> nEmission = new ArrayList<>();
                     for(int i = 0; i<n; i++){
                         String tempDate = (String) dataSnapshot.child("emissions")
