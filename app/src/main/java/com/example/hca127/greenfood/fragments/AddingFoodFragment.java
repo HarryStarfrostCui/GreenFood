@@ -9,7 +9,6 @@ import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import com.example.hca127.greenfood.MainActivity;
@@ -21,7 +20,7 @@ import java.util.Arrays;
 public class AddingFoodFragment extends Fragment {
 
     private Diet mDiet;
-    private Button mAddFoodButton;
+    private ImageView mNextImageView;
     private ArrayList<RadioGroup> mRadioGroups;
     private ArrayList<Integer> mRadioChoices;
 
@@ -34,8 +33,8 @@ public class AddingFoodFragment extends Fragment {
         mRadioGroups = new ArrayList<>();
         mRadioChoices = new ArrayList<>();
 
-        mAddFoodButton = view.findViewById(R.id.add_food_button);
-        mAddFoodButton.setOnClickListener(new View.OnClickListener() {
+        mNextImageView = view.findViewById(R.id.nextImageView);
+        mNextImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getUserInput();

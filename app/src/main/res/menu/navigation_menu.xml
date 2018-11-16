@@ -35,10 +35,6 @@
             android:id="@+id/menu_suggestion"
             android:icon="@drawable/chat"
             android:title="Suggestion"/>
-        <item
-            android:id="@+id/menu_restaurant"
-            android:icon="@drawable/chef"
-            android:title="Share Your Meal!"/>
     </group>
 
     <item android:title="">
