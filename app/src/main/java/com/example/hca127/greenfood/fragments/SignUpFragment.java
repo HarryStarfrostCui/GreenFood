@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class SignUpFragment extends Fragment {
@@ -122,8 +123,11 @@ public class SignUpFragment extends Fragment {
                     thisUser.child("city").setValue(0);
                     thisUser.child("email").setValue(user.getEmail());
                     thisUser.child("pledge").setValue(0.0);
-                    thisUser.child("emissions").child(mLocalUser.getEmissions().get(0).getStrdate())
-                            .setValue(mLocalUser.getEmissions().get(0).getAmount());
+                    HashMap<String, Object> emission = new HashMap<>();
+                    emission.put("date", mLocalUser.getEmissions().get(0).getStrdate());
+                    emission.put("amount", mLocalUser.getEmissions().get(0).getAmount());
+                    thisUser.child("emissions").child("0").setValue(emission);
+                    thisUser.child("emissions").child("NofEmission").setValue(1);
                     thisUser.child("icon_index").setValue(mLocalUser.getProfileIcon());
 
                     mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {

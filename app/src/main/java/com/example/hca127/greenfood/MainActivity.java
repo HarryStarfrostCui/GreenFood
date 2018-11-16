@@ -25,12 +25,16 @@ import com.example.hca127.greenfood.fragments.ProfileFragment;
 import com.example.hca127.greenfood.fragments.ResultFragment;
 import com.example.hca127.greenfood.fragments.SuggestionFragment;
 import com.example.hca127.greenfood.objects.Diet;
+import com.example.hca127.greenfood.objects.Emission;
 import com.example.hca127.greenfood.objects.LocalUser;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser mFireUser;
     private FirebaseAuth mAuthentication;
     private ImageView mProfile;
+    private DatabaseReference mDatabase;
 
     private ArrayList<Integer> mIconIds;
 
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         mDrawer = findViewById(R.id.drawer);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -75,6 +81,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mLocalUser = gson.fromJson(json, LocalUser.class);
         if(mLocalUser == null){
             mLocalUser = new LocalUser();
+        }else{
+            DatabaseReference userDatabase = mDatabase.child(mLocalUser.getUserId());
+            userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mLocalUser.setName((String) dataSnapshot.child("name").getValue());
+                    double temp_pledge = 0.0+(long)dataSnapshot.child("pledge").getValue();
+                    mLocalUser.setPledge(temp_pledge);
+
+                    mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
+                    mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
+                    int n = (int)(long)dataSnapshot.child("emissions").child("NofEmission").getValue();
+                    ArrayList<Emission> nEmission = new ArrayList<>();
+                    for(int i = 0; i<n; i++){
+                        String tempDate = (String) dataSnapshot.child("emission")
+                                .child(String.valueOf(i)).child("date").getValue();
+                        double tempAmount = (double) dataSnapshot.child("emissions")
+                                .child(String.valueOf(i)).child("amount").getValue();
+                        nEmission.add(new Emission(tempDate,tempAmount));
+                    }
+                    mLocalUser.setEmission(nEmission);
+                    setLocalUser(mLocalUser);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
         }
 
         mIconIds = new ArrayList<>(Arrays.asList(

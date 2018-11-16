@@ -46,10 +46,11 @@ public class LocalUser implements Serializable { //
     public int getProfileIcon(){   return mProfileIconIndex;    }
     public Diet getCurrentDiet() {        return mCurrentDiet;    }
     public ArrayList<Emission> getEmissions() {        return mEmissions;    }
+    public Emission getLastEmission(){ return mEmissions.get(mEmissions.size() - 1); }
 
-    public void setCurrentDiet(Diet mCurrentDiet){
-        this.mCurrentDiet = mCurrentDiet;
-        addEmission(mCurrentDiet.getUserDietEmission());
+    public void setCurrentDiet(Diet nCurrentDiet){
+        this.mCurrentDiet = nCurrentDiet;
+        addEmission(nCurrentDiet.getUserDietEmission());
     }
     private void addEmission(double nEmission){
         Emission temp = new Emission(nEmission);
@@ -63,17 +64,8 @@ public class LocalUser implements Serializable { //
         }
     }
 
-    private void addEmission(String strDate, double nEmission){
-        Emission temp = new Emission(nEmission);
-        temp.setmStrdate(strDate);
-        if(temp.getStrdate().equals(mEmissions.get(mEmissions.size()-1).getStrdate())){
-            mEmissions.set(mEmissions.size()-1, temp);
-        }else {
-            mEmissions.add(temp);
-            while(mEmissions.size()>7){
-                mEmissions.remove(0);
-            }
-        }
+    public void setEmission(ArrayList<Emission> nEmission){
+        mEmissions = nEmission;
     }
 
     public void setUserId(String UserId) {        this.mUserId = UserId;    }
