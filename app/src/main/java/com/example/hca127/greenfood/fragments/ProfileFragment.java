@@ -132,30 +132,32 @@ public class ProfileFragment extends Fragment {
                 mCityPencil.setVisibility(ImageView.VISIBLE);
                 mCityCheck.setVisibility(ImageView.GONE);
 
-                DatabaseReference userDatabase = mDatabase.child("Community pledge");
+                DatabaseReference userDatabase = mDatabase;
                 userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int city = mCityChoice.getSelectedItemPosition();
                         if(city != mLocalUser.getCity()) {
-                            int participantTemp = (int) (long) dataSnapshot.child(Integer.toString(
-                                    mLocalUser.getCity())).child("participant").getValue();
+                            int participantTemp = (int) (long) dataSnapshot.child("Community pledge")
+                                    .child(Integer.toString(mLocalUser.getCity())).child("participant").getValue();
                             dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("participant")
                                     .getRef().setValue(participantTemp - 1);
-                            double pledgeTemp = (double) dataSnapshot.child(Integer.toString(
-                                    mLocalUser.getCity())).child("pledge").getValue();
-                            dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("pledge")
-                                    .getRef().setValue(pledgeTemp - mLocalUser.getPledge());
+                            double pledgeTemp = (double) dataSnapshot.child("Community pledge").child(
+                                    Integer.toString(mLocalUser.getCity())).child("pledge").getValue();
+                            dataSnapshot.child("Community pledge").child(Integer.toString(mLocalUser.getCity()))
+                                    .child("pledge").getRef().setValue(pledgeTemp - mLocalUser.getPledge());
 
-                            participantTemp = (int) (long) dataSnapshot.child(Integer.toString(
-                                    city)).child("participant").getValue();
-                            dataSnapshot.child(Integer.toString(city)).child("participant")
+                            participantTemp = (int) (long) dataSnapshot.child("Community pledge").child(
+                                    Integer.toString(city)).child("participant").getValue();
+                            dataSnapshot.child("Community pledge").child(Integer.toString(city)).child("participant")
                                     .getRef().setValue(participantTemp + 1);
-                            pledgeTemp = (double) dataSnapshot.child(Integer.toString(
+                            pledgeTemp = (double) dataSnapshot.child("Community pledge").child(Integer.toString(
                                     city)).child("pledge").getValue();
-                            dataSnapshot.child(Integer.toString(city)).child("pledge")
+                            dataSnapshot.child("Community pledge").child(Integer.toString(city)).child("pledge")
                                     .getRef().setValue(pledgeTemp + mLocalUser.getPledge());
                             mLocalUser.setCity(city);
+                            dataSnapshot.child("users").child(mLocalUser.getUserId()).child("city")
+                                    .getRef().setValue(mLocalUser.getCity());
                             ((MainActivity) getActivity()).setLocalUser(mLocalUser);
                             SharedPreferences.Editor editor = googleStuff.edit();
                             editor.putInt("mCityChoice", city);
