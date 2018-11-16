@@ -14,8 +14,16 @@ import android.widget.RadioGroup;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
+import com.example.hca127.greenfood.objects.Emission;
+import com.example.hca127.greenfood.objects.LocalUser;
+import com.google.android.gms.common.data.DataBufferObserverSet;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class AddingFoodFragment extends Fragment {
 
@@ -23,6 +31,8 @@ public class AddingFoodFragment extends Fragment {
     private ImageView mNextImageView;
     private ArrayList<RadioGroup> mRadioGroups;
     private ArrayList<Integer> mRadioChoices;
+    private LocalUser mLocalUser;
+    private DatabaseReference mUserData;
 
     @Nullable
     @Override
@@ -32,6 +42,9 @@ public class AddingFoodFragment extends Fragment {
         mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
         mRadioGroups = new ArrayList<>();
         mRadioChoices = new ArrayList<>();
+
+        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mUserData = FirebaseDatabase.getInstance().getReference().child("users").child(mLocalUser.getUserId());
 
         mNextImageView = view.findViewById(R.id.nextImageView);
         mNextImageView.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +97,16 @@ public class AddingFoodFragment extends Fragment {
                     Float.parseFloat(mAverageConsumption.get(i)),
                     Float.parseFloat(level));
         }
+        saveUserEmission();
+    }
+
+    public void saveUserEmission(){
+        ArrayList<Emission> mArr = mLocalUser.getEmissions();
+        HashMap<String, Double> emissionTree=new HashMap<>();
+        for(int i = 0; i<mArr.size(); i++){
+            emissionTree.put(mArr.get(i).getStrdate(), mArr.get(i).getAmount());
+        }
+        mUserData.child("emissions").setValue(emissionTree);
     }
 
 }
