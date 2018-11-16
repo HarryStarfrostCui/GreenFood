@@ -101,9 +101,9 @@ public class LoginFragment extends Fragment {
                     int n = (int)(long)dataSnapshot.child("emission").child("NofEmission").getValue();
                     ArrayList<Emission> nEmission = new ArrayList<>();
                     for(int i = 0; i<n; i++){
-                        String tempDate = (String) dataSnapshot.child("emission")
+                        String tempDate = (String) dataSnapshot.child("emissions")
                                 .child(String.valueOf(i)).child("date").getValue();
-                        double tempAmount = (double) dataSnapshot.child("emission")
+                        double tempAmount = (double) dataSnapshot.child("emissions")
                                 .child(String.valueOf(i)).child("amount").getValue();
                         nEmission.add(new Emission(tempDate,tempAmount));
                     }
