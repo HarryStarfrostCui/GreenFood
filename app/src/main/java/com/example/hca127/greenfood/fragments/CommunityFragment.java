@@ -138,8 +138,10 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                 clearOtherPledges();
                 int index = 0;
                 for (DataSnapshot user : userChildren) {
+                    double tempDouble = (double)user.child("pledge").getValue();
+                    tempDouble = Math.round(tempDouble*100)/100;
                     String temp = String.format(getResources().getString(R.string.community_other_pledge),
-                            user.child("name").getValue(), user.child("pledge").getValue());
+                            user.child("name").getValue(), String.valueOf(tempDouble));
                     temp = temp + " kgs";
                     mOtherPledges.get(index).setText(temp);
                     int tempInt = (int)(long)user.child("icon_index").getValue();
