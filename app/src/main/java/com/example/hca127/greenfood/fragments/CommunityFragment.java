@@ -38,6 +38,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     private DatabaseReference mDatabase;
     private ProgressBar mProgressBar;
     private ArrayList<TextView> mOtherPledges;
+    private ArrayList<ImageView> mOtherIcons;
 
     @Nullable
     @Override
@@ -58,6 +59,12 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge5));
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge6));
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge7));
+        mOtherIcons = new ArrayList<>();
+        int[] tempId = {R.id.otherIcon0, R.id.otherIcon1, R.id.otherIcon2, R.id.otherIcon3,
+                R.id.otherIcon4, R.id.otherIcon5, R.id.otherIcon6, R.id.otherIcon7};
+        for(int i = 0; i<tempId.length; i++){
+            mOtherIcons.add((ImageView)view.findViewById(tempId[i]));
+        }
 
 
         mCitySpinner = view.findViewById(R.id.community_cityList);
@@ -133,10 +140,18 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                 for (DataSnapshot user : userChildren) {
                     String temp = String.format(getResources().getString(R.string.community_other_pledge),
                             user.child("name").getValue(), user.child("pledge").getValue());
-
+                    temp = temp + " kgs";
                     mOtherPledges.get(index).setText(temp);
+                    int tempInt = (int)(long)user.child("icon_index").getValue();
+                    int[] pictureIds = {
+                            R.drawable.tree, R.drawable.sunglasses, R.drawable.dog,
+                            R.drawable.cat, R.drawable.monkey, R.drawable.ghost
+                    };
+                    mOtherIcons.get(index).setImageResource(pictureIds[tempInt]);
                     index++;
-
+                    if(index >= mOtherPledges.size() || index>= mOtherIcons.size()){
+                        break;
+                    }
                 }
 
                 mProgressBar.setVisibility(View.GONE);
