@@ -185,6 +185,7 @@
         <item>West/North Vancouver</item>
     </string-array>
 
+    <string name="community_other_pledge">%s has pledged to save %s</string>
     <string name="participants_text">Number of Participants:</string>
     <string name="participants_number">12</string>
     <string name="total_pledged_text">Total CO2 Reduction:</string>
