@@ -64,20 +64,26 @@ public class PledgeFragment extends Fragment {
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                DatabaseReference community = FirebaseDatabase.getInstance().getReference().child("Community pledge");
+                DatabaseReference community = FirebaseDatabase.getInstance().getReference();
                 community.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        double totalTemp = (double)dataSnapshot.child("total").child("pledge").getValue();
-                        double cityTemp = (double)dataSnapshot.child(String.valueOf(mLocalUser.getCity())).child("pledge").getValue();
-                        Toast.makeText(getContext(),String.valueOf(mLocalUser.getPledge()),Toast.LENGTH_SHORT).show();
+                        double totalTemp = (double)dataSnapshot.child("Community pledge")
+                                .child("total").child("pledge").getValue();
+                        double cityTemp = (double)dataSnapshot.child("Community pledge")
+                                .child(String.valueOf(mLocalUser.getCity())).child("pledge").getValue();
+                        //Toast.makeText(getContext(),String.valueOf(mLocalUser.getPledge()),Toast.LENGTH_SHORT).show();
                         totalTemp = totalTemp - mLocalUser.getPledge();
                         cityTemp = cityTemp - mLocalUser.getPledge();
                         mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
                         totalTemp += mLocalUser.getPledge();
                         cityTemp += mLocalUser.getPledge();
-                        dataSnapshot.child("total").child("pledge").getRef().setValue(totalTemp);
-                        dataSnapshot.child(String.valueOf(mLocalUser.getCity())).child("pledge").getRef().setValue(cityTemp);
+                        dataSnapshot.child("users").child(mLocalUser.getUserId()).child("pledge")
+                                .getRef().setValue(mLocalUser.getPledge());
+                        dataSnapshot.child("Community pledge").child("total").child("pledge")
+                                .getRef().setValue(totalTemp);
+                        dataSnapshot.child("Community pledge").child(String.valueOf(mLocalUser.getCity()))
+                                .child("pledge").getRef().setValue(cityTemp);
                         ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                     }
                     @Override
