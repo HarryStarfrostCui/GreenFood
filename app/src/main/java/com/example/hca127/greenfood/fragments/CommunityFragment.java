@@ -37,7 +37,6 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     private String mCurrentCity;
     private DatabaseReference mDatabase;
     private ProgressBar mProgressBar;
-    private TextView mOtherPledge1;
     private ArrayList<TextView> mOtherPledges;
 
     @Nullable
@@ -51,11 +50,14 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
 
         mOtherPledges = new ArrayList<>();
-        mOtherPledge1 = view.findViewById(R.id.otherPledge1);
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge0));
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge1));
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge2));
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge3));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge4));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge5));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge6));
+        mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge7));
 
 
         mCitySpinner = view.findViewById(R.id.community_cityList);
@@ -93,10 +95,10 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
 
         if(position==0){
             mCurrentCity = "total";
-            userPledges= mDatabase.child("users").orderByChild("city");
+            userPledges= mDatabase.child("users").orderByChild("city").limitToFirst(8);
         }else {
             mCurrentCity = Integer.toString(position);
-            userPledges= mDatabase.child("users").orderByChild("city").equalTo(position);
+            userPledges= mDatabase.child("users").orderByChild("city").equalTo(position).limitToFirst(8);
         }
 
         DatabaseReference community = mDatabase.child("Community pledge").child(mCurrentCity);
