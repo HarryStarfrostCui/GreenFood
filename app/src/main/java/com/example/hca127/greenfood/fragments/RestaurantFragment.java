@@ -1,18 +1,24 @@
 package com.example.hca127.greenfood.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AlertDialogLayout;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -30,14 +36,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class RestaurantFragment extends Fragment {
-    private TextView mRestaurantName;
-    private TextView mMealName;
-    private TextView mMealDescription;
+    private EditText mRestaurantName;
+    private EditText mMealName;
+    private EditText mMealDescription;
     private Spinner mProtein;
     private Spinner mSecondIngredient;
     private Spinner mThirdIngredient;
     private Spinner mCityShare;
     private Switch mLocationSwitch;
+
 
 
     @Nullable
@@ -47,7 +54,9 @@ public class RestaurantFragment extends Fragment {
 
         mRestaurantName = view.findViewById(R.id.restaurant_name_edit);
         mMealName = view.findViewById(R.id.meal_name_edit);
+        mMealName.setEnabled(true);
         mMealDescription = view.findViewById(R.id.description_edit);
+        mMealDescription.setEnabled(true);
         mProtein = view.findViewById(R.id.protein_spinner);
         mSecondIngredient = view.findViewById(R.id.second_ingredient_spinner);
         mThirdIngredient = view.findViewById(R.id.third_ingredient_spinner);
@@ -60,7 +69,6 @@ public class RestaurantFragment extends Fragment {
                mCityShare.setEnabled(true);
             }
         });
-
 
 
         return view;

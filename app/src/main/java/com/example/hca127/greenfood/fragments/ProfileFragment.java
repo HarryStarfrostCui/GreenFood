@@ -89,6 +89,7 @@ public class ProfileFragment extends Fragment {
                 mDisplayName.setCursorVisible(true);
                 mDisplayName.setFocusableInTouchMode(true);
                 mDisplayName.setInputType(InputType.TYPE_CLASS_TEXT);
+                mDisplayName.setSelection(mDisplayName.getText().length());
                 mDisplayName.requestFocus();
                 name_pencil.setVisibility(ImageView.GONE);
                 mNameCheck.setVisibility(ImageView.VISIBLE);

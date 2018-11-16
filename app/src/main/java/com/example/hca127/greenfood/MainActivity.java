@@ -22,6 +22,7 @@ import com.example.hca127.greenfood.fragments.FacebookShareFragment;
 import com.example.hca127.greenfood.fragments.LoginFragment;
 import com.example.hca127.greenfood.fragments.PledgeFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
+import com.example.hca127.greenfood.fragments.RestaurantFragment;
 import com.example.hca127.greenfood.fragments.ResultFragment;
 import com.example.hca127.greenfood.fragments.SuggestionFragment;
 import com.example.hca127.greenfood.objects.Diet;
@@ -150,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_suggestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SuggestionFragment()).addToBackStack(null).commit();
+            case R.id.menu_restaurant:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new RestaurantFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
