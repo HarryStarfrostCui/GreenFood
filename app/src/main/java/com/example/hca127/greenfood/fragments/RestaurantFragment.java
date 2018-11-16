@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -40,6 +41,7 @@ public class RestaurantFragment extends Fragment {
 
     private ImageView mGalleryButton;
     private ImageView mCameraButton;
+    private ImageView mResetButton;
     private static final int mGetFromGallery = 0;
     private static final int mCameraRequest = 1;
 
@@ -61,10 +63,12 @@ public class RestaurantFragment extends Fragment {
         mCityShare = view.findViewById(R.id.location_spinner);
         mCityShare.setEnabled(false);
         mLocationSwitch = view.findViewById(R.id.share_location_switch);
-        mGalleryButton = view.findViewById(R.id.beef_button);
+        mGalleryButton = view.findViewById(R.id.gallery_button);
         mGalleryButton.setVisibility(View.VISIBLE);
-        mCameraButton = view.findViewById(R.id.lamb_button);
+        mCameraButton = view.findViewById(R.id.camera_button);
         mCameraButton.setVisibility(View.VISIBLE);
+        mResetButton = view.findViewById(R.id.reset_button);
+        mResetButton.setVisibility(View.GONE);
 
 
         mLocationSwitch.setOnClickListener(new View.OnClickListener() {
@@ -77,12 +81,18 @@ public class RestaurantFragment extends Fragment {
         mGalleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                while (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED){
+                    String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                    ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, mGetFromGallery);
+                }
+
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                galleryIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(galleryIntent, mGetFromGallery);
-                mCameraButton.setVisibility(View.GONE);
                 }
             });
-
 
         mCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +106,21 @@ public class RestaurantFragment extends Fragment {
 
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, mCameraRequest);
-                mGalleryButton.setVisibility(View.GONE);
+                cameraIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }
+        });
+
+        mResetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable galleryDrawable = getResources().getDrawable(R.drawable.gallery);
+                Drawable CameraDrawable = getResources().getDrawable(R.drawable.camera);
+                mGalleryButton.setImageDrawable(galleryDrawable);
+                mGalleryButton.setVisibility(View.VISIBLE);
+                mCameraButton.setImageDrawable(CameraDrawable);
+                mCameraButton.setVisibility(View.VISIBLE);
+                mResetButton.setVisibility(View.GONE);
+
             }
         });
 
@@ -110,24 +134,32 @@ public class RestaurantFragment extends Fragment {
 
 
         //Detects request codes
-        if(requestCode==mGetFromGallery && resultCode == Activity.RESULT_OK) {
-            Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+        if(requestCode==mGetFromGallery) {
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                mGalleryButton.setImageBitmap(bitmap);
+                Uri selectedImage = data.getData();
+                Bitmap imageFromGallery = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                mGalleryButton.setImageBitmap(imageFromGallery);
+                mCameraButton.setVisibility(View.GONE);
+                mResetButton.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                Log.w("IOException","NOT GOOD");
+                e.printStackTrace();
+            } catch (NullPointerException e){
                 e.printStackTrace();
             }
         }
 
         if(requestCode==mCameraRequest){
-            Bitmap image = (Bitmap) data.getExtras().get("data");
-            mCameraButton.setImageBitmap(image);
+            try {
+                Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
+                mCameraButton.setImageBitmap(imageFromCamera);
+                mGalleryButton.setVisibility(View.GONE);
+                mResetButton.setVisibility(View.VISIBLE);
+            } catch (NullPointerException e){
+                e.printStackTrace();
+            }
+
 
         }
     }
