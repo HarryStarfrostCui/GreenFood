@@ -29,7 +29,7 @@ public class LocalUser implements Serializable { //
         mUserId = "";
         mName = "anonymoose";
         mUserEmail = "anony@moose.com";
-        mPledge = 0.0;
+        mPledge = -0.00001;
         mCityIndex = 0;
         Random rand = new Random();
         mProfileIconIndex = rand.nextInt(6);
@@ -73,7 +73,7 @@ public class LocalUser implements Serializable { //
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
     public void setPledge(double pledge) {       mPledge = pledge;    }
     public void setPledgeByIndex(int index){
-        double temp = mCurrentDiet.getUserDietEmission()/9;
+        double temp = mCurrentDiet.getUserDietEmission()/9 - 0.00001;
         mPledge = index*temp;
     }
     public void setCity(int index) {        mCityIndex = index;    }

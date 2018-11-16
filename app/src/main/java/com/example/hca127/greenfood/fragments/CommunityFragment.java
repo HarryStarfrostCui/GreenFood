@@ -88,10 +88,6 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
             }
         });
 
-
-
-
-
         return view;
     }
 
