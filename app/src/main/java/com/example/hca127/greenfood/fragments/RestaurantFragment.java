@@ -1,38 +1,31 @@
 package com.example.hca127.greenfood.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AlertDialogLayout;
-import android.util.Patterns;
-import android.view.Gravity;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
-import com.example.hca127.greenfood.objects.LocalUser;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class RestaurantFragment extends Fragment {
@@ -44,6 +37,11 @@ public class RestaurantFragment extends Fragment {
     private Spinner mThirdIngredient;
     private Spinner mCityShare;
     private Switch mLocationSwitch;
+
+    private ImageView mGalleryButton;
+    private ImageView mCameraButton;
+    private static final int mGetFromGallery = 0;
+    private static final int mCameraRequest = 1;
 
 
 
@@ -63,6 +61,12 @@ public class RestaurantFragment extends Fragment {
         mCityShare = view.findViewById(R.id.location_spinner);
         mCityShare.setEnabled(false);
         mLocationSwitch = view.findViewById(R.id.share_location_switch);
+        mGalleryButton = view.findViewById(R.id.beef_button);
+        mGalleryButton.setVisibility(View.VISIBLE);
+        mCameraButton = view.findViewById(R.id.lamb_button);
+        mCameraButton.setVisibility(View.VISIBLE);
+
+
         mLocationSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +74,61 @@ public class RestaurantFragment extends Fragment {
             }
         });
 
+        mGalleryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, mGetFromGallery);
+                mCameraButton.setVisibility(View.GONE);
+                }
+            });
+
+
+        mCameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                while (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED){
+                    String[] PERMISSIONS = {android.Manifest.permission.CAMERA};
+                    ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, mCameraRequest);
+                }
+
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, mCameraRequest);
+                mGalleryButton.setVisibility(View.GONE);
+            }
+        });
 
         return view;
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+
+        //Detects request codes
+        if(requestCode==mGetFromGallery && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                mGalleryButton.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.w("IOException","NOT GOOD");
+                e.printStackTrace();
+            }
+        }
+
+        if(requestCode==mCameraRequest){
+            Bitmap image = (Bitmap) data.getExtras().get("data");
+            mCameraButton.setImageBitmap(image);
+
+        }
     }
 }
