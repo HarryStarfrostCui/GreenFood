@@ -175,6 +175,75 @@
             android:text="@string/other_members"
             android:textColor="@color/themeGreen"/>
 
+        <TextView
+            android:id="@+id/otherPledge0"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/otherPledge1"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+        <TextView
+            android:id="@+id/otherPledge2"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/otherPledge3"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+        <TextView
+            android:id="@+id/otherPledge4"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/otherPledge5"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+        <TextView
+            android:id="@+id/otherPledge6"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/otherPledge7"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
 
     </LinearLayout>
 
