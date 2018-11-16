@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
+import com.example.hca127.greenfood.objects.Emission;
 import com.example.hca127.greenfood.objects.LocalUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class LoginFragment extends Fragment {
@@ -95,6 +98,14 @@ public class LoginFragment extends Fragment {
 
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
+                    Iterable<DataSnapshot> emissionReader = dataSnapshot.child("emission").getChildren();
+                    ArrayList<Emission> nEmission = new ArrayList<>();
+                    Emission temp;
+                    for(DataSnapshot child:emissionReader){
+                        temp = new Emission(child.getKey(), (double)child.getValue());
+                        nEmission.add(temp);
+                    }
+                    mLocalUser.setEmission(nEmission);
                     ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                 }
                 @Override

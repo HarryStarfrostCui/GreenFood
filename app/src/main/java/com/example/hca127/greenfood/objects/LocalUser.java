@@ -64,17 +64,8 @@ public class LocalUser implements Serializable { //
         }
     }
 
-    public void addEmission(String strDate, double nEmission){
-        Emission temp = new Emission(nEmission);
-        temp.setmStrdate(strDate);
-        if(temp.getStrdate().equals(mEmissions.get(mEmissions.size()-1).getStrdate())){
-            mEmissions.set(mEmissions.size()-1, temp);
-        }else {
-            mEmissions.add(temp);
-            while(mEmissions.size()>7){
-                mEmissions.remove(0);
-            }
-        }
+    public void setEmission(ArrayList<Emission> nEmission){
+        mEmissions = nEmission;
     }
 
     public void setUserId(String UserId) {        this.mUserId = UserId;    }

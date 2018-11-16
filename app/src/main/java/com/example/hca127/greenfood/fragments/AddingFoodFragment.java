@@ -97,11 +97,12 @@ public class AddingFoodFragment extends Fragment {
                     Float.parseFloat(mAverageConsumption.get(i)),
                     Float.parseFloat(level));
         }
+        ((MainActivity)getActivity()).setLocalUserDiet(mDiet);
         saveUserEmission();
     }
 
     public void saveUserEmission(){
-        ArrayList<Emission> mArr = mLocalUser.getEmissions();
+        ArrayList<Emission> mArr = ((MainActivity)getActivity()).getLocalUser().getEmissions();
         HashMap<String, Double> emissionTree=new HashMap<>();
         for(int i = 0; i<mArr.size(); i++){
             emissionTree.put(mArr.get(i).getStrdate(), mArr.get(i).getAmount());

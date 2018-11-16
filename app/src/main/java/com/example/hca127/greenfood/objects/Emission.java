@@ -14,6 +14,10 @@ public class Emission {
         mStrdate = formatter.format(date);
         mAmount = nAmount;
     }
+    public Emission(String nStrDate, double nAmount){
+        mStrdate = nStrDate;
+        mAmount = nAmount;
+    }
     public String getStrdate() {        return mStrdate;    }
     public double getAmount() {        return mAmount;    }
     public Date getDate() throws ParseException {
