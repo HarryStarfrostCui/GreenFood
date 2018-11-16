@@ -85,10 +85,10 @@ public class Diet implements Serializable {
     }
 
     public int getSuggestionMinIndex() {
-        int minIndex = 0;
-        float minValue = mBasket.get(0).getCarbonCoefficient();
+        int minIndex = 6;
+        float minValue = mBasket.get(6).getCarbonCoefficient();
         float temp;
-        for(int i = 1; i < mBasket.size() ; i++){
+        for(int i = 0; i < mBasket.size() ; i++){
             if(mBasket.get(i).getUserConsumption() < 1.45f) {
                 temp = mBasket.get(i).getCarbonCoefficient();
                 if (temp < minValue) {
@@ -98,7 +98,7 @@ public class Diet implements Serializable {
             }
         }
 
-        return minIndex; // everyone should eat veggies, lol
+        return minIndex;
     }
 
     public int getSuggestionMaxIndex() {

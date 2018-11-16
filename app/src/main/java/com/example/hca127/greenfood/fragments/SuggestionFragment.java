@@ -78,7 +78,7 @@ public class SuggestionFragment extends Fragment {
             checker += mDiet.getUserConsumption(i);
         }
         if(checker == 0){
-            mReduceSuggestionText.setText("Emm... you're doing great in term of carbon emission!");
+            mReduceSuggestionText.setText("Emm... you're doing great in term of CO2e!");
             mIncreaseSuggestionText.setText("But try to eat a bit more healthy, would ya? ;)");
         }else if (checker == 1.5*mDiet.getSize()){
             String temp = String.format(getResources().getString(R.string.suggestion_text_1),
