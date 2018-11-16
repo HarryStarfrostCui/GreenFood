@@ -140,8 +140,8 @@ public class ProfileFragment extends Fragment {
                         if(city != mLocalUser.getCity()) {
                             int participantTemp = (int) (long) dataSnapshot.child("Community pledge")
                                     .child(Integer.toString(mLocalUser.getCity())).child("participant").getValue();
-                            dataSnapshot.child(Integer.toString(mLocalUser.getCity())).child("participant")
-                                    .getRef().setValue(participantTemp - 1);
+                            dataSnapshot.child("Community pledge").child(Integer.toString(mLocalUser.getCity()))
+                                    .child("participant").getRef().setValue(participantTemp - 1);
                             double pledgeTemp = (double) dataSnapshot.child("Community pledge").child(
                                     Integer.toString(mLocalUser.getCity())).child("pledge").getValue();
                             dataSnapshot.child("Community pledge").child(Integer.toString(mLocalUser.getCity()))
