@@ -22,15 +22,16 @@ public class Diet implements Serializable {
     
      // instantiates an average diet
     public Diet(boolean b){
-        this();
-        addNewIngredient("Beef", 27, 25, 1);
-        addNewIngredient("Lamb", 39.2f, 1, 1);
-        addNewIngredient("Chicken", 6.9f, 33, 1);
-        addNewIngredient("Fish", 11.9f, 9, 1);
-        addNewIngredient("Pork", 12.1f, 21, 1);
-        addNewIngredient("Eggs", 4.8f, 10, 1);
-        addNewIngredient("Veggies", 2, 40, 1);
-        addNewIngredient("Bread", 2.7f, 32, 1);
+        mBasket = new ArrayList<>();
+        mDate = new Date();
+        addNewIngredient("Beef", 27, 25, 2);
+        addNewIngredient("Lamb", 39.2f, 1, 2);
+        addNewIngredient("Chicken", 6.9f, 33, 2);
+        addNewIngredient("Fish", 11.9f, 9, 2);
+        addNewIngredient("Pork", 12.1f, 21, 2);
+        addNewIngredient("Eggs", 4.8f, 10, 2);
+        addNewIngredient("Veggies", 2, 40, 2);
+        addNewIngredient("Bread", 2.7f, 32, 2);
     }
 
     public String getFoodName(int index){ return mBasket.get(index).getFoodName();}
@@ -83,21 +84,21 @@ public class Diet implements Serializable {
         }
     }
 
-
     public int getSuggestionMinIndex() {
-        int minIndex = 0;
-        float minValue = mBasket.get(0).getCarbonCoefficient();
-
+        int minIndex = 6;
+        float minValue = mBasket.get(6).getCarbonCoefficient();
         float temp;
-        for(int i = 1; i < mBasket.size() ; i++){
-            temp = mBasket.get(i).getCarbonCoefficient();
-            if (temp < minValue) {
-                minValue = temp;
-                minIndex = i;
+        for(int i = 0; i < mBasket.size() ; i++){
+            if(mBasket.get(i).getUserConsumption() < 1.45f) {
+                temp = mBasket.get(i).getCarbonCoefficient();
+                if (temp < minValue) {
+                    minValue = temp;
+                    minIndex = i;
+                }
             }
         }
 
-        return minIndex; // everyone should eat veggies, lol
+        return minIndex;
     }
 
     public int getSuggestionMaxIndex() {

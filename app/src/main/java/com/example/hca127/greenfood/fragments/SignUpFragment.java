@@ -1,14 +1,10 @@
 package com.example.hca127.greenfood.fragments;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
@@ -28,18 +23,23 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.regex.Pattern;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 
 
 public class SignUpFragment extends Fragment {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mUserData;
+    private DatabaseReference mCommunity;
+    private DataSnapshot dataSnapshot;
 
     private ImageView mSignUp;
     private EditText mUserName;
@@ -47,7 +47,6 @@ public class SignUpFragment extends Fragment {
     private EditText mPassword;
     private EditText mPasswordConfirm;
     private LocalUser mLocalUser;
-    private String mUserNameLocal;
     ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,8 +56,10 @@ public class SignUpFragment extends Fragment {
         mPassword = (EditText) view.findViewById(R.id.create_password_input);
         mPasswordConfirm = (EditText) view.findViewById(R.id.create_confirm_password);
         mSignUp = (ImageView) view.findViewById(R.id.sign_up_button);
-        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mLocalUser = new LocalUser();
         mAuth = FirebaseAuth.getInstance();
+        mUserData = FirebaseDatabase.getInstance().getReference().child("users");
+        mCommunity = FirebaseDatabase.getInstance().getReference().child("Community pledge");
 
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,11 +74,10 @@ public class SignUpFragment extends Fragment {
     }
 
     private void registerUser() {
-        final String userName = mUserName.getText().toString();
-        mUserNameLocal = userName;
-        String email = mEmail.getText().toString();
-        String password = mPassword.getText().toString();
-        String passwordConfirm = mPasswordConfirm.getText().toString();
+        final String userName = mUserName.getText().toString().trim();
+        String email = mEmail.getText().toString().trim();
+        String password = mPassword.getText().toString().trim();
+        String passwordConfirm = mPasswordConfirm.getText().toString().trim();
 
         if (email.isEmpty()) {
             mEmail.setError("Email is required");
@@ -114,6 +114,35 @@ public class SignUpFragment extends Fragment {
                     FirebaseUser user = mAuth.getCurrentUser();
                     mLocalUser.setUserEmail(user.getEmail());
                     mLocalUser.setUserId(user.getUid());
+                    mLocalUser.setName(userName);
+                    DatabaseReference thisUser = mUserData.child(mLocalUser.getUserId());
+                    Date date = new Date();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                    String strDate = formatter.format(date);
+                    thisUser.child("name").setValue(userName);
+                    thisUser.child("city").setValue(0);
+                    thisUser.child("email").setValue(user.getEmail());
+                    thisUser.child("pledge").setValue(-0.00001);
+                    HashMap<String, Object> emission = new HashMap<>();
+                    emission.put("date", mLocalUser.getEmissions().get(0).getStrdate());
+                    emission.put("amount", mLocalUser.getEmissions().get(0).getAmount());
+                    thisUser.child("emissions").child("0").setValue(emission);
+                    thisUser.child("emissions").child("NofEmission").setValue(1);
+                    thisUser.child("icon_index").setValue(mLocalUser.getProfileIcon());
+
+                    mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            long temp = (long)dataSnapshot.child("0").child("participant").getValue();
+                            dataSnapshot.child("0").child("participant").getRef().setValue(temp+1);
+                            temp = (long)dataSnapshot.child("total").child("participant").getValue();
+                            dataSnapshot.child("total").child("participant").getRef().setValue(temp+1);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+
                     ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                     String dialog = String.format(getResources().getString(R.string.logged_in),user.getEmail());
 

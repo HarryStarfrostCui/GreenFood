@@ -175,6 +175,7 @@
     </string-array>
 
     <string-array name="city_array">
+        <item>-Default-</item>
         <item>Abbotsford</item>
         <item>Burnaby</item>
         <item>Coquitlam</item>
@@ -188,9 +189,10 @@
         <item>West/North Vancouver</item>
     </string-array>
 
+    <string name="community_other_pledge">%s has pledged to save %s</string>
     <string name="participants_text">Number of Participants:</string>
     <string name="participants_number">12</string>
-    <string name="total_pledged_text">Total Pledged CO2 Reduction:</string>
+    <string name="total_pledged_text">Total CO2 Reduction:</string>
     <string name="total_pledged_number">240</string>
     <string name="our_community">Our Community</string>
     <string name="trees_planted_text">= Trees Planted:</string>
@@ -241,8 +243,6 @@
     <string name="make_pledge_button_text">MAKE A PLEDGE!</string>
     <string name="pledge_share">PLEDGE AND SHARE!</string>
     <string name="title_activity_photo">PhotoActivity</string>
-
-    
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->

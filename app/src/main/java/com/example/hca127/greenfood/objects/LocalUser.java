@@ -1,10 +1,7 @@
 package com.example.hca127.greenfood.objects;
 
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 /*
@@ -22,26 +19,23 @@ import java.util.Random;
 
 public class LocalUser implements Serializable { //
 
-    private String mUserId;
-    private String mName;
-    private String mUserPassword;
-    private String mUserEmail;
+    private String mUserId, mName, mUserEmail;
+    private int mCityIndex, mProfileIconIndex;
+    private Diet mCurrentDiet;
+    private ArrayList<Emission> mEmissions;
     private double mPledge;
-    private int mCityIndex;
-    private ArrayList<Diet> mDietList;
-    private int mProfileIconIndex;
 
     public LocalUser(){
         mUserId = "";
         mName = "anonymoose";
-        mUserPassword = "";
         mUserEmail = "anony@moose.com";
-        mPledge = 0.0;
+        mPledge = -0.00001;
         mCityIndex = 0;
-        mDietList = new ArrayList<Diet>();
-        mDietList.add(new Diet(true));
         Random rand = new Random();
         mProfileIconIndex = rand.nextInt(6);
+        mEmissions = new ArrayList<>();
+        mCurrentDiet = new Diet(true);
+        mEmissions.add(new Emission(mCurrentDiet.getUserDietEmission()));
     }
 
     public String getUserId() {        return mUserId;    }
@@ -50,55 +44,41 @@ public class LocalUser implements Serializable { //
     public double getPledge() {        return mPledge;    }
     public int getCity() {        return mCityIndex;    }
     public int getProfileIcon(){   return mProfileIconIndex;    }
+    public Diet getCurrentDiet() {        return mCurrentDiet;    }
+    public ArrayList<Emission> getEmissions() {        return mEmissions;    }
+    public Emission getLastEmission(){ return mEmissions.get(mEmissions.size() - 1); }
 
-    public void addDiet(Diet newDiet){        mDietList.add(newDiet);    }
-
-    //getInitialDiet used in junit test
-    public Diet getInitialDiet(){   return mDietList.get(0);    }
-
-    public Diet getCurrentDiet() {
-        if( mDietList.size() == 0) {
-            return new Diet();
-        } else {
-            return mDietList.get(mDietList.size() - 1);
+    public void setCurrentDiet(Diet nCurrentDiet){
+        this.mCurrentDiet = nCurrentDiet;
+        addEmission(nCurrentDiet.getUserDietEmission());
+    }
+    private void addEmission(double nEmission){
+        Emission temp = new Emission(nEmission);
+        if(temp.getStrdate().equals(mEmissions.get(mEmissions.size()-1).getStrdate())){
+            mEmissions.set(mEmissions.size()-1, temp);
+        }else {
+            mEmissions.add(temp);
+            while(mEmissions.size()>7){
+                mEmissions.remove(0);
+            }
         }
-
     }
 
-    //getDietDateList used in junit test
-    public ArrayList<Date> getDietDateList() {
-        ArrayList<Date> dates = new ArrayList<>();
-        for(int i = 0; i< mDietList.size(); i++){
-            dates.add(mDietList.get(i).getDate());
-        }
-        return dates;
-    }
-
-    //getEmissionList used in junit test
-    public ArrayList<Float> getEmissionList(){
-        ArrayList<Float> CO2e = new ArrayList<>();
-        for(int i = 0; i< mDietList.size(); i++){
-            CO2e.add(mDietList.get(i).getUserDietEmission());
-        }
-        return CO2e;
-    }
-
-    //renewDiet used in junit test
-    public void renewDiet(){
-        while(mDietList.size()>1){
-            mDietList.remove(0);
-        }
+    public void setEmission(ArrayList<Emission> nEmission){
+        mEmissions = nEmission;
     }
 
     public void setUserId(String UserId) {        this.mUserId = UserId;    }
-    public void setFirstName(String mFirstName) {        this.mName = mFirstName;    }
+    public void setName(String Name) {        this.mName = Name;    }
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
-    public void setPledge(double pledge) {        mPledge = pledge;    }
+    public void setPledge(double pledge) {       mPledge = pledge;    }
+    public void setPledgeByIndex(int index){
+        double temp = mCurrentDiet.getUserDietEmission()/9 - 0.00001;
+        mPledge = index*temp;
+    }
     public void setCity(int index) {        mCityIndex = index;    }
     public void setProfileIcon(int newIconIndex){   mProfileIconIndex = newIconIndex;     }
 
     //thtese two test in junit class, so this is used, if not, it will never use
-    public void setUserPassword(String userPassword) {        mUserPassword = userPassword;    }
-    public boolean CheckPassword(String Password){        return mUserPassword.equals(Password);    }
 
 }

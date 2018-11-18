@@ -5,12 +5,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
@@ -54,23 +56,47 @@ public class SuggestionFragment extends Fragment {
         mPledgeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PledgeFragment()).addToBackStack(null).commit();
+                if(mLocalUser.getUserId().equals("")){
+                    Toast.makeText(getActivity(), "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LoginFragment()).addToBackStack(null).commit();
+                }else {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new PledgeFragment()).addToBackStack(null).commit();
+                }
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        new PledgeFragment()).addToBackStack(null).commit();
             }
         });
         shareDialog = new ShareDialog(this);
 
         mReduceSuggestionText = view.findViewById(R.id.suggestionText1);
-        String temp = String.format(getResources().getString(R.string.suggestion_text_1),
-                                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
-        mReduceSuggestionText.setText(temp);
-
         mIncreaseSuggestionText = view.findViewById(R.id.suggestionText2);
-        String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
-                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
-        mIncreaseSuggestionText.setText(tempTwo);
-
         mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
+        float checker = 0;
+        for(int i = 0; i<mDiet.getSize(); i++){
+            checker += mDiet.getUserConsumption(i);
+        }
+        if(checker == 0){
+            mReduceSuggestionText.setText("Emm... you're doing great in term of CO2e!");
+            mIncreaseSuggestionText.setText("But try to eat a bit more healthy, would ya? ;)");
+        }else if (checker == 1.5*mDiet.getSize()){
+            String temp = String.format(getResources().getString(R.string.suggestion_text_1),
+                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
+            mReduceSuggestionText.setText(temp);
+            String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
+                    "... actually just eat a bit less =)");
+            mIncreaseSuggestionText.setText(tempTwo);
+        }else {
+            String temp = String.format(getResources().getString(R.string.suggestion_text_1),
+                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
+            mReduceSuggestionText.setText(temp);
+
+            String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
+                    mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+            mIncreaseSuggestionText.setText(tempTwo);
+        }
+
         mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);

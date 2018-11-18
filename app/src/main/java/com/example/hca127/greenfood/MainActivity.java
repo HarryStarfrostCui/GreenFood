@@ -1,8 +1,6 @@
 package com.example.hca127.greenfood;
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -24,14 +22,19 @@ import com.example.hca127.greenfood.fragments.FacebookShareFragment;
 import com.example.hca127.greenfood.fragments.LoginFragment;
 import com.example.hca127.greenfood.fragments.PledgeFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
-import com.example.hca127.greenfood.fragments.RestaurantFragment;
 import com.example.hca127.greenfood.fragments.ResultFragment;
 import com.example.hca127.greenfood.fragments.SuggestionFragment;
 import com.example.hca127.greenfood.objects.Diet;
+import com.example.hca127.greenfood.objects.Emission;
 import com.example.hca127.greenfood.objects.LocalUser;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser mFireUser;
     private FirebaseAuth mAuthentication;
     private ImageView mProfile;
+    private DatabaseReference mDatabase;
 
     private ArrayList<Integer> mIconIds;
 
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mAuth = FirebaseAuth.getInstance();
         mDrawer = findViewById(R.id.drawer);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -76,6 +81,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mLocalUser = gson.fromJson(json, LocalUser.class);
         if(mLocalUser == null){
             mLocalUser = new LocalUser();
+        }else{
+            DatabaseReference userDatabase = mDatabase.child(mLocalUser.getUserId());
+            userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mLocalUser.setName((String) dataSnapshot.child("name").getValue());
+                    double temp_pledge = (double)dataSnapshot.child("pledge").getValue();
+                    mLocalUser.setPledge(temp_pledge);
+
+                    mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
+                    mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
+                    int n = (int)(long)dataSnapshot.child("emissions").child("NofEmission").getValue();
+                    ArrayList<Emission> nEmission = new ArrayList<>();
+                    for(int i = 0; i<n; i++){
+                        String tempDate = (String) dataSnapshot.child("emission")
+                                .child(String.valueOf(i)).child("date").getValue();
+                        double tempAmount = (double) dataSnapshot.child("emissions")
+                                .child(String.valueOf(i)).child("amount").getValue();
+                        nEmission.add(new Emission(tempDate,tempAmount));
+                    }
+                    mLocalUser.setEmission(nEmission);
+                    setLocalUser(mLocalUser);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
         }
 
         mIconIds = new ArrayList<>(Arrays.asList(
@@ -139,12 +171,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new AddingFoodFragment()).addToBackStack("AddingFoodFragment").commit();
                 break;
             case R.id.menu_user:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).addToBackStack(null).commit();
+                if(mLocalUser.getUserId().equals("")){
+                    Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LoginFragment()).addToBackStack(null).commit();
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    navigationView.setCheckedItem(R.id.menu_community);
+                }else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ProfileFragment()).addToBackStack(null).commit();
+                }
                 break;
             case R.id.menu_pledge:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new PledgeFragment()).addToBackStack(null).commit();
+                if(mLocalUser.getUserId().equals("")){
+                    Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LoginFragment()).addToBackStack(null).commit();
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    navigationView.setCheckedItem(R.id.menu_community);
+                }else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new PledgeFragment()).addToBackStack(null).commit();
+                    NavigationView navigationView = findViewById(R.id.navigation_view);
+                    navigationView.setCheckedItem(R.id.menu_pledge);
+                }
                 break;
             case R.id.menu_result:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -153,9 +203,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_suggestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SuggestionFragment()).addToBackStack(null).commit();
-            case R.id.menu_restaurant:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new RestaurantFragment()).addToBackStack(null).commit();
                 break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -183,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setLocalUserDiet(Diet diet) {
-        mLocalUser.addDiet(diet);
+        mLocalUser.setCurrentDiet(diet);
     }
 
     public LocalUser getLocalUser() {
@@ -193,7 +240,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setLocalUser(LocalUser user) {
         mLocalUser = user;
         saveLocalUser();
-        saveToDatabase();
         updateHeader();
     }
 
@@ -204,14 +250,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String json = gson.toJson(mLocalUser);
         prefsEditor.putString("mLocalUser", json);
         prefsEditor.apply();
-    }
-
-    private void saveToDatabase() {
-        if (mFireUser !=null) {
-
-
-
-        }
     }
 
     private void updateHeader() {

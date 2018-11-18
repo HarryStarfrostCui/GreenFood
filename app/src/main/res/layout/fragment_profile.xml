@@ -39,10 +39,10 @@
         android:paddingTop="40dp">
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo_original" />
         <Space
             android:layout_width="5dp"
             android:layout_height="wrap_content" />
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/display_name_prompt"
             android:layout_gravity="center"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:textColor="@color/themeGreen"/>
 
         <Space
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="16dp"
+            android:textSize="24dp"
             android:textColor="#000000"
             android:text="TEMP" />
 
@@ -96,8 +96,8 @@
         android:paddingTop="20dp">
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
             android:src="@drawable/logo_original" />
         <Space
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:text="@string/city_prompt"
             android:layout_gravity="center"
-            android:textSize="18dp"
+            android:textSize="24dp"
             android:textColor="@color/themeGreen"/>
 
         <Space
@@ -120,7 +120,7 @@
             android:id="@+id/edit_city_spinner_choice"
             android:entries="@array/city_array"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_gravity="center" />
 
         <ImageView
@@ -145,8 +145,8 @@
         android:paddingTop="20dp">
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
             android:src="@drawable/logo_original" />
         <Space
