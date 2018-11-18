@@ -39,6 +39,7 @@ public class RestaurantFragment extends Fragment {
     private Spinner mCityShare;
     private Switch mLocationSwitch;
 
+    private int temp;
     private ImageView mGalleryButton;
     private ImageView mCameraButton;
     private ImageView mResetButton;
