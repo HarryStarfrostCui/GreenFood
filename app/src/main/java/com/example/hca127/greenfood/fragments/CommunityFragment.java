@@ -96,6 +96,11 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mProgressBar.setVisibility(View.VISIBLE);
         Query userPledges;
 
+        for(int i = 0; i<mOtherIcons.size(); i++){
+            mOtherIcons.get(i).setVisibility(View.GONE);
+            mOtherPledges.get(i).setVisibility(View.GONE);
+        }
+
         if(position==0){
             mCurrentCity = "total";
             userPledges= mDatabase.child("users").orderByChild("city").limitToFirst(8);
@@ -140,12 +145,14 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                             user.child("name").getValue(), String.valueOf(tempDouble));
                     temp = temp + " kgs";
                     mOtherPledges.get(index).setText(temp);
+                    mOtherPledges.get(index).setVisibility(View.VISIBLE);
                     int tempInt = (int)(long)user.child("icon_index").getValue();
                     int[] pictureIds = {
                             R.drawable.tree, R.drawable.sunglasses, R.drawable.dog,
                             R.drawable.cat, R.drawable.monkey, R.drawable.ghost
                     };
                     mOtherIcons.get(index).setImageResource(pictureIds[tempInt]);
+                    mOtherIcons.get(index).setVisibility(View.VISIBLE);
                     index++;
                     if(index >= mOtherPledges.size() || index>= mOtherIcons.size()){
                         break;
