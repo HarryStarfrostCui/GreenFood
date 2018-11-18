@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment {
                 editor.apply();
 
                 mLocalUser.setName(newName);
-                mDatabase.child("name").setValue(newName);
+                mDatabase.child("users").child(mLocalUser.getUserId()).child("name").setValue(newName);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
 
                 mNameCheck.setVisibility(ImageView.GONE);

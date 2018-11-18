@@ -23,6 +23,7 @@ public class LocalUser implements Serializable { //
     private int mCityIndex, mProfileIconIndex;
     private Diet mCurrentDiet;
     private ArrayList<Emission> mEmissions;
+    private ArrayList<String> mMeals;
     private double mPledge;
 
     public LocalUser(){
@@ -33,20 +34,21 @@ public class LocalUser implements Serializable { //
         mCityIndex = 0;
         Random rand = new Random();
         mProfileIconIndex = rand.nextInt(6);
+        mMeals = new ArrayList<>();
         mEmissions = new ArrayList<>();
         mCurrentDiet = new Diet(true);
         mEmissions.add(new Emission(mCurrentDiet.getUserDietEmission()));
     }
 
-    public String getUserId() {        return mUserId;    }
-    public String getName() {        return mName;    }
-    public String getUserEmail() {        return mUserEmail;    }
-    public double getPledge() {        return mPledge;    }
-    public int getCity() {        return mCityIndex;    }
-    public int getProfileIcon(){   return mProfileIconIndex;    }
-    public Diet getCurrentDiet() {        return mCurrentDiet;    }
+    public String getUserId() {     return mUserId;    }
+    public String getName() {       return mName;    }
+    public String getUserEmail() {      return mUserEmail;    }
+    public double getPledge() {     return mPledge;    }
+    public int getCity() {      return mCityIndex;    }
+    public int getProfileIcon(){    return mProfileIconIndex;    }
+    public Diet getCurrentDiet() {      return mCurrentDiet;    }
+    public ArrayList<String> getMeals(){  return mMeals;  }
     public ArrayList<Emission> getEmissions() {        return mEmissions;    }
-    public Emission getLastEmission(){ return mEmissions.get(mEmissions.size() - 1); }
 
     public void setCurrentDiet(Diet nCurrentDiet){
         this.mCurrentDiet = nCurrentDiet;
@@ -60,6 +62,16 @@ public class LocalUser implements Serializable { //
             mEmissions.add(temp);
             while(mEmissions.size()>7){
                 mEmissions.remove(0);
+            }
+        }
+    }
+
+    public void addMeal(String nMealId){    mMeals.add(nMealId);      }
+    public void removeMeal(String mealId){
+        for(int i = 0; i<mMeals.size();i++){
+            if(mMeals.get(i).equals(mealId)){
+                mMeals.remove(i);
+                break;
             }
         }
     }
