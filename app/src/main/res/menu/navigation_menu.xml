@@ -18,6 +18,10 @@
             android:id="@+id/menu_calculator"
             android:icon="@drawable/calculator"
             android:title="CO2e calculator"/>
+        <item
+            android:id="@+id/menu_meal"
+            android:icon="@drawable/ic_meal"
+            android:title="Green Meals"/>
 
         <item
             android:id="@+id/menu_about"

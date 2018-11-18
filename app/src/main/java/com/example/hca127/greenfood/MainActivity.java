@@ -22,6 +22,7 @@ import com.example.hca127.greenfood.fragments.FacebookShareFragment;
 import com.example.hca127.greenfood.fragments.LoginFragment;
 import com.example.hca127.greenfood.fragments.PledgeFragment;
 import com.example.hca127.greenfood.fragments.ProfileFragment;
+import com.example.hca127.greenfood.fragments.RestaurantFragment;
 import com.example.hca127.greenfood.fragments.ResultFragment;
 import com.example.hca127.greenfood.fragments.SuggestionFragment;
 import com.example.hca127.greenfood.objects.Diet;
@@ -192,8 +193,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new PledgeFragment()).addToBackStack(null).commit();
+                }
+                break;
+            case R.id.menu_meal:
+                if(mLocalUser.getUserId().equals("")){
+                    Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LoginFragment()).addToBackStack(null).commit();
                     NavigationView navigationView = findViewById(R.id.navigation_view);
-                    navigationView.setCheckedItem(R.id.menu_pledge);
+                    navigationView.setCheckedItem(R.id.menu_community);
+                }else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new RestaurantFragment()).addToBackStack(null).commit();
                 }
                 break;
             case R.id.menu_result:

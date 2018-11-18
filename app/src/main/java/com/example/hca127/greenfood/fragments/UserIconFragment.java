@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -54,6 +56,9 @@ public class UserIconFragment extends Fragment implements View.OnClickListener {
             if(id == mIconIds[i]){
                 mLocalUser.setProfileIcon(i);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                DatabaseReference user = FirebaseDatabase.getInstance().getReference()
+                        .child("users").child(mLocalUser.getUserId());
+                user.child("icon_index").setValue(i);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ProfileFragment()).commit();
                 break;

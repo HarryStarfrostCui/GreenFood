@@ -18,15 +18,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
+import com.example.hca127.greenfood.objects.LocalUser;
+import com.example.hca127.greenfood.objects.Meal;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 
 public class RestaurantFragment extends Fragment {
@@ -45,13 +52,19 @@ public class RestaurantFragment extends Fragment {
     private ImageView mResetButton;
     private static final int mGetFromGallery = 0;
     private static final int mCameraRequest = 1;
-
+    private Meal mMeal;
+    private Button mShareBotton;
+    private DatabaseReference mDatabase;
+    private LocalUser mLocalUser;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant, container, false);
+        mMeal = new Meal();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
         mRestaurantName = view.findViewById(R.id.restaurant_name_edit);
         mMealName = view.findViewById(R.id.meal_name_edit);
@@ -70,7 +83,7 @@ public class RestaurantFragment extends Fragment {
         mCameraButton.setVisibility(View.VISIBLE);
         mResetButton = view.findViewById(R.id.reset_button);
         mResetButton.setVisibility(View.GONE);
-
+        mShareBotton = view.findViewById(R.id.facebook_share_button);
 
         mLocationSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +135,23 @@ public class RestaurantFragment extends Fragment {
                 mCameraButton.setVisibility(View.VISIBLE);
                 mResetButton.setVisibility(View.GONE);
 
+            }
+        });
+
+        mShareBotton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference nMeal = mDatabase.child("meals").push();
+                mLocalUser.addMeal(nMeal.getKey());
+                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
+                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                nMeal.child("meal name").setValue(mMealName.getText().toString());
+                nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
+                nMeal.child("protein").child("1").setValue(mProtein.getSelectedItemPosition());
+                nMeal.child("protein").child("2").setValue(mSecondIngredient.getSelectedItemPosition());
+                nMeal.child("protein").child("3").setValue(mThirdIngredient.getSelectedItemPosition());
+                nMeal.child("description").setValue(mMealDescription.getText().toString());
+                nMeal.child("city index").setValue(mCityShare.getSelectedItemPosition());
             }
         });
 

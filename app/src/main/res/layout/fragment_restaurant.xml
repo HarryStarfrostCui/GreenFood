@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
-            android:entries="@array/protein_array"
+            android:entries="@array/ingredient_name"
             app:layout_constraintStart_toEndOf="@+id/protein"
             app:layout_constraintTop_toBottomOf="@+id/meal_name" />
 
