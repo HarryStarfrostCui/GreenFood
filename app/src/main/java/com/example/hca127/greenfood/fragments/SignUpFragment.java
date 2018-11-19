@@ -1,5 +1,7 @@
 package com.example.hca127.greenfood.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +11,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -65,6 +68,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 registerUser();
+                hideKeyboard(getActivity());
             }
         });
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
@@ -100,7 +104,7 @@ public class SignUpFragment extends Fragment {
             return;
         }
         if (password.length()<6) {
-            mPassword.setError("Minimum lenght of password should be 6");
+            mPassword.setError("Minimum length of password should be 6");
             mPassword.requestFocus();
             return;
         }
@@ -163,5 +167,15 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+    }
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputManager = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // check if no view has focus:
+        View currentFocusedView = activity.getCurrentFocus();
+        if (currentFocusedView != null) {
+            inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

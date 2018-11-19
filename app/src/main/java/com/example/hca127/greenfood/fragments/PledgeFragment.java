@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,8 +94,7 @@ public class PledgeFragment extends Fragment {
                 });
 
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CommunityFragment()).commit();
-
+                        new CommunityFragment()).addToBackStack(null).commit();
             }
         });
 
@@ -114,7 +114,7 @@ public class PledgeFragment extends Fragment {
 
                 mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FacebookShareFragment()).commit();
+                        new FacebookShareFragment()).addToBackStack(null).commit();
 
 
             }

@@ -43,26 +43,22 @@ public class FacebookShareFragment extends Fragment {
         shareDialog = new ShareDialog(this);
 
 
-                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
-                    @Override
-                    public void onSuccess(Sharer.Result result) {
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new CommunityFragment()).commit();
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
 
-                    }
+            @Override
+            public void onCancel() {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
 
-                    @Override
-                    public void onCancel() {
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new CommunityFragment()).commit();
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new CommunityFragment()).commit();
-                    }
-                });
+            @Override
+            public void onError(FacebookException error) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
                 //Link share
 
@@ -79,24 +75,18 @@ public class FacebookShareFragment extends Fragment {
 
 //                Bitmap mLogoImage = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.logo_share);
 
-                SharePhoto mSharePhoto = new SharePhoto.Builder()
-                        .setBitmap(mLogoImage)
-                        .build();
-                SharePhotoContent content = new SharePhotoContent.Builder()
-                        .addPhoto(mSharePhoto)
-                        .setShareHashtag(new ShareHashtag.Builder().setHashtag(String.valueOf("#GreenVancouverProject ")).build())
-                        .build();
-                ShareApi.share(content, null);
-                if (ShareDialog.canShow(SharePhotoContent.class)) {
-                    shareDialog.show(content);
-                }
-
-
-
+        SharePhoto mSharePhoto = new SharePhoto.Builder()
+                .setBitmap(mLogoImage)
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(mSharePhoto)
+                .setShareHashtag(new ShareHashtag.Builder().setHashtag(String.valueOf("#GreenVancouverProject ")).build())
+                .build();
+        if (ShareDialog.canShow(SharePhotoContent.class)) {
+            shareDialog.show(content);
+        }
 
         //call intent
-
-
 //        mFacebookShare.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
