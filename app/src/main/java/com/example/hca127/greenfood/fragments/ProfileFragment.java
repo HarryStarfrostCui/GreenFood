@@ -1,14 +1,10 @@
 package com.example.hca127.greenfood.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -18,15 +14,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
-
-import static android.app.Activity.RESULT_OK;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
 
+    private DatabaseReference mDatabase;
     private ImageView name_pencil;
     private ImageView mNameCheck;
     private EditText mDisplayName;
@@ -45,6 +46,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mNameCheck = view.findViewById(R.id.edit_display_name_button_check);
         mNameCheck.setVisibility(ImageView.GONE);
@@ -53,12 +55,10 @@ public class ProfileFragment extends Fragment {
         mCityCheck.setVisibility(ImageView.GONE);
 
         mCityChoice = view.findViewById(R.id.edit_city_spinner_choice);
+        mCityChoice.setSelection(mLocalUser.getCity());
         mCityChoice.setEnabled(false);
 
         final SharedPreferences googleStuff = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        /*String google_name = google_stuff.getString("google_account_name","");
-        String google_email = google_stuff.getString("google_account_email", mLocalUser.getUserEmail());
-        final int city = google_stuff.getInt("mCityChoice",0);*/
         mCityChoice.setSelection(mLocalUser.getCity());
         mDisplayName = (EditText) view.findViewById(R.id.display_name);
         mDisplayName.setText(mLocalUser.getName());
@@ -89,7 +89,6 @@ public class ProfileFragment extends Fragment {
                 mDisplayName.setCursorVisible(true);
                 mDisplayName.setFocusableInTouchMode(true);
                 mDisplayName.setInputType(InputType.TYPE_CLASS_TEXT);
-                mDisplayName.setSelection(mDisplayName.getText().length());
                 mDisplayName.requestFocus();
                 name_pencil.setVisibility(ImageView.GONE);
                 mNameCheck.setVisibility(ImageView.VISIBLE);
@@ -100,12 +99,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mDisplayName.setEnabled(false);
-                String newName = mDisplayName.getText().toString();
+                String newName = mDisplayName.getText().toString().trim();
                 SharedPreferences.Editor editor = googleStuff.edit();
                 editor.putString("google_account_name",newName);
                 editor.apply();
 
-                mLocalUser.setFirstName(newName);
+                mLocalUser.setName(newName);
+                mDatabase.child("users").child(mLocalUser.getUserId()).child("name").setValue(newName);
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
 
                 mNameCheck.setVisibility(ImageView.GONE);
@@ -122,16 +122,6 @@ public class ProfileFragment extends Fragment {
                 mCityPencil.setVisibility(ImageView.GONE);
                 mCityCheck.setVisibility(ImageView.VISIBLE);
 
-                /*mCityChoice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        int city = Integer.parseInt(mCityChoice.getItemAtPosition(position).toString());
-                        final SharedPreferences.Editor editor = googleStuff.edit();
-                        editor.putInt("mCityChoice",city);
-                        editor.apply();
-                    }
-                });*/
-
             }
         });
 
@@ -141,12 +131,45 @@ public class ProfileFragment extends Fragment {
                 mCityChoice.setEnabled(false);
                 mCityPencil.setVisibility(ImageView.VISIBLE);
                 mCityCheck.setVisibility(ImageView.GONE);
-                int city = mCityChoice.getSelectedItemPosition();
-                mLocalUser.setCity(city);
-                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-                SharedPreferences.Editor editor = googleStuff.edit();
-                editor.putInt("mCityChoice",city);
-                editor.apply();
+
+                DatabaseReference userDatabase = mDatabase;
+                userDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int city = mCityChoice.getSelectedItemPosition();
+                        if(city != mLocalUser.getCity()) {
+                            int participantTemp = (int) (long) dataSnapshot.child("Community pledge")
+                                    .child(Integer.toString(mLocalUser.getCity())).child("participant").getValue();
+                            dataSnapshot.child("Community pledge").child(Integer.toString(mLocalUser.getCity()))
+                                    .child("participant").getRef().setValue(participantTemp - 1);
+                            double pledgeTemp = (double) dataSnapshot.child("Community pledge").child(
+                                    Integer.toString(mLocalUser.getCity())).child("pledge").getValue();
+                            dataSnapshot.child("Community pledge").child(Integer.toString(mLocalUser.getCity()))
+                                    .child("pledge").getRef().setValue(pledgeTemp - mLocalUser.getPledge());
+
+                            participantTemp = (int) (long) dataSnapshot.child("Community pledge").child(
+                                    Integer.toString(city)).child("participant").getValue();
+                            dataSnapshot.child("Community pledge").child(Integer.toString(city)).child("participant")
+                                    .getRef().setValue(participantTemp + 1);
+                            pledgeTemp = (double) dataSnapshot.child("Community pledge").child(Integer.toString(
+                                    city)).child("pledge").getValue();
+                            dataSnapshot.child("Community pledge").child(Integer.toString(city)).child("pledge")
+                                    .getRef().setValue(pledgeTemp + mLocalUser.getPledge());
+                            mLocalUser.setCity(city);
+                            dataSnapshot.child("users").child(mLocalUser.getUserId()).child("city")
+                                    .getRef().setValue(mLocalUser.getCity());
+                            ((MainActivity) getActivity()).setLocalUser(mLocalUser);
+                            SharedPreferences.Editor editor = googleStuff.edit();
+                            editor.putInt("mCityChoice", city);
+                            editor.apply();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(), databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

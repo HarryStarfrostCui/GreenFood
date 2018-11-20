@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -38,13 +44,12 @@ public class PledgeFragment extends Fragment {
     private Button mPledgeButton;
     private Button mFacebookPledgeButton;
     private LocalUser mLocalUser;
-
+    private String mLevel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_pledge, container, false);
-
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
@@ -55,17 +60,41 @@ public class PledgeFragment extends Fragment {
 
                 mPledgeChoiceRadioGroup = view.findViewById(R.id.pledge_radio_group);
                 mPledgeChoiceButton = mPledgeChoiceRadioGroup.getCheckedRadioButtonId();
-
                 String mChoice;
-                String mLevel;
-
+                final String mLevel;
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                mLocalUser.setPledge(Double.parseDouble(mLevel));
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CommunityFragment()).commit();
+                DatabaseReference community = FirebaseDatabase.getInstance().getReference();
+                community.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        double totalTemp = (double)dataSnapshot.child("Community pledge")
+                                .child("total").child("pledge").getValue();
+                        double cityTemp = (double)dataSnapshot.child("Community pledge")
+                                .child(String.valueOf(mLocalUser.getCity())).child("pledge").getValue();
+                        //Toast.makeText(getContext(),String.valueOf(mLocalUser.getPledge()),Toast.LENGTH_SHORT).show();
+                        totalTemp = totalTemp - mLocalUser.getPledge();
+                        cityTemp = cityTemp - mLocalUser.getPledge();
+                        mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
+                        totalTemp += mLocalUser.getPledge();
+                        cityTemp += mLocalUser.getPledge();
+                        dataSnapshot.child("users").child(mLocalUser.getUserId()).child("pledge")
+                                .getRef().setValue(mLocalUser.getPledge());
+                        dataSnapshot.child("Community pledge").child("total").child("pledge")
+                                .getRef().setValue(totalTemp);
+                        dataSnapshot.child("Community pledge").child(String.valueOf(mLocalUser.getCity()))
+                                .child("pledge").getRef().setValue(cityTemp);
+                        ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
 
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CommunityFragment()).addToBackStack(null).commit();
             }
         });
 
@@ -83,9 +112,9 @@ public class PledgeFragment extends Fragment {
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                mLocalUser.setPledge(Double.parseDouble(mLevel));
+                mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FacebookShareFragment()).commit();
+                        new FacebookShareFragment()).addToBackStack(null).commit();
 
 
             }
