@@ -51,11 +51,11 @@
 
         <TextView
             android:id="@+id/meal_1_title"
-            android:layout_width="240dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="2dp"
-            android:text="HELLO"
+            android:layout_marginStart="10dp"
+            android:text="Meal 1 Title"
             android:textSize="25sp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="@id/meal_1_description_box"
@@ -65,13 +65,13 @@
 
         <TextView
             android:id="@+id/meal_1_description"
-            android:layout_width="240dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
             android:gravity="center"
-            android:text="TEST"
-            android:textSize="25sp"
+            android:text="Meal 1 Description"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/meal_1_description_box"
             app:layout_constraintStart_toStartOf="@id/meal_1_description_box"
             app:layout_constraintTop_toBottomOf="@+id/meal_1_title">
@@ -89,6 +89,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/meal_1_description_box">
         </ImageView>
+
+        <TextView
+            android:id="@+id/meal_2_title"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Meal 2 Title"
+            android:textSize="25sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@id/meal_2_description_box"
+            app:layout_constraintTop_toTopOf="@id/meal_2_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_2_description_box">
+        </TextView>
+
+        <TextView
+            android:id="@+id/meal_2_description"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="Meal 2 Description"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/meal_2_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_2_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_2_title">
+        </TextView>
 
         <ImageView
             android:id="@+id/meal_2_image"
@@ -135,6 +163,34 @@
             app:layout_constraintTop_toBottomOf="@+id/meal_2_description_box">
         </ImageView>
 
+        <TextView
+            android:id="@+id/meal_3_title"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Meal 3 Title"
+            android:textSize="25sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@id/meal_3_description_box"
+            app:layout_constraintTop_toTopOf="@id/meal_3_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_3_description_box">
+        </TextView>
+
+        <TextView
+            android:id="@+id/meal_3_description"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="Meal 3 Description"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/meal_3_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_3_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_3_title">
+        </TextView>
+
         <ImageView
             android:id="@+id/meal_4_description_box"
             android:layout_width="240dp"
@@ -147,6 +203,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/meal_3_description_box">
         </ImageView>
+
+        <TextView
+            android:id="@+id/meal_4_title"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Meal 4 Title"
+            android:textSize="25sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@id/meal_4_description_box"
+            app:layout_constraintTop_toTopOf="@id/meal_4_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_4_description_box">
+        </TextView>
+
+        <TextView
+            android:id="@+id/meal_4_description"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="Meal 4 Description"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/meal_4_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_4_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_4_title">
+        </TextView>
 
         <ImageView
             android:id="@+id/meal_4_image"
@@ -192,6 +276,34 @@
             app:layout_constraintStart_toEndOf="@id/meal_5_image"
             app:layout_constraintTop_toBottomOf="@+id/meal_4_description_box">
         </ImageView>
+
+        <TextView
+            android:id="@+id/meal_5_title"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Meal 5 Title"
+            android:textSize="25sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@id/meal_5_description_box"
+            app:layout_constraintTop_toTopOf="@id/meal_5_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_5_description_box">
+        </TextView>
+
+        <TextView
+            android:id="@+id/meal_5_description"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text="Meal 5 Description"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/meal_5_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_5_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_5_title">
+        </TextView>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
