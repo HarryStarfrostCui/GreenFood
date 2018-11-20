@@ -96,17 +96,13 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mProgressBar.setVisibility(View.VISIBLE);
         Query userPledges;
 
-        for(int i = 0; i<mOtherIcons.size(); i++){
-            mOtherIcons.get(i).setVisibility(View.GONE);
-            mOtherPledges.get(i).setVisibility(View.GONE);
-        }
-
         if(position==0){
             mCurrentCity = "total";
-            userPledges= mDatabase.child("users").orderByChild("city").limitToFirst(8);
+            userPledges= mDatabase.child("users").orderByChild("pledge");
         }else {
             mCurrentCity = Integer.toString(position);
-            userPledges= mDatabase.child("users").orderByChild("city").equalTo(position).limitToFirst(8);
+            userPledges= mDatabase.child("users").orderByChild("city").equalTo(position)
+                    .orderByChild("pledge");
         }
 
         DatabaseReference community = mDatabase.child("Community pledge").child(mCurrentCity);
@@ -138,7 +134,15 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                 Iterable<DataSnapshot> userChildren = dataSnapshot.getChildren();
                 clearOtherPledges();
                 int index = 0;
-                for (DataSnapshot user : userChildren) {
+                ArrayList<DataSnapshot> userReference = new ArrayList<>();
+                for(DataSnapshot user : userChildren){
+                    userReference.add(user);
+                    if(userReference.size()>8){
+                        userReference.remove(0);
+                    }
+                }
+                for (int i = userReference.size()-1; i>=0; i--) {
+                    DataSnapshot user = userReference.get(i);
                     double tempDouble = (double)user.child("pledge").getValue();
                     tempDouble = Math.round(tempDouble*100)/100;
                     String temp = String.format(getResources().getString(R.string.community_other_pledge),
@@ -159,6 +163,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
                     }
                 }
 
+
                 mProgressBar.setVisibility(View.GONE);
             }
             @Override
@@ -175,8 +180,10 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     }
 
     private void clearOtherPledges() {
-        for (int i = 0; i < mOtherPledges.size(); i++) {
+        for(int i = 0; i<mOtherIcons.size(); i++){
             mOtherPledges.get(i).setText("");
+            mOtherIcons.get(i).setVisibility(View.GONE);
+            mOtherPledges.get(i).setVisibility(View.GONE);
         }
 
     }
