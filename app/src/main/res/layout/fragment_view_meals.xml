@@ -20,13 +20,27 @@
             android:textColor="#000000"
             android:textSize="25sp"/>
 
+        <TextView
+            android:id="@+id/meal_1_user"
+            android:layout_width="130dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="First name Last Name"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/meal_1_description_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/meal_1_image" />
+
         <ImageView
             android:id="@+id/meal_1_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/beef"
@@ -35,6 +49,20 @@
             app:layout_constraintEnd_toStartOf="@+id/meal_1_description_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_meal_title" />
+
+        <TextView
+            android:id="@+id/meal_1_location"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/greater_vancouver"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/meal_1_description_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_1_image" />
 
         <ImageView
             android:id="@+id/meal_1_description_box"
@@ -83,7 +111,7 @@
             android:layout_height="150dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/box"
             app:layout_constraintEnd_toStartOf="@+id/meal_2_image"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,10 +146,24 @@
             app:layout_constraintTop_toBottomOf="@+id/meal_2_title">
         </TextView>
 
+        <TextView
+            android:id="@+id/meal_2_user"
+            android:layout_width="130dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="First name Last name"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/meal_2_description_box"
+            app:layout_constraintBottom_toTopOf="@+id/meal_2_image" />
+
         <ImageView
             android:id="@+id/meal_2_image"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="101dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -134,13 +176,41 @@
             app:layout_constraintStart_toEndOf="@id/meal_2_description_box"
             app:layout_constraintTop_toBottomOf="@+id/meal_1_description_box" />
 
+        <TextView
+            android:id="@+id/meal_2_location"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/greater_vancouver"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/meal_2_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_2_image" />
+
+        <TextView
+            android:id="@+id/meal_3_user"
+            android:layout_width="130dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="First name Last Name"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/meal_3_description_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/meal_3_image" />
+
         <ImageView
             android:id="@+id/meal_3_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/chicken"
@@ -149,6 +219,20 @@
             app:layout_constraintEnd_toStartOf="@+id/meal_3_description_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/meal_2_description_box" />
+
+        <TextView
+            android:id="@+id/meal_3_location"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/greater_vancouver"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toStartOf="@+id/meal_3_description_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_3_image" />
 
         <ImageView
             android:id="@+id/meal_3_description_box"
@@ -197,7 +281,7 @@
             android:layout_height="150dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/box"
             app:layout_constraintEnd_toStartOf="@+id/meal_4_image"
             app:layout_constraintStart_toStartOf="parent"
@@ -232,6 +316,20 @@
             app:layout_constraintTop_toBottomOf="@+id/meal_4_title">
         </TextView>
 
+        <TextView
+            android:id="@+id/meal_4_user"
+            android:layout_width="130dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="First name Last name"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/meal_4_description_box"
+            app:layout_constraintBottom_toTopOf="@+id/meal_4_image" />
+
         <ImageView
             android:id="@+id/meal_4_image"
             android:layout_width="100dp"
@@ -245,6 +343,34 @@
             app:layout_constraintBottom_toTopOf="@+id/meal_5_description_box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/meal_3_description_box" />
+
+        <TextView
+            android:id="@+id/meal_4_location"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/greater_vancouver"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/meal_4_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_4_image" />
+
+        <TextView
+            android:id="@+id/meal_5_user"
+            android:layout_width="130dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="First name Last Name"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/meal_5_description_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/meal_5_image" />
 
         <ImageView
             android:id="@+id/meal_5_image"
@@ -261,6 +387,20 @@
             app:layout_constraintEnd_toStartOf="@+id/meal_5_description_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/meal_4_description_box" />
+
+        <TextView
+            android:id="@+id/meal_5_location"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/greater_vancouver"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toStartOf="@+id/meal_5_description_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_5_image" />
 
         <ImageView
             android:id="@+id/meal_5_description_box"
