@@ -242,6 +242,8 @@
     <string name="pledge_share">PLEDGE AND SHARE!</string>
     <string name="title_activity_photo">PhotoActivity</string>
 
+    <string name="view_meal_page_title">Check Out Other's Meals!</string>
+
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>

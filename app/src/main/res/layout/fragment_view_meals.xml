@@ -11,220 +11,187 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/view_meal_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/view_meal_page_title"
+            android:textColor="#000000"
+            android:textSize="25sp"/>
+
         <ImageView
             android:id="@+id/meal_1_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="2dp"
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/beef"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toStartOf="@+id/meal_1_description"
+            app:layout_constraintBottom_toTopOf="@+id/meal_2_description_box"
+            app:layout_constraintEnd_toStartOf="@+id/meal_1_description_box"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/view_meal_title" />
 
         <ImageView
-            android:id="@+id/meal_1_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:id="@+id/meal_1_description_box"
+            android:layout_width="240dp"
+            android:layout_height="150dp"
             android:layout_marginStart="2dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/box"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/meal_1_image">
+            app:layout_constraintStart_toEndOf="@id/meal_1_image"
+            app:layout_constraintTop_toBottomOf="@id/view_meal_title">
         </ImageView>
 
+        <TextView
+            android:id="@+id/meal_1_title"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="2dp"
+            android:text="HELLO"
+            android:textSize="25sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="@id/meal_1_description_box"
+            app:layout_constraintTop_toTopOf="@id/meal_1_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_1_description_box">
+        </TextView>
+
+        <TextView
+            android:id="@+id/meal_1_description"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="TEST"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="@id/meal_1_description_box"
+            app:layout_constraintStart_toStartOf="@id/meal_1_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_1_title">
+        </TextView>
+
         <ImageView
-            android:id="@+id/meal_2_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:id="@+id/meal_2_description_box"
+            android:layout_width="240dp"
+            android:layout_height="150dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="2dp"
             android:background="@drawable/box"
             app:layout_constraintEnd_toStartOf="@+id/meal_2_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_1_image">
+            app:layout_constraintTop_toBottomOf="@+id/meal_1_description_box">
         </ImageView>
 
         <ImageView
             android:id="@+id/meal_2_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/lamb"
             android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/meal_3_description_box"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_1_description"
-            app:layout_constraintStart_toEndOf="@id/meal_2_description"/>
+            app:layout_constraintStart_toEndOf="@id/meal_2_description_box"
+            app:layout_constraintTop_toBottomOf="@+id/meal_1_description_box" />
 
         <ImageView
             android:id="@+id/meal_3_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="2dp"
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/chicken"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toStartOf="@+id/meal_3_description"
+            app:layout_constraintBottom_toTopOf="@+id/meal_4_description_box"
+            app:layout_constraintEnd_toStartOf="@+id/meal_3_description_box"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_2_description" />
+            app:layout_constraintTop_toBottomOf="@id/meal_2_description_box" />
 
         <ImageView
-            android:id="@+id/meal_3_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:background="@drawable/box"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:id="@+id/meal_3_description_box"
+            android:layout_width="240dp"
+            android:layout_height="150dp"
             android:layout_marginStart="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/box"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_2_image"
-            app:layout_constraintStart_toEndOf="@id/meal_3_image">
+            app:layout_constraintStart_toEndOf="@id/meal_3_image"
+            app:layout_constraintTop_toBottomOf="@+id/meal_2_description_box">
         </ImageView>
 
         <ImageView
-            android:id="@+id/meal_4_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:id="@+id/meal_4_description_box"
+            android:layout_width="240dp"
+            android:layout_height="150dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="2dp"
             android:background="@drawable/box"
             app:layout_constraintEnd_toStartOf="@+id/meal_4_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_3_image">
+            app:layout_constraintTop_toBottomOf="@+id/meal_3_description_box">
         </ImageView>
 
         <ImageView
             android:id="@+id/meal_4_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/fish"
             android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/meal_5_description_box"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_3_description" />
+            app:layout_constraintTop_toBottomOf="@+id/meal_3_description_box" />
 
         <ImageView
             android:id="@+id/meal_5_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:background="@drawable/pork"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toStartOf="@+id/meal_5_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/meal_5_description_box"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_4_description" />
+            app:layout_constraintTop_toBottomOf="@id/meal_4_description_box" />
 
         <ImageView
-            android:id="@+id/meal_5_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:background="@drawable/box"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:id="@+id/meal_5_description_box"
+            android:layout_width="240dp"
+            android:layout_height="150dp"
             android:layout_marginStart="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_4_image"
-            app:layout_constraintStart_toEndOf="@id/meal_5_image">
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/meal_6_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="2dp"
-            android:background="@drawable/box"
-            app:layout_constraintEnd_toStartOf="@+id/meal_6_image"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_5_image">
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/meal_6_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="2dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/egg"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_5_description"
-            app:layout_constraintStart_toEndOf="@id/meal_6_description"/>
-
-        <ImageView
-            android:id="@+id/meal_7_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="2dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/veg"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toStartOf="@+id/meal_7_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_6_description" />
-
-        <ImageView
-            android:id="@+id/meal_7_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/box"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_6_image"
-            app:layout_constraintStart_toEndOf="@id/meal_7_image">
+            app:layout_constraintStart_toEndOf="@id/meal_5_image"
+            app:layout_constraintTop_toBottomOf="@+id/meal_4_description_box">
         </ImageView>
-
-        <ImageView
-            android:id="@+id/meal_8_description"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="2dp"
-            android:background="@drawable/box"
-            app:layout_constraintEnd_toStartOf="@+id/meal_8_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/meal_7_image">
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/meal_8_image"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="2dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/bread"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meal_7_description"
-            app:layout_constraintStart_toEndOf="@id/meal_8_description"/>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
