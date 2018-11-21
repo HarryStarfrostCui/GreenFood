@@ -53,6 +53,31 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="RoundedFrame">
+        <item name="android:background">@drawable/frame</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+
+    <style name="SquareRounded" parent="RoundedFrame">
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_width">200dp</item>
+    </style>
+
+    <style name="SquareRoundedText" parent="SquareRounded">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:layout_width">200dp</item>
+    </style>
+
+    <style name="RectangleShortRounded" parent="RoundedFrame">
+        <item name="android:layout_height">99dp</item>
+        <item name="android:layout_width">400dp</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
