@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,56 +69,17 @@ public class SuggestionFragment extends Fragment {
         });
         shareDialog = new ShareDialog(this);
 
-        mReduceSuggestionText = view.findViewById(R.id.suggestionText1);
-        mIncreaseSuggestionText = view.findViewById(R.id.suggestionText2);
-        mUserEmissionSaving = view.findViewById(R.id.userEmissionSaving);
-        float checker = 0;
-        for(int i = 0; i<mDiet.getSize(); i++){
-            checker += mDiet.getUserConsumption(i);
-        }
-        if(checker == 0){
-            mReduceSuggestionText.setText("Emm... you're doing great in term of CO2e!");
-            mIncreaseSuggestionText.setText("But try to eat a bit more healthy, would ya? ;)");
-        }else if (checker == 1.5*mDiet.getSize()){
-            String temp = String.format(getResources().getString(R.string.suggestion_text_1),
-                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
-            mReduceSuggestionText.setText(temp);
-            String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
-                    "... actually just eat a bit less =)");
-            mIncreaseSuggestionText.setText(tempTwo);
-        }else {
-            String temp = String.format(getResources().getString(R.string.suggestion_text_1),
-                    mDiet.getFoodName(mDiet.getSuggestionMaxIndex()));
-            mReduceSuggestionText.setText(temp);
-
-            String tempTwo = String.format(getResources().getString(R.string.suggestion_text_2),
-                    mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
-            mIncreaseSuggestionText.setText(tempTwo);
-        }
-
-        mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
+        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
+        String temp = String.format(getResources().getString(R.string.suggestion_text),
+                "test",
+                mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
+                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+        mReduceSuggestionText.setText(temp);
+//
+//        mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);
-
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
-        entries.add(new BarEntry(1, 1500f));
-        entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
-
-        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-        BarData suggestionData = new BarData(barDataSet);
-        mSuggestionChart.getXAxis().setDrawGridLines(false);
-        mSuggestionChart.getLegend().setEnabled(false);
-        mSuggestionChart.getAxisRight().setAxisMinimum(0f);
-        mSuggestionChart.getAxisLeft().setAxisMinimum(0f);
-        mSuggestionChart.getDescription().setEnabled(false);
-
-        mSuggestionChart.setData(suggestionData);
-        mSuggestionChart.animateY(1200);
-        mSuggestionChart.invalidate();
-
+        setupBarChart(mSuggestionChart);
         float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
         float treesSaved = carbonSaved/22;  // carbon offset of trees
 
@@ -129,16 +89,40 @@ public class SuggestionFragment extends Fragment {
             treesSaved = 0;
         }
 
-        mCarbonSaved = view.findViewById(R.id.carbonSaved);
-        mCarbonSaved.setText(String.valueOf(carbonSaved));
-
-        mTreesSaved = view.findViewById(R.id.treesSaved);
-        mTreesSaved.setText(String.valueOf(treesSaved));
+//        mCarbonSaved = view.findViewById(R.id.carbonSaved);
+//        mCarbonSaved.setText(String.valueOf(carbonSaved));
+//
+//        mTreesSaved = view.findViewById(R.id.treesSaved);
+//        mTreesSaved.setText(String.valueOf(treesSaved));
 
         //share stuff
 
         return view;
     }
+
+    private void setupBarChart(BarChart chart) {
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
+        entries.add(new BarEntry(1, 1500f));
+        entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
+
+        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
+        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        BarData suggestionData = new BarData(barDataSet);
+        chart.getXAxis().setEnabled(false);
+        chart.getLegend().setEnabled(false);
+        chart.getAxisRight().setEnabled(false);
+        chart.getAxisLeft().setAxisMinimum(0f);
+        chart.getDescription().setEnabled(false);
+
+        chart.setData(suggestionData);
+        chart.animateY(1200);
+        chart.invalidate();
+    }
+
+
 
 }
 

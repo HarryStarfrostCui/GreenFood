@@ -104,6 +104,16 @@
         various food groups.
     </string>
 
+    <string name="suggestion_greeting">
+        <b>Hey! Listen!</b>\nWanna help save the planet?\n<small>(We had a group decision...
+        Navi is more helpful)</small>
+    </string>
+    <string name="suggestion_text">
+        To save %s\nI\'d suggest eating less %s and more %s\n
+        <small>(don\'t worry, clippy is ok, probably...)</small>
+    </string>
+
+
     <string name="low_carbon_result">
         Good News! The greenhouse gas emissions required to produce your diet are very low!
     </string>
@@ -115,12 +125,7 @@
         The greenhouse gas emissions required to produce your diet are higher than the average
         Vancouver resident.
     </string>
-    <string name="suggestion_text_1">
-        Would you consider eating a bit less %s
-    </string>
-    <string name="suggestion_text_2">
-        and a bit more %s
-    </string>
+
     <string name="question_mark">\?</string>
     <string name="suggestion_text_3">
         Every year that would save (in kg of C02e):

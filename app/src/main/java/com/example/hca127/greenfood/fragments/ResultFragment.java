@@ -109,9 +109,9 @@ public class ResultFragment extends Fragment {
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         BarData suggestionData = new BarData(barDataSet);
-        chart.getXAxis().setDrawGridLines(false);
+        chart.getXAxis().setEnabled(false);
         chart.getLegend().setEnabled(false);
-        chart.getAxisRight().setAxisMinimum(0f);
+        chart.getAxisRight().setEnabled(false);
         chart.getAxisLeft().setAxisMinimum(0f);
         chart.getDescription().setEnabled(false);
 
