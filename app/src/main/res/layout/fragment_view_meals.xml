@@ -11,14 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+
+
+        <LinearLayout
             android:id="@+id/view_meal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/view_meal_page_title"
-            android:textColor="#000000"
-            android:textSize="25sp"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/view_meal_page_title"
+                android:textColor="#000000"
+                android:textSize="22sp"/>
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Go To My Meal"
+                style="@style/NiceButton"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/meal_1_user"
