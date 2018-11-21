@@ -78,7 +78,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:buttonTint="@color/themeGreen"
-                android:checked="true"
                 android:text="@string/pledge_radio_button_1"
                 android:textColor="@color/themeGreen"
                 android:textStyle="bold" />

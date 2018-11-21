@@ -70,34 +70,48 @@ public class SuggestionFragment extends Fragment {
 
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);
-        setupBarChart(mSuggestionChart);
+        setupBarChart(mSuggestionChart, 0);
 
         mPledgeRadioGroup = view.findViewById(R.id.pledgeRadioGroup);
         mPledgeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 String choice = "a little";
+                String temp = "";
                 switch (checkedId) {
                     case R.id.pledge3:
                         choice = "a ton";
+                        temp = String.format(getResources().getString(R.string.suggestion_text),
+                                choice,
+                                "to do",
+                                "TO DO");
+                        mReduceSuggestionText.setText(temp);
+                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
                         break;
                     case R.id.pledge2:
                         choice = "a decent amount";
+                        temp = String.format(getResources().getString(R.string.suggestion_text),
+                                choice,
+                                "to do",
+                                "TO DO");
+                        mReduceSuggestionText.setText(temp);
+                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
                         break;
                     case R.id.pledge1:
                         choice = "a little";
+                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
+                        temp = String.format(getResources().getString(R.string.suggestion_text),
+                                choice,
+                                mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
+                                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+                        mReduceSuggestionText.setText(temp);
                         break;
                     case R.id.pledge0:
-                        choice = "nothing";
+                        mReduceSuggestionText.setText("To save nothing\n Do nothing : )");
+                        setupBarChart(mSuggestionChart, 0);
                         break;
                 }
 
-                String temp = String.format(getResources().getString(R.string.suggestion_text),
-                        choice,
-                        mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
-                        mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
-                mReduceSuggestionText.setText(temp);
-                setupBarChart(mSuggestionChart);
             }
         });
 
@@ -109,11 +123,14 @@ public class SuggestionFragment extends Fragment {
         return view;
     }
 
-    private void setupBarChart(BarChart chart) {
+    private void setupBarChart(BarChart chart, float suggestedDiet) {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
         entries.add(new BarEntry(1, 1500f));
-        entries.add(new BarEntry(2, mDiet.getSuggestedDietEmission()));
+        if (suggestedDiet != 0) {
+            entries.add(new BarEntry(2, suggestedDiet));
+        }
+
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
