@@ -44,7 +44,6 @@ public class PledgeFragment extends Fragment {
     private Button mPledgeButton;
     private Button mFacebookPledgeButton;
     private LocalUser mLocalUser;
-    private String mLevel;
 
     @Nullable
     @Override
@@ -107,12 +106,37 @@ public class PledgeFragment extends Fragment {
                 mPledgeChoiceButton = mPledgeChoiceRadioGroup.getCheckedRadioButtonId();
 
                 String mChoice;
-                String mLevel;
-
+                final String mLevel;
                 mChoice = getResources().getResourceEntryName(mPledgeChoiceButton);
                 mLevel = mChoice.substring(mChoice.length()-1, mChoice.length());
 
-                mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
+                DatabaseReference community = FirebaseDatabase.getInstance().getReference();
+                community.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        double totalTemp = (double)dataSnapshot.child("Community pledge")
+                                .child("total").child("pledge").getValue();
+                        double cityTemp = (double)dataSnapshot.child("Community pledge")
+                                .child(String.valueOf(mLocalUser.getCity())).child("pledge").getValue();
+                        //Toast.makeText(getContext(),String.valueOf(mLocalUser.getPledge()),Toast.LENGTH_SHORT).show();
+                        totalTemp = totalTemp - mLocalUser.getPledge();
+                        cityTemp = cityTemp - mLocalUser.getPledge();
+                        mLocalUser.setPledgeByIndex(Integer.parseInt(mLevel));
+                        totalTemp += mLocalUser.getPledge();
+                        cityTemp += mLocalUser.getPledge();
+                        dataSnapshot.child("users").child(mLocalUser.getUserId()).child("pledge")
+                                .getRef().setValue(mLocalUser.getPledge());
+                        dataSnapshot.child("Community pledge").child("total").child("pledge")
+                                .getRef().setValue(totalTemp);
+                        dataSnapshot.child("Community pledge").child(String.valueOf(mLocalUser.getCity()))
+                                .child("pledge").getRef().setValue(cityTemp);
+                        ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FacebookShareFragment()).addToBackStack(null).commit();
 
