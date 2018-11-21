@@ -50,7 +50,9 @@ public class ResultFragment extends Fragment {
 
         mResultText = view.findViewById(R.id.resultText);
 
-        if (mUserCarbon < mAverageCarbon*mLowCarbonPercentage) {
+        if(mUserCarbon == 0) {
+            mResultText.setText(R.string.no_carbon_result);
+        } else if (mUserCarbon < mAverageCarbon*mLowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
         } else if (mUserCarbon < mAverageCarbon*mAverageCarbonPercentage) {
             mResultText.setText(R.string.average_carbon_result);
@@ -85,6 +87,10 @@ public class ResultFragment extends Fragment {
             }
         }
 
+        if (mUserCarbon == 0) {
+            pieEntries.add(new PieEntry(20000f, "Blood"));
+        }
+
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setDrawValues(false);
@@ -109,9 +115,9 @@ public class ResultFragment extends Fragment {
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         BarData suggestionData = new BarData(barDataSet);
-        chart.getXAxis().setDrawGridLines(false);
+        chart.getXAxis().setEnabled(false);
         chart.getLegend().setEnabled(false);
-        chart.getAxisRight().setAxisMinimum(0f);
+        chart.getAxisRight().setEnabled(false);
         chart.getAxisLeft().setAxisMinimum(0f);
         chart.getDescription().setEnabled(false);
 

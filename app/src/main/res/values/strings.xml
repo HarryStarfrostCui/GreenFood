@@ -104,6 +104,23 @@
         various food groups.
     </string>
 
+    <string name="suggestion_greeting">
+        <b>Hey! Listen!</b>\nWanna help save the planet?\n<small>(We had a group decision...
+        Navi is more helpful)</small>
+    </string>
+    <string name="suggestion_text">
+        To save %s\nI\'d suggest eating less %s \n and more %s\n
+    </string>
+    <string name="suggestion_navi">
+        Hmm, is that a deku stick?\n
+        <small>(don\'t worry, clippy is ok, probably...)</small>
+    </string>
+
+
+    <string name="no_carbon_result">
+        You eat nothing? Maybe you are dead? A Vampire?
+    </string>
+
     <string name="low_carbon_result">
         Good News! The greenhouse gas emissions required to produce your diet are very low!
     </string>
@@ -115,12 +132,7 @@
         The greenhouse gas emissions required to produce your diet are higher than the average
         Vancouver resident.
     </string>
-    <string name="suggestion_text_1">
-        Would you consider eating a bit less %s
-    </string>
-    <string name="suggestion_text_2">
-        and a bit more %s
-    </string>
+
     <string name="question_mark">\?</string>
     <string name="suggestion_text_3">
         Every year that would save (in kg of C02e):
@@ -238,7 +250,7 @@
     <string name="pledge_radio_button_3">A TON! (Literally)</string>
     <string name="pledge_radio_button_2">A Decent Amount</string>
     <string name="pledge_radio_button_1">A Little At A Time</string>
-    <string name="pledge_radio_button_0">Remove My Pledge</string>
+    <string name="pledge_radio_button_0">Nothing. Bwahaha!</string>
     <string name="pledge_button_text">PLEDGE!</string>
     <string name="make_pledge_button_text">MAKE A PLEDGE!</string>
     <string name="pledge_share">PLEDGE AND SHARE!</string>
