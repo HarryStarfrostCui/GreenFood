@@ -42,6 +42,7 @@ public class RestaurantFragment extends Fragment {
     private EditText mRestaurantName;
     private EditText mMealName;
     private EditText mMealDescription;
+    private TextView mDescriptionText;
     private Spinner mProtein;
     private Spinner mSecondIngredient;
     private Spinner mThirdIngredient;
@@ -76,6 +77,7 @@ public class RestaurantFragment extends Fragment {
         mEditMeal = view.findViewById(R.id.meal_edit);
         mRestaurantName = view.findViewById(R.id.restaurant_name_edit);
         mMealName = view.findViewById(R.id.meal_name_edit);
+        mDescriptionText = view.findViewById(R.id.description_text);
         mMealDescription = view.findViewById(R.id.description_edit);
         mProtein = view.findViewById(R.id.protein_spinner);
         mSecondIngredient = view.findViewById(R.id.second_ingredient_spinner);
@@ -222,6 +224,7 @@ public class RestaurantFragment extends Fragment {
         mRestaurantName.setEnabled(false);
         mMealName.setEnabled(false);
         mMealDescription.setEnabled(false);
+        mDescriptionText.setText(R.string.description_meal);
         mProtein.setEnabled(false);
         mSecondIngredient.setEnabled(false);
         mThirdIngredient.setEnabled(false);
@@ -242,6 +245,7 @@ public class RestaurantFragment extends Fragment {
         mRestaurantName.setEnabled(true);
         mMealName.setEnabled(true);
         mMealDescription.setEnabled(true);
+        mDescriptionText.setText(R.string.description_text);
         mProtein.setEnabled(true);
         mSecondIngredient.setEnabled(true);
         mThirdIngredient.setEnabled(true);
