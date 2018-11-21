@@ -28,7 +28,7 @@ public class AboutFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
-        PieChart mPieChart = view.findViewById(R.id.emissionChart);
+        PieChart mPieChart = view.findViewById(R.id.aboutPieChart);
         ArrayList<PieEntry> mPieEntries = new ArrayList<>();
         for (int i = 0; i < emissionAmount.length; i++) {
             mPieEntries.add(new PieEntry(emissionAmount[i], emissionName[i]));
@@ -42,7 +42,7 @@ public class AboutFragment extends Fragment {
         mPieChart.getLegend().setEnabled(false);
         mPieChart.setEntryLabelColor(Color.BLACK);
         mPieChart.getDescription().setEnabled(false);
-
+        
         mPieChart.setData(mData);
         mPieChart.animateY(1200);
         mPieChart.invalidate();
