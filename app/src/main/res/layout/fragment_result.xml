@@ -49,7 +49,7 @@
 
         <TextView
             android:id="@+id/resultText"
-            style="@style/SquareRoundedText"
+            style="@style/SquareRounded"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultTopBox" />
 
@@ -67,7 +67,7 @@
 
         <TextView
             android:id="@+id/emissionSplitText"
-            style="@style/SquareRoundedText"
+            style="@style/SquareRounded"
             android:text="@string/emission_split_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultBarChart" />
