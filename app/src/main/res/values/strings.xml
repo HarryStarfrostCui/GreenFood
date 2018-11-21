@@ -226,7 +226,7 @@
 
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
-    <string name="restaurant_title">Share Your Meal!</string>
+    <string name="restaurant_title">My Meal</string>
     <string name="restaurant_name">Restaurant Name: </string>
     <string name="meal_name">Meal Name:</string>
     <string name="main_protein">Main Protein: </string>
@@ -255,6 +255,11 @@
     <string name="make_pledge_button_text">MAKE A PLEDGE!</string>
     <string name="pledge_share">PLEDGE AND SHARE!</string>
     <string name="title_activity_photo">PhotoActivity</string>
+
+    <string name="view_meal_page_title">Check Out Others\' Meals!</string>
+    <string name="greater_vancouver">Greater Vancouver</string>
+
+    <string name="description_meal">Description: </string>
 
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->

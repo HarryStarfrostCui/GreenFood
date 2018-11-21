@@ -19,10 +19,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
@@ -40,16 +42,22 @@ public class RestaurantFragment extends Fragment {
     private EditText mRestaurantName;
     private EditText mMealName;
     private EditText mMealDescription;
+    private TextView mDescriptionText;
     private Spinner mProtein;
     private Spinner mSecondIngredient;
     private Spinner mThirdIngredient;
     private Spinner mCityShare;
     private Switch mLocationSwitch;
+    private Button mSaveButton;
+    private TextView mAddPhotoText;
+    private ImageView mEditMeal;
+    private TextView mOR;
 
     private int temp;
     private ImageView mGalleryButton;
     private ImageView mCameraButton;
     private ImageView mResetButton;
+    private ImageView mFinalImage;
     private static final int mGetFromGallery = 0;
     private static final int mCameraRequest = 1;
     private Meal mMeal;
@@ -66,41 +74,47 @@ public class RestaurantFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
 
+        mEditMeal = view.findViewById(R.id.meal_edit);
         mRestaurantName = view.findViewById(R.id.restaurant_name_edit);
         mMealName = view.findViewById(R.id.meal_name_edit);
-        mMealName.setEnabled(true);
+        mDescriptionText = view.findViewById(R.id.description_text);
         mMealDescription = view.findViewById(R.id.description_edit);
-        mMealDescription.setEnabled(true);
         mProtein = view.findViewById(R.id.protein_spinner);
         mSecondIngredient = view.findViewById(R.id.second_ingredient_spinner);
         mThirdIngredient = view.findViewById(R.id.third_ingredient_spinner);
         mCityShare = view.findViewById(R.id.location_spinner);
-        mCityShare.setEnabled(false);
         mLocationSwitch = view.findViewById(R.id.share_location_switch);
         mGalleryButton = view.findViewById(R.id.gallery_button);
-        mGalleryButton.setVisibility(View.VISIBLE);
         mCameraButton = view.findViewById(R.id.camera_button);
-        mCameraButton.setVisibility(View.VISIBLE);
         mResetButton = view.findViewById(R.id.reset_button);
-        mResetButton.setVisibility(View.GONE);
+        mFinalImage = view.findViewById(R.id.final_photo);
         mShareBotton = view.findViewById(R.id.facebook_share_button);
+        mSaveButton = view.findViewById(R.id.save_meal_button);
+        mAddPhotoText = view.findViewById(R.id.add_photo_text);
+        mOR = view.findViewById(R.id.or_text);
+        lockAll();
 
-        mLocationSwitch.setOnClickListener(new View.OnClickListener() {
+        mEditMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mCityShare.setEnabled(true);
+                unlockAll();
+            }
+        });
+
+        mLocationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if(isChecked){
+                   mCityShare.setEnabled(true);
+               }
+               else{
+                   mCityShare.setEnabled(false);
+               }
             }
         });
 
         mGalleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                while (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED){
-                    String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                    ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, mGetFromGallery);
-                }
 
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 galleryIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -127,14 +141,26 @@ public class RestaurantFragment extends Fragment {
         mResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable galleryDrawable = getResources().getDrawable(R.drawable.gallery);
-                Drawable CameraDrawable = getResources().getDrawable(R.drawable.camera);
-                mGalleryButton.setImageDrawable(galleryDrawable);
-                mGalleryButton.setVisibility(View.VISIBLE);
-                mCameraButton.setImageDrawable(CameraDrawable);
-                mCameraButton.setVisibility(View.VISIBLE);
-                mResetButton.setVisibility(View.GONE);
+                Drawable android = getResources().getDrawable(R.drawable.android);
+                mFinalImage.setImageDrawable(android);
+            }
+        });
 
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference nMeal = mDatabase.child("meals").push();
+                mLocalUser.addMeal(nMeal.getKey());
+                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
+                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                nMeal.child("meal name").setValue(mMealName.getText().toString());
+                nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
+                nMeal.child("protein").child("1").setValue(mProtein.getSelectedItemPosition());
+                nMeal.child("protein").child("2").setValue(mSecondIngredient.getSelectedItemPosition());
+                nMeal.child("protein").child("3").setValue(mThirdIngredient.getSelectedItemPosition());
+                nMeal.child("description").setValue(mMealDescription.getText().toString());
+                nMeal.child("city index").setValue(mCityShare.getSelectedItemPosition());
+                lockAll();
             }
         });
 
@@ -152,6 +178,9 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("protein").child("3").setValue(mThirdIngredient.getSelectedItemPosition());
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCityShare.getSelectedItemPosition());
+                lockAll();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FacebookShareFragment()).addToBackStack(null).commit();
             }
         });
 
@@ -169,9 +198,7 @@ public class RestaurantFragment extends Fragment {
             try {
                 Uri selectedImage = data.getData();
                 Bitmap imageFromGallery = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                mGalleryButton.setImageBitmap(imageFromGallery);
-                mCameraButton.setVisibility(View.GONE);
-                mResetButton.setVisibility(View.VISIBLE);
+                mFinalImage.setImageBitmap(imageFromGallery);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -184,14 +211,52 @@ public class RestaurantFragment extends Fragment {
         if(requestCode==mCameraRequest){
             try {
                 Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
-                mCameraButton.setImageBitmap(imageFromCamera);
-                mGalleryButton.setVisibility(View.GONE);
-                mResetButton.setVisibility(View.VISIBLE);
+                mFinalImage.setImageBitmap(imageFromCamera);
             } catch (NullPointerException e){
                 e.printStackTrace();
             }
 
 
         }
+    }
+
+    public void lockAll(){
+        mRestaurantName.setEnabled(false);
+        mMealName.setEnabled(false);
+        mMealDescription.setEnabled(false);
+        mDescriptionText.setText(R.string.description_meal);
+        mProtein.setEnabled(false);
+        mSecondIngredient.setEnabled(false);
+        mThirdIngredient.setEnabled(false);
+        mCityShare.setEnabled(false);
+        mGalleryButton.setVisibility(View.GONE);
+        mCameraButton.setVisibility(View.GONE);
+        mResetButton.setVisibility(View.GONE);
+        mFinalImage.setVisibility(View.VISIBLE);
+        mAddPhotoText.setVisibility(View.GONE);
+        mSaveButton.setVisibility(View.GONE);
+        mShareBotton.setVisibility(View.GONE);
+        mLocationSwitch.setVisibility(View.GONE);
+        mCityShare.setVisibility(View.GONE);
+        mOR.setVisibility(View.GONE);
+    }
+
+    public void unlockAll(){
+        mRestaurantName.setEnabled(true);
+        mMealName.setEnabled(true);
+        mMealDescription.setEnabled(true);
+        mDescriptionText.setText(R.string.description_text);
+        mProtein.setEnabled(true);
+        mSecondIngredient.setEnabled(true);
+        mThirdIngredient.setEnabled(true);
+        mGalleryButton.setVisibility(View.VISIBLE);
+        mCameraButton.setVisibility(View.VISIBLE);
+        mResetButton.setVisibility(View.VISIBLE);
+        mAddPhotoText.setVisibility(View.VISIBLE);
+        mSaveButton.setVisibility(View.VISIBLE);
+        mShareBotton.setVisibility(View.VISIBLE);
+        mLocationSwitch.setVisibility(View.VISIBLE);
+        mCityShare.setVisibility(View.VISIBLE);
+        mOR.setVisibility(View.VISIBLE);
     }
 }
