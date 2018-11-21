@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,11 @@ import android.widget.TextView;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -26,7 +29,8 @@ import java.util.ArrayList;
 
 
 public class ResultFragment extends Fragment {
-    private PieChart mUserEmissionPieChart;
+    private PieChart mResultPieChart;
+    private BarChart mResultBarChart;
     private TextView mResultText;
     private float mUserCarbon;
     private float mAverageCarbon = 1500f;
@@ -54,10 +58,13 @@ public class ResultFragment extends Fragment {
             mResultText.setText(R.string.high_carbon_result);
         }
 
-        mUserEmissionPieChart = view.findViewById(R.id.emissionSplitChart);
-        setupPieChart(mUserEmissionPieChart);
+        mResultPieChart = view.findViewById(R.id.resultPieChart);
+        setupPieChart(mResultPieChart);
 
-        mGetSuggestion = (Button) view.findViewById(R.id.getSuggestion);
+        mResultBarChart = view.findViewById(R.id.resultBarChart);
+        setupBarChart(mResultBarChart);
+
+        mGetSuggestion = view.findViewById(R.id.getSuggestion);
         mGetSuggestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -74,7 +81,7 @@ public class ResultFragment extends Fragment {
 
         for (int i = 0; i <mDiet.getSize(); i++) {
             if (mDiet.getIngUserCo2Emission(i) != 0) {
-                pieEntries.add(new PieEntry((float) mDiet.getIngUserCo2Emission(i), mDiet.getFoodName(i)));
+                pieEntries.add(new PieEntry( mDiet.getIngUserCo2Emission(i), mDiet.getFoodName(i)));
             }
         }
 
@@ -91,5 +98,28 @@ public class ResultFragment extends Fragment {
         chart.animateY(1200);
         chart.invalidate();
     }
+
+    private void setupBarChart(BarChart chart) {
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
+        entries.add(new BarEntry(1, 1500f));
+
+        BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
+        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        BarData suggestionData = new BarData(barDataSet);
+        chart.getXAxis().setDrawGridLines(false);
+        chart.getLegend().setEnabled(false);
+        chart.getAxisRight().setAxisMinimum(0f);
+        chart.getAxisLeft().setAxisMinimum(0f);
+        chart.getDescription().setEnabled(false);
+
+        chart.setData(suggestionData);
+        chart.animateY(1200);
+        chart.invalidate();
+
+    }
+
 
 }
