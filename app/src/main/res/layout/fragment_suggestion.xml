@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <RadioGroup
-            android:id="@+id/suggestionRadioGroup"
+            android:id="@+id/pledgeRadioGroup"
             style="@style/SquareRounded"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="8dp"
@@ -74,15 +74,6 @@
                 android:textStyle="bold" />
 
             <RadioButton
-                android:id="@+id/pledge0"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:buttonTint="@color/themeGreen"
-                android:text="@string/pledge_radio_button_0"
-                android:textColor="@color/themeGreen"
-                android:textStyle="bold" />
-
-            <RadioButton
                 android:id="@+id/pledge1"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -91,6 +82,17 @@
                 android:text="@string/pledge_radio_button_1"
                 android:textColor="@color/themeGreen"
                 android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/pledge0"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:buttonTint="@color/themeGreen"
+                android:text="@string/pledge_radio_button_0"
+                android:textColor="@color/themeGreen"
+                android:textStyle="bold" />
+
+
         </RadioGroup>
 
         <com.github.mikephil.charting.charts.BarChart
@@ -119,11 +121,11 @@
 
             <TextView
                 android:id="@+id/reduceSuggestionText"
-                style="@style/BlackText"
+                style="@style/GreenHeadingSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text=""
+                android:text="@string/suggestion_navi"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +34,8 @@ public class SuggestionFragment extends Fragment {
     private Diet mDiet;
     private Button mPledgeButton;
     private TextView mReduceSuggestionText;
-    private TextView mIncreaseSuggestionText;
-    private TextView mUserEmissionSaving;
-    private TextView mCarbonSaved;
-    private TextView mTreesSaved;
     private LocalUser mLocalUser;
+    private RadioGroup mPledgeRadioGroup;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
@@ -63,45 +61,55 @@ public class SuggestionFragment extends Fragment {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new PledgeFragment()).addToBackStack(null).commit();
                 }
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        new PledgeFragment()).addToBackStack(null).commit();
             }
         });
         shareDialog = new ShareDialog(this);
 
         mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
-        String temp = String.format(getResources().getString(R.string.suggestion_text),
-                "test",
-                mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
-                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
-        mReduceSuggestionText.setText(temp);
-//
-//        mUserEmissionSaving.setText(String.valueOf(mDiet.getSuggestedDietSavingAmount()));
+
+
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);
         setupBarChart(mSuggestionChart);
+
+        mPledgeRadioGroup = view.findViewById(R.id.pledgeRadioGroup);
+        mPledgeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                String choice = "a little";
+                switch (checkedId) {
+                    case R.id.pledge3:
+                        choice = "a ton";
+                        break;
+                    case R.id.pledge2:
+                        choice = "a decent amount";
+                        break;
+                    case R.id.pledge1:
+                        choice = "a little";
+                        break;
+                    case R.id.pledge0:
+                        choice = "nothing";
+                        break;
+                }
+
+                String temp = String.format(getResources().getString(R.string.suggestion_text),
+                        choice,
+                        mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
+                        mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+                mReduceSuggestionText.setText(temp);
+                setupBarChart(mSuggestionChart);
+            }
+        });
+
+
         float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
         float treesSaved = carbonSaved/22;  // carbon offset of trees
 
-        if(carbonSaved < 0)
-        {
-            carbonSaved = 0;
-            treesSaved = 0;
-        }
-
-//        mCarbonSaved = view.findViewById(R.id.carbonSaved);
-//        mCarbonSaved.setText(String.valueOf(carbonSaved));
-//
-//        mTreesSaved = view.findViewById(R.id.treesSaved);
-//        mTreesSaved.setText(String.valueOf(treesSaved));
-
-        //share stuff
 
         return view;
     }
 
     private void setupBarChart(BarChart chart) {
-
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
         entries.add(new BarEntry(1, 1500f));

@@ -50,7 +50,9 @@ public class ResultFragment extends Fragment {
 
         mResultText = view.findViewById(R.id.resultText);
 
-        if (mUserCarbon < mAverageCarbon*mLowCarbonPercentage) {
+        if(mUserCarbon == 0) {
+            mResultText.setText(R.string.no_carbon_result);
+        } else if (mUserCarbon < mAverageCarbon*mLowCarbonPercentage) {
             mResultText.setText(R.string.low_carbon_result);
         } else if (mUserCarbon < mAverageCarbon*mAverageCarbonPercentage) {
             mResultText.setText(R.string.average_carbon_result);
@@ -83,6 +85,10 @@ public class ResultFragment extends Fragment {
             if (mDiet.getIngUserCo2Emission(i) != 0) {
                 pieEntries.add(new PieEntry( mDiet.getIngUserCo2Emission(i), mDiet.getFoodName(i)));
             }
+        }
+
+        if (mUserCarbon == 0) {
+            pieEntries.add(new PieEntry(20000f, "Blood"));
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
