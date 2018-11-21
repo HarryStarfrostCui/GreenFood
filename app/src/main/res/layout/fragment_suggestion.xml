@@ -1,180 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.PledgeFragment"
+    android:fillViewport="true"
     android:background="@drawable/background">
 
-    <TextView
-        android:id="@+id/suggestionText1"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/suggestion_text_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/suggestionText2"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:text="@string/suggestion_text_2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText1" />
-
-    <ImageView
-        android:id="@+id/clippyImage2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/result_greeting"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clippy" />
-
-    <TextView
-        android:id="@+id/suggestionText3"
-        style="@style/BlackText"
-        android:layout_width="334dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/suggestion_text_3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
-
-    <TextView
-        android:id="@+id/userEmissionSaving"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/suggestionText3"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />
-
-    <TextView
-        android:id="@+id/userLegend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/user_legend"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionChart"
-        style="@style/GreenText"/>
-
-    <TextView
-        android:id="@+id/averageLegend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
-        android:text="@string/average_legend"
-        app:layout_constraintEnd_toStartOf="@+id/dietLegend"
-        app:layout_constraintStart_toEndOf="@+id/userLegend"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionChart"
-        style="@style/YellowText"/>
-
-    <TextView
-        android:id="@+id/dietLegend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:text="@string/suggestion_legend"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionChart"
-        style="@style/RedText"/>
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/suggestionChart"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/suggestionText3" />
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/vancouverText"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/all_vancouver"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/averageLegend" />
+        <LinearLayout
+            android:id="@+id/suggestionFirstBox"
+            style="@style/RectangleShortRounded"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/vancouverText2"
-        style="@style/BlackText"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/tree_offset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carbonHeading" />
+            <TextView
+                android:id="@+id/SuggestionQuestion"
+                style="@style/GreenHeadingSmall"
+                android:layout_width="280dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/suggestion_greeting"
+                app:layout_constraintEnd_toStartOf="@+id/clippyImage2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/carbonHeading"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:text="@string/carbon_save"
-        app:layout_constraintStart_toEndOf="@+id/carbonSaved"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText" />
+            <ImageView
+                android:id="@+id/naviImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/result_greeting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/navi" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/carbonSaved"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText" />
+        <RadioGroup
+            android:id="@+id/pledgeRadioGroup"
+            style="@style/SquareRounded"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionFirstBox">
 
-    <TextView
-        android:id="@+id/treeHeading"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:text="@string/trees_save"
-        app:layout_constraintStart_toEndOf="@+id/treesSaved"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
+            <RadioButton
+                android:id="@+id/pledge3"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:buttonTint="@color/themeGreen"
+                android:text="@string/pledge_radio_button_3"
+                android:textColor="@color/themeGreen"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/treesSaved"
-        style="@style/GreenHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
+            <RadioButton
+                android:id="@+id/pledge2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:buttonTint="@color/themeGreen"
+                android:text="@string/pledge_radio_button_2"
+                android:textColor="@color/themeGreen"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/pledge_button"
-        style="@style/NiceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/make_pledge_button_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/treeHeading"
-        app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />
+            <RadioButton
+                android:id="@+id/pledge1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:buttonTint="@color/themeGreen"
+                android:text="@string/pledge_radio_button_1"
+                android:textColor="@color/themeGreen"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/pledge0"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:buttonTint="@color/themeGreen"
+                android:text="@string/pledge_radio_button_0"
+                android:textColor="@color/themeGreen"
+                android:textStyle="bold" />
 
 
-</android.support.constraint.ConstraintLayout>
+        </RadioGroup>
 
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/suggestionChart"
+            style="@style/SquareRounded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionFirstBox" />
+
+        <LinearLayout
+            android:id="@+id/suggestionSecondBox"
+            style="@style/RectangleShortRounded"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionChart">
+
+            <ImageView
+                android:id="@+id/naviImage2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/navi" />
+
+            <TextView
+                android:id="@+id/reduceSuggestionText"
+                style="@style/GreenHeadingSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/suggestion_navi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+
+
+
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/suggestionText2"-->
+            <!--style="@style/BlackText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:text="@string/suggestion_text_2"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/suggestionText1" />-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/suggestionText3"-->
+            <!--style="@style/BlackText"-->
+            <!--android:layout_width="334dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="28dp"-->
+            <!--android:text="@string/suggestion_text_3"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/userEmissionSaving"-->
+            <!--style="@style/BlackText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="28dp"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/suggestionText3"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/suggestionText2" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/userLegend"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:text="@string/user_legend"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/suggestionChart"-->
+            <!--style="@style/GreenText"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/averageLegend"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:text="@string/average_legend"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/dietLegend"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/userLegend"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/suggestionChart"-->
+            <!--style="@style/YellowText"/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/dietLegend"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="0dp"-->
+            <!--android:text="@string/suggestion_legend"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/suggestionChart"-->
+            <!--style="@style/RedText"/>-->
+
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/vancouverText"-->
+            <!--style="@style/BlackText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:text="@string/all_vancouver"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/averageLegend" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/vancouverText2"-->
+            <!--style="@style/BlackText"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="42dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:text="@string/tree_offset"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/carbonHeading" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/carbonHeading"-->
+            <!--style="@style/GreenHeading"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="0dp"-->
+            <!--android:text="@string/carbon_save"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/carbonSaved"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/vancouverText" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/carbonSaved"-->
+            <!--style="@style/GreenHeading"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/vancouverText" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/treeHeading"-->
+            <!--style="@style/GreenHeading"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="0dp"-->
+            <!--android:text="@string/trees_save"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/treesSaved"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/treesSaved"-->
+            <!--style="@style/GreenHeading"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/vancouverText2" />-->
+
+        <Button
+            android:id="@+id/pledge_button"
+            style="@style/NiceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/make_pledge_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suggestionSecondBox" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
