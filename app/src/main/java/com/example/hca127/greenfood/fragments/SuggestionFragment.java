@@ -141,6 +141,7 @@ public class SuggestionFragment extends Fragment {
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barDataSet.setValueTextSize(12f);
 
         BarData suggestionData = new BarData(barDataSet);
         chart.getXAxis().setEnabled(false);

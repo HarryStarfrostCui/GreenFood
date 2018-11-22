@@ -37,6 +37,8 @@ public class ResultFragment extends Fragment {
     private float mLowCarbonPercentage = 0.9f;
     private float mAverageCarbonPercentage = 1.1f;
     private Button mGetSuggestion;
+    private Button mToggleNumbers;
+    private Boolean mShowNumbers = false;
 
     private Diet mDiet;
 
@@ -49,6 +51,7 @@ public class ResultFragment extends Fragment {
         mUserCarbon = mDiet.getUserDietEmission(); //insert calculated mCarbonSaved in tC02e
 
         mResultText = view.findViewById(R.id.resultText);
+        mToggleNumbers = view.findViewById(R.id.toggleNumbers);
 
         if(mUserCarbon == 0) {
             mResultText.setText(R.string.no_carbon_result);
@@ -76,6 +79,15 @@ public class ResultFragment extends Fragment {
             }
         });
 
+        mToggleNumbers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mShowNumbers = !mShowNumbers;
+                setupPieChart(mResultPieChart);
+            }
+        });
+
+
         return view;
     }
     private void setupPieChart(PieChart chart) {
@@ -93,8 +105,12 @@ public class ResultFragment extends Fragment {
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataSet.setDrawValues(false);
+
         PieData data = new PieData(dataSet);
+        data.setValueTextSize(12f);
+
+        if (!mShowNumbers)
+            dataSet.setDrawValues(false);
 
         chart.getLegend().setEnabled(false);
         chart.setEntryLabelColor(Color.BLACK);
@@ -112,6 +128,7 @@ public class ResultFragment extends Fragment {
         entries.add(new BarEntry(1, 1500f));
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
+        barDataSet.setValueTextSize(12f);
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         BarData suggestionData = new BarData(barDataSet);
