@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,17 +26,34 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.hca127.greenfood.GlideApp;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
 import com.example.hca127.greenfood.objects.Meal;
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+
 
 
 public class RestaurantFragment extends Fragment {
@@ -64,7 +82,9 @@ public class RestaurantFragment extends Fragment {
     private Button mShareBotton;
     private DatabaseReference mDatabase;
     private LocalUser mLocalUser;
-
+    private FirebaseStorage mCloudStorage;
+    private StorageReference mStorageReference;
+    private StorageReference mImagesReference;
 
     @Nullable
     @Override
@@ -73,6 +93,10 @@ public class RestaurantFragment extends Fragment {
         mMeal = new Meal();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+
+        mCloudStorage = FirebaseStorage.getInstance();
+        mStorageReference = mCloudStorage.getReference();
+        mImagesReference = mStorageReference.child("images");
 
         mEditMeal = view.findViewById(R.id.meal_edit);
         mRestaurantName = view.findViewById(R.id.restaurant_name_edit);
@@ -92,6 +116,7 @@ public class RestaurantFragment extends Fragment {
         mSaveButton = view.findViewById(R.id.save_meal_button);
         mAddPhotoText = view.findViewById(R.id.add_photo_text);
         mOR = view.findViewById(R.id.or_text);
+
         lockAll();
 
         mEditMeal.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +174,11 @@ public class RestaurantFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference nMeal = mDatabase.child("meals").push();
+                Long currentTime = Calendar.getInstance().getTimeInMillis();
+                String fileName = mLocalUser.getUserId() + "$" + currentTime;
+                final StorageReference mUserUpload = mImagesReference.child(fileName + ".jpg");
+
+                final DatabaseReference nMeal = mDatabase.child("meals").push();
                 mLocalUser.addMeal(nMeal.getKey());
                 mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
@@ -160,6 +189,55 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("protein").child("3").setValue(mThirdIngredient.getSelectedItemPosition());
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCityShare.getSelectedItemPosition());
+                // photo upload starts here
+                mFinalImage.setDrawingCacheEnabled(true);
+                mFinalImage.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) mFinalImage.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+                UploadTask uploadTask = mUserUpload.putBytes(data);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                    }
+                });
+
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+                        // Continue with the task to get the download URL
+                        return mUserUpload.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            nMeal.child("imageLink").setValue(downloadUri.toString());
+
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
+                });
+                // RETRIEVE IMAGE
+                /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2F8muF1KY8cmXSLaX2rndGH3IP1143%241542927527944.jpg?alt=media&token=da7f1146-fd7b-44d5-acdb-962e587063a3");
+                GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
+                        .load(httpsReference)
+                        .into(mFinalImage);
+                 */
                 lockAll();
             }
         });
