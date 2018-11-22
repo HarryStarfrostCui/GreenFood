@@ -34,8 +34,11 @@ import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
 import com.example.hca127.greenfood.objects.Meal;
 import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,6 +48,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
@@ -82,7 +86,6 @@ public class RestaurantFragment extends Fragment {
     private StorageReference mStorageReference;
     private StorageReference mImagesReference;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -113,6 +116,7 @@ public class RestaurantFragment extends Fragment {
         mSaveButton = view.findViewById(R.id.save_meal_button);
         mAddPhotoText = view.findViewById(R.id.add_photo_text);
         mOR = view.findViewById(R.id.or_text);
+
         lockAll();
 
         mEditMeal.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +178,7 @@ public class RestaurantFragment extends Fragment {
                 String fileName = mLocalUser.getUserId() + "$" + currentTime;
                 final StorageReference mUserUpload = mImagesReference.child(fileName + ".jpg");
 
-                DatabaseReference nMeal = mDatabase.child("meals").push();
+                final DatabaseReference nMeal = mDatabase.child("meals").push();
                 mLocalUser.addMeal(nMeal.getKey());
                 mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
                 ((MainActivity)getActivity()).setLocalUser(mLocalUser);
@@ -203,17 +207,37 @@ public class RestaurantFragment extends Fragment {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                        // ...
                     }
                 });
 
-                // RETRIEVE IMAGE
-                /*StorageReference temp = mImagesReference.child("test2.jpg");
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+                        // Continue with the task to get the download URL
+                        return mUserUpload.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            nMeal.child("imageLink").setValue(downloadUri.toString());
 
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
+                });
+                // RETRIEVE IMAGE
+                /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2F8muF1KY8cmXSLaX2rndGH3IP1143%241542927527944.jpg?alt=media&token=da7f1146-fd7b-44d5-acdb-962e587063a3");
                 GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
-                        .load(temp)
+                        .load(httpsReference)
                         .into(mFinalImage);
-                */
+                 */
                 lockAll();
             }
         });
