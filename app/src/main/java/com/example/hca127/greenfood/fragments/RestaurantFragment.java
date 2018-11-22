@@ -48,12 +48,13 @@ public class RestaurantFragment extends Fragment {
     private Button mMealOne;
     private Button mMealTwo;
     private Button mMealThree;
+    private TextView mRestaurantTitle;
     private EditText mRestaurantName;
     private EditText mMealName;
     private EditText mMealDescription;
     private TextView mDescriptionText;
     private Spinner mMainIngredient;
-    private Spinner mCityShare;
+    private Spinner mCity;
     private ImageView mSaveButton;
     private TextView mAddPhotoText;
     private ImageView mEditMeal;
@@ -81,6 +82,7 @@ public class RestaurantFragment extends Fragment {
         mMeal = new Meal();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
+        mRestaurantTitle = view.findViewById(R.id.restaurant_title);
         mMealOne = view.findViewById(R.id.meal_1_button);
         mMealTwo = view.findViewById(R.id.meal_2_button);
         mMealThree = view.findViewById(R.id.meal_3_button);
@@ -90,19 +92,44 @@ public class RestaurantFragment extends Fragment {
         mDescriptionText = view.findViewById(R.id.description_text);
         mMealDescription = view.findViewById(R.id.description_edit);
         mMainIngredient = view.findViewById(R.id.main_ingredient_spinner);
-        mCityShare = view.findViewById(R.id.location_spinner);
+        mCity = view.findViewById(R.id.location_spinner);
         mGalleryButton = view.findViewById(R.id.gallery_button);
         mCameraButton = view.findViewById(R.id.camera_button);
         mResetButton = view.findViewById(R.id.reset_button);
         mFinalImage = view.findViewById(R.id.final_photo);
         mSaveButton = view.findViewById(R.id.meal_edit_confirm);
         mAddPhotoText = view.findViewById(R.id.add_photo_text);
-        lockAllMealOne();
+        mealOneView();
+        lockAll();
+
+        mMealOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mealOneView();
+            }
+        });
+
+        mMealTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mealTwoView();
+            }
+        });
+
+        mMealThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mealThreeView();
+            }
+        });
 
         mEditMeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                unlockAllMealOne();
+                unlockAll();
+                mMealOne.setVisibility(View.GONE);
+                mMealTwo.setVisibility(View.GONE);
+                mMealThree.setVisibility(View.GONE);
                 mEditMeal.setVisibility(View.GONE);
             }
         });
@@ -154,6 +181,9 @@ public class RestaurantFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMealOne.setVisibility(View.VISIBLE);
+                mMealTwo.setVisibility(View.VISIBLE);
+                mMealThree.setVisibility(View.VISIBLE);
                 DatabaseReference nMeal = mDatabase.child("meals").push();
                 mLocalUser.addMeal(nMeal.getKey());
                 mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
@@ -162,8 +192,8 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
                 nMeal.child("MainIngredient").child("1").setValue(mMainIngredient.getSelectedItemPosition());
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
-                nMeal.child("city index").setValue(mCityShare.getSelectedItemPosition());
-                lockAllMealOne();
+                nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
+                lockAll();
             }
         });
 
@@ -208,22 +238,16 @@ public class RestaurantFragment extends Fragment {
                 mUri = Uri.fromFile(file);
                 mFinalImage.setImageURI(mUri);
             }
-
-//
-
-
-
-
         }
     }
 
-    public void lockAllMealOne() {
+    public void lockAll() {
         mRestaurantName.setEnabled(false);
         mMealName.setEnabled(false);
         mMealDescription.setEnabled(false);
         mDescriptionText.setText(R.string.description_meal);
         mMainIngredient.setEnabled(false);
-        mCityShare.setEnabled(false);
+        mCity.setEnabled(false);
         mGalleryButton.setVisibility(View.GONE);
         mCameraButton.setVisibility(View.GONE);
         mResetButton.setVisibility(View.GONE);
@@ -233,18 +257,57 @@ public class RestaurantFragment extends Fragment {
         mEditMeal.setVisibility(View.VISIBLE);
     }
 
-
-    public void unlockAllMealOne(){
+    public void unlockAll(){
         mRestaurantName.setEnabled(true);
         mMealName.setEnabled(true);
         mMealDescription.setEnabled(true);
         mDescriptionText.setText(R.string.description_text);
         mMainIngredient.setEnabled(true);
-        mCityShare.setEnabled(true);
+        mCity.setEnabled(true);
         mGalleryButton.setVisibility(View.VISIBLE);
         mCameraButton.setVisibility(View.VISIBLE);
         mResetButton.setVisibility(View.VISIBLE);
         mAddPhotoText.setVisibility(View.VISIBLE);
         mSaveButton.setVisibility(View.VISIBLE);
+    }
+
+    //TODO:
+
+    public void mealOneView(){
+        mMealOne.setAlpha(0.5f);
+        mMealTwo.setAlpha(1.0f);
+        mMealThree.setAlpha(1.0f);
+        mRestaurantName.setText("");
+        mMealName.setText("");
+        mMealDescription.setText("");
+        mMainIngredient.setSelection(1);
+        mCity.setSelection(1);
+        mFinalImage.setImageURI(mUri);
+        mRestaurantTitle.setText(R.string.restaurant_title1);
+    }
+
+    public void mealTwoView(){
+        mMealOne.setAlpha(1.0f);
+        mMealTwo.setAlpha(0.5f);
+        mMealThree.setAlpha(1.0f);
+        mRestaurantName.setText("");
+        mMealName.setText("");
+        mMealDescription.setText("");
+        mMainIngredient.setSelection(1);
+        mCity.setSelection(1);
+        mFinalImage.setImageURI(mUri);
+        mRestaurantTitle.setText(R.string.restaurant_title2);
+    }
+    public void mealThreeView(){
+        mMealOne.setAlpha(1.0f);
+        mMealTwo.setAlpha(1.0f);
+        mMealThree.setAlpha(0.5f);
+        mRestaurantName.setText("");
+        mMealName.setText("");
+        mMealDescription.setText("");
+        mMainIngredient.setSelection(1);
+        mCity.setSelection(1);
+        mFinalImage.setImageURI(mUri);
+        mRestaurantTitle.setText(R.string.restaurant_title3);
     }
 }

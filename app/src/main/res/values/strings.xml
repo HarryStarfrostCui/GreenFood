@@ -226,7 +226,9 @@
 
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
-    <string name="meal_title">~Meal 1~</string>
+    <string name="restaurant_title1">~Meal 1~</string>
+    <string name="restaurant_title2">~Meal 2~</string>
+    <string name="restaurant_title3">~Meal 3~</string>
     <string name="restaurant_name">Restaurant Name: </string>
     <string name="meal_name">Meal Name:</string>
     <string name="main_ingredient">Main Ingredient: </string>
