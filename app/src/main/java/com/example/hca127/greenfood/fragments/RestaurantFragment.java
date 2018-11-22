@@ -65,6 +65,7 @@ public class RestaurantFragment extends Fragment {
     private ImageView mSpeechBubble;
     private TextView mSpeechBubbleText;
     private Drawable mDrawable;
+    private Button mDeleteMealButton;
 
 
     private static final int mGetFromGallery = 0;
@@ -104,7 +105,9 @@ public class RestaurantFragment extends Fragment {
         mAddPhotoText = view.findViewById(R.id.add_photo_text);
         mSpeechBubble = view.findViewById(R.id.speech_bubble);
         mSpeechBubbleText = view.findViewById(R.id.speech_bubble_text);
+        mDeleteMealButton = view.findViewById(R.id.meal_delete);
         mDrawable = getResources().getDrawable(R.drawable.android);
+        mMealOne.setAlpha(0.5f);
         mealOneView();
         lockAll();
         checkPhoto();
@@ -112,6 +115,9 @@ public class RestaurantFragment extends Fragment {
         mMealOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMealOne.setAlpha(0.5f);
+                mMealTwo.setAlpha(1.0f);
+                mMealThree.setAlpha(1.0f);
                 mealOneView();
             }
         });
@@ -119,6 +125,9 @@ public class RestaurantFragment extends Fragment {
         mMealTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMealOne.setAlpha(1.0f);
+                mMealTwo.setAlpha(0.5f);
+                mMealThree.setAlpha(1.0f);
                 mealTwoView();
             }
         });
@@ -126,6 +135,9 @@ public class RestaurantFragment extends Fragment {
         mMealThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mMealOne.setAlpha(1.0f);
+                mMealTwo.setAlpha(1.0f);
+                mMealThree.setAlpha(0.5f);
                 mealThreeView();
             }
         });
@@ -138,6 +150,21 @@ public class RestaurantFragment extends Fragment {
                 mMealTwo.setVisibility(View.GONE);
                 mMealThree.setVisibility(View.GONE);
                 mEditMeal.setVisibility(View.GONE);
+            }
+        });
+
+        mDeleteMealButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mRestaurantName.setText("");
+                mMealName.setText("");
+                mMealDescription.setText("");
+                mMainIngredient.setSelection(0);
+                mCity.setSelection(0);
+                mFinalImage.setImageDrawable(mDrawable);
+                updateMeal();
+                lockAll();
             }
         });
 
@@ -188,20 +215,9 @@ public class RestaurantFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMealOne.setVisibility(View.VISIBLE);
-                mMealTwo.setVisibility(View.VISIBLE);
-                mMealThree.setVisibility(View.VISIBLE);
-                DatabaseReference nMeal = mDatabase.child("meals").push();
-                mLocalUser.addMeal(nMeal.getKey());
-                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
-                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-                nMeal.child("meal name").setValue(mMealName.getText().toString());
-                nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
-                nMeal.child("MainIngredient").child("1").setValue(mMainIngredient.getSelectedItemPosition());
-                nMeal.child("description").setValue(mMealDescription.getText().toString());
-                nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
                 lockAll();
                 checkPhoto();
+                updateMeal();
             }
         });
 
@@ -263,6 +279,10 @@ public class RestaurantFragment extends Fragment {
         mAddPhotoText.setVisibility(View.GONE);
         mSaveButton.setVisibility(View.GONE);
         mEditMeal.setVisibility(View.VISIBLE);
+        mDeleteMealButton.setVisibility(View.GONE);
+        mMealOne.setVisibility(View.VISIBLE);
+        mMealTwo.setVisibility(View.VISIBLE);
+        mMealThree.setVisibility(View.VISIBLE);
         checkPhoto();
     }
 
@@ -280,14 +300,13 @@ public class RestaurantFragment extends Fragment {
         mSaveButton.setVisibility(View.VISIBLE);
         mSpeechBubble.setVisibility(View.GONE);
         mSpeechBubbleText.setVisibility(View.GONE);
+        mDeleteMealButton.setVisibility(View.VISIBLE);
     }
 
     //TODO:
 
     public void mealOneView(){
-        mMealOne.setAlpha(0.5f);
-        mMealTwo.setAlpha(1.0f);
-        mMealThree.setAlpha(1.0f);
+
         mRestaurantName.setText("");
         mMealName.setText("");
         mMealDescription.setText("");
@@ -299,9 +318,6 @@ public class RestaurantFragment extends Fragment {
     }
 
     public void mealTwoView(){
-        mMealOne.setAlpha(1.0f);
-        mMealTwo.setAlpha(0.5f);
-        mMealThree.setAlpha(1.0f);
         mRestaurantName.setText("");
         mMealName.setText("");
         mMealDescription.setText("");
@@ -312,9 +328,6 @@ public class RestaurantFragment extends Fragment {
         checkPhoto();
     }
     public void mealThreeView(){
-        mMealOne.setAlpha(1.0f);
-        mMealTwo.setAlpha(1.0f);
-        mMealThree.setAlpha(0.5f);
         mRestaurantName.setText("");
         mMealName.setText("");
         mMealDescription.setText("");
@@ -339,5 +352,17 @@ public class RestaurantFragment extends Fragment {
             mSpeechBubble.setVisibility(View.VISIBLE);
             mSpeechBubbleText.setText(R.string.nice_photo);
         }
+    }
+
+    public void updateMeal(){
+        DatabaseReference nMeal = mDatabase.child("meals").push();
+        mLocalUser.addMeal(nMeal.getKey());
+        mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
+        ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+        nMeal.child("meal name").setValue(mMealName.getText().toString());
+        nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
+        nMeal.child("MainIngredient").child("1").setValue(mMainIngredient.getSelectedItemPosition());
+        nMeal.child("description").setValue(mMealDescription.getText().toString());
+        nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
     }
 }

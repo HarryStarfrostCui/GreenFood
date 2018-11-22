@@ -1,6 +1,7 @@
 package com.example.hca127.greenfood.fragments;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
@@ -28,6 +29,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class CommunityFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -49,6 +51,18 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
         mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
         mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
+
+        Timer timer = new Timer();
+        timer.
+
+        for(int i = 0; i < 10000; i++){
+            mAverageDisplay.setTextColor(Color.RED);
+            mAverageDisplay.setTextColor(Color.YELLOW);
+            mAverageDisplay.setTextColor(Color.GREEN);
+            mAverageDisplay.setTextColor(Color.CYAN);
+            mAverageDisplay.setTextColor(Color.BLUE);
+            mAverageDisplay.setTextColor(Color.MAGENTA);
+        }
 
         mOtherPledges = new ArrayList<>();
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge0));

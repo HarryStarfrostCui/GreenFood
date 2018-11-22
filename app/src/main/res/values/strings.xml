@@ -207,11 +207,12 @@
     <string name="total_pledged_text">Total CO2 Reduction:</string>
     <string name="total_pledged_number">240</string>
     <string name="our_community">Our Community</string>
-    <string name="trees_planted_text">= Trees Planted:</string>
+    <string name="trees_planted_text"> Trees Planted:</string>
     <string name="trees_planted_number">20</string>
     <string name="avg_pledged_text">Average Amount Pledged:</string>
     <string name="avg_pledged_number">20</string>
     <string name="other_members">Others In The Community:</string>
+    <string name="kgs">KGs</string>
 
     <string name="title_activity_suggestion">SuggestionActivity</string>
     <string name="title_activity_google_sign_in">GoogleSignInActivity</string>
@@ -239,6 +240,7 @@
     <string name="add_photo">Add a Photo: </string>
     <string name="why_not">WHY NOT ADD A PHOTO?</string>
     <string name="nice_photo">NICE PHOTO! </string>
+    <string name="delete_meal">DELETE !</string>
 
 
     <string-array name="protein_array">
