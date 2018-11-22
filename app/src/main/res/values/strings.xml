@@ -108,8 +108,14 @@
         <b>Hey! Listen!</b>\nWanna help save the planet?\n<small>(We had a group decision...
         Navi is more helpful)</small>
     </string>
-    <string name="suggestion_text">
+    <string name="suggestion_small">
+        To save %s\nI\'d suggest eating a bit less %s \n and more %s\n
+    </string>
+    <string name="suggestion_medium">
         To save %s\nI\'d suggest eating less %s \n and more %s\n
+    </string>
+    <string name="suggestion_large">
+        To save %s\nI\'d suggest eating a lot less %s \n and more %s\n
     </string>
     <string name="suggestion_navi">
         Hmm, is that a deku stick?\n
@@ -134,9 +140,11 @@
     </string>
 
     <string name="question_mark">\?</string>
-    <string name="suggestion_text_3">
-        Every year that would save (in kg of C02e):
+    <string name="suggestion_filler">
+        Some text will show up, once you toggle
     </string>
+    <string name="suggestion_trees">We\'d need to plant %s trees to offset that amount of carbon</string>
+    <string name="suggestion_all_vancouver">If everyone in Vancouver also saved %s, the total would be %s</string>
 
     <string name="all_vancouver">
         If Everyone in Vancouver also made your change, then there would be:

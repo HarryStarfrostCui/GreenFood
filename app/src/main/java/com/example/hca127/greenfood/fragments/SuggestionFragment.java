@@ -34,8 +34,11 @@ public class SuggestionFragment extends Fragment {
     private Diet mDiet;
     private Button mPledgeButton;
     private TextView mReduceSuggestionText;
+    private TextView mSuggestionTreeOffset;
+    private TextView mSuggestionCarbonSaving;
     private LocalUser mLocalUser;
     private RadioGroup mPledgeRadioGroup;
+    private float mPledgeEmission;
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
@@ -48,6 +51,9 @@ public class SuggestionFragment extends Fragment {
 
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
         mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
+        mPledgeEmission = mDiet.getUserDietEmission();
+        mSuggestionCarbonSaving = view.findViewById(R.id.suggestionCarbonSaving);
+        mSuggestionTreeOffset = view.findViewById(R.id.suggestionTreeOffset);
 
         mPledgeButton = view.findViewById(R.id.pledge_button);
         mPledgeButton.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +76,7 @@ public class SuggestionFragment extends Fragment {
 
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);
-        setupBarChart(mSuggestionChart, 0);
+        setupBarChart(mSuggestionChart, mPledgeEmission);
 
         mPledgeRadioGroup = view.findViewById(R.id.pledgeRadioGroup);
         mPledgeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -81,43 +87,44 @@ public class SuggestionFragment extends Fragment {
                 switch (checkedId) {
                     case R.id.pledge3:
                         choice = "a ton";
-                        temp = String.format(getResources().getString(R.string.suggestion_text),
-                                choice,
-                                "to do",
-                                "TO DO");
-                        mReduceSuggestionText.setText(temp);
-                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
-                        break;
-                    case R.id.pledge2:
-                        choice = "a decent amount";
-                        temp = String.format(getResources().getString(R.string.suggestion_text),
-                                choice,
-                                "to do",
-                                "TO DO");
-                        mReduceSuggestionText.setText(temp);
-                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
-                        break;
-                    case R.id.pledge1:
-                        choice = "a little";
-                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
-                        temp = String.format(getResources().getString(R.string.suggestion_text),
+                        temp = String.format(getResources().getString(R.string.suggestion_large),
                                 choice,
                                 mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
                                 mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
                         mReduceSuggestionText.setText(temp);
+                        mPledgeEmission = mDiet.getUserDietEmission() *.7f;
+                        break;
+                    case R.id.pledge2:
+                        choice = "a decent amount";
+                        temp = String.format(getResources().getString(R.string.suggestion_medium),
+                                choice,
+                                mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
+                                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+                        mReduceSuggestionText.setText(temp);
+                        mPledgeEmission = mDiet.getUserDietEmission() * .8f;
+                        break;
+                    case R.id.pledge1:
+                        choice = "a little";
+                        setupBarChart(mSuggestionChart, mDiet.getSuggestedDietEmission());
+                        temp = String.format(getResources().getString(R.string.suggestion_small),
+                                choice,
+                                mDiet.getFoodName(mDiet.getSuggestionMaxIndex()),
+                                mDiet.getFoodName(mDiet.getSuggestionMinIndex()));
+                        mReduceSuggestionText.setText(temp);
+                        mPledgeEmission = mDiet.getUserDietEmission() * .9f;
                         break;
                     case R.id.pledge0:
                         mReduceSuggestionText.setText("To save nothing\n Do nothing : )");
-                        setupBarChart(mSuggestionChart, 0);
+                        mPledgeEmission = mDiet.getUserDietEmission();
                         break;
                 }
-
+                updateText();
+                setupBarChart(mSuggestionChart, mPledgeEmission);
             }
         });
 
 
-        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
-        float treesSaved = carbonSaved/22;  // carbon offset of trees
+
 
 
         return view;
@@ -127,7 +134,7 @@ public class SuggestionFragment extends Fragment {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
         entries.add(new BarEntry(1, 1500f));
-        if (suggestedDiet != 0) {
+        if (suggestedDiet != mDiet.getUserDietEmission()) {
             entries.add(new BarEntry(2, suggestedDiet));
         }
 
@@ -145,6 +152,23 @@ public class SuggestionFragment extends Fragment {
         chart.setData(suggestionData);
         chart.animateY(1200);
         chart.invalidate();
+    }
+
+    private void updateText() {
+        String tempTrees;
+        String tempCarbon;
+
+        float emissionSaving = mDiet.getUserDietEmission() - mPledgeEmission;
+        float carbonSaved =  emissionSaving *.9f * 2463000f / 1000;
+        float treesSaved = carbonSaved/22;  // carbon offset of trees
+
+        tempTrees = String.format(getResources().getString(R.string.suggestion_trees),
+                String.valueOf((int)treesSaved));
+        mSuggestionTreeOffset.setText(tempTrees);
+
+        tempCarbon = String.format(getResources().getString(R.string.suggestion_all_vancouver),
+                String.valueOf((int)emissionSaving), String.valueOf((int)carbonSaved)) ;
+        mSuggestionCarbonSaving.setText(tempCarbon);
     }
 
 
