@@ -34,6 +34,8 @@ public class SuggestionFragment extends Fragment {
     private Diet mDiet;
     private Button mPledgeButton;
     private TextView mReduceSuggestionText;
+    private TextView mSuggestionTreeOffset;
+    private TextView mSuggestionCarbonSaving;
     private LocalUser mLocalUser;
     private RadioGroup mPledgeRadioGroup;
     private float mPledgeEmission;
@@ -50,6 +52,8 @@ public class SuggestionFragment extends Fragment {
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
         mDiet = ((MainActivity)getActivity()).getLocalUserDiet();
         mPledgeEmission = mDiet.getUserDietEmission();
+        mSuggestionCarbonSaving = view.findViewById(R.id.suggestionCarbonSaving);
+        mSuggestionTreeOffset = view.findViewById(R.id.suggestionTreeOffset);
 
         mPledgeButton = view.findViewById(R.id.pledge_button);
         mPledgeButton.setOnClickListener(new View.OnClickListener() {
@@ -114,14 +118,13 @@ public class SuggestionFragment extends Fragment {
                         mPledgeEmission = mDiet.getUserDietEmission();
                         break;
                 }
-
+                updateText();
                 setupBarChart(mSuggestionChart, mPledgeEmission);
             }
         });
 
 
-        float carbonSaved = mDiet.getSuggestedDietSavingAmount() *.9f * 2463000f / 1000;
-        float treesSaved = carbonSaved/22;  // carbon offset of trees
+
 
 
         return view;
@@ -149,6 +152,23 @@ public class SuggestionFragment extends Fragment {
         chart.setData(suggestionData);
         chart.animateY(1200);
         chart.invalidate();
+    }
+
+    private void updateText() {
+        String tempTrees;
+        String tempCarbon;
+
+        float emissionSaving = mDiet.getUserDietEmission() - mPledgeEmission;
+        float carbonSaved =  emissionSaving *.9f * 2463000f / 1000;
+        float treesSaved = carbonSaved/22;  // carbon offset of trees
+
+        tempTrees = String.format(getResources().getString(R.string.suggestion_trees),
+                String.valueOf((int)treesSaved));
+        mSuggestionTreeOffset.setText(tempTrees);
+
+        tempCarbon = String.format(getResources().getString(R.string.suggestion_all_vancouver),
+                String.valueOf((int)emissionSaving), String.valueOf((int)carbonSaved)) ;
+        mSuggestionCarbonSaving.setText(tempCarbon);
     }
 
 
