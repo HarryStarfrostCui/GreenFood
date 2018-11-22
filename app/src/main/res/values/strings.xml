@@ -108,8 +108,14 @@
         <b>Hey! Listen!</b>\nWanna help save the planet?\n<small>(We had a group decision...
         Navi is more helpful)</small>
     </string>
-    <string name="suggestion_text">
+    <string name="suggestion_small">
+        To save %s\nI\'d suggest eating a bit less %s \n and more %s\n
+    </string>
+    <string name="suggestion_medium">
         To save %s\nI\'d suggest eating less %s \n and more %s\n
+    </string>
+    <string name="suggestion_large">
+        To save %s\nI\'d suggest eating a lot less %s \n and more %s\n
     </string>
     <string name="suggestion_navi">
         Hmm, is that a deku stick?\n
