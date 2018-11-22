@@ -125,7 +125,7 @@ public class ResultFragment extends Fragment {
 
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
-        entries.add(new BarEntry(1, 1500f));
+        entries.add(new BarEntry(1, 1517.5f));
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setValueTextSize(12f);
