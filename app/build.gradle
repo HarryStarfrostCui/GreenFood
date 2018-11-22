@@ -62,3 +62,10 @@ dependencies {
     implementation 'com.android.support:support-v4:28.+'
 }
 
+dependencies {
+    // FirebaseUI Storage only
+    implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+}
