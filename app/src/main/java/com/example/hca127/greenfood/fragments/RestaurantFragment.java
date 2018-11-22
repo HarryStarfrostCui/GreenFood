@@ -2,12 +2,14 @@ package com.example.hca127.greenfood.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,8 +35,12 @@ import com.example.hca127.greenfood.objects.Meal;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -52,8 +58,9 @@ public class RestaurantFragment extends Fragment {
     private TextView mAddPhotoText;
     private ImageView mEditMeal;
     private TextView mOR;
+    private String mCameraFile;
+    private Uri mUri;
 
-    private int temp;
     private ImageView mGalleryButton;
     private ImageView mCameraButton;
     private ImageView mResetButton;
@@ -61,7 +68,7 @@ public class RestaurantFragment extends Fragment {
     private static final int mGetFromGallery = 0;
     private static final int mCameraRequest = 1;
     private Meal mMeal;
-    private Button mShareBotton;
+    private Button mShareButton;
     private DatabaseReference mDatabase;
     private LocalUser mLocalUser;
 
@@ -88,7 +95,7 @@ public class RestaurantFragment extends Fragment {
         mCameraButton = view.findViewById(R.id.camera_button);
         mResetButton = view.findViewById(R.id.reset_button);
         mFinalImage = view.findViewById(R.id.final_photo);
-        mShareBotton = view.findViewById(R.id.facebook_share_button);
+        mShareButton = view.findViewById(R.id.facebook_share_button);
         mSaveButton = view.findViewById(R.id.save_meal_button);
         mAddPhotoText = view.findViewById(R.id.add_photo_text);
         mOR = view.findViewById(R.id.or_text);
@@ -133,6 +140,16 @@ public class RestaurantFragment extends Fragment {
                 }
 
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Date date = new Date();
+                DateFormat dateFormat = new SimpleDateFormat("-mm-ss");
+                String newPicture = dateFormat.format(date)+".png";
+                String outPath = "/Internal storage/DCIM/Camera"+newPicture;
+                File outFile = new File(outPath);
+                mCameraFile = outFile.toString();
+                Uri uriSavedImage = Uri.fromFile(outFile);
+                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                StrictMode.setVmPolicy(builder.build());
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
                 startActivityForResult(cameraIntent, mCameraRequest);
                 cameraIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
@@ -164,7 +181,7 @@ public class RestaurantFragment extends Fragment {
             }
         });
 
-        mShareBotton.setOnClickListener(new View.OnClickListener() {
+        mShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseReference nMeal = mDatabase.child("meals").push();
@@ -209,12 +226,26 @@ public class RestaurantFragment extends Fragment {
         }
 
         if(requestCode==mCameraRequest){
-            try {
-                Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
-                mFinalImage.setImageBitmap(imageFromCamera);
-            } catch (NullPointerException e){
-                e.printStackTrace();
+            File file = new File(mCameraFile);
+            if(!file.exists()){
+                file.mkdir();
             }
+            
+            if(data != null){
+                mUri = Uri.fromFile(file);
+                /*mUri = data.getData();*/
+                mFinalImage.setImageURI( mUri);
+//                Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
+//                mFinalImage.setImageBitmap(imageFromCamera);
+            }
+            if( mUri == null && mCameraFile != null){
+                mUri = Uri.fromFile(file);
+                mFinalImage.setImageURI(mUri);
+            }
+
+//
+
+
 
 
         }
@@ -235,7 +266,7 @@ public class RestaurantFragment extends Fragment {
         mFinalImage.setVisibility(View.VISIBLE);
         mAddPhotoText.setVisibility(View.GONE);
         mSaveButton.setVisibility(View.GONE);
-        mShareBotton.setVisibility(View.GONE);
+        mShareButton.setVisibility(View.GONE);
         mLocationSwitch.setVisibility(View.GONE);
         mCityShare.setVisibility(View.GONE);
         mOR.setVisibility(View.GONE);
@@ -254,7 +285,7 @@ public class RestaurantFragment extends Fragment {
         mResetButton.setVisibility(View.VISIBLE);
         mAddPhotoText.setVisibility(View.VISIBLE);
         mSaveButton.setVisibility(View.VISIBLE);
-        mShareBotton.setVisibility(View.VISIBLE);
+        mShareButton.setVisibility(View.VISIBLE);
         mLocationSwitch.setVisibility(View.VISIBLE);
         mCityShare.setVisibility(View.VISIBLE);
         mOR.setVisibility(View.VISIBLE);
