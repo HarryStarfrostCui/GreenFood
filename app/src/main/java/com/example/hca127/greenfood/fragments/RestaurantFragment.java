@@ -5,15 +5,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +36,14 @@ import com.example.hca127.greenfood.objects.Meal;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class RestaurantFragment extends Fragment {
@@ -64,6 +72,7 @@ public class RestaurantFragment extends Fragment {
     private Button mShareBotton;
     private DatabaseReference mDatabase;
     private LocalUser mLocalUser;
+    private String mCurrentPhotoPath;
 
 
     @Nullable
@@ -131,12 +140,23 @@ public class RestaurantFragment extends Fragment {
                     String[] PERMISSIONS = {android.Manifest.permission.CAMERA};
                     ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, mCameraRequest);
                 }
-
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, mCameraRequest);
-                cameraIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                dispatchTakePictureIntent();
+//                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                Date date = new Date();
+//                DateFormat dateFormat = new SimpleDateFormat("-mm-ss");
+//                String newPicture = dateFormat.format(date)+".png";
+//                String outPath = "/Internal storage/DCIM/Camera"+newPicture;
+//                File outFile = new File(outPath);
+//                mCameraFile = outFile.toString();
+//                Uri uriSavedImage = Uri.fromFile(outFile);
+//                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+//                StrictMode.setVmPolicy(builder.build());
+//                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+//                startActivityForResult(cameraIntent, mCameraRequest);
+                //cameraIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
         });
+
 
         mResetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,36 +208,99 @@ public class RestaurantFragment extends Fragment {
     }
 
 
+    private File createImageFile() throws IOException
+    {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private void dispatchTakePictureIntent(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            }catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            if (photoFile != null)
+            {
+                Uri photoUri = FileProvider.getUriForFile(getActivity(),
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(takePictureIntent, mCameraRequest);
+            }
+        }
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
-
+        if(requestCode == mCameraRequest && resultCode == RESULT_OK)
+        {
+            loadImageFromFile();
+        }
         //Detects request codes
-        if(requestCode==mGetFromGallery) {
-            try {
-                Uri selectedImage = data.getData();
-                Bitmap imageFromGallery = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
-                mFinalImage.setImageBitmap(imageFromGallery);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e){
-                e.printStackTrace();
-            }
-        }
+//        if(requestCode==mGetFromGallery) {
+//            try {
+//                Uri selectedImage = data.getData();
+//                Bitmap imageFromGallery = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+//                mFinalImage.setImageBitmap(imageFromGallery);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (NullPointerException e){
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        if(requestCode==mCameraRequest){
+//            File file = new File(mCameraFile);
+//            if(!file.exists()){
+//                file.mkdir();
+//            }
+//
+//            if(data != null){
+//                mUri = Uri.fromFile(file);
+//                /*mUri = data.getData();*/
+//                mFinalImage.setImageURI( mUri);
+//                Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
+//                mFinalImage.setImageBitmap(imageFromCamera);
+//            }
+//            if( mUri == null && mCameraFile != null){
+//                mUri = Uri.fromFile(file);
+//                mFinalImage.setImageURI(mUri);
+//            }
+//        }
+    }
 
-        if(requestCode==mCameraRequest){
-            try {
-                Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
-                mFinalImage.setImageBitmap(imageFromCamera);
-            } catch (NullPointerException e){
-                e.printStackTrace();
-            }
+    private void loadImageFromFile() {
+        int targetW = mFinalImage.getWidth();
+        int targetH = mFinalImage.getHeight();
 
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
 
-        }
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        mFinalImage.setImageBitmap(bitmap);
     }
 
     public void lockAll(){
