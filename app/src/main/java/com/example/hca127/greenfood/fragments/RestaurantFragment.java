@@ -62,6 +62,9 @@ public class RestaurantFragment extends Fragment {
     private ImageView mCameraButton;
     private ImageView mResetButton;
     private ImageView mFinalImage;
+    private ImageView mSpeechBubble;
+    private TextView mSpeechBubbleText;
+    private Drawable mDrawable;
 
 
     private static final int mGetFromGallery = 0;
@@ -99,8 +102,12 @@ public class RestaurantFragment extends Fragment {
         mFinalImage = view.findViewById(R.id.final_photo);
         mSaveButton = view.findViewById(R.id.meal_edit_confirm);
         mAddPhotoText = view.findViewById(R.id.add_photo_text);
+        mSpeechBubble = view.findViewById(R.id.speech_bubble);
+        mSpeechBubbleText = view.findViewById(R.id.speech_bubble_text);
+        mDrawable = getResources().getDrawable(R.drawable.android);
         mealOneView();
         lockAll();
+        checkPhoto();
 
         mMealOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,6 +201,7 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
                 lockAll();
+                checkPhoto();
             }
         });
 
@@ -255,6 +263,7 @@ public class RestaurantFragment extends Fragment {
         mAddPhotoText.setVisibility(View.GONE);
         mSaveButton.setVisibility(View.GONE);
         mEditMeal.setVisibility(View.VISIBLE);
+        checkPhoto();
     }
 
     public void unlockAll(){
@@ -269,6 +278,8 @@ public class RestaurantFragment extends Fragment {
         mResetButton.setVisibility(View.VISIBLE);
         mAddPhotoText.setVisibility(View.VISIBLE);
         mSaveButton.setVisibility(View.VISIBLE);
+        mSpeechBubble.setVisibility(View.GONE);
+        mSpeechBubbleText.setVisibility(View.GONE);
     }
 
     //TODO:
@@ -284,6 +295,7 @@ public class RestaurantFragment extends Fragment {
         mCity.setSelection(1);
         mFinalImage.setImageURI(mUri);
         mRestaurantTitle.setText(R.string.restaurant_title1);
+        checkPhoto();
     }
 
     public void mealTwoView(){
@@ -297,6 +309,7 @@ public class RestaurantFragment extends Fragment {
         mCity.setSelection(1);
         mFinalImage.setImageURI(mUri);
         mRestaurantTitle.setText(R.string.restaurant_title2);
+        checkPhoto();
     }
     public void mealThreeView(){
         mMealOne.setAlpha(1.0f);
@@ -309,5 +322,22 @@ public class RestaurantFragment extends Fragment {
         mCity.setSelection(1);
         mFinalImage.setImageURI(mUri);
         mRestaurantTitle.setText(R.string.restaurant_title3);
+        checkPhoto();
+    }
+
+    public void checkPhoto(){
+        Drawable image = mFinalImage.getDrawable();
+        Drawable.ConstantState cImage = image.getConstantState();
+        Drawable.ConstantState cAndroid = mDrawable.getConstantState();
+        if(cImage.equals(cAndroid)){
+            mSpeechBubbleText.setVisibility(View.VISIBLE);
+            mSpeechBubble.setVisibility(View.VISIBLE);
+            mSpeechBubbleText.setText(R.string.why_not);
+        }
+        else{
+            mSpeechBubbleText.setVisibility(View.VISIBLE);
+            mSpeechBubble.setVisibility(View.VISIBLE);
+            mSpeechBubbleText.setText(R.string.nice_photo);
+        }
     }
 }

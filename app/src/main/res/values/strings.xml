@@ -237,6 +237,8 @@
     <string name="share_location_text">Share Location? </string>
     <string name="description_text">Describe Your Meal: </string>
     <string name="add_photo">Add a Photo: </string>
+    <string name="why_not">WHY NOT ADD A PHOTO?</string>
+    <string name="nice_photo">NICE PHOTO! </string>
 
 
     <string-array name="protein_array">
