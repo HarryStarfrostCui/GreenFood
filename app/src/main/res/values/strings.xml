@@ -226,15 +226,14 @@
 
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
-    <string name="restaurant_title">My Meal</string>
+    <string name="meal_title">~Meal 1~</string>
     <string name="restaurant_name">Restaurant Name: </string>
     <string name="meal_name">Meal Name:</string>
-    <string name="main_protein">Main Protein: </string>
+    <string name="main_ingredient">Main Ingredient: </string>
     <string name="second_ingredient">Second Ingredient: </string>
     <string name="third_ingredient">Third Ingredient: </string>
     <string name="share_location_text">Share Location? </string>
     <string name="description_text">Describe Your Meal: </string>
-    <string name="share_facebook">&#160; &#160;Share to Facebook!</string>
     <string name="add_photo">Add a Photo: </string>
 
 
