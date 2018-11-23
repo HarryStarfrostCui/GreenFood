@@ -151,11 +151,12 @@ public class RestaurantFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
+
         });
 
 
         lockAll();
-        //checkPhoto();
+        checkPhoto();
 
         mMealOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -463,6 +464,7 @@ public class RestaurantFragment extends Fragment {
     }
 
     public void deleteMeal(){
+        mMealReference.set(mCurrentMealIndex,"");
         mDatabase.child("meals").child(mMealReference.get(mCurrentMealIndex)).removeValue();
         mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").
                 child(String.valueOf(mCurrentMealIndex)).setValue("");
