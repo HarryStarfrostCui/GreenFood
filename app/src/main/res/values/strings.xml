@@ -1,24 +1,8 @@
 <resources>
     <string name="app_name">Green Food Challenge</string>
 
-    <string name="about_activity_challenge_header">The Green Food Challenge</string>
-    <string name="about_activity_challenge_text">
-        This challenge aims to raise awareness about the impact of our diets on the environment
-        and offer some suggestions on possible changes. 20% of a person\'s consumption based
-        greenhouse gas emissions come from food.
-    </string>
-    <string name="about_activity_C02e_header">What is C0<sub><small>2</small></sub>e?</string>
-    <string name="about_activity_C02e_text">
-        Greenhouse gases contribute to climate change. The most discussed is carbon dioxide, but
-        methane and nitrous oxide are also GHGs. In order to measure their impact, carbon dioxide
-        equivalents (C02e) is used.
-        For food production, the most common gas is methane.
-    </string>
-
     <string name="Navigation_drawer_open">Open Navigation Drawer</string>
-
     <string name="Navigation_drawer_close">Close Navigation Drawer</string>
-
 
     <string name="welcome">Welcome to your very own CO2 calculator! \n Please log in!</string>
     <string name="email_hint">Email</string>
@@ -99,11 +83,28 @@
         Phew! You made it through. I was worried  that we\'d need to ask clippy to help.
         On the bright side, I\'ve got some results for you:
     </string>
-    <string name="emission_split_text">
+    <string name="result_emission">
         Here\'s how we estimate the greenhouse gas emissions are split from the production of
         various food groups.
     </string>
     <string name="result_toggle_numbers">Toggle Numbers!</string>
+    <string name="result_no_carbon">
+        You eat nothing? Maybe you are dead? A Vampire?
+    </string>
+    <string name="result_blood">Blood!</string>
+    <string name="result_low_carbon">
+        Good News! The greenhouse gas emissions required to produce your diet (%s) are very low
+        compared to the average vancouver resident (%s)!
+    </string>
+    <string name="result_average_carbon">
+        The greenhouse gas emissions required to produce your diet (%s) are similar to the average
+        Vancouver resident (%s).
+    </string>
+    <string name="result_high_carbon">
+        The greenhouse gas emissions required to produce your diet (%s) are higher than the average
+        Vancouver resident (%s).
+    </string>
+    <string name="result_get_suggestion">Get Suggestions</string>
 
     <string name="suggestion_greeting">
         <b>Hey! Listen!</b>\nWanna help save the planet?\n<small>(We had a group decision...
@@ -122,26 +123,6 @@
         Hmm, is that a deku stick?\n
         <small>(don\'t worry, clippy is ok, probably...)</small>
     </string>
-
-
-    <string name="no_carbon_result">
-        You eat nothing? Maybe you are dead? A Vampire?
-    </string>
-
-    <string name="low_carbon_result">
-        Good News! The greenhouse gas emissions required to produce your diet (%s) are very low
-        compared to the average vancouver resident (%s)!
-    </string>
-    <string name="average_carbon_result">
-        The greenhouse gas emissions required to produce your diet (%s) are similar to the average
-        Vancouver resident (%s).
-    </string>
-    <string name="high_carbon_result">
-        The greenhouse gas emissions required to produce your diet (%s) are higher than the average
-        Vancouver resident (%s).
-    </string>
-
-    <string name="question_mark">\?</string>
     <string name="suggestion_filler">
         Some text will show up, once you toggle
     </string>
@@ -149,20 +130,6 @@
     <string name="suggestion_all_vancouver">
         If everyone in Vancouver also saved %s, the total saved would be %s of CO2e
     </string>
-
-    <string name="all_vancouver">
-        If Everyone in Vancouver also made your change, then there would be:
-    </string>
-    <string name="tree_offset">To offset that amount greenhouse gases we would need to plant:</string>
-    <string name="user_legend">User Diet</string>
-    <string name="average_legend">Average Diet</string>
-    <string name="suggestion_legend">Suggested Diet</string>
-    <string name="carbon_save">kg of C0<sub><small>2</small></sub> Reduced:</string>
-    <string name="trees_save">trees!!</string>
-
-    <string name="get_suggestion">Get Suggestions</string>
-    <string name="about_button">What is C02E?</string>
-
     <string name="logo_content_description">Green Challenge Logo</string>
 
     <string-array name="ingredient_name">
@@ -255,7 +222,6 @@
     <string name="nice_photo">NICE PHOTO! </string>
     <string name="delete_meal">DELETE !</string>
 
-
     <string-array name="protein_array">
         <item>Beef</item>
         <item>Lamb</item>
@@ -279,6 +245,19 @@
 
     <string name="description_meal">Description: </string>
 
+    <string name="about_activity_challenge_header">The Green Food Challenge</string>
+    <string name="about_activity_challenge_text">
+        This challenge aims to raise awareness about the impact of our diets on the environment
+        and offer some suggestions on possible changes. 20% of a person\'s consumption based
+        greenhouse gas emissions come from food.
+    </string>
+    <string name="about_activity_C02e_header">What is C0<sub><small>2</small></sub>e?</string>
+    <string name="about_activity_C02e_text">
+        Greenhouse gases contribute to climate change. The most discussed is carbon dioxide, but
+        methane and nitrous oxide are also GHGs. In order to measure their impact, carbon dioxide
+        equivalents (C02e) is used.
+        For food production, the most common gas is methane.
+    </string>
 
     <!-- https://unsplash.com/photos/2mKYEVGA4jE  BACKGROUND -->
 </resources>

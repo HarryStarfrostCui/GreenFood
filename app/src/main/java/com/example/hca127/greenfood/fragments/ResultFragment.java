@@ -54,19 +54,19 @@ public class ResultFragment extends Fragment {
         mToggleNumbers = view.findViewById(R.id.toggleNumbers);
 
         if(mUserCarbon == 0) {
-            mResultText.setText(R.string.no_carbon_result);
+            mResultText.setText(R.string.result_no_carbon);
         } else if (mUserCarbon < mAverageCarbon*mLowCarbonPercentage) {
-            String temp = String.format(getResources().getString(R.string.low_carbon_result),
+            String temp = String.format(getResources().getString(R.string.result_low_carbon),
                     String.valueOf(mDiet.getUserDietEmission()),
                     String.valueOf(mAverageCarbon));
             mResultText.setText(temp);
         } else if (mUserCarbon < mAverageCarbon*mAverageCarbonPercentage) {
-            String temp = String.format(getResources().getString(R.string.average_carbon_result),
+            String temp = String.format(getResources().getString(R.string.result_average_carbon),
                     String.valueOf(mDiet.getUserDietEmission()),
                     String.valueOf(mAverageCarbon));
             mResultText.setText(temp);
         } else {
-            String temp = String.format(getResources().getString(R.string.high_carbon_result),
+            String temp = String.format(getResources().getString(R.string.result_high_carbon),
                     String.valueOf(mDiet.getUserDietEmission()),
                     String.valueOf(mAverageCarbon));
             mResultText.setText(temp);
@@ -107,9 +107,8 @@ public class ResultFragment extends Fragment {
             }
         }
 
-        if (mUserCarbon == 0) {
-            pieEntries.add(new PieEntry(20000f, "Blood"));
-        }
+        if (mUserCarbon == 0)
+            pieEntries.add(new PieEntry(20000f, "Blood!"));
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -130,7 +129,6 @@ public class ResultFragment extends Fragment {
     }
 
     private void setupBarChart(BarChart chart) {
-
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
         entries.add(new BarEntry(1, mAverageCarbon));
@@ -149,8 +147,5 @@ public class ResultFragment extends Fragment {
         chart.setData(suggestionData);
         chart.animateY(1200);
         chart.invalidate();
-
     }
-
-
 }
