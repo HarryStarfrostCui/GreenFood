@@ -242,48 +242,56 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
                 // photo upload starts here
-                mFinalImage.setDrawingCacheEnabled(true);
-                mFinalImage.buildDrawingCache();
-                Bitmap bitmap = ((BitmapDrawable) mFinalImage.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] data = baos.toByteArray();
+                Bitmap tempFinalImage = ((BitmapDrawable)mFinalImage.getDrawable()).getBitmap();
+                Bitmap tempDrawable = ((BitmapDrawable)getResources().getDrawable(R.drawable.android)).getBitmap();
+                if(!tempFinalImage.sameAs(tempDrawable)){
+                    mFinalImage.setDrawingCacheEnabled(true);
+                    mFinalImage.buildDrawingCache();
+                    Bitmap bitmap = ((BitmapDrawable) mFinalImage.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
 
-                UploadTask uploadTask = mUserUpload.putBytes(data);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                    }
-                });
-
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
+                    UploadTask uploadTask = mUserUpload.putBytes(data);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
                         }
-                        // Continue with the task to get the download URL
-                        return mUserUpload.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            nMeal.child("imageLink").setValue(downloadUri.toString());
-
-                        } else {
-                            // Handle failures
-                            // ...
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                         }
-                    }
-                });
+                    });
+
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+                            // Continue with the task to get the download URL
+                            return mUserUpload.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                nMeal.child("imageLink").setValue(downloadUri.toString());
+
+                            } else {
+                                // Handle failures
+                                // ...
+                            }
+                        }
+                    });
+                }else{
+                    // if no image is uploaded, the default no image is chosen
+                    nMeal.child("imageLink").setValue("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2Fandroid.png?alt=media&token=a729a2b4-dea7-4b76-8e81-8188e1b2fa1d");
+                }
+
                 // RETRIEVE IMAGE
                 /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2F8muF1KY8cmXSLaX2rndGH3IP1143%241542927527944.jpg?alt=media&token=da7f1146-fd7b-44d5-acdb-962e587063a3");
                 GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
@@ -310,6 +318,7 @@ public class RestaurantFragment extends Fragment {
                 mFinalImage.setImageBitmap(imageFromGallery);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (NullPointerException e){
