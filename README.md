@@ -24,3 +24,9 @@ my_meals:
 
 view_meals:
 ![alt text](img/view_meals.png)
+
+log_in:
+![alt text](img/log_in.png)
+
+sign_up:
+![alt text](img/sign_up.png)
