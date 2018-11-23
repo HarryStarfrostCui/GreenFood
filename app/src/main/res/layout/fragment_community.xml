@@ -76,7 +76,7 @@
 
                 <Spinner
                     android:id="@+id/community_cityList"
-                    android:layout_width="150dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:entries="@array/city_array" />
