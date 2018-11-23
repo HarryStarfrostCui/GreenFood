@@ -103,6 +103,7 @@
         Here\'s how we estimate the greenhouse gas emissions are split from the production of
         various food groups.
     </string>
+    <string name="result_toggle_numbers">Toggle Numbers!</string>
 
     <string name="suggestion_greeting">
         <b>Hey! Listen!</b>\nWanna help save the planet?\n<small>(We had a group decision...

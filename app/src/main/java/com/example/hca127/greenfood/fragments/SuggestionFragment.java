@@ -133,7 +133,7 @@ public class SuggestionFragment extends Fragment {
     private void setupBarChart(BarChart chart, float suggestedDiet) {
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
-        entries.add(new BarEntry(1, 1500f));
+        entries.add(new BarEntry(1, 1517.5f));
         if (suggestedDiet != mDiet.getUserDietEmission()) {
             entries.add(new BarEntry(2, suggestedDiet));
         }
@@ -141,6 +141,7 @@ public class SuggestionFragment extends Fragment {
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barDataSet.setValueTextSize(12f);
 
         BarData suggestionData = new BarData(barDataSet);
         chart.getXAxis().setEnabled(false);
