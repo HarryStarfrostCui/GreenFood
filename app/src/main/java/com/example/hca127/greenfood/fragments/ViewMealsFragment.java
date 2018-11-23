@@ -49,9 +49,13 @@ public class ViewMealsFragment extends Fragment implements AdapterView.OnItemSel
     private ArrayList<ImageView> mMealImages;
     private ArrayList<ImageView> mDescriptionBoxes;
     private Spinner mCityFilter;
+    private Spinner mIngredientFilter;
     private Button mMyMeals;
     private DatabaseReference mDatabase;
     private FirebaseStorage mCloudStorage;
+
+    private int mIngredientIndex;
+    private int mCityIndex;
 
     @Nullable
     @Override
@@ -101,20 +105,38 @@ public class ViewMealsFragment extends Fragment implements AdapterView.OnItemSel
         mCityFilter = view.findViewById(R.id.city_filter);
         mCityFilter.setOnItemSelectedListener(this);
         mCityFilter.setSelection(0);
+        mIngredientFilter = view.findViewById(R.id.ingredient_filter);
+        mIngredientFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mIngredientIndex = position;
+                updateView();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return view;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mCityIndex = position;
+        updateView();
+    }
+
+    private void updateView(){
         Query mealList;
         final String[] Ingredients = getActivity().getResources().getStringArray(R.array.ingredient_name);
         final String[] Citys = getActivity().getResources().getStringArray(R.array.city_array);
 
-        if(position==0){
+        if(mCityIndex==0){
             mealList= mDatabase;
         }else {
-            mealList= mDatabase.orderByChild("city index").equalTo(position);
+            mealList= mDatabase.orderByChild("city index").equalTo(mCityIndex);
         }
         mealList.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -123,9 +145,11 @@ public class ViewMealsFragment extends Fragment implements AdapterView.OnItemSel
                 resetViews();
                 ArrayList<DataSnapshot> mealOrderedList = new ArrayList<>();
                 for(DataSnapshot meal : mealChildren){
-                    mealOrderedList.add(meal);
-                    if(mealOrderedList.size()>5){
-                        mealOrderedList.remove(0);
+                    if(mIngredientIndex ==0 || (long)meal.child("protein").getValue() == mIngredientIndex-1) {
+                        mealOrderedList.add(meal);
+                        if (mealOrderedList.size() > 5) {
+                            mealOrderedList.remove(0);
+                        }
                     }
                 }
                 ArrayList<DataSnapshot> mealRevertedList = new ArrayList<>();

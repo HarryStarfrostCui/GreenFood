@@ -41,6 +41,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -59,6 +60,26 @@
             android:entries="@array/city_array"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_meal_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Ingredient filter:"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/ingredient_filter"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Spinner
+            android:id="@+id/ingredient_filter"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:entries="@array/ingredient_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_filter" />
 
 
         <TextView
@@ -88,7 +109,7 @@
             app:layout_constraintBottom_toTopOf="@+id/meal_2_description_box"
             app:layout_constraintEnd_toStartOf="@+id/meal_1_description_box"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_meal_title" />
+            app:layout_constraintTop_toBottomOf="@id/ingredient_filter" />
 
         <TextView
             android:id="@+id/meal_1_location"
@@ -114,7 +135,7 @@
             android:background="@drawable/box"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/meal_1_image"
-            app:layout_constraintTop_toBottomOf="@+id/city_filter">
+            app:layout_constraintTop_toBottomOf="@+id/ingredient_filter">
         </ImageView>
 
         <TextView
