@@ -25,6 +25,7 @@ import com.example.hca127.greenfood.fragments.ProfileFragment;
 import com.example.hca127.greenfood.fragments.RestaurantFragment;
 import com.example.hca127.greenfood.fragments.ResultFragment;
 import com.example.hca127.greenfood.fragments.SuggestionFragment;
+import com.example.hca127.greenfood.fragments.ViewMealsFragment;
 import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.Emission;
 import com.example.hca127.greenfood.objects.LocalUser;
@@ -204,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new RestaurantFragment()).addToBackStack(null).commit();
+                            new ViewMealsFragment()).addToBackStack(null).commit();
                 }
                 break;
             case R.id.menu_result:
