@@ -1,8 +1,6 @@
 package com.example.hca127.greenfood.fragments;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,23 +8,19 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +28,6 @@ import com.example.hca127.greenfood.GlideApp;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.LocalUser;
-import com.example.hca127.greenfood.objects.Meal;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,18 +43,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 
 
 public class RestaurantFragment extends Fragment {
@@ -274,48 +258,56 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
                 nMeal.child("imageLink").setValue("");
                 // photo upload starts here
-                mFinalImage.setDrawingCacheEnabled(true);
-                mFinalImage.buildDrawingCache();
-                Bitmap bitmap = ((BitmapDrawable) mFinalImage.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] data = baos.toByteArray();
+                Bitmap tempFinalImage = ((BitmapDrawable)mFinalImage.getDrawable()).getBitmap();
+                Bitmap tempDrawable = ((BitmapDrawable)getResources().getDrawable(R.drawable.android)).getBitmap();
+                if(!tempFinalImage.sameAs(tempDrawable)){
+                    mFinalImage.setDrawingCacheEnabled(true);
+                    mFinalImage.buildDrawingCache();
+                    Bitmap bitmap = ((BitmapDrawable) mFinalImage.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
 
-                UploadTask uploadTask = mUserUpload.putBytes(data);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                    }
-                });
-
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
+                    UploadTask uploadTask = mUserUpload.putBytes(data);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
                         }
-                        // Continue with the task to get the download URL
-                        return mUserUpload.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            nMeal.child("imageLink").setValue(downloadUri.toString());
-
-                        } else {
-                            // Handle failures
-                            // ...
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                         }
-                    }
-                });
+                    });
+
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+                            // Continue with the task to get the download URL
+                            return mUserUpload.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                nMeal.child("imageLink").setValue(downloadUri.toString());
+
+                            } else {
+                                // Handle failures
+                                // ...
+                            }
+                        }
+                    });
+                }else{
+                    // if no image is uploaded, the default no image is chosen
+                    nMeal.child("imageLink").setValue("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2Fandroid.png?alt=media&token=a729a2b4-dea7-4b76-8e81-8188e1b2fa1d");
+                }
+
                 // RETRIEVE IMAGE
                 /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2F8muF1KY8cmXSLaX2rndGH3IP1143%241542927527944.jpg?alt=media&token=da7f1146-fd7b-44d5-acdb-962e587063a3");
                 GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
@@ -342,6 +334,7 @@ public class RestaurantFragment extends Fragment {
                 mFinalImage.setImageBitmap(imageFromGallery);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (NullPointerException e){

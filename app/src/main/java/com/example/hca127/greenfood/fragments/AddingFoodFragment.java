@@ -14,7 +14,6 @@ import android.widget.RadioGroup;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
-import com.example.hca127.greenfood.objects.Emission;
 import com.example.hca127.greenfood.objects.LocalUser;
 import com.google.android.gms.common.data.DataBufferObserverSet;
 import com.google.firebase.database.DatabaseReference;
@@ -97,18 +96,9 @@ public class AddingFoodFragment extends Fragment {
                     Float.parseFloat(level));
         }
         ((MainActivity)getActivity()).setLocalUserDiet(mDiet);
-        saveUserEmission();
+
     }
 
-    public void saveUserEmission(){
-        ArrayList<Emission> mArr = ((MainActivity)getActivity()).getLocalUser().getEmissions();
-        mUserData.child("emissions").child("NofEmission").setValue(mArr.size());
-        for(int i = 0; i<mArr.size(); i++){
-            mUserData.child("emissions").child(String.valueOf(i))
-                    .child("date").setValue(mArr.get(i).getStrdate());
-            mUserData.child("emissions").child(String.valueOf(i))
-                    .child("amount").setValue(mArr.get(i).getAmount());
-        }
-    }
+
 
 }
