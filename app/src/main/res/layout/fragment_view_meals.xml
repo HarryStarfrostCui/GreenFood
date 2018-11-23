@@ -118,6 +118,7 @@
         </ImageView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_1_title"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -132,6 +133,7 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_1_description"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -146,19 +148,22 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_1_ingredient"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/main_ingredient"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/meal_1_description_box"
             app:layout_constraintEnd_toEndOf="@id/meal_1_description_box"
             app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toStartOf="@id/meal_1_description_box"/>
 
         <ImageView
+            android:textColor="#000000"
             android:id="@+id/meal_2_description_box"
             android:layout_width="240dp"
             android:layout_height="150dp"
@@ -171,6 +176,7 @@
         </ImageView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_2_title"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -185,6 +191,7 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_2_description"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -199,13 +206,15 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_2_ingredient"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/main_ingredient"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/meal_2_description_box"
             app:layout_constraintEnd_toEndOf="@id/meal_2_description_box"
             app:layout_constraintStart_toStartOf="@id/meal_2_description_box"/>
@@ -225,6 +234,7 @@
             app:layout_constraintBottom_toTopOf="@+id/meal_2_image" />
 
         <ImageView
+            android:textColor="#000000"
             android:id="@+id/meal_2_image"
             android:layout_width="100dp"
             android:layout_height="101dp"
@@ -297,6 +307,7 @@
             app:layout_constraintTop_toBottomOf="@+id/meal_3_image" />
 
         <ImageView
+            android:textColor="#000000"
             android:id="@+id/meal_3_description_box"
             android:layout_width="240dp"
             android:layout_height="150dp"
@@ -310,6 +321,7 @@
         </ImageView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_3_title"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -324,6 +336,7 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_3_description"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -338,13 +351,15 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_3_ingredient"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/main_ingredient"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/meal_3_description_box"
             app:layout_constraintEnd_toEndOf="@id/meal_3_description_box"
             app:layout_constraintStart_toStartOf="@id/meal_3_description_box"/>
@@ -363,6 +378,7 @@
         </ImageView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_4_title"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -377,6 +393,7 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_4_description"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -391,13 +408,15 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_4_ingredient"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/main_ingredient"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/meal_4_description_box"
             app:layout_constraintEnd_toEndOf="@id/meal_4_description_box"
             app:layout_constraintStart_toStartOf="@id/meal_4_description_box"/>
@@ -502,6 +521,7 @@
         </ImageView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_5_title"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -516,6 +536,7 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_5_description"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -530,13 +551,15 @@
         </TextView>
 
         <TextView
+            android:textColor="#000000"
             android:id="@+id/meal_5_ingredient"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="@string/main_ingredient"
-            android:textSize="15sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/meal_5_description_box"
             app:layout_constraintEnd_toEndOf="@id/meal_5_description_box"
             app:layout_constraintStart_toStartOf="@id/meal_5_description_box"/>

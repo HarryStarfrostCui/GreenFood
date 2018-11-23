@@ -52,8 +52,8 @@ public class LocalUser implements Serializable { //
     public void setUserEmail(String userEmail) {        mUserEmail = userEmail;    }
     public void setPledge(double pledge) {       mPledge = pledge;    }
     public void setPledgeByIndex(int index){
-        double temp = mCurrentDiet.getUserDietEmission()/9 - 0.00001;
-        mPledge = index*temp;
+        double temp = mCurrentDiet.getUserDietEmission()/9;
+        mPledge = index*temp - 0.00001;
     }
     public void setCity(int index) {        mCityIndex = index;    }
     public void setProfileIcon(int newIconIndex){   mProfileIconIndex = newIconIndex;     }
