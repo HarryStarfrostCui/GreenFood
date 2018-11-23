@@ -153,9 +153,6 @@ public class DietTest {
         testDiet.addNewIngredient("two", 20, 10, 2);
         testDiet.addNewIngredient("two", 30, 10, 2);
         assertEquals(400f, testDiet.getUserDietEmission(), 0.001);
-
-
-
     }
 
 

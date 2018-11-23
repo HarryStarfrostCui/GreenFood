@@ -106,4 +106,11 @@ public class LocalUserTest {
         testUser.setCurrentDiet(testDietFor);
         assertEquals(1517.5f, testUser.getCurrentDiet().getUserDietEmission(), 0.001f);
     }
+
+    @Test
+    public void testPledgeByIndex() {
+        testUser.setPledgeByIndex(1);
+        assertEquals(168.611f, testUser.getPledge(), 0.001f);
+
+    }
 }
