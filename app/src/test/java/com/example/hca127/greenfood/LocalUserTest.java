@@ -91,4 +91,26 @@ public class LocalUserTest {
         testUser.setCity(1);
         assertEquals(1, testUser.getCity());
     }
+
+    @Test
+    public void userIcon() {
+        testUser.setProfileIcon(2);
+        assertEquals(2, testUser.getProfileIcon());
+        testUser.setProfileIcon(3);
+        assertEquals(3, testUser.getProfileIcon());
+    }
+
+    @Test
+    public void setCurrentDiet() {
+        Diet testDietFor = new Diet(true);
+        testUser.setCurrentDiet(testDietFor);
+        assertEquals(1517.5f, testUser.getCurrentDiet().getUserDietEmission(), 0.001f);
+    }
+
+    @Test
+    public void testPledgeByIndex() {
+        testUser.setPledgeByIndex(1);
+        assertEquals(168.611f, testUser.getPledge(), 0.001f);
+
+    }
 }

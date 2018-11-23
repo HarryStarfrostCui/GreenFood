@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
-import com.example.hca127.greenfood.objects.Emission;
 import com.example.hca127.greenfood.objects.LocalUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -104,16 +103,7 @@ public class LoginFragment extends Fragment {
 
                     mLocalUser.setCity((int)(long) dataSnapshot.child("city").getValue());
                     mLocalUser.setProfileIcon((int)(long)dataSnapshot.child("icon_index").getValue());
-                    int n = (int)(long)dataSnapshot.child("emissions").child("NofEmission").getValue();
-                    ArrayList<Emission> nEmission = new ArrayList<>();
-                    for(int i = 0; i<n; i++){
-                        String tempDate = (String) dataSnapshot.child("emissions")
-                                .child(String.valueOf(i)).child("date").getValue();
-                        double tempAmount = (double) dataSnapshot.child("emissions")
-                                .child(String.valueOf(i)).child("amount").getValue();
-                        nEmission.add(new Emission(tempDate,tempAmount));
-                    }
-                    mLocalUser.setEmission(nEmission);
+
                     ((MainActivity)getActivity()).setLocalUser(mLocalUser);
                 }
                 @Override
