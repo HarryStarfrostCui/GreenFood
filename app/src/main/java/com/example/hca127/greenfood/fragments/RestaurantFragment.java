@@ -211,7 +211,7 @@ public class RestaurantFragment extends Fragment {
                 mMainIngredient.setSelection(0);
                 mCity.setSelection(0);
                 mFinalImage.setImageDrawable(mDrawable);
-                updateMeal();
+                deleteMeal();
                 lockAll();
             }
         });
@@ -256,14 +256,19 @@ public class RestaurantFragment extends Fragment {
                 Long currentTime = Calendar.getInstance().getTimeInMillis();
                 String fileName = mLocalUser.getUserId() + "$" + currentTime;
                 final StorageReference mUserUpload = mImagesReference.child(fileName + ".jpg");
-
-                final DatabaseReference nMeal = mDatabase.child("meals").push();
-                mLocalUser.addMeal(nMeal.getKey());
-                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
-                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                final DatabaseReference nMeal;
+                if(mMealReference.get(mCurrentMealIndex).equals("")) {
+                    nMeal = mDatabase.child("meals").push();
+                    mMealReference.set(mCurrentMealIndex, nMeal.getKey());
+                }else{
+                    nMeal = mDatabase.child("meals")
+                            .child(mMealReference.get(mCurrentMealIndex));
+                }
+                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal")
+                        .child(String.valueOf(mCurrentMealIndex)).setValue(nMeal.getKey());
                 nMeal.child("meal name").setValue(mMealName.getText().toString());
                 nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
-                nMeal.child("protein").child("1").setValue(mMainIngredient.getSelectedItemPosition());
+                nMeal.child("protein").setValue(mMainIngredient.getSelectedItemPosition());
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
                 // photo upload starts here
@@ -410,7 +415,10 @@ public class RestaurantFragment extends Fragment {
                     mCity.setSelection((int)(long)dataSnapshot.child("city index").getValue());
                     String imageLink = (String)dataSnapshot.child("imageLink").getValue();
                     if(!imageLink.equals("")){
-
+                        /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
+                        GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
+                                .load(httpsReference)
+                                .into(mFinalImage);*/
                     }else {
                         mFinalImage.setImageURI(mUri);
                     }
@@ -420,7 +428,7 @@ public class RestaurantFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }else {
@@ -453,15 +461,10 @@ public class RestaurantFragment extends Fragment {
         }
     }
 
-    public void updateMeal(){
-        DatabaseReference nMeal = mDatabase.child("meals").push();
-        mLocalUser.addMeal(nMeal.getKey());
-        mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
-        ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-        nMeal.child("meal name").setValue(mMealName.getText().toString());
-        nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
-        nMeal.child("MainIngredient").child("1").setValue(mMainIngredient.getSelectedItemPosition());
-        nMeal.child("description").setValue(mMealDescription.getText().toString());
-        nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
+    public void deleteMeal(){
+        mDatabase.child("meals").child(mMealReference.get(mCurrentMealIndex)).removeValue();
+        mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").
+                child(String.valueOf(mCurrentMealIndex)).setValue("");
+
     }
 }
