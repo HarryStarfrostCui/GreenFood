@@ -40,22 +40,29 @@
                 style="@style/NiceButton"/>
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/city_filter"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/city_filter"
+            app:layout_constraintTop_toBottomOf="@+id/view_meal_title" />
+
         <Spinner
             android:id="@+id/city_filter"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:entries="@array/city_array"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_meal_title" />
 
 
         <TextView
-            android:id="@+id/meal_1_user"
+            android:id="@+id/meal_1_restaurant"
             android:layout_width="130dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
@@ -205,7 +212,7 @@
             app:layout_constraintStart_toStartOf="@id/meal_2_description_box"/>
 
         <TextView
-            android:id="@+id/meal_2_user"
+            android:id="@+id/meal_2_restaurant"
             android:layout_width="130dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
@@ -249,7 +256,7 @@
             app:layout_constraintTop_toBottomOf="@+id/meal_2_image" />
 
         <TextView
-            android:id="@+id/meal_3_user"
+            android:id="@+id/meal_3_restaurant"
             android:layout_width="130dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
@@ -399,7 +406,7 @@
             app:layout_constraintStart_toStartOf="@id/meal_4_description_box"/>
 
         <TextView
-            android:id="@+id/meal_4_user"
+            android:id="@+id/meal_4_restaurant"
             android:layout_width="130dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
@@ -441,7 +448,7 @@
             app:layout_constraintTop_toBottomOf="@+id/meal_4_image" />
 
         <TextView
-            android:id="@+id/meal_5_user"
+            android:id="@+id/meal_5_restaurant"
             android:layout_width="130dp"
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
