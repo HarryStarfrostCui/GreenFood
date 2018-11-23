@@ -54,6 +54,7 @@ public class SuggestionFragment extends Fragment {
         mPledgeEmission = mDiet.getUserDietEmission();
         mSuggestionCarbonSaving = view.findViewById(R.id.suggestionCarbonSaving);
         mSuggestionTreeOffset = view.findViewById(R.id.suggestionTreeOffset);
+        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
 
         mPledgeButton = view.findViewById(R.id.pledge_button);
         mPledgeButton.setOnClickListener(new View.OnClickListener() {
@@ -70,10 +71,6 @@ public class SuggestionFragment extends Fragment {
             }
         });
         shareDialog = new ShareDialog(this);
-
-        mReduceSuggestionText = view.findViewById(R.id.reduceSuggestionText);
-
-
 
         mSuggestionChart = view.findViewById(R.id.suggestionChart);
         setupBarChart(mSuggestionChart, mPledgeEmission);
@@ -123,10 +120,6 @@ public class SuggestionFragment extends Fragment {
             }
         });
 
-
-
-
-
         return view;
     }
 
@@ -137,7 +130,6 @@ public class SuggestionFragment extends Fragment {
         if (suggestedDiet != mDiet.getUserDietEmission()) {
             entries.add(new BarEntry(2, suggestedDiet));
         }
-
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -171,8 +163,5 @@ public class SuggestionFragment extends Fragment {
                 String.valueOf((int)emissionSaving), String.valueOf((int)carbonSaved)) ;
         mSuggestionCarbonSaving.setText(tempCarbon);
     }
-
-
-
 }
 
