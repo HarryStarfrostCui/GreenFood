@@ -3,6 +3,7 @@ package com.example.hca127.greenfood.fragments;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -12,9 +13,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class CommunityFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -41,6 +45,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
     private ProgressBar mProgressBar;
     private ArrayList<TextView> mOtherPledges;
     private ArrayList<ImageView> mOtherIcons;
+    private ScrollView mScroll;
 
     @Nullable
     @Override
@@ -51,18 +56,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         mReducedDisplay = (TextView)view.findViewById(R.id.community_pledge_total);
         mTreesDisplay = (TextView)view.findViewById(R.id.community_pledge_trees);
         mAverageDisplay = (TextView)view.findViewById(R.id.community_pledge_average);
-
-        Timer timer = new Timer();
-        timer.
-
-        for(int i = 0; i < 10000; i++){
-            mAverageDisplay.setTextColor(Color.RED);
-            mAverageDisplay.setTextColor(Color.YELLOW);
-            mAverageDisplay.setTextColor(Color.GREEN);
-            mAverageDisplay.setTextColor(Color.CYAN);
-            mAverageDisplay.setTextColor(Color.BLUE);
-            mAverageDisplay.setTextColor(Color.MAGENTA);
-        }
+        mScroll = view.findViewById(R.id.scroll);
 
         mOtherPledges = new ArrayList<>();
         mOtherPledges.add((TextView)view.findViewById(R.id.otherPledge0));
@@ -115,8 +109,7 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
             userPledges= mDatabase.child("users").orderByChild("pledge");
         }else {
             mCurrentCity = Integer.toString(position);
-            userPledges= mDatabase.child("users").orderByChild("city").equalTo(position)
-                    .orderByChild("pledge");
+            userPledges= mDatabase.child("users").orderByChild("city").equalTo(position);
         }
 
         DatabaseReference community = mDatabase.child("Community pledge").child(mCurrentCity);
