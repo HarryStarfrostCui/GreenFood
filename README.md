@@ -18,3 +18,9 @@ suggestion:
 
 user_profile:
 ![alt text](img/user_profile.png)
+
+my_meals:
+![alt text](img/my_meals.png)
+
+view_meals:
+![alt text](img/view_meals.png)
