@@ -30,3 +30,6 @@ log_in:
 
 sign_up:
 ![alt text](img/sign_up.png)
+
+pledge:
+![alt text](img/pledge.png)
