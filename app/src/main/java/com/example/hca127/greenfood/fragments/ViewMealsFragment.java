@@ -124,14 +124,14 @@ public class ViewMealsFragment extends Fragment implements AdapterView.OnItemSel
                 resetViews();
                 for(DataSnapshot meal : mealChildren){
                     ShowView(i);
-                    mMealRestaurants.get(i).setText((String) dataSnapshot.child("restaurant").getValue());
-                    mMealTitles.get(i).setText((String) dataSnapshot.child("meal name").getValue());
-                    mMealDescriptions.get(i).setText((String) dataSnapshot.child("description").getValue());
+                    mMealRestaurants.get(i).setText((String) meal.child("restaurant").getValue());
+                    mMealTitles.get(i).setText((String) meal.child("meal name").getValue());
+                    mMealDescriptions.get(i).setText((String) meal.child("description").getValue());
                     mMealIngredients.get(i).setText(Ingredients[
-                            (int)(long) dataSnapshot.child("protein").getValue()]);
+                            (int)(long) meal.child("protein").getValue()]);
                     mMealLocations.get(i).setText(Citys[
-                            (int) (long) dataSnapshot.child("city index").getValue()]);
-                    String imageLink = (String) dataSnapshot.child("imageLink").getValue();
+                            (int) (long) meal.child("city index").getValue()]);
+                    String imageLink = (String) meal.child("imageLink").getValue();
                     if (imageLink == null || !imageLink.equals("")) {
                         StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
                         GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
