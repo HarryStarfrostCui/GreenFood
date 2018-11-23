@@ -195,7 +195,7 @@
     </string-array>
 
     <string-array name="city_array">
-        <item>lower Mainland</item>
+        <item>Lower Mainland</item>
         <item>Abbotsford</item>
         <item>Burnaby</item>
         <item>Coquitlam</item>
@@ -215,7 +215,7 @@
     <string name="total_pledged_text">Total CO2 Reduction:</string>
     <string name="total_pledged_number">240</string>
     <string name="our_community">Our Community</string>
-    <string name="trees_planted_text"> Trees Planted:</string>
+    <string name="trees_planted_text"> = Trees Planted:</string>
     <string name="trees_planted_number">20</string>
     <string name="avg_pledged_text">Average Amount Pledged:</string>
     <string name="avg_pledged_number">20</string>
