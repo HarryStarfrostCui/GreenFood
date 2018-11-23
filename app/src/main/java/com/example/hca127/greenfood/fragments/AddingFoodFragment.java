@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,10 @@ import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
 import com.example.hca127.greenfood.objects.LocalUser;
-import com.google.android.gms.common.data.DataBufferObserverSet;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class AddingFoodFragment extends Fragment {
 
@@ -59,7 +54,7 @@ public class AddingFoodFragment extends Fragment {
             }
         });
 
-        int[] RadioId={
+        int[] RadioId = {
                 R.id.beefRadioGroup, R.id.lambRadioGroup, R.id.chickenRadioGroup,
                 R.id.fishRadioGroup, R.id.porkRadioGroup, R.id.eggRadioGroup,
                 R.id.vegRadioGroup, R.id.breadRadioGroup
@@ -70,7 +65,7 @@ public class AddingFoodFragment extends Fragment {
                 R.id.veggieRadio2, R.id.breadRadio2
         };
 
-        for(int i = 0; i<RadioId.length; i++){
+        for(int i = 0; i<RadioId.length; i++) {
             RadioGroup tempGroup = (RadioGroup) view.findViewById(RadioId[i]);
             mRadioGroups.add(tempGroup);
             tempGroup.check(RadioCheck[i]);
@@ -87,7 +82,7 @@ public class AddingFoodFragment extends Fragment {
         ArrayList<String> mCarbonCoefficient = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.carbon_coefficient)));
         ArrayList<String> mAverageConsumption = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.annual_average_consumption)));
 
-        for(int i = 0; i<mRadioGroups.size(); i++){
+        for (int i = 0; i<mRadioGroups.size(); i++) {
             mRadioChoices.add(mRadioGroups.get(i).getCheckedRadioButtonId());
             choice = getResources().getResourceEntryName(mRadioChoices.get(i));
             level = choice.substring( choice.length()-1, choice.length());
@@ -96,9 +91,5 @@ public class AddingFoodFragment extends Fragment {
                     Float.parseFloat(level));
         }
         ((MainActivity)getActivity()).setLocalUserDiet(mDiet);
-
     }
-
-
-
 }

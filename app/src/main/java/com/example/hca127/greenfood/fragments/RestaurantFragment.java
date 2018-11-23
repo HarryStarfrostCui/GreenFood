@@ -50,29 +50,12 @@ import java.util.Calendar;
 
 
 public class RestaurantFragment extends Fragment {
-    private Button mMealOne;
-    private Button mMealTwo;
-    private Button mMealThree;
-    private TextView mRestaurantTitle;
-    private EditText mRestaurantName;
-    private EditText mMealName;
-    private EditText mMealDescription;
-    private TextView mDescriptionText;
-    private Spinner mMainIngredient;
-    private Spinner mCity;
-    private ImageView mSaveButton;
-    private TextView mAddPhotoText;
-    private ImageView mEditMeal;
-    private ImageView mGalleryButton;
-    private ImageView mCameraButton;
-    private ImageView mResetButton;
-    private ImageView mFinalImage;
-    private ImageView mSpeechBubble;
-    private TextView mSpeechBubbleText;
+    private Button mMealOne, mMealTwo, mMealThree;
+    private TextView mRestaurantTitle, mDescriptionText, mAddPhotoText, mSpeechBubbleText, mDeleteMealButton;
+    private EditText mRestaurantName, mMealName, mMealDescription;
+    private Spinner mMainIngredient, mCity;
+    private ImageView mSaveButton, mEditMeal, mGalleryButton, mCameraButton, mResetButton, mFinalImage, mSpeechBubble;
     private Drawable mDrawable;
-    private Button mDeleteMealButton;
-
-
     private static final int mGetFromGallery = 0;
     private static final int mCameraRequest = 1;
     private String mCameraFile;
@@ -82,7 +65,6 @@ public class RestaurantFragment extends Fragment {
     private FirebaseStorage mCloudStorage;
     private StorageReference mStorageReference;
     private StorageReference mImagesReference;
-
     private ArrayList<String> mMealReference;
     private int mCurrentMealIndex;
 
@@ -135,10 +117,7 @@ public class RestaurantFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
-
         });
-
-
         lockAll();
         checkPhoto();
 
@@ -214,7 +193,6 @@ public class RestaurantFragment extends Fragment {
         mCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 while (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED){
                     String[] PERMISSIONS = {android.Manifest.permission.CAMERA};
@@ -272,22 +250,20 @@ public class RestaurantFragment extends Fragment {
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            // Handle unsuccessful uploads
+
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+
                         }
                     });
-
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                             if (!task.isSuccessful()) {
                                 throw task.getException();
                             }
-                            // Continue with the task to get the download URL
                             return mUserUpload.getDownloadUrl();
                         }
                     }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -298,8 +274,7 @@ public class RestaurantFragment extends Fragment {
                                 nMeal.child("imageLink").setValue(downloadUri.toString());
 
                             } else {
-                                // Handle failures
-                                // ...
+
                             }
                         }
                     });
@@ -307,13 +282,6 @@ public class RestaurantFragment extends Fragment {
                     // if no image is uploaded, the default no image is chosen
                     nMeal.child("imageLink").setValue("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2Fandroid.png?alt=media&token=a729a2b4-dea7-4b76-8e81-8188e1b2fa1d");
                 }
-
-                // RETRIEVE IMAGE
-                /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/greenfood-a5dd0.appspot.com/o/images%2F8muF1KY8cmXSLaX2rndGH3IP1143%241542927527944.jpg?alt=media&token=da7f1146-fd7b-44d5-acdb-962e587063a3");
-                GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
-                        .load(httpsReference)
-                        .into(mFinalImage);
-                 */
                 lockAll();
             }
         });
@@ -324,9 +292,6 @@ public class RestaurantFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-        //Detects request codes
         if(requestCode==mGetFromGallery) {
             try {
                 Uri selectedImage = data.getData();
@@ -334,14 +299,12 @@ public class RestaurantFragment extends Fragment {
                 mFinalImage.setImageBitmap(imageFromGallery);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (NullPointerException e){
                 e.printStackTrace();
             }
         }
-
         if(requestCode==mCameraRequest){
             try {
                 Bitmap imageFromCamera = (Bitmap) data.getExtras().get("data");
@@ -349,7 +312,6 @@ public class RestaurantFragment extends Fragment {
             } catch (NullPointerException e){
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -391,8 +353,6 @@ public class RestaurantFragment extends Fragment {
         mDeleteMealButton.setVisibility(View.VISIBLE);
     }
 
-    //TODO:
-
     public void mealViewUpdate(){
         final int[] titleIds = {
                 R.string.restaurant_title1, R.string.restaurant_title2, R.string.restaurant_title3
@@ -418,10 +378,8 @@ public class RestaurantFragment extends Fragment {
                         mFinalImage.setImageURI(mUri);
                     }
                     mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
-                    //checkPhoto();
-
+                    checkPhoto();
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
@@ -439,21 +397,40 @@ public class RestaurantFragment extends Fragment {
         }
     }
 
-
-
     public void checkPhoto(){
-        Drawable image = mFinalImage.getDrawable();
-        Drawable.ConstantState cImage = image.getConstantState();
-        Drawable.ConstantState cAndroid = mDrawable.getConstantState();
-        if(cImage.equals(cAndroid)){
-            mSpeechBubbleText.setVisibility(View.VISIBLE);
-            mSpeechBubble.setVisibility(View.VISIBLE);
-            mSpeechBubbleText.setText(R.string.why_not);
-        }
-        else{
-            mSpeechBubbleText.setVisibility(View.VISIBLE);
-            mSpeechBubble.setVisibility(View.VISIBLE);
-            mSpeechBubbleText.setText(R.string.nice_photo);
+        try{
+            Bitmap tempFinalImage = ((BitmapDrawable)mFinalImage.getDrawable()).getBitmap();
+            Bitmap tempDrawable = ((BitmapDrawable)getResources().getDrawable(R.drawable.android)).getBitmap();
+            if(tempFinalImage.sameAs(tempDrawable)) {
+                mSpeechBubbleText.setVisibility(View.VISIBLE);
+                mSpeechBubble.setVisibility(View.VISIBLE);
+                mSpeechBubbleText.setText(R.string.why_not);
+            }
+            else{
+                mSpeechBubbleText.setVisibility(View.VISIBLE);
+                mSpeechBubble.setVisibility(View.VISIBLE);
+                mSpeechBubbleText.setText(R.string.nice_photo);
+            }
+        }catch(NullPointerException e){
+            e.printStackTrace();
+            try {
+                Drawable image = mFinalImage.getDrawable();
+                Drawable.ConstantState cImage = image.getConstantState();
+                Drawable.ConstantState cAndroid = mDrawable.getConstantState();
+                if (cImage.equals(cAndroid)) {
+                    mSpeechBubbleText.setVisibility(View.VISIBLE);
+                    mSpeechBubble.setVisibility(View.VISIBLE);
+                    mSpeechBubbleText.setText(R.string.why_not);
+                } else {
+                    mSpeechBubbleText.setVisibility(View.VISIBLE);
+                    mSpeechBubble.setVisibility(View.VISIBLE);
+                    mSpeechBubbleText.setText(R.string.nice_photo);
+                }
+            }catch(NullPointerException n){
+                mSpeechBubbleText.setVisibility(View.VISIBLE);
+                mSpeechBubble.setVisibility(View.VISIBLE);
+                mSpeechBubbleText.setText(R.string.nice_photo);
+            }
         }
     }
 

@@ -6,7 +6,7 @@ import java.util.Date;
 
 /*
 *   holds a list of ingredients(food) that makes up a diet plan
-*   holds the yearly emittion of such diet and
+*   holds the yearly emission of such diet and
 *   the date of record of the diet
 */
 

@@ -75,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar,
-                R.string.Navigation_drawer_open, R.string.Navigation_drawer_close);
+                R.string.Navigation_drawer_open, R.string.Navigation_drawer_close){
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset){
+                hideKeyboard(MainActivity.this);
+            }
+        };
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
