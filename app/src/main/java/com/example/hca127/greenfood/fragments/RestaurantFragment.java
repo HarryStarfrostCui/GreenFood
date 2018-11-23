@@ -140,19 +140,19 @@ public class RestaurantFragment extends Fragment {
         userMealData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> mealList = dataSnapshot.getChildren();
-                for(DataSnapshot meal : mealList){
-                    mMealReference.add((String)meal.getValue());
+                for(int i = 0; i<3; i++){
+                    mMealReference.add((String)dataSnapshot.child(String.valueOf(i)).getValue());
                 }
+                mCurrentMealIndex = 0;
+                mMealOne.setAlpha(0.5f);
+                mealViewUpdate();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-        mCurrentMealIndex = 0;
-        mMealOne.setAlpha(0.5f);
-        mealViewUpdate();
+
 
         lockAll();
         checkPhoto();
@@ -408,22 +408,26 @@ public class RestaurantFragment extends Fragment {
             mealReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    mRestaurantName.setText((String)dataSnapshot.child("restaurant").getValue());
-                    mMealName.setText((String)dataSnapshot.child("meal name").getValue());
-                    mMealDescription.setText((String)dataSnapshot.child("description").getValue());
-                    mMainIngredient.setSelection((int)(long)dataSnapshot.child("ingredient").getValue());
-                    mCity.setSelection((int)(long)dataSnapshot.child("city index").getValue());
-                    String imageLink = (String)dataSnapshot.child("imageLink").getValue();
-                    if(!imageLink.equals("")){
-                        /*StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
-                        GlideApp.with(((MainActivity)getActivity()).getApplicationContext())
-                                .load(httpsReference)
-                                .into(mFinalImage);*/
+                    if(!dataSnapshot.exists()){
+                        Toast.makeText(getContext(),"something went wrong", Toast.LENGTH_SHORT).show();
                     }else {
-                        mFinalImage.setImageURI(mUri);
+                        mRestaurantName.setText((String) dataSnapshot.child("restaurant").getValue());
+                        mMealName.setText((String) dataSnapshot.child("meal name").getValue());
+                        mMealDescription.setText((String) dataSnapshot.child("description").getValue());
+                        mMainIngredient.setSelection((int) (long) dataSnapshot.child("protein").getValue());
+                        mCity.setSelection((int) (long) dataSnapshot.child("city index").getValue());
+                        String imageLink = (String) dataSnapshot.child("imageLink").getValue();
+                        if (!imageLink.equals("")) {
+                            StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
+                            GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
+                                    .load(httpsReference)
+                                    .into(mFinalImage);
+                        } else {
+                            mFinalImage.setImageURI(mUri);
+                        }
+                        mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
+                        checkPhoto();
                     }
-                    mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
-                    checkPhoto();
                 }
 
                 @Override
