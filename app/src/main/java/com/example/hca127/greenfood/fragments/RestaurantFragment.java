@@ -435,9 +435,12 @@ public class RestaurantFragment extends Fragment {
     }
 
     public void deleteMeal(){
-        mMealReference.set(mCurrentMealIndex,"");
-        mDatabase.child("meals").child(mMealReference.get(mCurrentMealIndex)).removeValue();
-        mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").
-                child(String.valueOf(mCurrentMealIndex)).setValue("");
+        if(!mMealReference.get(mCurrentMealIndex).equals("")) {
+            mDatabase.child("meals").child(mMealReference.get(mCurrentMealIndex)).removeValue();
+            mMealReference.set(mCurrentMealIndex, "");
+            mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").
+                    child(String.valueOf(mCurrentMealIndex)).setValue("");
+        }
+
     }
 }

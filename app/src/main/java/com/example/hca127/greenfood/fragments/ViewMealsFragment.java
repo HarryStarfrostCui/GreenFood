@@ -120,9 +120,20 @@ public class ViewMealsFragment extends Fragment implements AdapterView.OnItemSel
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> mealChildren = dataSnapshot.getChildren();
-                int i =0;
                 resetViews();
+                ArrayList<DataSnapshot> mealOrderedList = new ArrayList<>();
                 for(DataSnapshot meal : mealChildren){
+                    mealOrderedList.add(meal);
+                    if(mealOrderedList.size()>5){
+                        mealOrderedList.remove(0);
+                    }
+                }
+                ArrayList<DataSnapshot> mealRevertedList = new ArrayList<>();
+                for(int i = 0; i<mealOrderedList.size(); i++){
+                    mealRevertedList.add(mealOrderedList.get(mealOrderedList.size()-i-1));
+                }
+                int i = 0;
+                for(DataSnapshot meal : mealRevertedList){
                     ShowView(i);
                     mMealRestaurants.get(i).setText((String) meal.child("restaurant").getValue());
                     mMealTitles.get(i).setText((String) meal.child("meal name").getValue());
