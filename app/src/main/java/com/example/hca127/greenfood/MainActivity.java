@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new RestaurantFragment()).addToBackStack(null).commit();
+                            new ViewMealsFragment()).addToBackStack(null).commit();
                     hideKeyboard(this);
                 }
                 break;
