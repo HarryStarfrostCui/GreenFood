@@ -134,6 +134,9 @@ public class SignUpFragment extends Fragment {
                     emission.put("amount", mLocalUser.getEmissions().get(0).getAmount());
                     thisUser.child("emissions").child("0").setValue(emission);
                     thisUser.child("emissions").child("NofEmission").setValue(1);
+                    thisUser.child("meal").child("0").setValue("");
+                    thisUser.child("meal").child("1").setValue("");
+                    thisUser.child("meal").child("2").setValue("");
                     thisUser.child("icon_index").setValue(mLocalUser.getProfileIcon());
 
                     mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
