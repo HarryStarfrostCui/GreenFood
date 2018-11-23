@@ -143,6 +143,18 @@
         <item>Bread</item>
     </string-array>
 
+    <string-array name="ingredient_filter">
+        <item>-default-</item>
+        <item>Beef</item>
+        <item>Lamb</item>
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Pork</item>
+        <item>Eggs</item>
+        <item>Veggies</item>
+        <item>Bread</item>
+    </string-array>
+
     <string-array name="carbon_coefficient">
         <item>27.0</item> <!--beef-->
         <item>39.2</item> <!--lamb-->
