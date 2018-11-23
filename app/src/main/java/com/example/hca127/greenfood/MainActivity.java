@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ViewMealsFragment()).addToBackStack(null).commit();
+                            new RestaurantFragment()).addToBackStack(null).commit();
                 }
                 break;
             case R.id.menu_result:
