@@ -146,7 +146,7 @@
     </string>
     <string name="suggestion_trees">We\'d need to plant %s trees to offset that amount of carbon</string>
     <string name="suggestion_all_vancouver">
-        If everyone in Vancouver also saved %s, the total CO2e saved would be %s
+        If everyone in Vancouver also saved %s, the total saved would be %s of CO2e
     </string>
 
     <string name="all_vancouver">
