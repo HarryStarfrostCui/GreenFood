@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new CommunityFragment()).commit();
+                    new AddingFoodFragment()).commit();
             navigationView.setCheckedItem(R.id.menu_community);
         }
 
