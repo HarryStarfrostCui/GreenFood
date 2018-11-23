@@ -105,7 +105,7 @@ public class AddingFoodFragment extends Fragment {
         mUserData.child("emissions").child("NofEmission").setValue(mArr.size());
         for(int i = 0; i<mArr.size(); i++){
             mUserData.child("emissions").child(String.valueOf(i))
-                    .child("date").setValue(mArr.get(i).getStrdate());
+                    .child("date").setValue(mArr.get(i).getStringDate());
             mUserData.child("emissions").child(String.valueOf(i))
                     .child("amount").setValue(mArr.get(i).getAmount());
         }

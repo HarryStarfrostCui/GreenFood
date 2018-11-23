@@ -128,7 +128,7 @@ public class SignUpFragment extends Fragment {
                     thisUser.child("email").setValue(user.getEmail());
                     thisUser.child("pledge").setValue(-0.00001);
                     HashMap<String, Object> emission = new HashMap<>();
-                    emission.put("date", mLocalUser.getEmissions().get(0).getStrdate());
+                    emission.put("date", mLocalUser.getEmissions().get(0).getStringDate());
                     emission.put("amount", mLocalUser.getEmissions().get(0).getAmount());
                     thisUser.child("emissions").child("0").setValue(emission);
                     thisUser.child("emissions").child("NofEmission").setValue(1);

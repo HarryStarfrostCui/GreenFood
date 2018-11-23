@@ -5,26 +5,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Emission {
-    private String mStrdate;
+    private String mStringDate;
     private double mAmount;
 
     public Emission(double nAmount){
         Date date = new Date();
         SimpleDateFormat formatter=new SimpleDateFormat("MM dd, yyyy");
-        mStrdate = formatter.format(date);
+        mStringDate = formatter.format(date);
         mAmount = nAmount;
     }
     public Emission(String nStrDate, double nAmount){
-        mStrdate = nStrDate;
+        mStringDate = nStrDate;
         mAmount = nAmount;
     }
-    public String getStrdate() {        return mStrdate;    }
+    public String getStringDate() {        return mStringDate;    }
     public double getAmount() {        return mAmount;    }
     public Date getDate() throws ParseException {
         SimpleDateFormat formatter=new SimpleDateFormat("MM dd, yyyy");
-        return formatter.parse(mStrdate);
+        return formatter.parse(mStringDate);
     }
-    public void setmStrdate(String mStrdate) {
-        this.mStrdate = mStrdate;
+    public void setmStringDate(String mStringDate) {
+        this.mStringDate = mStringDate;
     }
 }

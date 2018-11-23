@@ -56,7 +56,7 @@ public class LocalUser implements Serializable { //
     }
     private void addEmission(double nEmission){
         Emission temp = new Emission(nEmission);
-        if(temp.getStrdate().equals(mEmissions.get(mEmissions.size()-1).getStrdate())){
+        if(temp.getStringDate().equals(mEmissions.get(mEmissions.size()-1).getStringDate())){
             mEmissions.set(mEmissions.size()-1, temp);
         }else {
             mEmissions.add(temp);
