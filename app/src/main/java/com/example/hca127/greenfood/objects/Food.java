@@ -6,7 +6,7 @@ import java.io.Serializable;
 *   Food ingredient class
 *   holds:
 *   ingredient names
-*   carbon emittion coefficient
+*   carbon emission coefficient
 *   average consumption in canada
 *   user's consumption
 *   generated suggestion amounts
