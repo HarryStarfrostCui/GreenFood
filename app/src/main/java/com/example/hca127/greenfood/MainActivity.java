@@ -236,6 +236,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mAuth.signOut();
                 mLocalUser = new LocalUser();
                 updateHeader();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new LoginFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 Toast.makeText(this, "Successfully Logged Off!",Toast.LENGTH_SHORT).show();
                 break;
 
