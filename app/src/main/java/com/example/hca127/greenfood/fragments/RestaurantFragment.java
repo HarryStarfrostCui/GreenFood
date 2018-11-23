@@ -357,6 +357,7 @@ public class RestaurantFragment extends Fragment {
         final int[] titleIds = {
                 R.string.restaurant_title1, R.string.restaurant_title2, R.string.restaurant_title3
         };
+        mFinalImage.setImageResource(R.drawable.android);
         if(mCurrentMealIndex<mMealReference.size() && !mMealReference.get(mCurrentMealIndex).equals("")){
             DatabaseReference mealReference = mDatabase.child("meals")
                     .child(mMealReference.get(mCurrentMealIndex));
