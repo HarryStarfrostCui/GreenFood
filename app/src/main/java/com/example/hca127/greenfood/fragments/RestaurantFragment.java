@@ -83,7 +83,6 @@ public class RestaurantFragment extends Fragment {
     private TextView mSpeechBubbleText;
     private Drawable mDrawable;
     private Button mDeleteMealButton;
-    private TextView mOR;
 
 
     private static final int mGetFromGallery = 0;
@@ -132,7 +131,6 @@ public class RestaurantFragment extends Fragment {
         mDrawable = getResources().getDrawable(R.drawable.android);
         mMealOne.setAlpha(0.5f);
         mealOneView();
-        mOR = view.findViewById(R.id.or_text);
 
         lockAll();
         checkPhoto();
@@ -214,16 +212,6 @@ public class RestaurantFragment extends Fragment {
                 }
 
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                Date date = new Date();
-                DateFormat dateFormat = new SimpleDateFormat("-mm-ss");
-                String newPicture = dateFormat.format(date)+".png";
-                String outPath = "/sdcard/"+newPicture;
-                File outFile = new File(outPath);
-                mCameraFile = outFile.toString();
-                Uri uriSavedImage = Uri.fromFile(outFile);
-                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                StrictMode.setVmPolicy(builder.build());
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
                 startActivityForResult(cameraIntent, mCameraRequest);
                 cameraIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
@@ -251,7 +239,7 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("meal name").setValue(mMealName.getText().toString());
                 nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
                 nMeal.child("protein").child("1").setValue(mMainIngredient.getSelectedItemPosition());
-               nMeal.child("description").setValue(mMealDescription.getText().toString());
+                nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
                 // photo upload starts here
                 mFinalImage.setDrawingCacheEnabled(true);
@@ -314,7 +302,6 @@ public class RestaurantFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-
         //Detects request codes
         if(requestCode==mGetFromGallery) {
             try {
@@ -337,7 +324,6 @@ public class RestaurantFragment extends Fragment {
             } catch (NullPointerException e){
                 e.printStackTrace();
             }
-
 
         }
     }
