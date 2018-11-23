@@ -216,11 +216,12 @@
     <string name="total_pledged_text">Total CO2 Reduction:</string>
     <string name="total_pledged_number">240</string>
     <string name="our_community">Our Community</string>
-    <string name="trees_planted_text">= Trees Planted:</string>
+    <string name="trees_planted_text"> Trees Planted:</string>
     <string name="trees_planted_number">20</string>
     <string name="avg_pledged_text">Average Amount Pledged:</string>
     <string name="avg_pledged_number">20</string>
     <string name="other_members">Others In The Community:</string>
+    <string name="kgs">KGs</string>
 
     <string name="title_activity_suggestion">SuggestionActivity</string>
     <string name="title_activity_google_sign_in">GoogleSignInActivity</string>
@@ -235,16 +236,20 @@
 
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
-    <string name="restaurant_title">My Meal</string>
+    <string name="restaurant_title1">~Meal 1~</string>
+    <string name="restaurant_title2">~Meal 2~</string>
+    <string name="restaurant_title3">~Meal 3~</string>
     <string name="restaurant_name">Restaurant Name: </string>
     <string name="meal_name">Meal Name:</string>
-    <string name="main_protein">Main Protein: </string>
+    <string name="main_ingredient">Main Ingredient: </string>
     <string name="second_ingredient">Second Ingredient: </string>
     <string name="third_ingredient">Third Ingredient: </string>
     <string name="share_location_text">Share Location? </string>
     <string name="description_text">Describe Your Meal: </string>
-    <string name="share_facebook">&#160; &#160;Share to Facebook!</string>
     <string name="add_photo">Add a Photo: </string>
+    <string name="why_not">WHY NOT ADD A PHOTO?</string>
+    <string name="nice_photo">NICE PHOTO! </string>
+    <string name="delete_meal">DELETE !</string>
 
 
     <string-array name="protein_array">
