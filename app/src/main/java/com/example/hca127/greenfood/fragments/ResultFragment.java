@@ -33,7 +33,7 @@ public class ResultFragment extends Fragment {
     private BarChart mResultBarChart;
     private TextView mResultText;
     private float mUserCarbon;
-    private float mAverageCarbon = 1500f;
+    private float mAverageCarbon = 1517.5f;
     private float mLowCarbonPercentage = 0.9f;
     private float mAverageCarbonPercentage = 1.1f;
     private Button mGetSuggestion;
@@ -56,11 +56,20 @@ public class ResultFragment extends Fragment {
         if(mUserCarbon == 0) {
             mResultText.setText(R.string.no_carbon_result);
         } else if (mUserCarbon < mAverageCarbon*mLowCarbonPercentage) {
-            mResultText.setText(R.string.low_carbon_result);
+            String temp = String.format(getResources().getString(R.string.low_carbon_result),
+                    String.valueOf(mDiet.getUserDietEmission()),
+                    String.valueOf(mAverageCarbon));
+            mResultText.setText(temp);
         } else if (mUserCarbon < mAverageCarbon*mAverageCarbonPercentage) {
-            mResultText.setText(R.string.average_carbon_result);
+            String temp = String.format(getResources().getString(R.string.average_carbon_result),
+                    String.valueOf(mDiet.getUserDietEmission()),
+                    String.valueOf(mAverageCarbon));
+            mResultText.setText(temp);
         } else {
-            mResultText.setText(R.string.high_carbon_result);
+            String temp = String.format(getResources().getString(R.string.high_carbon_result),
+                    String.valueOf(mDiet.getUserDietEmission()),
+                    String.valueOf(mAverageCarbon));
+            mResultText.setText(temp);
         }
 
         mResultPieChart = view.findViewById(R.id.resultPieChart);
@@ -86,7 +95,6 @@ public class ResultFragment extends Fragment {
                 setupPieChart(mResultPieChart);
             }
         });
-
 
         return view;
     }
@@ -125,7 +133,7 @@ public class ResultFragment extends Fragment {
 
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0, mDiet.getUserDietEmission()));
-        entries.add(new BarEntry(1, 1517.5f));
+        entries.add(new BarEntry(1, mAverageCarbon));
 
         BarDataSet barDataSet = new BarDataSet(entries, "BarDataSet");
         barDataSet.setValueTextSize(12f);
