@@ -10,10 +10,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.hca127.greenfood.GlideApp;
 import com.example.hca127.greenfood.MainActivity;
 import com.example.hca127.greenfood.R;
 import com.example.hca127.greenfood.objects.Diet;
@@ -22,80 +26,69 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
-public class ViewMealsFragment extends Fragment {
-    private TextView mMealOneUser;
-    private TextView mMealOneTitle;
-    private TextView mMealOneDescription;
-    private TextView mMealOneLocation;
-    private ImageView mMealOneImage;
-
-    private TextView mMealTwoUser;
-    private TextView mMealTwoTitle;
-    private TextView mMealTwoDescription;
-    private TextView mMealTwoLocation;
-    private ImageView mMealTwoImage;
-
-    private TextView mMealThreeUser;
-    private TextView mMealThreeTitle;
-    private TextView mMealThreeDescription;
-    private TextView mMealThreeLocation;
-    private ImageView mMealThreeImage;
-
-    private TextView mMealFourUser;
-    private TextView mMealFourTitle;
-    private TextView mMealFourDescription;
-    private TextView mMealFourLocation;
-    private ImageView mMealFourImage;
-
-    private TextView mMealFiveUser;
-    private TextView mMealFiveTitle;
-    private TextView mMealFiveDescription;
-    private TextView mMealFiveLocation;
-    private ImageView mMealFiveImage;
-
+public class ViewMealsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    private ArrayList<TextView> mMealRestaurants;
+    private ArrayList<TextView> mMealTitles;
+    private ArrayList<TextView> mMealDescriptions;
+    private ArrayList<TextView> mMealLocations;
+    private ArrayList<TextView> mMealIngredients;
+    private ArrayList<ImageView> mMealImages;
+    private ArrayList<ImageView> mDescriptionBoxes;
+    private Spinner mCityFilter;
     private Button mMyMeals;
-
+    private DatabaseReference mDatabase;
+    private FirebaseStorage mCloudStorage;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_meals, container, false);
-
-        mMealOneUser = view.findViewById(R.id.meal_1_user);
-        mMealOneTitle = view.findViewById(R.id.meal_1_title);
-        mMealOneDescription = view.findViewById(R.id.meal_1_description);
-        mMealOneLocation = view.findViewById(R.id.meal_1_location);
-        mMealOneImage = view.findViewById(R.id.meal_1_image);
-
-        mMealTwoUser = view.findViewById(R.id.meal_2_user);
-        mMealTwoTitle = view.findViewById(R.id.meal_2_title);
-        mMealTwoDescription = view.findViewById(R.id.meal_2_description);
-        mMealTwoLocation = view.findViewById(R.id.meal_2_location);
-        mMealTwoImage = view.findViewById(R.id.meal_2_image);
-
-        mMealThreeUser = view.findViewById(R.id.meal_3_user);
-        mMealThreeTitle = view.findViewById(R.id.meal_3_title);
-        mMealThreeDescription = view.findViewById(R.id.meal_3_description);
-        mMealThreeLocation = view.findViewById(R.id.meal_3_location);
-        mMealThreeImage = view.findViewById(R.id.meal_3_image);
-
-        mMealFourUser = view.findViewById(R.id.meal_4_user);
-        mMealFourTitle = view.findViewById(R.id.meal_4_title);
-        mMealFourDescription = view.findViewById(R.id.meal_4_description);
-        mMealFourLocation = view.findViewById(R.id.meal_4_location);
-        mMealFourImage = view.findViewById(R.id.meal_4_image);
-
-        mMealFiveUser = view.findViewById(R.id.meal_5_user);
-        mMealFiveTitle = view.findViewById(R.id.meal_5_title);
-        mMealFiveDescription = view.findViewById(R.id.meal_5_description);
-        mMealFiveLocation = view.findViewById(R.id.meal_5_location);
-        mMealFiveImage = view.findViewById(R.id.meal_5_image);
+        mCloudStorage = FirebaseStorage.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("meals");
+        final int[] restaurants = {R.id.meal_1_restaurant, R.id.meal_2_restaurant,
+                R.id.meal_3_restaurant, R.id.meal_4_restaurant, R.id.meal_5_restaurant};
+        final int[] title = {R.id.meal_1_title, R.id.meal_2_title,
+                R.id.meal_3_title, R.id.meal_4_title, R.id.meal_5_title};
+        final int[] description = {R.id.meal_1_description, R.id.meal_2_description,
+                R.id.meal_3_description, R.id.meal_4_description, R.id.meal_5_description};
+        final int[] location = {R.id.meal_1_location, R.id.meal_2_location,
+                R.id.meal_3_location, R.id.meal_4_location, R.id.meal_5_location};
+        final int[] ingredient = {R.id.meal_1_ingredient, R.id.meal_2_ingredient,
+                R.id.meal_3_ingredient, R.id.meal_4_ingredient, R.id.meal_5_ingredient};
+        final int[] image = {R.id.meal_1_image, R.id.meal_2_image, R.id.meal_3_image,
+                R.id.meal_4_image, R.id.meal_5_image};
+        final int[] descriptionBox = {R.id.meal_1_description_box, R.id.meal_2_description_box,
+                R.id.meal_3_description_box, R.id.meal_4_description_box, R.id.meal_5_description_box};
+        mMealTitles = new ArrayList<>();
+        mMealLocations = new ArrayList<>();
+        mMealDescriptions = new ArrayList<>();
+        mMealRestaurants = new ArrayList<>();
+        mMealIngredients = new ArrayList<>();
+        mMealImages = new ArrayList<>();
+        mDescriptionBoxes = new ArrayList<>();
+        for(int i = 0; i<title.length; i++){
+            mMealTitles.add((TextView)view.findViewById(title[i]));
+            mMealLocations.add((TextView)view.findViewById(location[i]));
+            mMealRestaurants.add((TextView)view.findViewById(restaurants[i]));
+            mMealIngredients.add((TextView)view.findViewById(ingredient[i]));
+            mMealDescriptions.add((TextView)view.findViewById(description[i]));
+            mMealImages.add((ImageView) view.findViewById(image[i]));
+            mDescriptionBoxes.add((ImageView) view.findViewById(descriptionBox[i]));
+        }
 
         mMyMeals = view.findViewById(R.id.my_meals_button);
         mMyMeals.setOnClickListener(new View.OnClickListener() {
@@ -105,9 +98,83 @@ public class ViewMealsFragment extends Fragment {
                         new RestaurantFragment()).addToBackStack(null).commit();
             }
         });
-
+        mCityFilter = view.findViewById(R.id.city_filter);
+        mCityFilter.setOnItemSelectedListener(this);
+        mCityFilter.setSelection(0);
 
         return view;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Query mealList;
+        final String[] Ingredients = getActivity().getResources().getStringArray(R.array.ingredient_name);
+        final String[] Citys = getActivity().getResources().getStringArray(R.array.city_array);
+
+        if(position==0){
+            mealList= mDatabase;
+        }else {
+            mealList= mDatabase.orderByChild("city index").equalTo(position);
+        }
+        mealList.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> mealChildren = dataSnapshot.getChildren();
+                int i =0;
+                resetViews();
+                for(DataSnapshot meal : mealChildren){
+                    ShowView(i);
+                    mMealRestaurants.get(i).setText((String) meal.child("restaurant").getValue());
+                    mMealTitles.get(i).setText((String) meal.child("meal name").getValue());
+                    mMealDescriptions.get(i).setText((String) meal.child("description").getValue());
+                    mMealIngredients.get(i).setText(Ingredients[
+                            (int)(long) meal.child("protein").getValue()]);
+                    mMealLocations.get(i).setText(Citys[
+                            (int) (long) meal.child("city index").getValue()]);
+                    String imageLink = (String) meal.child("imageLink").getValue();
+                    if (imageLink == null || !imageLink.equals("")) {
+                        StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
+                        GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
+                                .load(httpsReference)
+                                .into(mMealImages.get(i));
+                    } else {
+                        mMealImages.get(i).setImageResource(R.drawable.ic_meal);
+                    }
+                    i++;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void ShowView(int i) {
+        mMealTitles.get(i).setVisibility(View.VISIBLE);
+        mMealLocations.get(i).setVisibility(View.VISIBLE);
+        mMealRestaurants.get(i).setVisibility(View.VISIBLE);
+        mMealIngredients.get(i).setVisibility(View.VISIBLE);
+        mMealDescriptions.get(i).setVisibility(View.VISIBLE);
+        mMealImages.get(i).setVisibility(View.VISIBLE);
+        mDescriptionBoxes.get(i).setVisibility(View.VISIBLE);
+    }
+
+    private void resetViews() {
+        for(int i = 0; i<mMealTitles.size(); i++){
+            mMealTitles.get(i).setVisibility(View.GONE);
+            mMealLocations.get(i).setVisibility(View.GONE);
+            mMealRestaurants.get(i).setVisibility(View.GONE);
+            mMealIngredients.get(i).setVisibility(View.GONE);
+            mMealDescriptions.get(i).setVisibility(View.GONE);
+            mMealImages.get(i).setVisibility(View.GONE);
+            mDescriptionBoxes.get(i).setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
