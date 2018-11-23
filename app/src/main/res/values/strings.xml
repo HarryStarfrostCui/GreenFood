@@ -199,7 +199,7 @@
     </string-array>
 
     <string-array name="city_array">
-        <item>lower Mainland</item>
+        <item>Lower Mainland</item>
         <item>Abbotsford</item>
         <item>Burnaby</item>
         <item>Coquitlam</item>
@@ -219,7 +219,7 @@
     <string name="total_pledged_text">Total CO2 Reduction:</string>
     <string name="total_pledged_number">240</string>
     <string name="our_community">Our Community</string>
-    <string name="trees_planted_text"> Trees Planted:</string>
+    <string name="trees_planted_text"> = Trees Planted:</string>
     <string name="trees_planted_number">20</string>
     <string name="avg_pledged_text">Average Amount Pledged:</string>
     <string name="avg_pledged_number">20</string>
@@ -237,6 +237,7 @@
     <string name="email_prompt">Email: </string>
     <string name="request_token">729621741617-a8mmkn2ankbokmmnnoe5ur5m6f0d0ke8.apps.googleusercontent.com</string>
 
+    <string name="go_to_my_meals">GO TO MY MEALS</string>
     <string name="facebook_application_id">337483050352224</string>
     <string name="facebook_login_protocol_scheme">fb337483050352224</string>
     <string name="restaurant_title1">~Meal 1~</string>

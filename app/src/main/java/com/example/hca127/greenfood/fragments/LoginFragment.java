@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static com.example.hca127.greenfood.MainActivity.hideKeyboard;
+
 
 public class LoginFragment extends Fragment {
     private FirebaseUser mUser;
@@ -154,7 +156,7 @@ public class LoginFragment extends Fragment {
                 if (task.isSuccessful()) {
                     updateUser(mAuthentication.getCurrentUser());
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new CommunityFragment()).commit();
+                            new CommunityFragment()).addToBackStack(null).commit();
                     NavigationView navigationView = getActivity().findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
 
@@ -163,17 +165,6 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputManager = (InputMethodManager) activity
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        // check if no view has focus:
-        View currentFocusedView = activity.getCurrentFocus();
-        if (currentFocusedView != null) {
-            inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
     }
 
 }

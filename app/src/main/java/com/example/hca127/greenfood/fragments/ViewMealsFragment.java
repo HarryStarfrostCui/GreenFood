@@ -59,6 +59,8 @@ public class ViewMealsFragment extends Fragment {
     private TextView mMealFiveLocation;
     private ImageView mMealFiveImage;
 
+    private Button mMyMeals;
+
 
     @Nullable
     @Override
@@ -94,6 +96,15 @@ public class ViewMealsFragment extends Fragment {
         mMealFiveDescription = view.findViewById(R.id.meal_5_description);
         mMealFiveLocation = view.findViewById(R.id.meal_5_location);
         mMealFiveImage = view.findViewById(R.id.meal_5_image);
+
+        mMyMeals = view.findViewById(R.id.my_meals_button);
+        mMyMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new RestaurantFragment()).addToBackStack(null).commit();
+            }
+        });
 
 
         return view;
