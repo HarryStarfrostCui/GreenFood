@@ -49,26 +49,37 @@
 
         <TextView
             android:id="@+id/resultText"
-            style="@style/SquareRounded"
+            style="@style/RoundedFrame"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/resultTopBox" />
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/resultBarChart"
-            style="@style/SquareRounded"
+            style="@style/RoundedFrame"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toEndOf="@id/guideline1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultTopBox" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/resultPieChart"
-            style="@style/SquareRounded"
+            style="@style/RoundedFrame"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/resultText" />
 
         <TextView
             android:id="@+id/emissionSplitText"
-            style="@style/SquareRounded"
-            android:text="@string/emission_split_text"
+            style="@style/RoundedFrame"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toEndOf="@id/guideline1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultBarChart" />
 
@@ -86,6 +97,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/resultPieChart" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="603dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_begin="97dp"
+            app:layout_constraintGuide_percent=".5"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>
