@@ -1,5 +1,5 @@
 adding food page (main):
-![alt text](img/add_food_page.png)
+![alt text](img/add_food.png)
 
 result:
 ![alt text](img/result.png)
@@ -18,3 +18,18 @@ suggestion:
 
 user_profile:
 ![alt text](img/user_profile.png)
+
+my_meals:
+![alt text](img/my_meals.png)
+
+view_meals:
+![alt text](img/view_meals.png)
+
+log_in:
+![alt text](img/log_in.png)
+
+sign_up:
+![alt text](img/sign_up.png)
+
+pledge:
+![alt text](img/pledge.png)

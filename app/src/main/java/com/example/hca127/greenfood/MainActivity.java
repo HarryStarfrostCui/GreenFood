@@ -163,30 +163,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_community:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CommunityFragment()).addToBackStack(null).commit();
-                hideKeyboard(this);
                 break;
             case R.id.menu_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AboutFragment()).addToBackStack(null).commit();
-                hideKeyboard(this);
                 break;
             case R.id.menu_calculator:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AddingFoodFragment()).addToBackStack("AddingFoodFragment").commit();
-                hideKeyboard(this);
                 break;
             case R.id.menu_user:
                 if(mLocalUser.getUserId().equals("")){
                     Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new LoginFragment()).addToBackStack(null).commit();
-                    hideKeyboard(this);
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ProfileFragment()).addToBackStack(null).commit();
-                    hideKeyboard(this);
                 }
                 break;
             case R.id.menu_pledge:
@@ -194,13 +189,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new LoginFragment()).addToBackStack(null).commit();
-                    hideKeyboard(this);
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new PledgeFragment()).addToBackStack(null).commit();
-                    hideKeyboard(this);
                 }
                 break;
             case R.id.menu_meal:
@@ -208,29 +201,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new LoginFragment()).addToBackStack(null).commit();
-                    hideKeyboard(this);
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ViewMealsFragment()).addToBackStack(null).commit();
-                    hideKeyboard(this);
                 }
                 break;
             case R.id.menu_result:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ResultFragment()).addToBackStack(null).commit();
-                hideKeyboard(this);
                 break;
             case R.id.menu_suggestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SuggestionFragment()).addToBackStack(null).commit();
-                hideKeyboard(this);
                 break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new LoginFragment()).addToBackStack(null).commit();
-                hideKeyboard(this);
                 break;
             case R.id.menu_LogOff:
                 mAuth.signOut();
@@ -245,9 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_facebook:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FacebookShareFragment()).addToBackStack(null).commit();
-                hideKeyboard(this);
                 break;
-
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
@@ -295,7 +281,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         InputMethodManager inputManager = (InputMethodManager) activity
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        // check if no view has focus:
         View currentFocusedView = activity.getCurrentFocus();
         if (currentFocusedView != null) {
             inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
