@@ -1,5 +1,7 @@
 package com.example.hca127.greenfood;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
@@ -11,6 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        hideKeyboard(this);
         mAuth = FirebaseAuth.getInstance();
         mDrawer = findViewById(R.id.drawer);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
@@ -162,25 +167,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_community:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CommunityFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 break;
             case R.id.menu_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AboutFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 break;
             case R.id.menu_calculator:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AddingFoodFragment()).addToBackStack("AddingFoodFragment").commit();
+                hideKeyboard(this);
                 break;
             case R.id.menu_user:
                 if(mLocalUser.getUserId().equals("")){
                     Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new LoginFragment()).addToBackStack(null).commit();
+                    hideKeyboard(this);
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ProfileFragment()).addToBackStack(null).commit();
+                    hideKeyboard(this);
                 }
                 break;
             case R.id.menu_pledge:
@@ -188,11 +198,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new LoginFragment()).addToBackStack(null).commit();
+                    hideKeyboard(this);
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new PledgeFragment()).addToBackStack(null).commit();
+                    hideKeyboard(this);
                 }
                 break;
             case R.id.menu_meal:
@@ -200,24 +212,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(this, "Area Only Opens For Logged-in Users",Toast.LENGTH_SHORT).show();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new LoginFragment()).addToBackStack(null).commit();
+                    hideKeyboard(this);
                     NavigationView navigationView = findViewById(R.id.navigation_view);
                     navigationView.setCheckedItem(R.id.menu_community);
                 }else {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new RestaurantFragment()).addToBackStack(null).commit();
+                    hideKeyboard(this);
                 }
                 break;
             case R.id.menu_result:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ResultFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 break;
             case R.id.menu_suggestion:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SuggestionFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 break;
             case R.id.menu_Login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new LoginFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 break;
             case R.id.menu_LogOff:
                 mAuth.signOut();
@@ -229,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_facebook:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FacebookShareFragment()).addToBackStack(null).commit();
+                hideKeyboard(this);
                 break;
 
         }
@@ -272,6 +290,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mProfile = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.profilePicture);
         mProfile.setImageResource(mIconIds.get(mLocalUser.getProfileIcon()));
 
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputManager = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // check if no view has focus:
+        View currentFocusedView = activity.getCurrentFocus();
+        if (currentFocusedView != null) {
+            inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 
 }
