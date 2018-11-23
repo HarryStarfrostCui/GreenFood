@@ -272,6 +272,7 @@ public class RestaurantFragment extends Fragment {
                 nMeal.child("protein").setValue(mMainIngredient.getSelectedItemPosition());
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
+                nMeal.child("imageLink").setValue("");
                 // photo upload starts here
                 mFinalImage.setDrawingCacheEnabled(true);
                 mFinalImage.buildDrawingCache();
@@ -415,7 +416,7 @@ public class RestaurantFragment extends Fragment {
                     mMainIngredient.setSelection((int) (long) dataSnapshot.child("protein").getValue());
                     mCity.setSelection((int) (long) dataSnapshot.child("city index").getValue());
                     String imageLink = (String) dataSnapshot.child("imageLink").getValue();
-                    if (!imageLink.equals("")) {
+                    if (imageLink == null || !imageLink.equals("")) {
                         StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
                         GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
                                 .load(httpsReference)
