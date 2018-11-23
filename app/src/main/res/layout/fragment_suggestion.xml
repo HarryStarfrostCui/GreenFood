@@ -141,8 +141,8 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:text="@string/suggestion_filler"
-            app:layout_constraintStart_toEndOf="@id/guideline1"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/suggestionSecondBox" />
 
         <TextView
@@ -151,8 +151,8 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:text="@string/suggestion_filler"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline1"
+            app:layout_constraintStart_toEndOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suggestionSecondBox" />
 
         <Button
