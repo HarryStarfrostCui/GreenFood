@@ -155,7 +155,7 @@ public class RestaurantFragment extends Fragment {
 
 
         lockAll();
-        checkPhoto();
+        //checkPhoto();
 
         mMealOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -408,26 +408,23 @@ public class RestaurantFragment extends Fragment {
             mealReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(!dataSnapshot.exists()){
-                        Toast.makeText(getContext(),"something went wrong", Toast.LENGTH_SHORT).show();
-                    }else {
-                        mRestaurantName.setText((String) dataSnapshot.child("restaurant").getValue());
-                        mMealName.setText((String) dataSnapshot.child("meal name").getValue());
-                        mMealDescription.setText((String) dataSnapshot.child("description").getValue());
-                        mMainIngredient.setSelection((int) (long) dataSnapshot.child("protein").getValue());
-                        mCity.setSelection((int) (long) dataSnapshot.child("city index").getValue());
-                        String imageLink = (String) dataSnapshot.child("imageLink").getValue();
-                        if (!imageLink.equals("")) {
-                            StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
-                            GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
-                                    .load(httpsReference)
-                                    .into(mFinalImage);
-                        } else {
-                            mFinalImage.setImageURI(mUri);
-                        }
-                        mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
-                        checkPhoto();
+                    mRestaurantName.setText((String) dataSnapshot.child("restaurant").getValue());
+                    mMealName.setText((String) dataSnapshot.child("meal name").getValue());
+                    mMealDescription.setText((String) dataSnapshot.child("description").getValue());
+                    mMainIngredient.setSelection((int) (long) dataSnapshot.child("protein").getValue());
+                    mCity.setSelection((int) (long) dataSnapshot.child("city index").getValue());
+                    String imageLink = (String) dataSnapshot.child("imageLink").getValue();
+                    if (!imageLink.equals("")) {
+                        StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
+                        GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
+                                .load(httpsReference)
+                                .into(mFinalImage);
+                    } else {
+                        mFinalImage.setImageURI(mUri);
                     }
+                    mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
+                    //checkPhoto();
+
                 }
 
                 @Override
