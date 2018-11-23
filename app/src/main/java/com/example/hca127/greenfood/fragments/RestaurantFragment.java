@@ -41,8 +41,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -53,6 +56,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
@@ -87,7 +91,6 @@ public class RestaurantFragment extends Fragment {
 
     private static final int mGetFromGallery = 0;
     private static final int mCameraRequest = 1;
-    private Meal mMeal;
     private String mCameraFile;
     private Uri mUri;
     private DatabaseReference mDatabase;
@@ -96,11 +99,13 @@ public class RestaurantFragment extends Fragment {
     private StorageReference mStorageReference;
     private StorageReference mImagesReference;
 
+    private ArrayList<String> mMealReference;
+    private int mCurrentMealIndex;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant, container, false);
-        mMeal = new Meal();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mLocalUser = ((MainActivity)getActivity()).getLocalUser();
         mRestaurantTitle = view.findViewById(R.id.restaurant_title);
@@ -129,8 +134,26 @@ public class RestaurantFragment extends Fragment {
         mSpeechBubbleText = view.findViewById(R.id.speech_bubble_text);
         mDeleteMealButton = view.findViewById(R.id.meal_delete);
         mDrawable = getResources().getDrawable(R.drawable.android);
-        mMealOne.setAlpha(0.5f);
-        mealOneView();
+
+        mMealReference = new ArrayList<>();
+        DatabaseReference userMealData = mDatabase.child("users").child(mLocalUser.getUserId()).child("meal");
+        userMealData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(int i = 0; i<3; i++){
+                    mMealReference.add((String)dataSnapshot.child(String.valueOf(i)).getValue());
+                }
+                mCurrentMealIndex = 0;
+                mMealOne.setAlpha(0.5f);
+                mealViewUpdate();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
 
         lockAll();
         checkPhoto();
@@ -141,7 +164,8 @@ public class RestaurantFragment extends Fragment {
                 mMealOne.setAlpha(0.5f);
                 mMealTwo.setAlpha(1.0f);
                 mMealThree.setAlpha(1.0f);
-                mealOneView();
+                mCurrentMealIndex = 0;
+                mealViewUpdate();
             }
         });
 
@@ -151,7 +175,8 @@ public class RestaurantFragment extends Fragment {
                 mMealOne.setAlpha(1.0f);
                 mMealTwo.setAlpha(0.5f);
                 mMealThree.setAlpha(1.0f);
-                mealTwoView();
+                mCurrentMealIndex = 1;
+                mealViewUpdate();
             }
         });
 
@@ -161,7 +186,8 @@ public class RestaurantFragment extends Fragment {
                 mMealOne.setAlpha(1.0f);
                 mMealTwo.setAlpha(1.0f);
                 mMealThree.setAlpha(0.5f);
-                mealThreeView();
+                mCurrentMealIndex = 2;
+                mealViewUpdate();
             }
         });
 
@@ -186,7 +212,7 @@ public class RestaurantFragment extends Fragment {
                 mMainIngredient.setSelection(0);
                 mCity.setSelection(0);
                 mFinalImage.setImageDrawable(mDrawable);
-                updateMeal();
+                deleteMeal();
                 lockAll();
             }
         });
@@ -231,16 +257,22 @@ public class RestaurantFragment extends Fragment {
                 Long currentTime = Calendar.getInstance().getTimeInMillis();
                 String fileName = mLocalUser.getUserId() + "$" + currentTime;
                 final StorageReference mUserUpload = mImagesReference.child(fileName + ".jpg");
-
-                final DatabaseReference nMeal = mDatabase.child("meals").push();
-                mLocalUser.addMeal(nMeal.getKey());
-                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
-                ((MainActivity)getActivity()).setLocalUser(mLocalUser);
+                final DatabaseReference nMeal;
+                if(mMealReference.get(mCurrentMealIndex).equals("")) {
+                    nMeal = mDatabase.child("meals").push();
+                    mMealReference.set(mCurrentMealIndex, nMeal.getKey());
+                }else{
+                    nMeal = mDatabase.child("meals")
+                            .child(mMealReference.get(mCurrentMealIndex));
+                }
+                mDatabase.child("users").child(mLocalUser.getUserId()).child("meal")
+                        .child(String.valueOf(mCurrentMealIndex)).setValue(nMeal.getKey());
                 nMeal.child("meal name").setValue(mMealName.getText().toString());
                 nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
-                nMeal.child("protein").child("1").setValue(mMainIngredient.getSelectedItemPosition());
+                nMeal.child("protein").setValue(mMainIngredient.getSelectedItemPosition());
                 nMeal.child("description").setValue(mMealDescription.getText().toString());
                 nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
+                nMeal.child("imageLink").setValue("");
                 // photo upload starts here
                 mFinalImage.setDrawingCacheEnabled(true);
                 mFinalImage.buildDrawingCache();
@@ -368,38 +400,53 @@ public class RestaurantFragment extends Fragment {
 
     //TODO:
 
-    public void mealOneView(){
+    public void mealViewUpdate(){
+        final int[] titleIds = {
+                R.string.restaurant_title1, R.string.restaurant_title2, R.string.restaurant_title3
+        };
+        if(mCurrentMealIndex<mMealReference.size() && !mMealReference.get(mCurrentMealIndex).equals("")){
+            DatabaseReference mealReference = mDatabase.child("meals")
+                    .child(mMealReference.get(mCurrentMealIndex));
+            mealReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mRestaurantName.setText((String) dataSnapshot.child("restaurant").getValue());
+                    mMealName.setText((String) dataSnapshot.child("meal name").getValue());
+                    mMealDescription.setText((String) dataSnapshot.child("description").getValue());
+                    mMainIngredient.setSelection((int) (long) dataSnapshot.child("protein").getValue());
+                    mCity.setSelection((int) (long) dataSnapshot.child("city index").getValue());
+                    String imageLink = (String) dataSnapshot.child("imageLink").getValue();
+                    if (imageLink == null || !imageLink.equals("")) {
+                        StorageReference httpsReference = mCloudStorage.getReferenceFromUrl(imageLink);
+                        GlideApp.with(((MainActivity) getActivity()).getApplicationContext())
+                                .load(httpsReference)
+                                .into(mFinalImage);
+                    } else {
+                        mFinalImage.setImageURI(mUri);
+                    }
+                    mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
+                    //checkPhoto();
 
-        mRestaurantName.setText("");
-        mMealName.setText("");
-        mMealDescription.setText("");
-        mMainIngredient.setSelection(1);
-        mCity.setSelection(1);
-        mFinalImage.setImageURI(mUri);
-        mRestaurantTitle.setText(R.string.restaurant_title1);
-        checkPhoto();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            mRestaurantName.setText("");
+            mMealName.setText("");
+            mMealDescription.setText("");
+            mMainIngredient.setSelection(0);
+            mCity.setSelection(0);
+            mFinalImage.setImageURI(mUri);
+            mRestaurantTitle.setText(titleIds[mCurrentMealIndex]);
+            checkPhoto();
+        }
     }
 
-    public void mealTwoView(){
-        mRestaurantName.setText("");
-        mMealName.setText("");
-        mMealDescription.setText("");
-        mMainIngredient.setSelection(1);
-        mCity.setSelection(1);
-        mFinalImage.setImageURI(mUri);
-        mRestaurantTitle.setText(R.string.restaurant_title2);
-        checkPhoto();
-    }
-    public void mealThreeView(){
-        mRestaurantName.setText("");
-        mMealName.setText("");
-        mMealDescription.setText("");
-        mMainIngredient.setSelection(1);
-        mCity.setSelection(1);
-        mFinalImage.setImageURI(mUri);
-        mRestaurantTitle.setText(R.string.restaurant_title3);
-        checkPhoto();
-    }
+
 
     public void checkPhoto(){
         Drawable image = mFinalImage.getDrawable();
@@ -417,15 +464,11 @@ public class RestaurantFragment extends Fragment {
         }
     }
 
-    public void updateMeal(){
-        DatabaseReference nMeal = mDatabase.child("meals").push();
-        mLocalUser.addMeal(nMeal.getKey());
-        mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").push().setValue(nMeal.getKey());
-        ((MainActivity)getActivity()).setLocalUser(mLocalUser);
-        nMeal.child("meal name").setValue(mMealName.getText().toString());
-        nMeal.child("restaurant").setValue(mRestaurantName.getText().toString());
-        nMeal.child("MainIngredient").child("1").setValue(mMainIngredient.getSelectedItemPosition());
-        nMeal.child("description").setValue(mMealDescription.getText().toString());
-        nMeal.child("city index").setValue(mCity.getSelectedItemPosition());
+    public void deleteMeal(){
+        mMealReference.set(mCurrentMealIndex,"");
+        mDatabase.child("meals").child(mMealReference.get(mCurrentMealIndex)).removeValue();
+        mDatabase.child("users").child(mLocalUser.getUserId()).child("meal").
+                child(String.valueOf(mCurrentMealIndex)).setValue("");
+
     }
 }

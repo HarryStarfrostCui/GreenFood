@@ -37,7 +37,7 @@ import java.util.TimerTask;
 
 public class CommunityFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private ImageView mabout;
+    private ImageView mAbout;
     private Spinner mCitySpinner;
     private TextView mParticipantDisplay, mReducedDisplay, mTreesDisplay, mAverageDisplay;
     private String mCurrentCity;
@@ -85,8 +85,8 @@ public class CommunityFragment extends Fragment implements AdapterView.OnItemSel
         String name = google_account_info.getString("name","");
         String email = google_account_info.getString("email","");
 
-        mabout = (ImageView) view.findViewById(R.id.about_button_community);
-        mabout.setOnClickListener(new View.OnClickListener() {
+        mAbout = (ImageView) view.findViewById(R.id.about_button_community);
+        mAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

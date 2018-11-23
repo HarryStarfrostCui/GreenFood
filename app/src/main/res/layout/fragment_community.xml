@@ -17,9 +17,11 @@
             android:id="@+id/community_progress_bar"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone"/>
+            android:layout_marginTop="200dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/title_layout"
@@ -74,7 +76,7 @@
 
                 <Spinner
                     android:id="@+id/community_cityList"
-                    android:layout_width="150dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:entries="@array/city_array" />
@@ -193,6 +195,7 @@
             android:text="@string/kgs"
             android:textColor="#000000"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/community_pledge_total"
             app:layout_constraintTop_toTopOf="@+id/textView7" />
 
@@ -226,7 +229,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/trees_planted_number"
             android:textColor="#000000"
             android:textSize="18sp"
@@ -278,8 +281,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon0"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge0"
@@ -299,8 +303,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge1"
@@ -320,8 +325,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge2"
@@ -341,8 +347,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon3"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge3"
@@ -362,8 +369,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon4"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center" />
 
                 <TextView
                     android:id="@+id/otherPledge4"
@@ -383,8 +391,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon5"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge5"
@@ -404,8 +413,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon6"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge6"
@@ -425,8 +435,9 @@
 
                 <ImageView
                     android:id="@+id/otherIcon7"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/otherPledge7"
