@@ -1,5 +1,5 @@
 adding food page (main):
-![alt text](img/add_food_page.png)
+![alt text](img/add_food.png)
 
 result:
 ![alt text](img/result.png)
